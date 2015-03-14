@@ -1,0 +1,17 @@
+buildscript {
+  repositories {
+    repositories { flatDir dirs: project.file("lib/buildscript") }
+    maven { url 'http://clojars.org/repo' }
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'clojuresque:clojuresque:1.7.0'
+  }
+}
+
+apply plugin: 'clojure'
+
+
+        dependencies {
+            compile "org.clojure:clojure:1.6.0"
+        }
