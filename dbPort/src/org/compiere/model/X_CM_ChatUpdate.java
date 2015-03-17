@@ -1,0 +1,162 @@
+/******************************************************************************
+ * (C) eCareSoft, LLC.                                                        *
+ ******************************************************************************/
+/** Generated Model - DO NOT CHANGE */
+package org.compiere.model;
+
+import java.lang.reflect.Constructor;
+import java.sql.ResultSet;
+import java.util.Properties;
+import java.util.logging.Level;
+
+/** Generated Model for CM_ChatUpdate
+ *  @author Generated Class 
+ *  @version Release 1.2 - $Id$ */
+public class X_CM_ChatUpdate extends PO implements I_CM_ChatUpdate, I_Persistent 
+{
+
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+
+    /** Standard Constructor */
+    public X_CM_ChatUpdate (Properties ctx, int CM_ChatUpdate_ID, String trxName)
+    {
+      super (ctx, CM_ChatUpdate_ID, trxName);
+      /** if (CM_ChatUpdate_ID == 0)
+        {
+			setAD_User_ID (0);
+			setCM_Chat_ID (0);
+			setIsSelfService (false);
+        } */
+    }
+
+    /** Load Constructor */
+    public X_CM_ChatUpdate (Properties ctx, ResultSet rs, String trxName)
+    {
+      super (ctx, rs, trxName);
+    }
+
+    /** AccessLevel
+      * @return 7 - System - Client - Org 
+      */
+    protected int get_AccessLevel()
+    {
+      return accessLevel.intValue();
+    }
+
+    /** Load Meta Data */
+    protected POInfo initPO (Properties ctx)
+    {
+      POInfo poi = POInfo.getPOInfo (ctx, Table_ID, get_TrxName());
+      return poi;
+    }
+
+    public String toString()
+    {
+      StringBuffer sb = new StringBuffer ("X_CM_ChatUpdate[")
+        .append(get_ID()).append("]");
+      return sb.toString();
+    }
+
+	public I_AD_User getAD_User() throws RuntimeException 
+    {
+        Class<?> clazz = MTable.getClass(I_AD_User.Table_Name);
+        I_AD_User result = null;
+        try	{
+	        Constructor<?> constructor = null;
+	    	constructor = clazz.getDeclaredConstructor(new Class[]{Properties.class, int.class, String.class});
+    	    result = (I_AD_User)constructor.newInstance(new Object[] {getCtx(), new Integer(getAD_User_ID()), get_TrxName()});
+        } catch (Exception e) {
+	        log.log(Level.SEVERE, "(id) - Table=" + Table_Name + ",Class=" + clazz, e);
+	        log.saveError("Error", "Table=" + Table_Name + ",Class=" + clazz);
+           throw new RuntimeException( e );
+        }
+        return result;
+    }
+
+	/** Set User/Contact.
+		@param AD_User_ID 
+		User within the system - Internal or Business Partner Contact
+	  */
+	public void setAD_User_ID (int AD_User_ID)
+	{
+		if (AD_User_ID < 1)
+			 throw new IllegalArgumentException ("AD_User_ID is mandatory.");
+		set_ValueNoCheck (COLUMNNAME_AD_User_ID, Integer.valueOf(AD_User_ID));
+	}
+
+	/** Get User/Contact.
+		@return User within the system - Internal or Business Partner Contact
+	  */
+	public int getAD_User_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_AD_User_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
+	public I_CM_Chat getCM_Chat() throws RuntimeException 
+    {
+        Class<?> clazz = MTable.getClass(I_CM_Chat.Table_Name);
+        I_CM_Chat result = null;
+        try	{
+	        Constructor<?> constructor = null;
+	    	constructor = clazz.getDeclaredConstructor(new Class[]{Properties.class, int.class, String.class});
+    	    result = (I_CM_Chat)constructor.newInstance(new Object[] {getCtx(), new Integer(getCM_Chat_ID()), get_TrxName()});
+        } catch (Exception e) {
+	        log.log(Level.SEVERE, "(id) - Table=" + Table_Name + ",Class=" + clazz, e);
+	        log.saveError("Error", "Table=" + Table_Name + ",Class=" + clazz);
+           throw new RuntimeException( e );
+        }
+        return result;
+    }
+
+	/** Set Chat.
+		@param CM_Chat_ID 
+		Chat or discussion thread
+	  */
+	public void setCM_Chat_ID (int CM_Chat_ID)
+	{
+		if (CM_Chat_ID < 1)
+			 throw new IllegalArgumentException ("CM_Chat_ID is mandatory.");
+		set_ValueNoCheck (COLUMNNAME_CM_Chat_ID, Integer.valueOf(CM_Chat_ID));
+	}
+
+	/** Get Chat.
+		@return Chat or discussion thread
+	  */
+	public int getCM_Chat_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_CM_Chat_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
+	/** Set Self-Service.
+		@param IsSelfService 
+		This is a Self-Service entry or this entry can be changed via Self-Service
+	  */
+	public void setIsSelfService (boolean IsSelfService)
+	{
+		set_Value (COLUMNNAME_IsSelfService, Boolean.valueOf(IsSelfService));
+	}
+
+	/** Get Self-Service.
+		@return This is a Self-Service entry or this entry can be changed via Self-Service
+	  */
+	public boolean isSelfService () 
+	{
+		Object oo = get_Value(COLUMNNAME_IsSelfService);
+		if (oo != null) 
+		{
+			 if (oo instanceof Boolean) 
+				 return ((Boolean)oo).booleanValue(); 
+			return "Y".equals(oo);
+		}
+		return false;
+	}
+}
