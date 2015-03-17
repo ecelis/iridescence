@@ -1,6 +1,5 @@
 buildscript {
   repositories {
-    repositories { flatDir dirs: project.file("lib/buildscript") }
     maven { url 'http://clojars.org/repo' }
     mavenCentral()
   }
@@ -11,7 +10,3 @@ buildscript {
 
 apply plugin: 'clojure'
 
-
-        dependencies {
-            compile "org.clojure:clojure:1.6.0"
-        }
