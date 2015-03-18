@@ -46,7 +46,7 @@ import org.compiere.util.DisplayType;
 import org.compiere.util.Ini;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
-import com.mchange.v2.util.PropertiesUtils;
+// TODO Check this import com.mchange.v2.util.PropertiesUtils;
 
 /**
  *  PostgreSQL Database Port
