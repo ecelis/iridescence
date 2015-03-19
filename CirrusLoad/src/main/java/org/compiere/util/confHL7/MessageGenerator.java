@@ -8,6 +8,7 @@ import java.util.Properties;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 
+/* TODO Spaghetti!!!
 import org.compiere.model.MHL7MessageConf;
 import org.compiere.model.MTable;
 import org.compiere.model.PO;
@@ -18,15 +19,18 @@ import org.compiere.process.ClaimGenerator;
 import org.compiere.util.CLogger;
 import org.compiere.util.DB;
 import org.compiere.util.Env;
-
+*/
 import com.mirth.connect.client.core.Client;
 import com.mirth.connect.client.core.ClientException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class MessageGenerator {
 
+	final Logger logger = LoggerFactory.getLogger(getClass());
+	
 	private MessageSender sender;
-
-	private static CLogger log = CLogger.getCLogger(MessageGenerator.class);
 
 	private Properties ctx;
 	private boolean sendMessage;
@@ -38,17 +42,23 @@ public class MessageGenerator {
 
 		this.ctx = ctx;
 		if (sendMessage) {
+			/* TODO MirthClient missing in 3.2 ??
 			mirthClient = MirthClient.getClient(ctx);
 			sender = new MessageSender(mirthClient);
+			*/
 		}
 		this.sendMessage = sendMessage;
 
 	}
 
 	public boolean generateMessage(int recordId, String tableName) throws ClientException {
+		/* TODO it'll be migrated to Clojure
 		return generateMessage(recordId, tableName, null, null);
+		*/
+		return false;
 	}
-	
+
+	/* TODO Too many overloaded methods
 	public boolean generateMessage(int recordId, String tableName, String confType, MessageArgs<String, Object> whereArgs)
 			throws ClientException{
 		boolean res = Boolean.FALSE;
@@ -64,7 +74,9 @@ public class MessageGenerator {
 		}
 		return res;
 	}
+	*/
 
+	/* TODO To clojure
 	public boolean generateStmtMessage(int recordId, String tableName, String confType, MessageArgs<String, Object> whereArgs)
 			throws ClientException{
 		ClaimGenerator claimG = new ClaimGenerator();
@@ -91,7 +103,9 @@ public class MessageGenerator {
 		
 		return res;
 	}
-
+	*/
+	
+	/* TODO Mixed UI code
 	public boolean generateClaimMessage(int recordId, String tableName, String confType, MessageArgs<String, Object> whereArgs)throws ClientException{
 		ClaimGenerator claimG = new ClaimGenerator();
 		int resultado = 0;
@@ -124,7 +138,9 @@ public class MessageGenerator {
 
 		return res;
 	}
-
+	*/
+	
+	/* TODO Move to Message Engine
 	public int getMessage(String recordId, String tableName, String confType, MessageArgs<String, Object> whereArgs)
 			throws ClientException {
 		List<Integer> messageConfIds = 
@@ -202,7 +218,9 @@ public class MessageGenerator {
 
 		return resultado;
 	}
+	*/
 
+	/* TODO Another overloaded method
 	public boolean generateMessage(String recordId, String tableName, String confType, MessageArgs<String, Object> whereArgs)throws ClientException{
 
 		boolean res = Boolean.FALSE;
@@ -288,7 +306,9 @@ public class MessageGenerator {
 		updatePOs(recordId, tableName);
 		return res;
 	}
+	*/
 
+	/* TODO Move to interface with Cirrus
 	private void updatePOs(String recordId,String tableName){
 		StringTokenizer tokenizer = new StringTokenizer(recordId, ",");
 
@@ -301,4 +321,5 @@ public class MessageGenerator {
 
 		}
 	}
+	*/
 }
