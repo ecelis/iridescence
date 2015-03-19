@@ -7,23 +7,33 @@ import java.util.StringTokenizer;
 import java.util.logging.Level;
 
 import org.apache.commons.lang.StringUtils;
-import org.compiere.model.MHL7MessageConf;
-import org.compiere.model.X_HL7_Dashboard;
-import org.compiere.model.X_HL7_MessageConf;
+/* TODO Check if should be part of Iridiscence 
+import org.compiere.model.MHL7MessageConf; */
+/* TODO Sems to be UI code... remove? 
+ * import org.compiere.model.X_HL7_Dashboard;
+ */
+/* TODO It should be part of the YAML module
+ * import org.compiere.model.X_HL7_MessageConf;
+ */
+/* TODO remove
 import org.compiere.util.CLogger;
 import org.compiere.util.Env;
 import org.compiere.util.SecureEngine;
-
+*/
 import com.mirth.connect.client.core.Client;
 import com.mirth.connect.client.core.ClientException;
 import com.mirth.connect.model.Channel;
 import com.mirth.connect.model.ChannelProperties;
-import com.mirth.connect.model.MessageObject;
+// TODO Missing in 3.2 import com.mirth.connect.model.MessageObject;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MessageSender {
 
-	public static CLogger log = CLogger.getCLogger(MessageObject.class);
-
+	// TODO remove public static CLogger log = CLogger.getCLogger(MessageObject.class);
+	final Logger logger = LoggerFactory.getLogger(getClass());
+	
 	private Client mirthClient;
 
 	private Hashtable<String, Channel> channelMap = new Hashtable<String, Channel>();
@@ -33,6 +43,7 @@ public class MessageSender {
 		channelMap = loadChannel();
 	}
 
+	/* TODO Seems to be UI code... remove?
 	public boolean sendMessage(X_HL7_Dashboard panel) {
 		boolean res = Boolean.FALSE;
 		
@@ -83,7 +94,9 @@ public class MessageSender {
 		}
 		return res;
 	}
+	*/
 
+	/* TODO Should be in the YAML module
 	private String decryptMessage(String encryptedMessage, MHL7MessageConf conf) {
 
 		StringBuilder decryptedMessage = new StringBuilder("");
@@ -114,11 +127,12 @@ public class MessageSender {
 		return decryptedMessage.toString();
 
 	}
-
+*/
 	private Hashtable<String, Channel> loadChannel() throws ClientException {
 
 		if (mirthClient != null) {//Lama .- evitar NullPointerException
-			List<Channel> channels = mirthClient.getChannel(null);
+			// TODO Check why null as parameter
+			List<Channel> channels = mirthClient.getChannels(null);
 
 			for (Channel channel : channels) {
 				channelMap.put(channel.getId(), channel);
