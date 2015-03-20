@@ -24,3 +24,23 @@ Leiningen.gitignore
  # Vim
  .*.sw*
 *~
+# Eclipse
+*target*
+*.pydevproject
+.project
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+*.bak
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+**/bin
+
+# Legacy code
+dbPort
+# Locally stored "Eclipse launch configurations"
+*.launch
