@@ -1,12 +1,15 @@
 package org.compiere.util.confHL7;
 
-import java.util.Calendar;
 import java.util.Hashtable;
 import java.util.List;
-import java.util.StringTokenizer;
-import java.util.logging.Level;
 
-import org.apache.commons.lang.StringUtils;
+import com.mirth.connect.client.core.Client;
+import com.mirth.connect.client.core.ClientException;
+import com.mirth.connect.model.Channel;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /* TODO Check if should be part of Iridiscence 
 import org.compiere.model.MHL7MessageConf; */
 /* TODO Sems to be UI code... remove? 
@@ -20,23 +23,15 @@ import org.compiere.util.CLogger;
 import org.compiere.util.Env;
 import org.compiere.util.SecureEngine;
 */
-import com.mirth.connect.client.core.Client;
-import com.mirth.connect.client.core.ClientException;
-import com.mirth.connect.model.Channel;
-import com.mirth.connect.model.ChannelProperties;
 // TODO Missing in 3.2 import com.mirth.connect.model.MessageObject;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class MessageSender {
 
-	// TODO remove public static CLogger log = CLogger.getCLogger(MessageObject.class);
 	final Logger logger = LoggerFactory.getLogger(getClass());
 	
 	private Client mirthClient;
-
-	private Hashtable<String, Channel> channelMap = new Hashtable<String, Channel>();
+	private Hashtable<String, Channel> channelMap = 
+			new Hashtable<String, Channel>();
 
 	public MessageSender(Client mirthClient) throws ClientException {
 		this.mirthClient = mirthClient;
