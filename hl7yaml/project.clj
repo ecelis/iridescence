@@ -4,7 +4,8 @@
   :license {:name "GNU Affero General Public License"
             :url "http://www.gnu.org/licenses/"}
   :dependencies [[org.clojure/clojure "1.6.0"]
-                 [org.clojars.mpenet/clj-yaml "0.3.4"]]
+                 [clj-yaml "0.4.0"]
+                 [com.taoensso/timbre "1.6.0"]]
   :main ^:skip-aot hl7yaml.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}})
