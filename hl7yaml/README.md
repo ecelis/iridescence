@@ -1,6 +1,6 @@
 # hl7yaml
 
-FIXME: description
+HL7 <-> YAML translator
 
 ## Installation
 
@@ -30,7 +30,8 @@ FIXME: listing of options this app accepts.
 
 ## License
 
-Copyright © 2015 FIXME
+Copyright © 2015 eCaresoft Inc.
+Ernesto Angel Celis de la Fuente <developer@celisdelafuente.net>
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.
