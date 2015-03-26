@@ -34,11 +34,6 @@ jar {
 repositories {
   mavenCentral()
   jcenter()
-  /*
-  maven {
-    url "https://celisdelafuente.net/maven"
-  }
-  */
   flatDir {
     dirs '../lib/mirth'
   }

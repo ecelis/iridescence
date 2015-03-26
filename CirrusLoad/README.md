@@ -3,7 +3,11 @@ Cirrus Load Module for Smart Connector
 
 ## Installation
 
-    gradle build
+    gradle eclipse
+
+  1. Open Eclipse
+  2. Import CirrusLoad (File->Import->General->Existing Projects into
+     workspace)
 
 ## Usage
 
@@ -20,7 +24,12 @@ FIXME: listing of options this app accepts.
 
 ### Bugs
 
-  * build.gradle md5has errors for mirth server jar
+  * Some .jar dependencies should be fetched and untarred in the root
+    directory /iridiscence before importing or building in Eclipse.
+    Later these dependencies will eb avaialble in a custom maven
+    repository
+
+  * build.gradle md5hash errors for mirth server jar
 
 ## License
 
