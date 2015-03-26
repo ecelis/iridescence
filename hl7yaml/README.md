@@ -33,5 +33,7 @@ FIXME: listing of options this app accepts.
 Copyright © 2015 eCaresoft Inc.
 Ernesto Angel Celis de la Fuente <developer@celisdelafuente.net>
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.  This file is offered as-is,
+without any warranty.

@@ -1,10 +1,8 @@
 # Iridescence
-Cirrus Smart Connector
+Cirrus Load Module for Smart Connector
 
 ## Installation
 
-    git clone git@github.com:ecelis/iridescence.git
-    cd iridescence
     gradle build
 
 ## Usage
@@ -22,8 +20,7 @@ FIXME: listing of options this app accepts.
 
 ### Bugs
 
-  * build.gradle does nothing currently, its only a template for
-    subprojects
+  * build.gradle md5has errors for mirth server jar
 
 ## License
 
