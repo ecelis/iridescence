@@ -4,7 +4,8 @@ Smart Connector
 
 This is a work in progress, some/many things might be broken or need
 manual intervention to build/run. Please refer to README.md files within
-each submodule directory for details.
+each submodule directory for details. Madules can change name, split or
+be deleted until we reach the first stable and fully functional version.
 
   * CirrusLoad - Module for Cirrus
   * hl7yaml - HL7/YAML parser
@@ -14,6 +15,8 @@ each submodule directory for details.
 
     git clone git@github.com:ecelis/iridescence.git
     cd iridescence
+    git submodule init
+    git submodule update
     gradle build
 
 ## Usage

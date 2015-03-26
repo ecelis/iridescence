@@ -4,7 +4,11 @@ HL7 <-> YAML translator
 
 ## Installation
 
-Download from http://example.com/FIXME.
+`git submodule init && git submodule update` should be run in the root
+directory /iridesence before trying to build with lein
+
+    lein deps
+    lein repl
 
 ## Usage
 
