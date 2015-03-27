@@ -1,5 +1,6 @@
 ;;  HL7 YAMl converter
-;;  Copyright (C) <year>  <name of author>
+;;  Copyright (C) 2015 eCaresoft Inc
+;;  Ernesto Angel Celis de la Fuente <developer@celisdelafuente.net>
 ;;
 ;;  This file is part of Iridescence Smart Connector
 ;;
@@ -23,10 +24,10 @@
     [com.nervestaple.hl7-parser.parser :as hl7parser]
     [com.nervestaple.hl7-parser.message :as hl7message]))
 ;; Read the message from a file, just like unix everything is a file!
-(def rawmsg (slurp "../data/data.hl7")) ; TODO make a funtion
-(def rawyaml (slurp "../data/data.yaml"))
-(def s {:1 "Uno" :2 "Dos" :3 "Tres"})
-(def t [:3 :2 :1])
+;(def rawmsg (slurp "../data/data.hl7")) ; TODO make a funtion
+;(def rawyaml (slurp "../data/data.yaml"))
+;(def s {:1 "Uno" :2 "Dos" :3 "Tres"})
+;(def t [:3 :2 :1])
 
 (defn rechl7
   "HL7 message reception and parsing"
