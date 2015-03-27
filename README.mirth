@@ -2,6 +2,11 @@
 
 Iridescence Smart Connector depends on Mirth Connect 3.2.1
 
+## Notes
+
+  * Eclipse requires Subclipse
+  *
+
 ## Build
 
   1. From Eclipse, go to File > New > Other... > SVN > Checkout Projects
@@ -22,9 +27,8 @@ Iridescence Smart Connector depends on Mirth Connect 3.2.1
   Windows you can run the build.bat file.
   9. When the build completes, refresh and clean the Client, Command, Manager,
   Donkey, WebAdmin, and Server projects.
-  10. Under the Run button you should have four new run configurations for each
-  project. Select the Mirth Connect Server. Once you see the splash screen
-  appear in your console, you can start the Mirth Connect Client.
+  10. From Eclipse export the jar files, select Donkey project, Right click->
+  Export->Java->JAR File
 
     Note that if you need the embedded Derby database to be recreated
     because of any changes in the trunk code, you should delete the mirthdb
