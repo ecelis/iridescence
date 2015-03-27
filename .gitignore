@@ -44,3 +44,4 @@ local.properties
 dbPort
 # Locally stored "Eclipse launch configurations"
 *.launch
+**/logs
