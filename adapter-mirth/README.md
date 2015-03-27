@@ -6,8 +6,10 @@ FIXME: description
 
 After building Mirth Connect JARs install them with lein localrepo
 
-    lein localrepo install <path/to/file.jar>
-com.mirth.connect/<artifaxct-name> <artifact-version>
+    lein localrepo install <path/to/file.jar> \
+      com.mirth.connect/<artifaxct-name> <artifact-version>
+    lein deps
+
 
 
 ### Bugs
