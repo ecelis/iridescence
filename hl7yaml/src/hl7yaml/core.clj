@@ -1,3 +1,21 @@
+;;  HL7 YAMl converter
+;;  Copyright (C) <year>  <name of author>
+;;
+;;  This file is part of Iridescence Smart Connector
+;;
+;;  Iridescence Smart Connector is free software: you can redistribute it
+;;  under the terms of the GNU Affero General Public License as published by
+;;  the Free Software Foundation, either version 3 of the License, or (at
+;;  your option) any later version.
+;;
+;;  This program is distributed in the hope that it will be useful,
+;;  but WITHOUT ANY WARRANTY; without even the implied warranty of
+;;  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;;  GNU Affero General Public License for more details.
+;;
+;;  You should have received a copy of the GNU Affero General Public License
+;;  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 (ns hl7yaml.core
   (:gen-class)
   (:require
@@ -26,8 +44,3 @@
   "Map elements from YAML to HL7"
   [source-map target-vector]
   (zipmap target-vector (vals source-map)))
-
-(defn -main
-  "I don't do a whole lot ... yet."
-  [& args]
-  (println "Hello, World!"))
