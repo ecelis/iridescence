@@ -4,6 +4,7 @@
   :license {:name "GNU Affero Public General License version"
             :url "http://www.gnu.org/licenses/"}
   :dependencies [[org.clojure/clojure "1.6.0"]
+                 [com.mirth.commons.encryption/mirth-crypto "1"]
                  [com.mirth.connect/mirth-donkey "3.2.1svn"]
                  [com.mirth.connect/mirth-server "3.2.1svn"]
                  [com.mirth.connect/mirth-client "3.2.1svn"]]
