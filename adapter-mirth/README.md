@@ -6,8 +6,15 @@ FIXME: description
 
 After building Mirth Connect JARs install them with lein localrepo
 
-    lein localrepo install <path/to/file.jar> \
-      com.mirth.connect/<artifaxct-name> <artifact-version>
+    lein localrepo install ../lib/mirth/mirth-donkey-3.2.1svn.jar \
+      com.mirth.connect/mirth-donkey 3.2.1svn
+    lein localrepo install ../lib/mirth/mirth-server-3.2.1svn.jar \
+      com.mirth.connect/mirth-server 3.2.1svn
+    lein localrepo install ../lib/mirth/mirth-client-3.2.1svn.jar \
+      com.mirth.connect/mirth-client 3.2.1svn
+    lein localrepo install \
+      ../../workspace.luna/Server/lib/mirth-crypto.jar \
+      com.mirth.commons.encryption
     lein deps
 
 
