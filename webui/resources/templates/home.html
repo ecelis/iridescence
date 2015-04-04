@@ -1,14 +1,78 @@
 {% extends "base.html" %}
 {% block content %}
-  <div class="jumbotron">
-    <h1>Welcome to webui</h1>
-    <p>Time to start building your site!</p>
-    <p><a class="btn btn-primary btn-lg" href="http://luminusweb.net">Learn more &raquo;</a></p>
-  </div>
-
   <div class="row">
     <div class="span12">
-    {{docs|markdown}}
     </div>
+    <script src="/js/vendor/raphael-min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    // Creates canvas 320 × 200 at 10, 50
+    var paper = Raphael(10, 50, 640, 480);
+
+    var toolbar = paper.rect(20, 20, 40, 452);
+    var basicShape = paper.rect(25, 25, 30, 20);
+    var connectShape = paper.path("M25 55L55 80");
+
+    Workspace = function() {};
+    Workspace.prototype = {
+      lenght: 0,
+      first: null,
+      last: null
+    };
+    Workspace.prototype.append = function(shape) {
+      if(this.first === null) {
+        shape.prev = shape;
+        shape.next = shape;
+        this.first = shape;
+        this.last = shape;
+      } else {
+        shape.prev = this.last;
+        shape.next = this.first;
+        this.first.prev = shape;
+        this.last.next = shape;
+        this.last = shape;
+      }
+      this.lenght++;
+    };
+    Workspace.prototype.insertAfter = function(shape, newShape) {
+      newShape.prev = shape;
+      newShape.next = shape.next;
+      shape.next.prev = newShape;
+      shape.next = newShape;
+      if (newShape.prev == this.last) { this.last = newShape; }
+      this.lenght++;
+    }
+    Workspace.prototype.remove = function(shape) {
+      if(this.lenght > 1) {
+         shape.prev.next = shape.next;
+         shape.next.prev = shape.prev;
+         if(shape == this.first) { this.first = shape.next; }
+         if(shape == this.last) { this.last = shape.prev; }
+      } else {
+         this.first = null;
+         this.last = null;
+      }
+      shape.prev = null;
+      shape.next = null;
+      this.lenght--;
+    }
+
+    var w = new Workspace();
+
+    var addToDiagram = function (shape) {
+      newShape = shape.clone();
+      newShape.attr("width", 50);
+      newShape.attr("height", 30);
+      newShape.attr("x", 50);
+      newShape.attr("y", 50);
+      w.append(newShape);
+    };
+
+basicShape.drag(null, 
+    null,
+    function(){
+      addToDiagram(basicShape);
+    });
+
+    </script>
   </div>
 {% endblock %}
