@@ -12,12 +12,31 @@
     var basicShape = paper.rect(25, 25, 30, 20);
     var connectShape = paper.path("M25 55L55 80");
 
+    var dragger = function() {
+      this.ox = this.type == "rect" ? this.attr("x") : this.attr("cx");
+      this.ox = this.type == "rect" ? this.attr("y") : this.attr("cy");
+      this.animate({"fill-opacity": .2}, 500);
+    }
+
+    var move = function(dx, dy) {
+      var att = this.type == "rect" ? {x: this.ox + dx, y: this.oy + dy} : {cx: this.ox + dx, cy: this.oy + dy};
+      this.attr(att);
+      // TODO
+      paper.safari();
+    }
+
+    var up = function() {
+      this.animate({"fill-opacity": 0}, 500);
+    }
+
     Workspace = function() {};
+
     Workspace.prototype = {
       lenght: 0,
       first: null,
       last: null
     };
+
     Workspace.prototype.append = function(shape) {
       if(this.first === null) {
         shape.prev = shape;
@@ -33,6 +52,7 @@
       }
       this.lenght++;
     };
+
     Workspace.prototype.insertAfter = function(shape, newShape) {
       newShape.prev = shape;
       newShape.next = shape.next;
@@ -40,7 +60,8 @@
       shape.next = newShape;
       if (newShape.prev == this.last) { this.last = newShape; }
       this.lenght++;
-    }
+    };
+
     Workspace.prototype.remove = function(shape) {
       if(this.lenght > 1) {
          shape.prev.next = shape.next;
@@ -56,22 +77,21 @@
       this.lenght--;
     }
 
-    var w = new Workspace();
-
     var addToDiagram = function (shape) {
       newShape = shape.clone();
       newShape.attr("width", 50);
       newShape.attr("height", 30);
-      newShape.attr("x", 50);
-      newShape.attr("y", 50);
+      newShape.attr("x", 50 + Math.floor(Math.random()*160));
+      newShape.attr("y", 70 + Math.floor(Math.random()*160));
+      newShape.drag(move, dragger, up);
       w.append(newShape);
     };
 
-basicShape.drag(null, 
-    null,
-    function(){
+    basicShape.drag(move, dragger, function(){
       addToDiagram(basicShape);
     });
+
+    var w = new Workspace();
 
     </script>
   </div>
