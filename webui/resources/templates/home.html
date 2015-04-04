@@ -2,19 +2,21 @@
 {% block content %}
   <div class="row">
     <div class="span12">
-    </div>
     <script src="/js/vendor/raphael-min.js" type="text/javascript"></script>
     <script type="text/javascript">
+    var tx = 20, ty = 20;
     // Creates canvas 320 × 200 at 10, 50
     var paper = Raphael(10, 50, 640, 480);
 
-    var toolbar = paper.rect(20, 20, 40, 452);
-    var basicShape = paper.rect(25, 25, 30, 20);
+    var toolbar = paper.rect(tx, ty, 40, 452);
+    var basicShape = paper.rect(tx + 5, ty + 5, 30, 20);
+    basicShape.attr({"fill-opacity": 0, "stroke-width": 2, cursor: "move"});
     var connectShape = paper.path("M25 55L55 80");
+    connectShape.attr({"stroke-width": 2, cursor: "move"});
 
     var dragger = function() {
       this.ox = this.type == "rect" ? this.attr("x") : this.attr("cx");
-      this.ox = this.type == "rect" ? this.attr("y") : this.attr("cy");
+      this.oy = this.type == "rect" ? this.attr("y") : this.attr("cy");
       this.animate({"fill-opacity": .2}, 500);
     }
 
@@ -78,21 +80,29 @@
     }
 
     var addToDiagram = function (shape) {
+      var color = Raphael.getColor(); // Get next color in spectrum
       newShape = shape.clone();
+      newShape.attr({fill: color, stroke: color, 
+          "fill-opacity": 0, "stroke-width": 2});
       newShape.attr("width", 50);
       newShape.attr("height", 30);
       newShape.attr("x", 50 + Math.floor(Math.random()*160));
       newShape.attr("y", 70 + Math.floor(Math.random()*160));
       newShape.drag(move, dragger, up);
       w.append(newShape);
-    };
+    }
 
-    basicShape.drag(move, dragger, function(){
-      addToDiagram(basicShape);
-    });
+    var toolUp = function() {
+      this.attr("x", tx + 5);
+      this.attr("y", ty + 5);
+      addToDiagram(this);
+    }
+
+    basicShape.drag(move, dragger, toolUp);
 
     var w = new Workspace();
 
     </script>
+    </div>
   </div>
 {% endblock %}
