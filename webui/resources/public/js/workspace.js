@@ -19,6 +19,7 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var util = new Util();
 // Global settings
 var tx = 20, ty = 20;
 // Creates canvas 320 × 200 at 10, 50
@@ -61,6 +62,9 @@ var up = function() {
   this.animate({"fill-opacity": 0}, 500);
 }
 
+var modifyProperties = function() {
+  this.data("shapeProperties", );
+}
 /**
   Workspace is a linked list of configuration objects
   @class Workspace
@@ -131,6 +135,11 @@ Workspace.prototype.remove = function(shape) {
   this.lenght--;
 }
 
+var setData = function(shape) {
+  var d = new DataModel();
+  shape.data("shapeProperties", d);
+}
+
 /**
  * Add a new element from Toolbar to Workspace
  * @method addToDiagram
@@ -139,6 +148,7 @@ Workspace.prototype.remove = function(shape) {
 var addToDiagram = function (shape) {
   var color = Raphael.getColor(); // Get next color in spectrum
   var newShape = shape.clone();   // Hello Dolly!
+  setData(newShape);              // Give Dolly a Soul
   newShape.attr({fill: color,
                 stroke: color,
                 "fill-opacity": 0,
@@ -149,6 +159,8 @@ var addToDiagram = function (shape) {
                 "y": 70 + Math.floor(Math.random()*160)});
   newShape.drag(move, dragger, up);
   w.append(newShape);   // Append new shape to workspace
+//  newShape.click(modifyProperties(newShape)); // TODO FIX
+  alert(newShape.id);
 }
 
 /**
