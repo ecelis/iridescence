@@ -5,9 +5,18 @@ Iridescence Smart Connector depends on Mirth Connect 3.2.1
 ## Notes
 
   * Eclipse requires Subclipse
-  *
 
 ## Build
+
+### Manual build
+
+  1. Checout Mirth connect `svn co https://svnmirthcorp.com/connect/tags/3.2.1 mirth`
+  2. `cd mirth/server`
+  3. `export JAVA_TOOL_OPTIONS=-Dfile.conding=UTF8 ; ant -f mirth-build.xml`
+
+
+
+### Eclipse build
 
   1. From Eclipse, go to File > New > Other... > SVN > Checkout Projects
   from SVN.

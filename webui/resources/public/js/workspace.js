@@ -35,6 +35,7 @@ var connectShape = paper
   .path("M25 55L55 80")
   .attr({"stroke-width": 2,
         cursor: "move"});
+var propertiesPanel = new DataModel();
 
 /**
   Triggered when a shape starts moving
@@ -62,9 +63,14 @@ var up = function() {
   this.animate({"fill-opacity": 0}, 500);
 }
 
-var modifyProperties = function() {
-  this.data("shapeProperties", );
+var modify = function() {
+  var p = this.data("props");
+  $('#blk-name').val(p.name);
+  $('#blk-url').val(p.url);
+  $('#blk-id').val(this.id);
 }
+
+
 /**
   Workspace is a linked list of configuration objects
   @class Workspace
@@ -137,7 +143,7 @@ Workspace.prototype.remove = function(shape) {
 
 var setData = function(shape) {
   var d = new DataModel();
-  shape.data("shapeProperties", d);
+  shape.data("props", d);
 }
 
 /**
@@ -159,8 +165,7 @@ var addToDiagram = function (shape) {
                 "y": 70 + Math.floor(Math.random()*160)});
   newShape.drag(move, dragger, up);
   w.append(newShape);   // Append new shape to workspace
-//  newShape.click(modifyProperties(newShape)); // TODO FIX
-  alert(newShape.id);
+  newShape.click(modify);
 }
 
 /**
@@ -178,4 +183,26 @@ basicShape.drag(move, dragger, toolUp);
 
 // Create a default workspace
 var w = new Workspace();
+
+var save = function() {
+  //TODO
+  alert("What's up Linda?");
+}
+
+var remove = function(id) {
+  // TODO Fix this, should be donw within w.remove
+  var s = paper.getById(id);
+  w.remove(s);
+  s.remove();
+}
+
+var cloneBlk = function(id) {
+  addToDiagram(paper.getById(id));
+}
+
+
+// Bind listeners to controls
+$('#remove-btn').click(function(){remove($('#blk-id').val())});
+$('#clone-btn').click(function(){cloneBlk($('#blk-id').val())});
+$('#save-btn').click(function(){save($('#blk-id').val())});
 
