@@ -1,6 +1,13 @@
-# webui
+# Smart Connector Web User Interface
 
-FIXME
+Drag & Drop GUI for Smart Connector.
+
+### Features
+
+  * Drag & Drop blocks which represent code to be built at runtime
+  * Map Source data to HL7 messages for Mirth Connector by Drag & Drop
+  * Save or clone mappings to be reused or copied to other Smart
+    Connector Installs
 
 ## Prerequisites
 
@@ -8,14 +15,37 @@ You will need [Leiningen][1] 2.0 or above installed.
 
 [1]: https://github.com/technomancy/leiningen
 
-    lein deps
 
 ## Running
 
 To start a web server for the application, run:
 
+    lein deps
     lein ring server
+
+Create an standalone runable jar
+
+    lein ring uberjar
+    java -jar target/webui.jar
+
+Create a war for deploying to an app server
+
+    lein ring uberwar
+
+Browse to http://localhost:3000/
+
+## Bugs
+
+  * Dragging Connection from the toolbar does not work. It still creates
+    a new connection
+  * Dragging connections between blocks is broken overall.
 
 ## License
 
-Copyright © 2015 FIXME
+Copyright © 2015 eCaresoft Inc.
+Ernesto Angel Celis de la Fuente <developer@celisdelafuente.net>
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.  This file is offered as-is,
+without any warranty.

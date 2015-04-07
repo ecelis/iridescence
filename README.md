@@ -4,15 +4,21 @@ Smart Connector
 
 This is a work in progress, some/many things might be broken or need
 manual intervention to build/run. Please refer to README.md files within
-each submodule directory for details. Madules can change name, split or
+each submodule directory for details. Modules can change name, split or
 be deleted until we reach the first stable and fully functional version.
 
-  * CirrusLoad - Module for Cirrus
-  * hl7yaml - HL7/YAML parser
   * webui - SmartConnector Web User Interface
+  * adapter-mirth - Mirth Connect Adapter
+  * CirrusLoad - Cirrus Adapter
+  * hl7yaml - HL7/YAML parser module
 
 ## Installation
 
+
+
+
+
+## IGNORE EVERYTHING BELOW
     git clone git@github.com:ecelis/iridescence.git
     cd iridescence
     git submodule init

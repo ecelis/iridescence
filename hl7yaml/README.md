@@ -1,6 +1,6 @@
 # hl7yaml
 
-HL7 <-> YAML translator
+HL7/YAML parser for Smart Connector
 
 ## Installation
 
@@ -10,27 +10,8 @@ directory /iridesence before trying to build with lein
     lein deps
     lein repl
 
-## Usage
-
-FIXME: explanation
-
-    $ java -jar hl7yaml-0.1.0-standalone.jar [args]
-
-## Options
-
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
 ### Bugs
 
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
 
 ## License
 
