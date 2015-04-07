@@ -186,25 +186,37 @@ var util = new Util();
 var tx = 20, ty = 20;
 // Creates canvas 320 × 200 at 10, 50
 var paper = Raphael(10, 50, 640, 480);
+// A set of connections between shapes
 connections = [];
+// Just a placeholder for the tools
 var toolbar = paper.rect(tx, ty, 40, 452);
+// We'll derive other shapes from this one
 var basicShape = paper
   .rect(tx + 5, ty + 5, 30, 20)
   .attr({"fill": "#CCC",
         "fill-opacity": 0,
         "stroke-width": 2,
         cursor: "move"});
+// Same as basicShape its a basic connector, derive other from it
 var connectShape = paper
   .path("M25 55L55 80")
   .attr({"stroke-width": 2,
         cursor: "move"});
-var propertiesPanel = new DataModel();
 
+/**
+ * Save workspace to YAML in the server
+ * @method save
+ * */
 var save = function() {
   //TODO
   alert("What's up Linda?");
 }
 
+/**
+ * Remove shape from workspace
+ * @method remove
+ * @param {Integer} id of the Raphael element
+ * */
 var remove = function(id) {
   // TODO Fix this, should be donw within w.remove
   var s = paper.getById(id);
@@ -212,6 +224,11 @@ var remove = function(id) {
   s.remove();
 }
 
+/**
+ * Clone a shape by id
+ * @method cloneBlk
+ * @param {Integer} id of the Raphael element
+ * */
 var cloneBlk = function(id) {
   addToDiagram(paper.getById(id));
 }
