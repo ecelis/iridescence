@@ -27,15 +27,16 @@
                  [org.clojure/java.jdbc "0.3.2"]
                  [org.postgresql/postgresql "9.4-1201-jdbc41"]
                  [log4j/log4j "1.2.17"]
-                 [com.mirth.commons.encryption/mirth-crypto "1"]
                  [com.thoughtworks.xstream/xstream "1.4.8"]
                  [org.apache.commons/commons-lang3 "3.3.2"]
                  [org.apache.httpcomponents/httpcore "4.4.1"]
                  [org.apache.httpcomponents/httpmime "4.4"]
                  [org.apache.httpcomponents/httpclient "4.4"]
+                 [com.mirth.commons.encryption/mirth-crypto "1"]
                  [com.mirth.connect/mirth-donkey "3.2.1svn"]
                  [com.mirth.connect/mirth-server "3.2.1svn"]
                  [com.mirth.connect/mirth-client "3.2.1svn"]]
+  :repositories {"v3ctor.club" "http://maven.v3ctor.club"}
   :plugins [[lein-localrepo "0.5.3"]]
   :main ^:skip-aot adapter-mirth.core
   :target-path "target/%s"
