@@ -59,6 +59,11 @@ var up = function() {
   this.animate({"fill-opacity": 0}, 500);
 }
 
+/**
+ * Triggered when a shape is clicked, populates the
+ * properties panel
+ * @method modify
+ * */
 var modify = function() {
   var p = this.data("props");
   $('#blk-name').val(p.name);
@@ -233,11 +238,27 @@ var cloneBlk = function(id) {
   addToDiagram(paper.getById(id));
 }
 
+/**
+ * Update the shape properties data 'props' with values from
+ * the properties panel
+ * @method updateShape
+ * @param {Integer} id of Raphael element
+ * */
+var updateShape = function(id) {
+  var s = paper.getById(id);
+  s.data("props").name = $('#blk-name').val();
+  s.data("props").url = $('#blk-url').val();
+  s.attr({'title': s.data("props").name,
+          'text':s.data("props").name});
+}
 
 // Attach listeners to Toolbar elements
 basicShape.drag(move, dragger, toolUp);
 connectShape.drag(move, dragger, toolUp);
 // Bind listeners to Properties controls
+// TODO Do this in one iteration of all form controls
+$('#blk-name').change(function(){updateShape($('#blk-id').val())});
+$('#blk-url').change(function(){updateShape($('#blk-id').val())});
 $('#remove-btn').click(function(){remove($('#blk-id').val())});
 $('#clone-btn').click(function(){cloneBlk($('#blk-id').val())});
 $('#save-btn').click(function(){save($('#blk-id').val())});

@@ -21,5 +21,7 @@
 
 var PostgresModel = new DataModel();
 
+PostgresModel.type = "postgres"
+PostgresModel.name = "pg" + $('#blk-id').val(); // TODO Decouple from view
 PostgresModel.url = "jdbc:postgresql://host:port/db"
 
