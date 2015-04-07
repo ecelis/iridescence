@@ -1,6 +1,7 @@
 (ns webui.handler
   (:require [compojure.core :refer [defroutes routes]]
             [webui.routes.home :refer [home-routes]]
+            [webui.routes.api :refer [api-routes]]
             [webui.middleware
              :refer [development-middleware production-middleware]]
             [webui.session :as session]
@@ -51,6 +52,7 @@
 (def app
   (-> (routes
         home-routes
+        api-routes
         base-routes)
       development-middleware
       production-middleware))
