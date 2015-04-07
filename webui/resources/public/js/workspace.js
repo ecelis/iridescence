@@ -19,30 +19,18 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var util = new Util();
-// Global settings
-var tx = 20, ty = 20;
-// Creates canvas 320 × 200 at 10, 50
-var paper = Raphael(10, 50, 640, 480);
-var toolbar = paper.rect(tx, ty, 40, 452);
-var basicShape = paper
-  .rect(tx + 5, ty + 5, 30, 20)
-  .attr({"fill": "#CCC",
-        "fill-opacity": 0,
-        "stroke-width": 2,
-        cursor: "move"});
-var connectShape = paper
-  .path("M25 55L55 80")
-  .attr({"stroke-width": 2,
-        cursor: "move"});
-var propertiesPanel = new DataModel();
-
 /**
   Triggered when a shape starts moving
 */
 var dragger = function() {
-  this.ox = this.type == "rect" ? this.attr("x") : this.attr("cx");
-  this.oy = this.type == "rect" ? this.attr("y") : this.attr("cy");
+  // TODO Fix for paths
+  if(this.type == "rect") {
+    this.ox = this.attr("x");
+    this.oy = this.attr("y");
+  } else {
+    this.ox = this.attr("cx");
+    this.oy = this.attr("cy");
+  }
   this.animate({"fill-opacity": .2}, 500);
 }
 
@@ -50,9 +38,17 @@ var dragger = function() {
   Triggered when a shape is moving
   */
 var move = function(dx, dy) {
-  var att = this.type == "rect" ? {x: this.ox + dx, y: this.oy + dy} : {cx: this.ox + dx, cy: this.oy + dy};
+  // TODO Fix for paths
+  if (this.type == "rect") {
+    att = {x: this.ox + dx, y: this.oy + dy};
+  } else {
+    att ={ cx: this.ox + dx, cy: this.oy + dy};
+  }
   this.attr(att);
   // TODO
+  for(var i = connections.length; i--;) {
+    paper.connection(connections[i]);
+  }
   paper.safari();
 }
 
@@ -69,7 +65,6 @@ var modify = function() {
   $('#blk-url').val(p.url);
   $('#blk-id').val(this.id);
 }
-
 
 /**
   Workspace is a linked list of configuration objects
@@ -155,15 +150,21 @@ var addToDiagram = function (shape) {
   var color = Raphael.getColor(); // Get next color in spectrum
   var newShape = shape.clone();   // Hello Dolly!
   setData(newShape);              // Give Dolly a Soul
-  newShape.attr({fill: color,
-                stroke: color,
-                "fill-opacity": 0,
-                "stroke-width": 2,
-                "width": 50,
-                "height": 30,
-                "x": 50 + Math.floor(Math.random()*160),
-                "y": 70 + Math.floor(Math.random()*160)});
+  if(newShape.type === "path") {
+    newShape.attr({});
+  } else {
+    newShape.attr({fill: color,
+                  stroke: color,
+                  "fill-opacity": 0,
+                  "stroke-width": 2,
+                  "width": 50,
+                  "height": 30,
+                  "x": 50 + Math.floor(Math.random()*160),
+                  "y": 70 + Math.floor(Math.random()*160)});
+  }
   newShape.drag(move, dragger, up);
+  connections.push(paper
+                   .connection(shape, newShape, "#000"));
   w.append(newShape);   // Append new shape to workspace
   newShape.click(modify);
 }
@@ -178,11 +179,26 @@ var toolUp = function() {
   addToDiagram(this);
 }
 
-// Attach listeners to Toolbar elements
-basicShape.drag(move, dragger, toolUp);
-
 // Create a default workspace
 var w = new Workspace();
+var util = new Util();
+// Global settings
+var tx = 20, ty = 20;
+// Creates canvas 320 × 200 at 10, 50
+var paper = Raphael(10, 50, 640, 480);
+connections = [];
+var toolbar = paper.rect(tx, ty, 40, 452);
+var basicShape = paper
+  .rect(tx + 5, ty + 5, 30, 20)
+  .attr({"fill": "#CCC",
+        "fill-opacity": 0,
+        "stroke-width": 2,
+        cursor: "move"});
+var connectShape = paper
+  .path("M25 55L55 80")
+  .attr({"stroke-width": 2,
+        cursor: "move"});
+var propertiesPanel = new DataModel();
 
 var save = function() {
   //TODO
@@ -201,7 +217,10 @@ var cloneBlk = function(id) {
 }
 
 
-// Bind listeners to controls
+// Attach listeners to Toolbar elements
+basicShape.drag(move, dragger, toolUp);
+connectShape.drag(move, dragger, toolUp);
+// Bind listeners to Properties controls
 $('#remove-btn').click(function(){remove($('#blk-id').val())});
 $('#clone-btn').click(function(){cloneBlk($('#blk-id').val())});
 $('#save-btn').click(function(){save($('#blk-id').val())});
