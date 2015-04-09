@@ -190,9 +190,8 @@ var addToDiagram = function (shape) {
                   "x": 50 + Math.floor(Math.random()*160),
                   "y": 70 + Math.floor(Math.random()*160)});
   }
-  newShape.drag(move, dragger, up)
-    .click(modify);
-    w.append(newShape);   // Append new shape to workspace
+  newShape.drag(move, dragger, up).click(modify);
+  w.append(newShape);   // Append new shape to workspace
 }
 
 /**
@@ -242,7 +241,7 @@ var save = function() {
   //TODO
   var n = 0;
   var a = [];
-  while(n <= w.length) {
+  while(n < w.length) {
     a.push(w[n].data('props'));
     n++;
   }
