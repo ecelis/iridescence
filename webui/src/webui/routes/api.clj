@@ -20,16 +20,21 @@
 (ns webui.routes.api
   (:require [webui.layout :as layout]
             [compojure.core :refer :all]
+            [cheshire.core :as json]
             [clojure.java.io :as io]))
 
-(defn save-workspace []
-  (layout/render
-    "home.html"))
+(defn json-response [data & [status]]
+  {:status (or status 200)
+   :headers {"Content-Type" "application/json; charset=utf-8"}
+   :body (json/generate-string data)})
+
+(defn save-workspace [workspace]
+  (json-response workspace))
 
 (defn load-workspace []
-  (layout/render "about.html"))
+  (json-response "hola"))
 
 (defroutes api-routes
   (context "/api" []
-    (POST "/" [] (save-workspace))
+    (POST "/" [workspace] (save-workspace workspace))
     (GET "/" [] (load-workspace))))

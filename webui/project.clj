@@ -40,7 +40,8 @@
                  [prone "0.8.1"]
                  [ragtime "0.3.8"]
                  [yesql "0.5.0-rc1"]
-                 [com.h2database/h2 "1.4.182"]]
+                 [com.h2database/h2 "1.4.182"]
+                 [cheshire "5.4.0"]]
 
   :min-lein-version "2.0.0"
   :uberjar-name "webui.jar"
@@ -53,7 +54,6 @@
             [lein-environ "1.0.0"]
             [lein-ancient "0.6.5"]
             [ragtime/ragtime.lein "0.3.8"]]
-  
 
   :ring {:handler webui.handler/app
          :init    webui.handler/init

@@ -214,7 +214,13 @@ var connectShape = paper
  * */
 var save = function() {
   //TODO
-  alert("What's up Linda?");
+  var n = 0;
+  var a = [];
+  while(n <= w.length) {
+    a.push(w[n].data('props'));
+    n++;
+  }
+  $.post("/api/", a);
 }
 
 /**
@@ -261,5 +267,5 @@ $('#blk-name').change(function(){updateShape($('#blk-id').val())});
 $('#blk-url').change(function(){updateShape($('#blk-id').val())});
 $('#remove-btn').click(function(){remove($('#blk-id').val())});
 $('#clone-btn').click(function(){cloneBlk($('#blk-id').val())});
-$('#save-btn').click(function(){save($('#blk-id').val())});
+$('#save-btn').click(function(){save()});
 
