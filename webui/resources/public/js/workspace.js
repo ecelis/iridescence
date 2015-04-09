@@ -165,7 +165,8 @@ var save = function() {
   w.forEach(function(s) {
     payload.push(s.data("props"));
   });
-  $.post("/api/", JSON.stringify(payload));
+  $.post("/api/", {"__anti-forgery-token": $('#__anti-forgery-token').val(),
+         "shape":JSON.stringify(payload)});
 }
 
 /**
