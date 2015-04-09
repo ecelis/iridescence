@@ -10,7 +10,7 @@ Iridescence Smart Connector depends on Mirth Connect 3.2.1
 
 ### Manual build
 
-  1. Checout Mirth connect `svn co https://svnmirthcorp.com/connect/tags/3.2.1 mirth`
+  1. Checout Mirth connect `svn co https://svn.mirthcorp.com/connect/tags/3.2.1 mirth`
   2. `cd mirth/server`
   3. `export JAVA_TOOL_OPTIONS=-Dfile.conding=UTF8 ; ant -f mirth-build.xml`
 

@@ -24,12 +24,18 @@
 */
 var dragger = function() {
   // TODO Fix for paths
-  if(this.type == "rect") {
-    this.ox = this.attr("x");
-    this.oy = this.attr("y");
-  } else {
-    this.ox = this.attr("cx");
-    this.oy = this.attr("cy");
+  switch(this.type) {
+    case "rect":
+      this.ox = this.attr("x");
+      this.oy = this.attr("y");
+      break;
+    case "circle":
+    case "ellipse":
+      this.ox = this.attr("cx");
+      this.oy = this.attr("cy");
+      break;
+   case "path":
+     break;
   }
   this.animate({"fill-opacity": .2}, 500);
 }
@@ -65,6 +71,23 @@ var up = function() {
  * @method modify
  * */
 var modify = function() {
+  switch(this.type) {
+    case "rect":
+      if (connect.length < 2) {
+        if(connect[0] != this) {
+          connect.push(this);
+        }
+      }
+      break;
+    case "path":
+      // TODO Maybe make it a function and call it on drag and on click
+      // for the path shape in toolbar
+      if(connect.length == 2) {
+        connections.push(paper.connection(connect[0], connect[1], "#000"));
+        emptyConnectQueue();
+      }
+      break;
+  }
   var p = this.data("props");
   $('#blk-name').val(p.name);
   $('#blk-url').val(p.url);
@@ -79,7 +102,7 @@ var modify = function() {
 Workspace = function() {};
 
 Workspace.prototype = {
-  lenght: 0,
+  length: 0,
   first: null,
   last: null
 };
@@ -102,7 +125,7 @@ Workspace.prototype.append = function(shape) {
     this.last.next = shape;
     this.last = shape;
   }
-  this.lenght++;
+  this.length++;
 };
 
 /**
@@ -118,7 +141,7 @@ Workspace.prototype.insertAfter = function(shape, newShape) {
   shape.next.prev = newShape;
   shape.next = newShape;
   if (newShape.prev == this.last) { this.last = newShape; }
-  this.lenght++;
+  this.length++;
 };
 
 /**
@@ -127,7 +150,7 @@ Workspace.prototype.insertAfter = function(shape, newShape) {
  * @param {Object} shape a Raphael Element object
  * */
 Workspace.prototype.remove = function(shape) {
-  if(this.lenght > 1) {
+  if(this.length > 1) {
      shape.prev.next = shape.next;
      shape.next.prev = shape.prev;
      if(shape == this.first) { this.first = shape.next; }
@@ -138,7 +161,7 @@ Workspace.prototype.remove = function(shape) {
   }
   shape.prev = null;
   shape.next = null;
-  this.lenght--;
+  this.length--;
 }
 
 var setData = function(shape) {
@@ -167,11 +190,9 @@ var addToDiagram = function (shape) {
                   "x": 50 + Math.floor(Math.random()*160),
                   "y": 70 + Math.floor(Math.random()*160)});
   }
-  newShape.drag(move, dragger, up);
-  connections.push(paper
-                   .connection(shape, newShape, "#000"));
-  w.append(newShape);   // Append new shape to workspace
-  newShape.click(modify);
+  newShape.drag(move, dragger, up)
+    .click(modify);
+    w.append(newShape);   // Append new shape to workspace
 }
 
 /**
@@ -193,6 +214,8 @@ var tx = 20, ty = 20;
 var paper = Raphael(10, 50, 640, 480);
 // A set of connections between shapes
 connections = [];
+// Temporary queue for connections
+connect = [];
 // Just a placeholder for the tools
 var toolbar = paper.rect(tx, ty, 40, 452);
 // We'll derive other shapes from this one
@@ -208,6 +231,9 @@ var connectShape = paper
   .attr({"stroke-width": 2,
         cursor: "move"});
 
+var emptyConnectQueue = function() {
+  connect = [];
+}
 /**
  * Save workspace to YAML in the server
  * @method save
@@ -251,6 +277,7 @@ var cloneBlk = function(id) {
  * @param {Integer} id of Raphael element
  * */
 var updateShape = function(id) {
+  // TODO Fix it, values get borked in the panel
   var s = paper.getById(id);
   s.data("props").name = $('#blk-name').val();
   s.data("props").url = $('#blk-url').val();
