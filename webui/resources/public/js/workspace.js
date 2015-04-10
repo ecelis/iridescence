@@ -166,7 +166,7 @@ var save = function() {
     payload.push(s.data("props"));
   });
   $.post("/api/", {"__anti-forgery-token": $('#__anti-forgery-token').val(),
-         "shape":JSON.stringify(payload)});
+         "workspace":JSON.stringify(payload)});
 }
 
 /**

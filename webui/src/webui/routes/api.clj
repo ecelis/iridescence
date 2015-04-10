@@ -21,7 +21,8 @@
   (:require [webui.layout :as layout]
             [compojure.core :refer :all]
             [cheshire.core :as json]
-            [clojure.java.io :as io]))
+            [clojure.java.io :as io])
+  (:use [taoensso.timbre :only [trace debug info warn error fatal]]))
 
 (defn json-response [data & [status]]
   {:status (or status 200)
@@ -29,12 +30,12 @@
    :body (json/generate-string data)})
 
 (defn save-workspace [workspace]
-  (json-response workspace))
+  (info (vals (json/parse-string workspace))))
 
 (defn load-workspace []
   (json-response "hola"))
 
 (defroutes api-routes
   (context "/api" []
-    (POST "/" [workspace] (save-workspace workspace))
+    (POST "/" [__anti-forgery-token workspace] (save-workspace workspace))
     (GET "/" [] (load-workspace))))
