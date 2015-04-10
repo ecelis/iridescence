@@ -21,7 +21,9 @@
   (:require [webui.layout :as layout]
             [compojure.core :refer :all]
             [cheshire.core :as json]
-            [clojure.java.io :as io])
+            [clojure.java.io :as io]
+            [clj-yaml.core :as yaml]
+            )
   (:use [taoensso.timbre :only [trace debug info warn error fatal]]))
 
 (defn json-response [data & [status]]
@@ -30,7 +32,7 @@
    :body (json/generate-string data)})
 
 (defn save-workspace [workspace]
-  (info (vals (json/parse-string workspace))))
+  (info (yaml/parse-string (json/parse-string workspace))))
 
 (defn load-workspace []
   (json-response "hola"))
