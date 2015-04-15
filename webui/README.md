@@ -6,8 +6,23 @@ Drag & Drop GUI for Smart Connector.
 
   * Drag & Drop blocks which represent code to be built at runtime
   * Map Source data to HL7 messages for Mirth Connector by Drag & Drop
-  * Save or clone mappings to be reused or copied to other Smart
-    Connector Installs
+  * Save or clone mappings to be reused by other Smart Connector
+    Installs
+
+
+### RESTful API
+
+    ;; API Definition
+    ;;
+    ;; Everything in the /api context is a workspace
+    ;; http://localhost:3000/api
+    ;;
+    ;; POST     /             save-workspace to YAML storage
+    ;; GET      /             load-workspace from YAML storage
+    ;; PUT      /:id          update-workspace (existing) in YAML storage
+    ;; DELETE   /:id          delete-workspace (existing) in YAML storage
+    ;; GET      /run/:id      run-workspace by ID from YAML
+
 
 ## Prerequisites
 
@@ -34,11 +49,11 @@ Create a war for deploying to an app server
 
 Browse to http://localhost:3000/
 
+
 ## Bugs
 
   * Dragging Connection from the toolbar does not work. It still creates
     a new connection
-  * Dragging connections between blocks is broken overall.
 
 ## License
 

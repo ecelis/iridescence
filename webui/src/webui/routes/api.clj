@@ -28,23 +28,51 @@
 (def savedir "/tmp")
 
 (defn json-response [data & [status]]
+  "Returns a proper application/json response"
   {:status (or status 200)
    :headers {"Content-Type" "application/json; charset=utf-8"}
    :body (json/generate-string data)})
 
 (defn yaml-response [data & [status]]
+  "Returns a text/plain response YAML"
   {:status (or status 200)
    :headers {"Content-Type" "text/plain; charset=utf-8"}
    :body data})
 
 (defn save-workspace [workspace]
+  "Saves a YAML representation of a workspace"
   ; TODO handle nil or invalid data for spit
   (def yaml-workspace (yaml/generate-string (json/parse-string workspace)))
   (spit (str savedir "/workspace.sav") yaml-workspace); TODO dynamic filename
   (yaml-response yaml-workspace))
 
 (defn load-workspace []
-  (json-response "hola"))
+  "Loads a workspace from YAML storage"
+  (yaml-response "load-workspace stub"))
+
+(defn update-workspace [id]
+  "Update workspace in YAML storage"
+  (yaml-response "update-workspace stub"))
+
+(defn delete-workspace [id]
+  "Delete workspace from YAML storage"
+  (yaml-response "delete-workspace stub"))
+
+(defn run-workspace [id]
+  "Run workspace"
+  (yaml-response "run-workspace stub"))
+
+
+;; API Definition
+;;
+;; Everything in the /api context is a workspace
+;; http://localhost:3000/api
+;;
+;; POST     /             save-workspace to YAML
+;; GET      /             load-workspace from YAML
+;; PUT      /:id          update-workspace (existing) in YAML
+;; DELETE   /:id          delete-workspace (existing) in YAML
+;; GET      /run/:id      run-workspace by ID from YAML
 
 (defroutes api-routes
   (context "/api" []
