@@ -32,10 +32,16 @@
    :headers {"Content-Type" "application/json; charset=utf-8"}
    :body (json/generate-string data)})
 
+(defn yaml-response [data & [status]]
+  {:status (or status 200)
+   :headers {"Content-Type" "text/plain; charset=utf-8"}
+   :body data})
+
 (defn save-workspace [workspace]
   ; TODO handle nil or invalid data for spit
-  (spit (str savedir "/workspace.sav")  ; TODO dynamic filename
-        (yaml/generate-string (json/parse-string workspace))))
+  (def yaml-workspace (yaml/generate-string (json/parse-string workspace)))
+  (spit (str savedir "/workspace.sav") yaml-workspace); TODO dynamic filename
+  (yaml-response yaml-workspace))
 
 (defn load-workspace []
   (json-response "hola"))
