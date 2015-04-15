@@ -29,7 +29,7 @@
    :body (json/generate-string data)})
 
 (defn save-workspace [workspace]
-  (json-response workspace))
+  (json-response "sup"))
 
 (defn load-workspace []
   (json-response "hola"))
