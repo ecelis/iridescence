@@ -42,7 +42,8 @@
                  [yesql "0.5.0-rc1"]
                  [com.h2database/h2 "1.4.182"]
                  [cheshire "5.4.0"]
-                 [hl7yaml "0.1.2-SNAPSHOT"]]
+                 [hl7yaml "0.1.2-SNAPSHOT"]
+                 [clj-yaml "0.4.0"]]
 
   :min-lein-version "2.0.0"
   :uberjar-name "webui.jar"

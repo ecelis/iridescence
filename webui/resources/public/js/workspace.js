@@ -24,12 +24,18 @@
 */
 var dragger = function() {
   // TODO Fix for paths
-  if(this.type == "rect") {
-    this.ox = this.attr("x");
-    this.oy = this.attr("y");
-  } else {
-    this.ox = this.attr("cx");
-    this.oy = this.attr("cy");
+  switch(this.type) {
+    case "rect":
+      this.ox = this.attr("x");
+      this.oy = this.attr("y");
+      break;
+    case "circle":
+    case "ellipse":
+      this.ox = this.attr("cx");
+      this.oy = this.attr("cy");
+      break;
+   case "path":
+     break;
   }
   this.animate({"fill-opacity": .2}, 500);
 }
@@ -65,80 +71,27 @@ var up = function() {
  * @method modify
  * */
 var modify = function() {
+  switch(this.type) {
+    case "rect":
+      if (connect.length < 2) {   // If the connection queue's length < 2
+        if(connect[0] != this) {  // and If shape isn't already in queue
+          connect.push(this);     // add shape to queue
+        }
+      }
+      break;
+    case "path":
+      // TODO Maybe make it a function and call it on drag and on click
+      // for the path shape in toolbar
+      if(connect.length == 2) {
+        connections.push(paper.connection(connect[0], connect[1], "#000"));
+        connect = [];     // Empty queue
+      }
+      break;
+  }
   var p = this.data("props");
   $('#blk-name').val(p.name);
   $('#blk-url').val(p.url);
   $('#blk-id').val(this.id);
-}
-
-/**
-  Workspace is a linked list of configuration objects
-  @class Workspace
-  @constructor
-  */
-Workspace = function() {};
-
-Workspace.prototype = {
-  lenght: 0,
-  first: null,
-  last: null
-};
-
-/**
-  Append a new element to workspace
-  @method append
-  @param {Object} shape a Raphael Element object
-  */
-Workspace.prototype.append = function(shape) {
-  if(this.first === null) {
-    shape.prev = shape;
-    shape.next = shape;
-    this.first = shape;
-    this.last = shape;
-  } else {
-    shape.prev = this.last;
-    shape.next = this.first;
-    this.first.prev = shape;
-    this.last.next = shape;
-    this.last = shape;
-  }
-  this.lenght++;
-};
-
-/**
-  Insert a new element in the workspace before one specific element
-  which is already in the workspace, useful for workflow.
-  @method insertAfter
-  @param {Object} shape a Raphael Element object
-  @param {Object} newShape the new Raphael Element object
-  */
-Workspace.prototype.insertAfter = function(shape, newShape) {
-  newShape.prev = shape;
-  newShape.next = shape.next;
-  shape.next.prev = newShape;
-  shape.next = newShape;
-  if (newShape.prev == this.last) { this.last = newShape; }
-  this.lenght++;
-};
-
-/**
- * Remove an element from workspace
- * @method remove
- * @param {Object} shape a Raphael Element object
- * */
-Workspace.prototype.remove = function(shape) {
-  if(this.lenght > 1) {
-     shape.prev.next = shape.next;
-     shape.next.prev = shape.prev;
-     if(shape == this.first) { this.first = shape.next; }
-     if(shape == this.last) { this.last = shape.prev; }
-  } else {
-     this.first = null;
-     this.last = null;
-  }
-  shape.prev = null;
-  shape.next = null;
-  this.lenght--;
 }
 
 var setData = function(shape) {
@@ -167,34 +120,28 @@ var addToDiagram = function (shape) {
                   "x": 50 + Math.floor(Math.random()*160),
                   "y": 70 + Math.floor(Math.random()*160)});
   }
-  newShape.drag(move, dragger, up);
-  connections.push(paper
-                   .connection(shape, newShape, "#000"));
-  w.append(newShape);   // Append new shape to workspace
-  newShape.click(modify);
+  newShape.drag(move, dragger, up).click(modify);
+  w.push(newShape);   // Append new shape to workspace
 }
 
 /**
  * Triggers when an element from Toolbar is dragged into workspace
  * @method toolUp
  * */
-var toolUp = function() {
+var release = function() {
   this.attr("x", tx + 5);
   this.attr("y", ty + 5);
   addToDiagram(this);
 }
 
-// Create a default workspace
-var w = new Workspace();
 var util = new Util();
 // Global settings
 var tx = 20, ty = 20;
-// Creates canvas 320 × 200 at 10, 50
-var paper = Raphael(10, 50, 640, 480);
-// A set of connections between shapes
-connections = [];
-// Just a placeholder for the tools
-var toolbar = paper.rect(tx, ty, 40, 452);
+var paper = Raphael(10, 50, 640, 480);  // Creates canvas 320×200@10,50
+var w = paper.set();                    // Create a default workspace
+connections = [];                       // Connections between shapes
+connect = [];                           // Temporary queue for connections
+var toolbar = paper.rect(tx, ty, 40, 452); // Placeholder for the tools
 // We'll derive other shapes from this one
 var basicShape = paper
   .rect(tx + 5, ty + 5, 30, 20)
@@ -214,13 +161,12 @@ var connectShape = paper
  * */
 var save = function() {
   //TODO
-  var n = 0;
-  var a = [];
-  while(n <= w.length) {
-    a.push(w[n].data('props'));
-    n++;
-  }
-  $.post("/api/", a);
+  var payload = [];
+  w.forEach(function(s) {
+    payload.push(s.data("props"));
+  });
+  $.post("/api/", {"__anti-forgery-token": $('#__anti-forgery-token').val(),
+         "workspace":JSON.stringify(payload)});
 }
 
 /**
@@ -231,7 +177,7 @@ var save = function() {
 var remove = function(id) {
   // TODO Fix this, should be donw within w.remove
   var s = paper.getById(id);
-  w.remove(s);
+  w.exclude(s);
   s.remove();
 }
 
@@ -240,7 +186,7 @@ var remove = function(id) {
  * @method cloneBlk
  * @param {Integer} id of the Raphael element
  * */
-var cloneBlk = function(id) {
+var clone = function(id) {
   addToDiagram(paper.getById(id));
 }
 
@@ -250,22 +196,32 @@ var cloneBlk = function(id) {
  * @method updateShape
  * @param {Integer} id of Raphael element
  * */
-var updateShape = function(id) {
+var update = function(id) {
+  // TODO Fix it, values get borked in the panel
   var s = paper.getById(id);
+  s.data("props").id = id;
+  s.data("props").type = $('#blk-type').val();
   s.data("props").name = $('#blk-name').val();
   s.data("props").url = $('#blk-url').val();
   s.attr({'title': s.data("props").name,
           'text':s.data("props").name});
 }
 
+
 // Attach listeners to Toolbar elements
-basicShape.drag(move, dragger, toolUp);
-connectShape.drag(move, dragger, toolUp);
+basicShape.drag(move, dragger, release);
+connectShape.drag(move, dragger, release);
 // Bind listeners to Properties controls
 // TODO Do this in one iteration of all form controls
-$('#blk-name').change(function(){updateShape($('#blk-id').val())});
-$('#blk-url').change(function(){updateShape($('#blk-id').val())});
+$('#type-lst li a').click(function(){
+  var type = $(this).text().toUpperCase().replace(' ','');
+  $('#btn-type').html(type + '<span class="caret"></span>');
+  $('#blk-type').val(type);
+  update($('#blk-id').val());
+});
+$('#blk-name').change(function(){update($('#blk-id').val())});
+$('#blk-url').change(function(){update($('#blk-id').val())});
 $('#remove-btn').click(function(){remove($('#blk-id').val())});
-$('#clone-btn').click(function(){cloneBlk($('#blk-id').val())});
+$('#clone-btn').click(function(){clone($('#blk-id').val())});
 $('#save-btn').click(function(){save()});
 

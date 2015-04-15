@@ -19,9 +19,10 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var PostgresModel = new DataModel();
+var PostgresModel = new DataModel()
 
-PostgresModel.type = "postgres"
+PostgresModel.type = "postgres";
 PostgresModel.name = "pg" + $('#blk-id').val(); // TODO Decouple from view
-PostgresModel.url = "jdbc:postgresql://host:port/db"
+PostgresModel.url = "jdbc:postgresql://host:port/db";
+
 
