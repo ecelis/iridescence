@@ -22,11 +22,15 @@
             [compojure.core :refer :all]
             [cheshire.core :as json]
             [clojure.java.io :as io]
-            [clj-yaml.core :as yaml])
+            [clj-yaml.core :as yaml]
+            [webui.db.core :as db]
+            )
   (:use [taoensso.timbre :only [trace debug info warn error fatal]]))
 
 (def savedir "/tmp")
 
+;; TODO Read http://www.luminusweb.net/docs/responses.md
+;; for proper encoding reponses
 (defn json-response [data & [status]]
   "Returns a proper application/json response"
   {:status (or status 200)
@@ -62,7 +66,6 @@
   "Run workspace"
   (yaml-response "run-workspace stub"))
 
-
 ;; API Definition
 ;;
 ;; Everything in the /api context is a workspace
@@ -77,4 +80,10 @@
 (defroutes api-routes
   (context "/api" []
     (POST "/" [__anti-forgery-token workspace] (save-workspace workspace))
-    (GET "/" [] (load-workspace))))
+    (GET "/" [] (load-workspace))
+    (PUT "/:id" [id]
+         (update-workspace id))
+    (DELETE "/:id" [id]
+          (delete-workspace id))
+    (GET "/run/:id" [id]
+         (run-workspace id))))
