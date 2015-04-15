@@ -34,7 +34,6 @@
 (defn save-workspace [workspace]
   (info (yaml/parse-string (json/parse-string workspace))))
 
-
 (defn load-workspace []
   (json-response "hola"))
 
