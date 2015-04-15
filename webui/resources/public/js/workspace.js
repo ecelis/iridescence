@@ -137,11 +137,11 @@ var release = function() {
 var util = new Util();
 // Global settings
 var tx = 20, ty = 20;
-var paper = Raphael(10, 50, 640, 480);  // Creates canvas 320×200@10,50
+var paper = Raphael(10, 50, 500, 380);  // Creates canvas 320×200@10,50
 var w = paper.set();                    // Create a default workspace
 connections = [];                       // Connections between shapes
 connect = [];                           // Temporary queue for connections
-var toolbar = paper.rect(tx, ty, 40, 452); // Placeholder for the tools
+var toolbar = paper.rect(tx, ty, 40, 300); // Placeholder for the tools
 // We'll derive other shapes from this one
 var basicShape = paper
   .rect(tx + 5, ty + 5, 30, 20)

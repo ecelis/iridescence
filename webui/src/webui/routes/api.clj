@@ -22,9 +22,10 @@
             [compojure.core :refer :all]
             [cheshire.core :as json]
             [clojure.java.io :as io]
-            [clj-yaml.core :as yaml]
-            )
+            [clj-yaml.core :as yaml])
   (:use [taoensso.timbre :only [trace debug info warn error fatal]]))
+
+(def savedir "/tmp")
 
 (defn json-response [data & [status]]
   {:status (or status 200)
@@ -32,7 +33,9 @@
    :body (json/generate-string data)})
 
 (defn save-workspace [workspace]
-  (json-response (yaml/generate-string (json/parse-string workspace))))
+  ; TODO handle nil or invalid data for spit
+  (spit (str savedir "/workspace.sav")  ; TODO dynamic filename
+        (yaml/generate-string (json/parse-string workspace))))
 
 (defn load-workspace []
   (json-response "hola"))
