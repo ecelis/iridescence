@@ -56,15 +56,15 @@
 
 (defn update-workspace [id]
   "Update workspace in YAML storage"
-  (yaml-response "update-workspace stub"))
+  (yaml-response (str "update-workspace stub " id)))
 
 (defn delete-workspace [id]
   "Delete workspace from YAML storage"
-  (yaml-response "delete-workspace stub"))
+  (yaml-response (str "delete-workspace stub " id)))
 
 (defn run-workspace [id]
   "Run workspace"
-  (yaml-response "run-workspace stub"))
+  (yaml-response (str "run-workspace stub " id)))
 
 ;; API Definition
 ;;
