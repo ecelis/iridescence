@@ -10,6 +10,12 @@ directory /iridesence before trying to build with lein
     lein deps
     lein repl
 
+    (require 'hl7yaml.core)
+    (hl7yaml.core/rechl7 hl7msg)
+    (hl7yaml.core/recyaml yamlmsg)
+
+
+
 ### Bugs
 
 
