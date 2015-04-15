@@ -32,7 +32,7 @@
    :body (json/generate-string data)})
 
 (defn save-workspace [workspace]
-  (info (yaml/parse-string (json/parse-string workspace))))
+  (json-response (yaml/generate-string (json/parse-string workspace))))
 
 (defn load-workspace []
   (json-response "hola"))
