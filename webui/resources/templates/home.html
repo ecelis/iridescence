@@ -10,51 +10,77 @@
         <form name="properties-frm" id="properties-frm">
           {% csrf-field %}
           <div class="panel-body">
-            <div class="row">
-              <div class="col-xs-6">
-                <div class="input-group">
-                  <span class="input-group-addon" id="property-name">Name</span>
-                  <input type="text" class="form-control" placeholder="Name"
-                  aria-describedby="property-name" name="blk-name" id="blk-name">
+            <!-- Tab panels -->
+            <div class="tab-panel">
+              <!-- Navigation Tabs -->
+              <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                  <a href="#connector" aria-controls="connector"
+                    role="tab" data-toggle="tab">Connector</a></li>
+                <li role="presentation"><a href="#connection"
+                  aria-controls="connection"
+                  role="tab" data-toggle="tab">Connection</a></li>
+              </ul>
+
+              <!-- Tab Content -->
+              <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="connector">
+                  <div class="row">
+                    <div class="col-xs-6">
+                      <div class="input-group">
+                        <span class="input-group-addon" id="property-name">Name</span>
+                        <input type="text" class="form-control" placeholder="Name"
+                        aria-describedby="property-name" name="blk-name" id="blk-name">
+                      </div>
+                    </div>
+                    <div class="col-xs-6">
+                      <div class="input-group">
+                        <div class="input-group-btn">
+                          <button type="button" class="btn btn-default dropdown-toggle"
+                            data-toggle="dropdown" aria-expanded="false"
+                            id="btn-type">Type
+                            <span class="caret"></span></button>
+                          <ul class="dropdown-menu" id="type-lst" role="menu">
+                            <li><a>PostgreSQL</a></li> <!-- TODO Fix keyboard -->
+                            <li><a>Mirth Connect</a></li>
+                          </ul>
+                        </div> <!-- /btn-group -->
+                        <input type="text" class="form-control" arial-label="..."
+                        placeholder="url://" name="blk-url" id="blk-url">
+                      </div> <!-- /input- group -->
+                    </div> <!-- /.col-lg-6 -->
+                  </div>
+                </div> <!-- tab panel connector -->
+                <div role="tabpanel" class="tab-pane" id="connection">
+                  <div class="row">
+                    <div class="col-xs-6">
+                      <h1>Hello world</h1>
+                    </div>
+                  </div>
+                </div> <!-- tab panel connection -->
+              </div> <!-- /tab-content -->
+
+                <div class="row">
+                  <div class="col-xs-6">
+                    <div class="btn-group" role="group" aria-label="...">
+                      <button type="button" class="btn btn-default" name="save-btn"
+                        id="save-btn">Save</button>
+                      <button type="button" class="btn btn-default" name="clone-btn"
+                        id="clone-btn">Clone</button>
+                      <button type="button" class="btn btn-default" name="remove-btn"
+                        id="remove-btn">Remove</button>
+                    </div>
+                  </div>
+                  <div class="col-xs-6">
+                    <div class="input-group">
+                      <input type="text" class="form-control"
+                      name="blk-id" id="blk-id">
+                      <input type="text" class="form-control"
+                      name="blk-type" id="blk-type">
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="col-xs-6">
-                <div class="input-group">
-                  <div class="input-group-btn">
-                    <button type="button" class="btn btn-default dropdown-toggle"
-                      data-toggle="dropdown" aria-expanded="false"
-                      id="btn-type">Type
-                      <span class="caret"></span></button>
-                    <ul class="dropdown-menu" id="type-lst" role="menu">
-                      <li><a>PostgreSQL</a></li> <!-- TODO Fix keyboard -->
-                      <li><a>Mirth Connect</a></li>
-                    </ul>
-                  </div> <!-- /btn-group -->
-                  <input type="text" class="form-control" arial-label="..."
-                  placeholder="url://" name="blk-url" id="blk-url">
-                </div> <!-- /input- group -->
-              </div> <!-- /.col-lg-6 -->
-            </div>
-            <div class="row">
-              <div class="col-xs-6">
-                <div class="btn-group" role="group" aria-label="...">
-                  <button type="button" class="btn btn-default" name="save-btn"
-                    id="save-btn">Save</button>
-                  <button type="button" class="btn btn-default" name="clone-btn"
-                    id="clone-btn">Clone</button>
-                  <button type="button" class="btn btn-default" name="remove-btn"
-                    id="remove-btn">Remove</button>
-                </div>
-              </div>
-              <div class="col-xs-6">
-                <div class="input-group">
-                  <input type="text" class="form-control"
-                  name="blk-id" id="blk-id">
-                  <input type="text" class="form-control"
-                  name="blk-type" id="blk-type">
-                </div>
-              </div>
-            </div>
+
           </div>
         </form>
       </div>
