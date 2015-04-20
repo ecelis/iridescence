@@ -82,11 +82,7 @@ var modify = function() {
     case "path":
       // TODO Maybe make it a function and call it on drag and on click
       // for the path shape in toolbar
-      if(connect.length == 2) {
-        connections.push(paper.connection(connect[0], connect[1], "#000"));
-        connect = [];     // Empty queue
-      }
-      break;
+            break;
   }
   var p = this.data("props");
   $('#blk-name').val(p.name);
@@ -110,6 +106,13 @@ var addToDiagram = function (shape) {
   setData(newShape);              // Give Dolly a Soul
   if(newShape.type === "path") {
     newShape.attr({});
+    newShape.click(function(){addToDiagram(this)});
+    if(connect.length == 2) {
+      connections.push(paper.connection(connect[0], connect[1], "#000"));
+      connect = [];     // Empty queue
+    } else {
+      return;           // 2 shapes in queue are required to make a connection
+    }
   } else {
     newShape.attr({fill: color,
                   stroke: color,
@@ -119,8 +122,8 @@ var addToDiagram = function (shape) {
                   "height": 30,
                   "x": 50 + Math.floor(Math.random()*160),
                   "y": 70 + Math.floor(Math.random()*160)});
+    newShape.drag(move, dragger, up).click(modify);
   }
-  newShape.drag(move, dragger, up).click(modify);
   w.push(newShape);   // Append new shape to workspace
 }
 
@@ -210,7 +213,7 @@ var update = function(id) {
 
 // Attach listeners to Toolbar elements
 basicShape.drag(move, dragger, release);
-connectShape.drag(move, dragger, release);
+connectShape.click(function(){addToDiagram(this)});
 // Bind listeners to Properties controls
 // TODO Do this in one iteration of all form controls
 $('#type-lst li a').click(function(){
