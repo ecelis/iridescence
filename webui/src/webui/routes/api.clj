@@ -23,8 +23,7 @@
             [cheshire.core :as json]
             [clojure.java.io :as io]
             [clj-yaml.core :as yaml]
-            [webui.db.core :as db]
-            )
+            [adapter-db.core :as db])
   (:use [taoensso.timbre :only [trace debug info warn error fatal]]))
 
 (def savedir "/tmp")
@@ -64,6 +63,7 @@
 
 (defn run-workspace [id]
   "Run workspace"
+  (db/build-select "ta")
   (yaml-response (str "run-workspace stub " id)))
 
 ;; API Definition
