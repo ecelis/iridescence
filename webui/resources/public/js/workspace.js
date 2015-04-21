@@ -34,8 +34,6 @@ var dragger = function() {
       this.ox = this.attr("cx");
       this.oy = this.attr("cy");
       break;
-   case "path":
-     break;
   }
   this.animate({"fill-opacity": .2}, 500);
 }
@@ -48,7 +46,7 @@ var move = function(dx, dy) {
   if (this.type == "rect") {
     att = {x: this.ox + dx, y: this.oy + dy};
   } else {
-    att ={ cx: this.ox + dx, cy: this.oy + dy};
+    att = { cx: this.ox + dx, cy: this.oy + dy};
   }
   this.attr(att);
   // TODO
@@ -79,10 +77,6 @@ var modify = function() {
         }
       }
       break;
-    case "path":
-      // TODO Maybe make it a function and call it on drag and on click
-      // for the path shape in toolbar
-            break;
   }
   var p = this.data("props");
   $('#blk-name').val(p.name);
@@ -102,18 +96,19 @@ var setData = function(shape) {
  * */
 var addToDiagram = function (shape) {
   var color = Raphael.getColor(); // Get next color in spectrum
-  var newShape = shape.clone();   // Hello Dolly!
-  setData(newShape);              // Give Dolly a Soul
-  if(newShape.type === "path") {
-    newShape.attr({});
-    newShape.click(function(){addToDiagram(this)});
-    if(connect.length == 2) {
-      connections.push(paper.connection(connect[0], connect[1], "#000"));
-      connect = [];     // Empty queue
+  if(shape.type === "path") {
+    if(connect.length == 2) {     // Create a connection between adapters
+      var newConnection = paper.connection(connect[0], connect[1], "#000");
+      newConnection.id = connect[0].id + 'to' + connect[1].id;
+      connections.push(newConnection);
+      workspace.push(newConnection);
+      connect = [];               // Empty queue
     } else {
-      return;           // 2 shapes in queue are required to make a connection
-    }
+      return;                     // 2 shapes in queue are required
+    }                             // to make a connection
   } else {
+    var newShape = shape.clone();   // Hello Dolly!
+    setData(newShape);              // Give Dolly a Soul
     newShape.attr({fill: color,
                   stroke: color,
                   "fill-opacity": 0,
@@ -123,8 +118,8 @@ var addToDiagram = function (shape) {
                   "x": 50 + Math.floor(Math.random()*160),
                   "y": 70 + Math.floor(Math.random()*160)});
     newShape.drag(move, dragger, up).click(modify);
+    workspace.push(newShape);   // Append new shape to workspace
   }
-  w.push(newShape);   // Append new shape to workspace
 }
 
 /**
@@ -141,7 +136,7 @@ var util = new Util();
 // Global settings
 var tx = 20, ty = 20;
 var paper = Raphael(10, 50, 500, 380);  // Creates canvas 320×200@10,50
-var w = paper.set();                    // Create a default workspace
+var workspace = paper.set();            // Create a default workspace
 connections = [];                       // Connections between shapes
 connect = [];                           // Temporary queue for connections
 var toolbar = paper.rect(tx, ty, 40, 300); // Placeholder for the tools
@@ -165,7 +160,7 @@ var connectShape = paper
 var save = function() {
   //TODO
   var payload = [];
-  w.forEach(function(s) {
+  workspace.forEach(function(s) {
     payload.push(s.data("props"));
   });
   $.post("/api/", {"__anti-forgery-token": $('#__anti-forgery-token').val(),
@@ -179,9 +174,9 @@ var save = function() {
  * */
 var remove = function(id) {
   // TODO Fix this, should be donw within w.remove
-  var s = paper.getById(id);
-  w.exclude(s);
-  s.remove();
+  var shape = paper.getById(id);
+  workspace.exclude(s);
+  shape.remove();
 }
 
 /**
