@@ -101,7 +101,7 @@ var addToDiagram = function (shape) {
       var newConnection = paper.connection(connect[0], connect[1], "#000");
       newConnection.id = connect[0].id + 'to' + connect[1].id;
       connections.push(newConnection);
-      workspace.push(newConnection);
+      workspace.push(newConnection.line);
       connect = [];               // Empty queue
     } else {
       return;                     // 2 shapes in queue are required
