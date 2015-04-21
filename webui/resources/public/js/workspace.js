@@ -42,13 +42,13 @@ var dragger = function() {
   Triggered when a shape is moving
   */
 var move = function(dx, dy) {
-  // TODO Fix for paths
+  var coordinates;
   if (this.type == "rect") {
-    att = {x: this.ox + dx, y: this.oy + dy};
+    coordinates = {x: this.ox + dx, y: this.oy + dy};
   } else {
-    att = { cx: this.ox + dx, cy: this.oy + dy};
+    coordinates = { cx: this.ox + dx, cy: this.oy + dy};
   }
-  this.attr(att);
+  this.attr(coordinates);
   // TODO
   for(var i = connections.length; i--;) {
     paper.connection(connections[i]);
@@ -69,6 +69,7 @@ var up = function() {
  * @method modify
  * */
 var modify = function() {
+  var property = this.data("props");
   switch(this.type) {
     case "rect":
       if (connect.length < 2) {   // If the connection queue's length < 2
@@ -76,12 +77,15 @@ var modify = function() {
           connect.push(this);     // add shape to queue
         }
       }
+      $('#blk-name').val(property.name);
+      $('#blk-url').val(property.url);
+      $('#blk-id').val(this.id);
+      $('#properties a[href="#connector"]').tab('show');
+      break;
+    case "path":
+      $('#properties a[href="#connection"]').tab('show');
       break;
   }
-  var p = this.data("props");
-  $('#blk-name').val(p.name);
-  $('#blk-url').val(p.url);
-  $('#blk-id').val(this.id);
 }
 
 var setData = function(shape) {
@@ -99,7 +103,10 @@ var addToDiagram = function (shape) {
   if(shape.type === "path") {
     if(connect.length == 2) {     // Create a connection between adapters
       var newConnection = paper.connection(connect[0], connect[1], "#000");
-      newConnection.id = connect[0].id + 'to' + connect[1].id;
+      newConnection.line.attr({
+        "title": id = connect[0].id + 'to' + connect[1].id,
+        "stroke-width": 3});
+      newConnection.line.click(modify);
       connections.push(newConnection);
       workspace.push(newConnection.line);
       connect = [];               // Empty queue
@@ -112,7 +119,7 @@ var addToDiagram = function (shape) {
     newShape.attr({fill: color,
                   stroke: color,
                   "fill-opacity": 0,
-                  "stroke-width": 2,
+                  "stroke-width": 3,
                   "width": 50,
                   "height": 30,
                   "x": 50 + Math.floor(Math.random()*160),
@@ -137,20 +144,20 @@ var util = new Util();
 var tx = 20, ty = 20;
 var paper = Raphael(10, 50, 500, 380);  // Creates canvas 320×200@10,50
 var workspace = paper.set();            // Create a default workspace
-connections = [];                       // Connections between shapes
-connect = [];                           // Temporary queue for connections
+var connections = [];                       // Connections between shapes
+var connect = [];                           // Temporary queue for connections
 var toolbar = paper.rect(tx, ty, 40, 300); // Placeholder for the tools
 // We'll derive other shapes from this one
 var basicShape = paper
   .rect(tx + 5, ty + 5, 30, 20)
   .attr({"fill": "#CCC",
         "fill-opacity": 0,
-        "stroke-width": 2,
+        "stroke-width": 3,
         cursor: "move"});
 // Same as basicShape its a basic connector, derive other from it
 var connectShape = paper
   .path("M25 55L55 80")
-  .attr({"stroke-width": 2,
+  .attr({"stroke-width": 3,
         cursor: "move"});
 
 /**
