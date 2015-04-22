@@ -44,7 +44,7 @@ dependencies {
   compile 'org.slf4j:slf4j-simple:1.0.1'
   compile 'commons-lang:commons-lang:2.4'
 
-  compile name: 'server-3.2.0svn'
+  compile name: 'mirth-server-3.2.1svn'
 
 /*  compile 'javax.activation:activation:1.0.2'
   compile 'net.sourceforge.barbecue:barbecue:1.5-beta1'

@@ -29,6 +29,15 @@ The Mirth Jars can be downloaded at
     lein deps
 
 
+### Examples
+
+
+    lein repl
+    (import [com.mirth.connect.client.core Client])
+    (doto (new com.mirth.connect.client.core.Client "server"))
+
+
+
 ### Bugs
 
 ## License
