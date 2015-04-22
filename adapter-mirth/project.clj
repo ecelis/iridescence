@@ -24,7 +24,6 @@
   :license {:name "GNU Affero Public General License version"
             :url "http://www.gnu.org/licenses/"}
   :dependencies [[org.clojure/clojure "1.6.0"]
-                 [org.clojure/java.jdbc "0.3.2"]
                  [org.postgresql/postgresql "9.4-1201-jdbc41"]
                  [log4j/log4j "1.2.17"]
                  [com.thoughtworks.xstream/xstream "1.4.8"]

@@ -15,14 +15,18 @@ The Mirth Jars can be downloaded at
     wget http://maven.v3ctor.club/com/mirth/connect/mirth-client/3.2.1svn/mirth-client-3.2.1svn.jar
 
 
+    lein clean
+    lein deps
     lein localrepo install ../lib/mirth/mirth-donkey-3.2.1svn.jar \
       com.mirth.connect/mirth-donkey 3.2.1svn
     lein localrepo install ../lib/mirth/mirth-server-3.2.1svn.jar \
       com.mirth.connect/mirth-server 3.2.1svn
     lein localrepo install ../lib/mirth/mirth-client-3.2.1svn.jar \
-      com.mirth.connect/mirth-client 3.2.1svn lein localrepo install \
+      com.mirth.connect/mirth-client 3.2.1svn
+    lein localrepo install \
       ../../workspace.luna/Server/lib/mirth-crypto.jar \
-      com.mirth.commons.encryption lein deps
+      com.mirth.commons.encryption
+    lein deps
 
 
 ### Bugs
