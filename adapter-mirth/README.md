@@ -24,8 +24,8 @@ The Mirth Jars can be downloaded at
     lein localrepo install ../lib/mirth/mirth-client-3.2.1svn.jar \
       com.mirth.connect/mirth-client 3.2.1svn
     lein localrepo install \
-      ../../workspace.luna/Server/lib/mirth-crypto.jar \
-      com.mirth.commons.encryption
+      ../../workspace.luna/Server/lib/mirth-crypto-1.jar \
+      com.mirth.commons.encryption/mirth-crypto 1
     lein deps
 
 
