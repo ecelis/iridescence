@@ -1,0 +1,28 @@
+<div role="tabpanel" class="tab-pane" id="connector">
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="input-group">
+        <span class="input-group-addon" id="property-name">Name</span>
+        <input type="text" class="form-control" placeholder="Name"
+        aria-describedby="property-name" name="blk-name" id="blk-name">
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="input-group">
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-default dropdown-toggle"
+            data-toggle="dropdown" aria-expanded="false"
+            id="btn-type">Type
+            <span class="caret"></span></button>
+          <ul class="dropdown-menu" id="type-lst" role="menu">
+            <li><a>PostgreSQL</a></li> <!-- TODO Fix keyboard -->
+            <li><a>Mirth Connect</a></li>
+          </ul>
+        </div> <!-- /btn-group -->
+        <input type="text" class="form-control" arial-label="..."
+        placeholder="url://" name="blk-url" id="blk-url">
+      </div> <!-- /input- group -->
+    </div> <!-- /.col-lg-6 -->
+  </div>
+</div> <!-- tab panel connector -->
+

@@ -12,54 +12,27 @@
           <div class="panel-body">
             <!-- Tab panels -->
             <div class="tab-panel">
-              <!-- Navigation Tabs -->
-              <ul class="nav nav-tabs" role="tablist" id="properties">
+                <!-- Navigation Tabs -->
+                <ul class="nav nav-tabs" role="tablist" id="properties">
                 <li role="presentation" class="active">
+                  <a href="#workspace" aria-controls="workspace"
+                    role="tab" data-toggle="tab">Workspace</a></li>
+                <li role="presentation">
                   <a href="#connector" aria-controls="connector"
                     role="tab" data-toggle="tab">Connector</a></li>
                 <li role="presentation"><a href="#connection"
                   aria-controls="connection"
                   role="tab" data-toggle="tab">Connection</a></li>
-              </ul>
+                </ul>
 
-              <!-- Tab Content -->
-              <div class="tab-content">
-                <div role="tabpanel" class="tab-pane active" id="connector">
-                  <div class="row">
-                    <div class="col-xs-6">
-                      <div class="input-group">
-                        <span class="input-group-addon" id="property-name">Name</span>
-                        <input type="text" class="form-control" placeholder="Name"
-                        aria-describedby="property-name" name="blk-name" id="blk-name">
-                      </div>
-                    </div>
-                    <div class="col-xs-6">
-                      <div class="input-group">
-                        <div class="input-group-btn">
-                          <button type="button" class="btn btn-default dropdown-toggle"
-                            data-toggle="dropdown" aria-expanded="false"
-                            id="btn-type">Type
-                            <span class="caret"></span></button>
-                          <ul class="dropdown-menu" id="type-lst" role="menu">
-                            <li><a>PostgreSQL</a></li> <!-- TODO Fix keyboard -->
-                            <li><a>Mirth Connect</a></li>
-                          </ul>
-                        </div> <!-- /btn-group -->
-                        <input type="text" class="form-control" arial-label="..."
-                        placeholder="url://" name="blk-url" id="blk-url">
-                      </div> <!-- /input- group -->
-                    </div> <!-- /.col-lg-6 -->
-                  </div>
-                </div> <!-- tab panel connector -->
-                <div role="tabpanel" class="tab-pane" id="connection">
-                  <div class="row">
-                    <div class="col-xs-6">
-                      <h1>Hello world</h1>
-                    </div>
-                  </div>
-                </div> <!-- tab panel connection -->
-              </div> <!-- /tab-content -->
+                <!-- Tab Content -->
+                <div class="tab-content">
+                {% include "properties-tab-workspace.html" %}
+                {% include "properties-tab-connector.html" %}
+                {% include "properties-tab-connection.html" %}
+                </div> <!-- /tab-content -->
 
+                <!-- Form Controls -->
                 <div class="row">
                   <div class="col-xs-6">
                     <div class="btn-group" role="group" aria-label="...">
@@ -79,8 +52,8 @@
                       name="blk-type" id="blk-type">
                     </div>
                   </div>
-                </div>
-
+                </div> <!-- Form Controls -->
+            </div>
           </div>
         </form>
       </div>
