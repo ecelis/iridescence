@@ -104,8 +104,8 @@ var addToDiagram = function (shape) {
     if(connect.length == 2) {     // Create a connection between adapters
       var newConnection = paper.connection(connect[0], connect[1], "#000");
       newConnection.line.attr({
-        "title": id = connect[0].id + 'to' + connect[1].id,
-        "stroke-width": 3});
+          "title": id = connect[0].id + 'to' + connect[1].id,
+          "stroke-width": 3});
       newConnection.line.click(modify);
       connections.push(newConnection);
       workspace.push(newConnection.line);
@@ -126,6 +126,17 @@ var addToDiagram = function (shape) {
                   "y": 70 + Math.floor(Math.random()*160)});
     newShape.drag(move, dragger, up).click(modify);
     workspace.push(newShape);   // Append new shape to workspace
+    if(workspace.length == 1) {   // If workspace empty we start from scratch
+      connect.push(startShape);
+      connect.push(newShape);
+      var firstConnection = paper.connection(connect[0], connect[1], "#000");
+      firstConnection.line.attr({
+          "title": id = connect[0].id + 'to' + connect[1].id,
+          "stroke-width": 3});
+      firstConnection.line.click(modify);
+      connections.push(firstConnection); // connect to the begining
+      workspace.push(firstConnection.line);
+    }
   }
 }
 
