@@ -77,9 +77,9 @@ var modify = function() {
           connect.push(this);     // add shape to queue
         }
       }
-      $('#blk-name').val(property.name);
-      $('#blk-url').val(property.url);
-      $('#blk-id').val(this.id);
+      $('#step-name').val(property.name);
+      $('#step-url').val(property.url);
+      $('#step-id').val(this.id);
       $('#properties a[href="#connector"]').tab('show');
       break;
     case "path":
@@ -205,9 +205,9 @@ var update = function(id) {
   // TODO Fix it, values get borked in the panel
   var s = paper.getById(id);
   s.data("props").id = id;
-  s.data("props").type = $('#blk-type').val();
-  s.data("props").name = $('#blk-name').val();
-  s.data("props").url = $('#blk-url').val();
+  s.data("props").type = $('#step-type').val();
+  s.data("props").name = $('#step-name').val();
+  s.data("props").url = $('#step-url').val();
   s.attr({'title': s.data("props").name,
           'text':s.data("props").name});
 }
@@ -221,12 +221,12 @@ connectShape.click(function(){addToDiagram(this)});
 $('#type-lst li a').click(function(){
   var type = $(this).text().toUpperCase().replace(' ','');
   $('#btn-type').html(type + '<span class="caret"></span>');
-  $('#blk-type').val(type);
-  update($('#blk-id').val());
+  $('#step-type').val(type);
+  update($('#step-id').val());
 });
-$('#blk-name').change(function(){update($('#blk-id').val())});
-$('#blk-url').change(function(){update($('#blk-id').val())});
-$('#remove-btn').click(function(){remove($('#blk-id').val())});
-$('#clone-btn').click(function(){clone($('#blk-id').val())});
+$('#step-name').change(function(){update($('#step-id').val())});
+$('#step-url').change(function(){update($('#step-id').val())});
+$('#remove-btn').click(function(){remove($('#step-id').val())});
+$('#clone-btn').click(function(){clone($('#step-id').val())});
 $('#save-btn').click(function(){save()});
 
