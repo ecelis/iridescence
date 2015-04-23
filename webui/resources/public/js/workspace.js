@@ -20,6 +20,15 @@
  */
 
 /**
+ * Workspace Metadata
+ */
+var workspace_metadata = function() {};
+workspace_metadata.prototype.type;
+workspace_metadata.prototype.guid;
+workspace_metadata.prototype.name;
+workspace_metadata.prototype.comments;
+
+/**
   Triggered when a shape starts moving
 */
 var dragger = function() {
@@ -155,11 +164,6 @@ var util = new Util();
 // Global settings
 var connections = [];               // Connections between shapes
 var connect = [];                   // Temporary queue for connections
-var workspace_metadata = function() {};
-workspace_metadata.prototype.type;
-workspace_metadata.prototype.guid;
-workspace_metadata.prototype.name;
-workspace_metadata.prototype.comments;
 var workspace_meta = new workspace_metadata();
 
 var allInputs = $(":input");                // Properties list
@@ -172,11 +176,11 @@ var toolbarX = 4,
 var paper = Raphael("work-canvas",
                     paperWidth, paperHeigth);  // Creates canvas 320×200@10,50
 var workspace = paper.set();            // Create a default workspace
-var work_guid = util.guid();
+var work_guid = util.guid();            // Generate Workspace GUID
 var toolbar = paper.rect(toolbarX, toolbarY,
                          toolbarWidth,
                          toolBarHeigth); // Placeholder for the tools
-// We'll derive other shapes from this one
+// We'll create shapes based it
 var basicShape = paper
   .rect(toolbarX + 5, toolbarY + 5, 30, 20)
   .attr({"fill": "#CCC",
@@ -218,7 +222,7 @@ var endShape = paper
 var remove = function(id) {
   // TODO Fix this, should be donw within w.remove
   var shape = paper.getById(id);
-  workspace.exclude(s);
+  workspace.exclude(shape);
   shape.remove();
 }
 
@@ -259,9 +263,14 @@ var save = function() {
     payload.push(s.data("props"));
   });
   $.post("/api/", {"__anti-forgery-token": $('#__anti-forgery-token').val(),
-         "workspace":JSON.stringify(payload)});
+         "workspace":{"data": JSON.stringify(payload),
+                    "meta": JSON.stringify(workspace_meta)}});
 }
 
+/**
+ * Update workspace properties
+ * @method
+ */
 var updateWorkspace = function() {
   workspace_meta.type = $('#work-type').val();
   workspace_meta.guid= $('#work-guid').val()
@@ -270,6 +279,8 @@ var updateWorkspace = function() {
 
 }
 
+// Initialize some properties for a new workspace
+// TODO Check if the values aren't overwriten when refreshing webpage
 $('#work-guid').val(work_guid);
 $('#work-guid-label').html("Id: " + work_guid);
 // Attach listeners to Toolbar elements
@@ -279,6 +290,8 @@ startShape.drag(move, dragger, function(){});
 endShape.drag(move, dragger, function(){});
 // Bind listeners to Properties controls
 // TODO Do this in one iteration of all
+// Workspace
+//
 $('#work-type-lst li a').on("click change", function(){
   var type = $(this).text().toUpperCase().replace(' ','').replace('.','');
   $('#btn-work-type').html(type + '<span class="caret"></span>');
@@ -287,15 +300,25 @@ $('#work-type-lst li a').on("click change", function(){
 $('#workspace :input').on("click change keyup", function() {
   updateWorkspace();
 });
+//
+// Adapters
+//
 $('#step-type-lst li a').on("click change", function(){
   var type = $(this).text().toUpperCase().replace(' ','');
   $('#btn-step-type').html(type + '<span class="caret"></span>');
   $('#step-type').val(type);
   update($('#step-id').val());
 });
+//
+// Connectors
+//
 $('#connector :input').on("click change keyup", function(){
   update($('#step-id').val());
 });
+//
+// Form controls
+//
+// TODO Remove from workspace is badly broken
 $('#remove-btn').click(function(){remove($('#step-id').val())});
 $('#clone-btn').click(function(){clone($('#step-id').val())});
 $('#save-btn').click(function(){save()});
