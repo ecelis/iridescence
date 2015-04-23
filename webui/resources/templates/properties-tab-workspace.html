@@ -10,14 +10,13 @@
         <input type="text" class="form-control" placeholder="workspace..."
         aria-describedby="property-name" name="work-name" id="work-name">
       </div></div>
-      
     </div>
       <div class="col-xs-2">
         <div class="form-group"><div class="input-group">
           <div class="input-group-btn">
-            <button type="button" class="btn work-default dropdown-toggle"
+            <button type="button" class="btn btn-default dropdown-toggle"
               data-toggle="dropdown" aria-expanded="false"
-              id="work-type">Type
+              id="btn-work-type">Type
               <span class="caret"></span></button>
             <ul class="dropdown-menu" id="work-type-lst" role="menu">
               <li><a>HL7 v2.x</a></li> <!-- TODO Fix keyboard -->
@@ -26,8 +25,8 @@
           </div> <!-- /work-group -->
         </div></div> <!-- /input- group -->
       </div>
-      <div class="col-xs-4">
-        UUID: xyz-123
+      <div class="col-xs-4" id="work-guid-label">
+        Id:
       </div>
     </div>
     <div class="row">

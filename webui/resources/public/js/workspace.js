@@ -155,6 +155,13 @@ var util = new Util();
 // Global settings
 var connections = [];               // Connections between shapes
 var connect = [];                   // Temporary queue for connections
+var workspace_metadata = function() {};
+workspace_metadata.prototype.type;
+workspace_metadata.prototype.guid;
+workspace_metadata.prototype.name;
+workspace_metadata.prototype.comments;
+var workspace_meta = new workspace_metadata();
+
 var allInputs = $(":input");                // Properties list
 var toolbarX = 4,
   toolbarY = 4,
@@ -165,6 +172,7 @@ var toolbarX = 4,
 var paper = Raphael("work-canvas",
                     paperWidth, paperHeigth);  // Creates canvas 320×200@10,50
 var workspace = paper.set();            // Create a default workspace
+var work_guid = util.guid();
 var toolbar = paper.rect(toolbarX, toolbarY,
                          toolbarWidth,
                          toolBarHeigth); // Placeholder for the tools
@@ -254,21 +262,40 @@ var save = function() {
          "workspace":JSON.stringify(payload)});
 }
 
+var updateWorkspace = function() {
+  workspace_meta.type = $('#work-type').val();
+  workspace_meta.guid= $('#work-guid').val()
+  workspace_meta.name = $('#work-name').val()
+  workspace_meta.comments = $('#work-comments').val()
+
+}
+
+$('#work-guid').val(work_guid);
+$('#work-guid-label').html("Id: " + work_guid);
 // Attach listeners to Toolbar elements
 basicShape.drag(move, dragger, release);
 connectShape.click(function(){addToDiagram(this)});
 startShape.drag(move, dragger, function(){});
 endShape.drag(move, dragger, function(){});
 // Bind listeners to Properties controls
-// TODO Do this in one iteration of all form controls
-$('#type-lst li a').click(function(){
+// TODO Do this in one iteration of all
+$('#work-type-lst li a').on("click change", function(){
+  var type = $(this).text().toUpperCase().replace(' ','').replace('.','');
+  $('#btn-work-type').html(type + '<span class="caret"></span>');
+  $('#work-type').val(type);
+});
+$('#workspace :input').on("click change keyup", function() {
+  updateWorkspace();
+});
+$('#step-type-lst li a').on("click change", function(){
   var type = $(this).text().toUpperCase().replace(' ','');
-  $('#btn-type').html(type + '<span class="caret"></span>');
+  $('#btn-step-type').html(type + '<span class="caret"></span>');
   $('#step-type').val(type);
   update($('#step-id').val());
 });
-$('#step-name').change(function(){update($('#step-id').val())});
-$('#step-url').change(function(){update($('#step-id').val())});
+$('#connector :input').on("click change keyup", function(){
+  update($('#step-id').val());
+});
 $('#remove-btn').click(function(){remove($('#step-id').val())});
 $('#clone-btn').click(function(){clone($('#step-id').val())});
 $('#save-btn').click(function(){save()});
