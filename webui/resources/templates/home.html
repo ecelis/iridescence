@@ -31,10 +31,12 @@
                 {% include "properties-tab-connector.html" %}
                 {% include "properties-tab-connection.html" %}
                 </div> <!-- /tab-content -->
-
+            </div>
+          </div>
+          <div class="panel-footer clearfix"> 
                 <!-- Form Controls -->
                 <div class="row">
-                  <div class="col-xs-6">
+                  <div class="col-xs-12">
                     <div class="form-group"><div class="input-group">
                     <div class="btn-group" role="group" aria-label="...">
                       <button type="button" class="btn btn-default" name="save-btn"
@@ -46,16 +48,11 @@
                     </div>
                     </div>
                   </div>
-                  <div class="col-xs-6">
-                    <div class="input-group">
-                      <input type="hidden" class="form-control"
+                      <input type="hidden"
                       name="blk-id" id="blk-id">
-                      <input type="hidden" class="form-control"
+                      <input type="hidden"
                       name="blk-type" id="blk-type">
-                    </div>
-                  </div>
                 </div> <!-- Form Controls -->
-            </div>
           </div>
         </form>
       </div>
