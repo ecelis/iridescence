@@ -134,31 +134,61 @@ var addToDiagram = function (shape) {
  * @method toolUp
  * */
 var release = function() {
-  this.attr("x", tx + 5);
-  this.attr("y", ty + 5);
+  this.attr("x", toolbarX + 5);
+  this.attr("y", toolbarY + 5);
   addToDiagram(this);
 }
 
 var util = new Util();
 // Global settings
-var tx = 4, ty = 4;
-var paper = Raphael("work-canvas", 600, 500);  // Creates canvas 320×200@10,50
+var toolbarX = 4,
+  toolbarY = 4,
+  toolbarWidth = 40,
+  toolBarHeigth = 300,
+  paperWidth = 768,
+  paperHeigth = 500;
+var paper = Raphael("work-canvas",
+                    paperWidth, paperHeigth);  // Creates canvas 320×200@10,50
 var workspace = paper.set();            // Create a default workspace
 var connections = [];                       // Connections between shapes
 var connect = [];                           // Temporary queue for connections
-var toolbar = paper.rect(tx, ty, 40, 300); // Placeholder for the tools
+var toolbar = paper.rect(toolbarX, toolbarY,
+                         toolbarWidth,
+                         toolBarHeigth); // Placeholder for the tools
 // We'll derive other shapes from this one
 var basicShape = paper
-  .rect(tx + 5, ty + 5, 30, 20)
+  .rect(toolbarX + 5, toolbarY + 5, 30, 20)
   .attr({"fill": "#CCC",
         "fill-opacity": 0,
         "stroke-width": 3,
         cursor: "move"});
 // Same as basicShape its a basic connector, derive other from it
 var connectShape = paper
-  .path("M9 55L45 80")
+  .path("M9 35L40 60")
   .attr({"stroke-width": 3,
         cursor: "move"});
+// TODO Moar shapes
+
+// Start and End shapes, there should be one of each by default
+// in every workspace
+var startShape = paper
+  .circle(toolbarX + 80, toolbarY + 75, 15)
+  .attr({"fill": "#7AC200",
+        "fill-opacity": 100,
+        "stroke-width": 3,
+        "stroke": "#298500",
+        cursor: "move"})
+  .data("props", {"type":"start"});
+
+var endShape = paper
+  .circle(paperWidth - 80, paperHeigth - 75, 15)
+  .attr({"fill": "#D21C00",
+        "fill-opacity": 100,
+        "stroke-width": 3,
+        "stroke": "#990000",
+        cursor: "move"})
+  .data("props", {"type":"end"});
+
 
 /**
  * Save workspace to YAML in the server
@@ -216,6 +246,8 @@ var update = function(id) {
 // Attach listeners to Toolbar elements
 basicShape.drag(move, dragger, release);
 connectShape.click(function(){addToDiagram(this)});
+startShape.drag(move, dragger, function(){});
+endShape.drag(move, dragger, function(){});
 // Bind listeners to Properties controls
 // TODO Do this in one iteration of all form controls
 $('#type-lst li a').click(function(){
