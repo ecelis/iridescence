@@ -141,8 +141,8 @@ var release = function() {
 
 var util = new Util();
 // Global settings
-var tx = 20, ty = 20;
-var paper = Raphael(10, 50, 500, 380);  // Creates canvas 320×200@10,50
+var tx = 4, ty = 4;
+var paper = Raphael("work-canvas", 600, 500);  // Creates canvas 320×200@10,50
 var workspace = paper.set();            // Create a default workspace
 var connections = [];                       // Connections between shapes
 var connect = [];                           // Temporary queue for connections
@@ -156,7 +156,7 @@ var basicShape = paper
         cursor: "move"});
 // Same as basicShape its a basic connector, derive other from it
 var connectShape = paper
-  .path("M25 55L55 80")
+  .path("M9 55L45 80")
   .attr({"stroke-width": 3,
         cursor: "move"});
 
