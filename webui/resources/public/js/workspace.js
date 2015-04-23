@@ -64,6 +64,16 @@ var up = function() {
 }
 
 /**
+ * Triggers when an element from Toolbar is dragged into workspace
+ * @method toolUp
+ * */
+var release = function() {
+  this.attr("x", toolbarX + 5);
+  this.attr("y", toolbarY + 5);
+  addToDiagram(this);
+}
+
+/**
  * Triggered when a shape is clicked, populates the
  * properties panel
  * @method modify
@@ -140,18 +150,12 @@ var addToDiagram = function (shape) {
   }
 }
 
-/**
- * Triggers when an element from Toolbar is dragged into workspace
- * @method toolUp
- * */
-var release = function() {
-  this.attr("x", toolbarX + 5);
-  this.attr("y", toolbarY + 5);
-  addToDiagram(this);
-}
 
 var util = new Util();
 // Global settings
+var connections = [];               // Connections between shapes
+var connect = [];                   // Temporary queue for connections
+var allInputs = $(":input");                // Properties list
 var toolbarX = 4,
   toolbarY = 4,
   toolbarWidth = 40,
@@ -161,8 +165,6 @@ var toolbarX = 4,
 var paper = Raphael("work-canvas",
                     paperWidth, paperHeigth);  // Creates canvas 320×200@10,50
 var workspace = paper.set();            // Create a default workspace
-var connections = [];                       // Connections between shapes
-var connect = [];                           // Temporary queue for connections
 var toolbar = paper.rect(toolbarX, toolbarY,
                          toolbarWidth,
                          toolBarHeigth); // Placeholder for the tools
@@ -199,21 +201,6 @@ var endShape = paper
         "stroke": "#990000",
         cursor: "move"})
   .data("props", {"type":"end"});
-
-
-/**
- * Save workspace to YAML in the server
- * @method save
- * */
-var save = function() {
-  //TODO
-  var payload = [];
-  workspace.forEach(function(s) {
-    payload.push(s.data("props"));
-  });
-  $.post("/api/", {"__anti-forgery-token": $('#__anti-forgery-token').val(),
-         "workspace":JSON.stringify(payload)});
-}
 
 /**
  * Remove shape from workspace
@@ -253,6 +240,19 @@ var update = function(id) {
           'text':s.data("props").name});
 }
 
+/**
+ * Save workspace to YAML in the server
+ * @method save
+ * */
+var save = function() {
+  //TODO
+  var payload = [];
+  workspace.forEach(function(s) {
+    payload.push(s.data("props"));
+  });
+  $.post("/api/", {"__anti-forgery-token": $('#__anti-forgery-token').val(),
+         "workspace":JSON.stringify(payload)});
+}
 
 // Attach listeners to Toolbar elements
 basicShape.drag(move, dragger, release);
