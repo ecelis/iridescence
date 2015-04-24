@@ -45,7 +45,10 @@
 (defn save-workspace [workspace]
   "Saves a YAML representation of a workspace"
   ; TODO handle nil or invalid data for spit
-  (def yaml-workspace (yaml/generate-string (json/parse-string workspace)))
+  ; TODO Do the yaml conversion in a functional way
+  (def yaml-workspace
+            (yaml/generate-string
+            workspace))
   (spit (str savedir "/workspace.sav") yaml-workspace); TODO dynamic filename
   (yaml-response yaml-workspace))
 

@@ -109,8 +109,14 @@ var modify = function() {
 }
 
 var setData = function(shape) {
-  var d = new DataModel();
-  shape.data("props", d);
+  var data = null;
+  if(shape.type != "path") {
+    // TODO switch-case here to apply apropriate data model
+    data = new DataModel();
+  } else {
+    data = {"id": shape.id, "name": shape.attrs.title};
+  }
+  shape.data("props", data);
 }
 
 /**
@@ -153,6 +159,7 @@ var addToDiagram = function (shape) {
       firstConnection.line.attr({
           "title": id = connect[0].id + 'to' + connect[1].id,
           "stroke-width": 3});
+      setData(firstConnection.line);
       firstConnection.line.click(modify);
       connections.push(firstConnection); // connect to the begining
       workspace.push(firstConnection.line);
@@ -222,6 +229,7 @@ var endShape = paper.circle(paperWidth - 80, paperHeigth - 75, 15)
         cursor: "move"})
   .data("props", {"type":"end"});
 
+/////////// Adapter functions
 /**
  * Remove shape from workspace
  * @method remove
@@ -251,15 +259,16 @@ var clone = function(id) {
  * */
 var update = function(id) {
   // TODO Fix it, values get borked in the panel
-  var s = paper.getById(id);
-  s.data("props").id = id;
-  s.data("props").type = $('#step-type').val();
-  s.data("props").name = $('#step-name').val();
-  s.data("props").url = $('#step-url').val();
-  s.attr({'title': s.data("props").name,
-          'text':s.data("props").name});
+  var shape = paper.getById(id);
+  shape.data("props").id = id;
+  shape.data("props").type = $('#step-type').val();
+  shape.data("props").name = $('#step-name').val();
+  shape.data("props").url = $('#step-url').val();
+  shape.attr({'title': shape.data("props").name,
+          'text':shape.data("props").name});
 }
 
+//////////////// Workspace functions
 /**
  * Save workspace to YAML in the server
  * @method save
@@ -267,11 +276,13 @@ var update = function(id) {
 var save = function() {
   //TODO
   var payload = [];
-  workspace.forEach(function(s) {
-    payload.push(s.data("props"));
+  workspace.forEach(function(shape) {
+    var obj = {"id":null, "data":null};
+    obj = {id: shape.id, data: shape.data("props")};
+    payload.push(JSON.stringify(shape.data("props")));
   });
   $.post("/api/", {"__anti-forgery-token": $('#__anti-forgery-token').val(),
-         "workspace":{"data": JSON.stringify(payload),
+         "workspace":{"data": payload,
                     "meta": JSON.stringify(workspace_meta)}});
 }
 
@@ -281,10 +292,22 @@ var save = function() {
  */
 var updateWorkspace = function() {
   workspace_meta.type = $('#work-type').val();
-  workspace_meta.guid= $('#work-guid').val()
-  workspace_meta.name = $('#work-name').val()
-  workspace_meta.comments = $('#work-comments').val()
+  workspace_meta.guid= $('#work-guid').val();
+  workspace_meta.name = $('#work-name').val();
+  workspace_meta.comments = $('#work-comments').val();
 
+}
+
+////////// Connectors functions
+/**
+ * Update Connector properties
+ * @method
+ * @param id connector id
+ */
+var updateConnector = function(id) {
+  var connector = paper.getById(id);
+  connector.data("props").id = id;
+  connector.data("props").name = connector.title;
 }
 
 // Initialize some properties for a new workspace
