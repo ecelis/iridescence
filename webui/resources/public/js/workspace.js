@@ -274,16 +274,13 @@ var update = function(id) {
  * @method save
  * */
 var save = function() {
-  //TODO
-  var payload = [];
+  var payload = {'meta': null, 'data': []};
+  payload.meta = JSON.stringify(workspace_meta);
   workspace.forEach(function(shape) {
-    var obj = {"id":null, "data":null};
-    obj = {id: shape.id, data: shape.data("props")};
-    payload.push(JSON.stringify(shape.data("props")));
+    payload.data.push(JSON.stringify(shape.data("props")));
   });
   $.post("/api/", {"__anti-forgery-token": $('#__anti-forgery-token').val(),
-         "workspace":{"data": payload,
-                    "meta": JSON.stringify(workspace_meta)}});
+         "workspace":payload});
 }
 
 /**
