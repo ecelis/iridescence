@@ -47,10 +47,12 @@
   ; TODO handle nil or invalid data for spit
   ; TODO Do the yaml conversion in a functional way
 (.println System/out "")
- (info 
-              {:meta (json/parse-string 
-                       (get workspace :meta) true)
-               :data (map json/parse-string (get workspace :data))}))
+ (info (yaml/generate-string
+    {:workspace (json/parse-string
+             (get workspace :meta) true)
+     :artifacts (map
+             #(json/parse-string % true)
+             (get workspace :data))})))
   ;(def workspace-data (get workspace :data))
   ;(def workspace-meta (get workspace :meta))
   ;(spit (str savedir "/workspace.sav") yaml-workspace); TODO dynamic filename
