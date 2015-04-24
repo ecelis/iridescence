@@ -12,6 +12,52 @@ be deleted until we reach the first stable and fully functional version.
   * CirrusLoad - Cirrus Adapter
   * hl7yaml - HL7/YAML parser module
 
+
+
+  * Basado en Yahoo Pipes, Scratch y TIBCO BusinessWorks
+  * El Workspace es una colección de Adaptadores
+    * La mayor parte de la pantalla la ocupa el Workspace
+    * A la Derecha el Drop Zone permite arrastrar plantillas y otras
+      funciones relacionadas a la inter-conexión entre Adaptadores
+    * Abajo el Panel de Propiedades
+      - Modifica propiedades de Adaptadores, Conectores y Workspace
+  * Adaptador se conecta a una fuente de datos
+    * Usando la minima información posible
+    * Inspecciona la fuente de datos y provee campos
+  * Conector determina el flujo de datos
+    * Contiene reglas de interconexón entre origenes de datos
+  * Los Adaptadores de Inicio y Fin son automáticos
+    * Un Conector se agrega automáticamente entre Inicio y el primer
+      Adptador arrastrado al Workspace
+    * El Inicio es simbólico
+    * El Fin por default va al Log, pero se puede editar
+
+En Progreso
+-----------
+
+   * API RESTful
+    * Motor de Reglas de Connectores
+    * Implementación de reglas bśicas de interconexión
+    * Implementación de Adaptadores deribados
+      - DB (PsotgreSQL, Oracle, MySQL, SQL Server)
+      - Mirth Connect
+      - Cirrus
+
+Planeado
+--------
+
+  * Contenedor Docker (Actualmente en progreso, pero como extra)
+  * Encriptación del lado del cliente (Browser/JavaScript)
+
+Bugs
+----
+
+  * Eliminar Adaptadores o Conectores esta roto completamente
+  * Iterconexión de Adaptadores no esta validada
+  * Varios que se escapan a la mente :/
+
+
+
 ## Installation
 
 
