@@ -132,6 +132,7 @@ var addToDiagram = function (shape) {
       newConnection.line.attr({
           "title": id = connect[0].id + 'to' + connect[1].id,
           "stroke-width": 3});
+      setData(newConnection.line);
       newConnection.line.click(modify);
       connections.push(newConnection);
       workspace.push(newConnection.line);
