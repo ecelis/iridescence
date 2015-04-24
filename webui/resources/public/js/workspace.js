@@ -99,6 +99,7 @@ var modify = function() {
       $('#step-name').val(property.name);
       $('#step-url').val(property.url);
       $('#step-id').val(this.id);
+    case "circle":
       $('#properties a[href="#connector"]').tab('show');
       break;
     case "path":
@@ -160,13 +161,13 @@ var addToDiagram = function (shape) {
 }
 
 
-var util = new Util();
+var util = new Util();      // Utilities such as guid generator and crypto
 // Global settings
-var connections = [];               // Connections between shapes
-var connect = [];                   // Temporary queue for connections
+var connections = [];       // Connections between shapes
+var connect = [];           // Temporary queue for connections
 var workspace_meta = new workspace_metadata();
 
-var allInputs = $(":input");                // Properties list
+var allInputs = $(":input");        // TODO Review and reomve Properties list
 var toolbarX = 4,
   toolbarY = 4,
   toolbarWidth = 40,
@@ -196,8 +197,11 @@ var connectShape = paper
 
 // Start and End shapes, there should be one of each by default
 // in every workspace
-var startShape = paper
-  .circle(toolbarX + 80, toolbarY + 75, 15)
+
+/**
+* startShape does nothing, only serves as a visual aid for the flow
+*/
+var startShape = paper.circle(toolbarX + 80, toolbarY + 75, 15)
   .attr({"fill": "#7AC200",
         "fill-opacity": 100,
         "stroke-width": 3,
@@ -205,8 +209,12 @@ var startShape = paper
         cursor: "move"})
   .data("props", {"type":"start"});
 
-var endShape = paper
-  .circle(paperWidth - 80, paperHeigth - 75, 15)
+/**
+ * endShapes is an adapter which is obviously the last step
+ * in the work flow. By default it is configured to end in
+ * Smart Connector's log with INFO level.
+ */
+var endShape = paper.circle(paperWidth - 80, paperHeigth - 75, 15)
   .attr({"fill": "#D21C00",
         "fill-opacity": 100,
         "stroke-width": 3,
@@ -287,7 +295,7 @@ $('#work-guid-label').html("Id: " + work_guid);
 basicShape.drag(move, dragger, release);
 connectShape.click(function(){addToDiagram(this)});
 startShape.drag(move, dragger, function(){});
-endShape.drag(move, dragger, function(){});
+endShape.drag(move, dragger, function(){}).click(modify);
 // Bind listeners to Properties controls
 // TODO Do this in one iteration of all
 // Workspace
