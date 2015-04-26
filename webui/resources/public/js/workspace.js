@@ -1,5 +1,5 @@
 /**
- *   Drag & Drop Web adapters
+ *   Drag & Drop workspace
  *   Copyright (C) 2015 eCaresoft Inc
  *   Ernesto Angel Celis de la Fuente <developer@celisdelafuente.net>
  *
@@ -27,6 +27,67 @@ workspace_metadata.prototype.type;
 workspace_metadata.prototype.guid;
 workspace_metadata.prototype.name;
 workspace_metadata.prototype.comments;
+var util = new Util();      // Utilities such as guid generator and crypto
+// Global settings
+var connections = [];       // Connections between shapes
+var connect = [];           // Temporary queue for connections
+var work_meta = new workspace_metadata();
+
+var allInputs = $(":input");        // TODO Review and reomve Properties list
+var tbX = 4,
+  tbY = 4,
+  tbW = 40,
+  tbH = 300,
+  paperW = 768,
+  paperH = 500;
+var paper = Raphael("work-canvas",
+                    paperW, paperH);  // Creates canvas 320×200@10,50
+var adapters = paper.set();            // Create a default adapters
+var work_guid = util.guid();            // Generate adapters GUID
+var toolbar = paper.rect(tbX, tbY,
+                         tbW,
+                         tbH); // Placeholder for the tools
+// We'll create shapes based it
+var basicShape = paper
+  .rect(tbX + 5, tbY + 5, 30, 20)
+  .attr({"fill": "#CCC",
+        "fill-opacity": 0,
+        "stroke-width": 3,
+        cursor: "move"});
+// Same as basicShape its a basic connector, derive other from it
+var connectShape = paper
+  .path("M9 35L40 60")
+  .attr({"stroke-width": 3,
+        cursor: "move"});
+// TODO Moar shapes
+
+// Start and End shapes, there should be one of each by default
+// in every adapters
+
+/**
+* startShape does nothing, only serves as a visual aid for the flow
+*/
+var startShape = paper.circle(tbX + 80, tbY + 75, 15)
+  .attr({"fill": "#7AC200",
+        "fill-opacity": 100,
+        "stroke-width": 3,
+        "stroke": "#298500",
+        cursor: "move"})
+  .data("props", {"type":"start"});
+
+/**
+ * endShapes is an adapter which is obviously the last step
+ * in the work flow. By default it is configured to end in
+ * Smart Connector's log with INFO level.
+ */
+var endShape = paper.circle(paperW - 80, paperH - 75, 15)
+  .attr({"fill": "#D21C00",
+        "fill-opacity": 100,
+        "stroke-width": 3,
+        "stroke": "#990000",
+        cursor: "move"})
+  .data("props", {"type":"end"});
+
 
 /**
   Triggered when a shape starts moving
@@ -77,8 +138,8 @@ var up = function() {
  * @method toolUp
  * */
 var release = function() {
-  this.attr("x", toolbarX + 5);
-  this.attr("y", toolbarY + 5);
+  this.attr("x", tbX + 5);
+  this.attr("y", tbY + 5);
   addToDiagram(this);
 }
 
@@ -168,67 +229,6 @@ var addToDiagram = function (shape) {
   }
 }
 
-
-var util = new Util();      // Utilities such as guid generator and crypto
-// Global settings
-var connections = [];       // Connections between shapes
-var connect = [];           // Temporary queue for connections
-var work_meta = new workspace_metadata();
-
-var allInputs = $(":input");        // TODO Review and reomve Properties list
-var toolbarX = 4,
-  toolbarY = 4,
-  toolbarWidth = 40,
-  toolBarHeigth = 300,
-  paperWidth = 768,
-  paperHeigth = 500;
-var paper = Raphael("work-canvas",
-                    paperWidth, paperHeigth);  // Creates canvas 320×200@10,50
-var adapters = paper.set();            // Create a default adapters
-var work_guid = util.guid();            // Generate adapters GUID
-var toolbar = paper.rect(toolbarX, toolbarY,
-                         toolbarWidth,
-                         toolBarHeigth); // Placeholder for the tools
-// We'll create shapes based it
-var basicShape = paper
-  .rect(toolbarX + 5, toolbarY + 5, 30, 20)
-  .attr({"fill": "#CCC",
-        "fill-opacity": 0,
-        "stroke-width": 3,
-        cursor: "move"});
-// Same as basicShape its a basic connector, derive other from it
-var connectShape = paper
-  .path("M9 35L40 60")
-  .attr({"stroke-width": 3,
-        cursor: "move"});
-// TODO Moar shapes
-
-// Start and End shapes, there should be one of each by default
-// in every adapters
-
-/**
-* startShape does nothing, only serves as a visual aid for the flow
-*/
-var startShape = paper.circle(toolbarX + 80, toolbarY + 75, 15)
-  .attr({"fill": "#7AC200",
-        "fill-opacity": 100,
-        "stroke-width": 3,
-        "stroke": "#298500",
-        cursor: "move"})
-  .data("props", {"type":"start"});
-
-/**
- * endShapes is an adapter which is obviously the last step
- * in the work flow. By default it is configured to end in
- * Smart Connector's log with INFO level.
- */
-var endShape = paper.circle(paperWidth - 80, paperHeigth - 75, 15)
-  .attr({"fill": "#D21C00",
-        "fill-opacity": 100,
-        "stroke-width": 3,
-        "stroke": "#990000",
-        cursor: "move"})
-  .data("props", {"type":"end"});
 
 /////////// Adapter functions
 /**
