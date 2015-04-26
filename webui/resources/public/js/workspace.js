@@ -55,7 +55,7 @@ var basicShape = paper
         "stroke-width": 3,
         cursor: "move"});
 // Same as basicShape its a basic connector, derive other from it
-var connectShape = paper
+var connector = paper
   .path("M9 35L40 60")
   .attr({"stroke-width": 3,
         cursor: "move"});
@@ -314,7 +314,7 @@ $('#work-guid').val(work_guid);
 $('#work-guid-label').html("Id: " + work_guid);
 // Attach listeners to Toolbar elements
 basicShape.drag(move, dragger, release);
-connectShape.click(function(){addToDiagram(this)});
+connector.click(function(){addToDiagram(this)});
 startShape.drag(move, dragger, function(){});
 endShape.drag(move, dragger, function(){}).click(modify);
 // Bind listeners to Properties controls
