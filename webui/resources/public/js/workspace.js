@@ -327,7 +327,7 @@ $('#workspace :input').on("click change keyup", function() {
 //
 // Adapters
 $('#adapter :input').on("click change keyup", function() {
-    update_adapter();
+    update_adapter($('#adapter-id').val());
 });
 
 $('#adapter-type-lst li a').on("click change", function(){
