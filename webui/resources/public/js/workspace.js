@@ -48,13 +48,13 @@ var toolbar = paper.rect(tbX, tbY,
                          tbW,
                          tbH); // Placeholder for the tools
 // We'll create shapes based it
-var basicShape = paper
+var generic_adapter = paper
   .rect(tbX + 5, tbY + 5, 30, 20)
   .attr({"fill": "#CCC",
         "fill-opacity": 0,
         "stroke-width": 3,
         cursor: "move"});
-// Same as basicShape its a basic connector, derive other from it
+// Same as generic_adapter its a basic connector, derive other from it
 var connector = paper
   .path("M9 35L40 60")
   .attr({"stroke-width": 3,
@@ -313,7 +313,7 @@ var updateConnector = function(id) {
 $('#work-guid').val(work_guid);
 $('#work-guid-label').html("Id: " + work_guid);
 // Attach listeners to Toolbar elements
-basicShape.drag(move, dragger, release);
+generic_adapter.drag(move, dragger, release);
 connector.click(function(){addToDiagram(this)});
 startShape.drag(move, dragger, function(){});
 endShape.drag(move, dragger, function(){}).click(modify);
