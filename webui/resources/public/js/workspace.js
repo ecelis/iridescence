@@ -1,5 +1,5 @@
 /**
- *   Drag & Drop Web Workspace
+ *   Drag & Drop Web adapters
  *   Copyright (C) 2015 eCaresoft Inc
  *   Ernesto Angel Celis de la Fuente <developer@celisdelafuente.net>
  *
@@ -73,7 +73,7 @@ var up = function() {
 }
 
 /**
- * Triggers when an element from Toolbar is dragged into workspace
+ * Triggers when an element from Toolbar is dragged into adapters
  * @method toolUp
  * */
 var release = function() {
@@ -120,7 +120,7 @@ var setData = function(shape) {
 }
 
 /**
- * Add a new element from Toolbar to Workspace
+ * Add a new element from Toolbar to adapters
  * @method addToDiagram
  * @param {Object} shape Raphael Element object
  * */
@@ -135,7 +135,7 @@ var addToDiagram = function (shape) {
       setData(newConnection.line);
       newConnection.line.click(modify);
       connections.push(newConnection);
-      workspace.push(newConnection.line);
+      adapters.push(newConnection.line);
       connect = [];               // Empty queue
     } else {
       return;                     // 2 shapes in queue are required
@@ -152,8 +152,8 @@ var addToDiagram = function (shape) {
                   "x": 50 + Math.floor(Math.random()*160),
                   "y": 70 + Math.floor(Math.random()*160)});
     newShape.drag(move, dragger, up).click(modify);
-    workspace.push(newShape);   // Append new shape to workspace
-    if(workspace.length == 1) {   // If workspace empty we start from scratch
+    adapters.push(newShape);   // Append new shape to adapters
+    if(adapters.length == 1) {   // If adapters empty we start from scratch
       connect.push(startShape);
       connect.push(newShape);
       var firstConnection = paper.connection(connect[0], connect[1], "#000");
@@ -163,7 +163,7 @@ var addToDiagram = function (shape) {
       setData(firstConnection.line);
       firstConnection.line.click(modify);
       connections.push(firstConnection); // connect to the begining
-      workspace.push(firstConnection.line);
+      adapters.push(firstConnection.line);
     }
   }
 }
@@ -173,7 +173,7 @@ var util = new Util();      // Utilities such as guid generator and crypto
 // Global settings
 var connections = [];       // Connections between shapes
 var connect = [];           // Temporary queue for connections
-var workspace_meta = new workspace_metadata();
+var work_meta = new workspace_metadata();
 
 var allInputs = $(":input");        // TODO Review and reomve Properties list
 var toolbarX = 4,
@@ -184,8 +184,8 @@ var toolbarX = 4,
   paperHeigth = 500;
 var paper = Raphael("work-canvas",
                     paperWidth, paperHeigth);  // Creates canvas 320×200@10,50
-var workspace = paper.set();            // Create a default workspace
-var work_guid = util.guid();            // Generate Workspace GUID
+var adapters = paper.set();            // Create a default adapters
+var work_guid = util.guid();            // Generate adapters GUID
 var toolbar = paper.rect(toolbarX, toolbarY,
                          toolbarWidth,
                          toolBarHeigth); // Placeholder for the tools
@@ -204,7 +204,7 @@ var connectShape = paper
 // TODO Moar shapes
 
 // Start and End shapes, there should be one of each by default
-// in every workspace
+// in every adapters
 
 /**
 * startShape does nothing, only serves as a visual aid for the flow
@@ -232,14 +232,14 @@ var endShape = paper.circle(paperWidth - 80, paperHeigth - 75, 15)
 
 /////////// Adapter functions
 /**
- * Remove shape from workspace
+ * Remove shape from adapters
  * @method remove
  * @param {Integer} id of the Raphael element
  * */
 var remove = function(id) {
   // TODO Fix this, should be donw within w.remove
   var shape = paper.getById(id);
-  workspace.exclude(shape);
+  adapters.exclude(shape);
   shape.remove();
 }
 
@@ -269,15 +269,15 @@ var update = function(id) {
           'text':shape.data("props").name});
 }
 
-//////////////// Workspace functions
+//////////////// adapters functions
 /**
- * Save workspace to YAML in the server
+ * Save adapters to YAML in the server
  * @method save
  * */
 var save = function() {
   var payload = {'meta': null, 'data': []};
-  payload.meta = JSON.stringify(workspace_meta);
-  workspace.forEach(function(shape) {
+  payload.meta = JSON.stringify(work_meta);
+  adapters.forEach(function(shape) {
     payload.data.push(JSON.stringify(shape.data("props")));
   });
   $.post("/api/", {"__anti-forgery-token": $('#__anti-forgery-token').val(),
@@ -285,14 +285,14 @@ var save = function() {
 }
 
 /**
- * Update workspace properties
+ * Update work properties
  * @method
  */
-var updateWorkspace = function() {
-  workspace_meta.type = $('#work-type').val();
-  workspace_meta.guid= $('#work-guid').val();
-  workspace_meta.name = $('#work-name').val();
-  workspace_meta.comments = $('#work-comments').val();
+var updatework = function() {
+  work_meta.type = $('#work-type').val();
+  work_meta.guid= $('#work-guid').val();
+  work_meta.name = $('#work-name').val();
+  work_meta.comments = $('#work-comments').val();
 
 }
 
@@ -319,15 +319,15 @@ startShape.drag(move, dragger, function(){});
 endShape.drag(move, dragger, function(){}).click(modify);
 // Bind listeners to Properties controls
 // TODO Do this in one iteration of all
-// Workspace
+// adapters
 //
 $('#work-type-lst li a').on("click change", function(){
   var type = $(this).text().toUpperCase().replace(' ','').replace('.','');
   $('#btn-work-type').html(type + '<span class="caret"></span>');
   $('#work-type').val(type);
 });
-$('#workspace :input').on("click change keyup", function() {
-  updateWorkspace();
+$('#adapters :input').on("click change keyup", function() {
+  updateadapters();
 });
 //
 // Adapters
