@@ -22,18 +22,14 @@
 /**
  * Workspace Metadata
  */
-var workspace_metadata = function() {};
-workspace_metadata.prototype.type;
-workspace_metadata.prototype.guid;
-workspace_metadata.prototype.name;
-workspace_metadata.prototype.comments;
+var work_meta = {'type': null,
+  'guid': null,
+  'name': null,
+  'comments': null};
 var util = new Util();      // Utilities such as guid generator and crypto
 // Global settings
-var connections = [];       // Connections between shapes
+var connections = [];       // Connections between adapters
 var connect = [];           // Temporary queue for connections
-var work_meta = new workspace_metadata();
-
-var allInputs = $(":input");        // TODO Review and reomve Properties list
 var tbX = 4,
   tbY = 4,
   tbW = 40,
@@ -42,12 +38,12 @@ var tbX = 4,
   paperH = 500;
 var paper = Raphael("work-canvas",
                     paperW, paperH);  // Creates canvas 320×200@10,50
-var adapters = paper.set();            // Create a default adapters
-var work_guid = util.guid();            // Generate adapters GUID
+var adapters = paper.set();           // Create a default adapters
+var work_guid = util.guid();          // Generate adapters GUID
 var toolbar = paper.rect(tbX, tbY,
                          tbW,
-                         tbH); // Placeholder for the tools
-// We'll create shapes based it
+                         tbH);        // Placeholder for the tools
+// We'll create adapters based it
 var generic_adapter = paper
   .rect(tbX + 5, tbY + 5, 30, 20)
   .attr({"fill": "#CCC",
@@ -59,15 +55,15 @@ var connector = paper
   .path("M9 35L40 60")
   .attr({"stroke-width": 3,
         cursor: "move"});
-// TODO Moar shapes
+// TODO Moar adapters
 
-// Start and End shapes, there should be one of each by default
+// Start and End adapters, there should be one of each by default
 // in every adapters
 
 /**
-* startShape does nothing, only serves as a visual aid for the flow
+* start does nothing, only serves as a visual aid for the flow
 */
-var startShape = paper.circle(tbX + 80, tbY + 75, 15)
+var start = paper.circle(tbX + 80, tbY + 75, 15)
   .attr({"fill": "#7AC200",
         "fill-opacity": 100,
         "stroke-width": 3,
@@ -76,11 +72,11 @@ var startShape = paper.circle(tbX + 80, tbY + 75, 15)
   .data("props", {"type":"start"});
 
 /**
- * endShapes is an adapter which is obviously the last step
+ * finishs is an adapter which is obviously the last adapter
  * in the work flow. By default it is configured to end in
  * Smart Connector's log with INFO level.
  */
-var endShape = paper.circle(paperW - 80, paperH - 75, 15)
+var finish = paper.circle(paperW - 80, paperH - 75, 15)
   .attr({"fill": "#D21C00",
         "fill-opacity": 100,
         "stroke-width": 3,
@@ -88,9 +84,8 @@ var endShape = paper.circle(paperW - 80, paperH - 75, 15)
         cursor: "move"})
   .data("props", {"type":"end"});
 
-
 /**
-  Triggered when a shape starts moving
+  Triggered when a adapter starts moving
 */
 var dragger = function() {
   // TODO Fix for paths
@@ -109,7 +104,7 @@ var dragger = function() {
 }
 
 /**
-  Triggered when a shape is moving
+  Triggered when a adapter is moving
   */
 var move = function(dx, dy) {
   var coordinates;
@@ -127,7 +122,7 @@ var move = function(dx, dy) {
 }
 
 /**
-  Triggered when a shape stops moving
+  Triggered when a adapter stops moving
   */
 var up = function() {
   this.animate({"fill-opacity": 0}, 500);
@@ -144,7 +139,7 @@ var release = function() {
 }
 
 /**
- * Triggered when a shape is clicked, populates the
+ * Triggered when a adapter is clicked, populates the
  * properties panel
  * @method modify
  * */
@@ -153,41 +148,43 @@ var modify = function() {
   switch(this.type) {
     case "rect":
       if (connect.length < 2) {   // If the connection queue's length < 2
-        if(connect[0] != this) {  // and If shape isn't already in queue
-          connect.push(this);     // add shape to queue
+        if(connect[0] != this) {  // and If adapter isn't already in queue
+          connect.push(this);     // add adapter to queue
         }
       }
-      $('#step-name').val(property.name);
-      $('#step-url').val(property.url);
-      $('#step-id').val(this.id);
+      $('#adapter-name').val(property.name);
+      $('#adapter-url').val(property.url);
+      $('#adapter-id').val(this.id);
+      $('#properties a[href="#adapter"]').tab('show');
+      break;
     case "circle":
-      $('#properties a[href="#connector"]').tab('show');
+      $('#properties a[href="#adapter"]').tab('show');
       break;
     case "path":
-      $('#properties a[href="#connection"]').tab('show');
+      $('#properties a[href="#connector"]').tab('show');
       break;
   }
 }
 
-var setData = function(shape) {
+var setData = function(adapter) {
   var data = null;
-  if(shape.type != "path") {
+  if(adapter.type != "path") {
     // TODO switch-case here to apply apropriate data model
     data = new DataModel();
   } else {
-    data = {"id": shape.id, "name": shape.attrs.title};
+    data = {"id": adapter.id, "name": adapter.attrs.title};
   }
-  shape.data("props", data);
+  adapter.data("props", data);
 }
 
 /**
  * Add a new element from Toolbar to adapters
  * @method addToDiagram
- * @param {Object} shape Raphael Element object
+ * @param {Object} adapter Raphael Element object
  * */
-var addToDiagram = function (shape) {
+var addToDiagram = function (adapter) {
   var color = Raphael.getColor(); // Get next color in spectrum
-  if(shape.type === "path") {
+  if(adapter.type === "path") {
     if(connect.length == 2) {     // Create a connection between adapters
       var newConnection = paper.connection(connect[0], connect[1], "#000");
       newConnection.line.attr({
@@ -199,12 +196,12 @@ var addToDiagram = function (shape) {
       adapters.push(newConnection.line);
       connect = [];               // Empty queue
     } else {
-      return;                     // 2 shapes in queue are required
+      return;                     // 2 adapters in queue are required
     }                             // to make a connection
   } else {
-    var newShape = shape.clone();   // Hello Dolly!
-    setData(newShape);              // Give Dolly a Soul
-    newShape.attr({fill: color,
+    var newadapter = adapter.clone();   // Hello Dolly!
+    setData(newadapter);              // Give Dolly a Soul
+    newadapter.attr({fill: color,
                   stroke: color,
                   "fill-opacity": 0,
                   "stroke-width": 3,
@@ -212,11 +209,11 @@ var addToDiagram = function (shape) {
                   "height": 30,
                   "x": 50 + Math.floor(Math.random()*160),
                   "y": 70 + Math.floor(Math.random()*160)});
-    newShape.drag(move, dragger, up).click(modify);
-    adapters.push(newShape);   // Append new shape to adapters
+    newadapter.drag(move, dragger, up).click(modify);
+    adapters.push(newadapter);   // Append new adapter to adapters
     if(adapters.length == 1) {   // If adapters empty we start from scratch
-      connect.push(startShape);
-      connect.push(newShape);
+      connect.push(start);
+      connect.push(newadapter);
       var firstConnection = paper.connection(connect[0], connect[1], "#000");
       firstConnection.line.attr({
           "title": id = connect[0].id + 'to' + connect[1].id,
@@ -229,22 +226,21 @@ var addToDiagram = function (shape) {
   }
 }
 
-
 /////////// Adapter functions
 /**
- * Remove shape from adapters
+ * Remove adapter from adapters
  * @method remove
  * @param {Integer} id of the Raphael element
  * */
 var remove = function(id) {
   // TODO Fix this, should be donw within w.remove
-  var shape = paper.getById(id);
-  adapters.exclude(shape);
-  shape.remove();
+  var adapter = paper.getById(id);
+  adapters.exclude(adapter);
+  adapter.remove();
 }
 
 /**
- * Clone a shape by id
+ * Clone a adapter by id
  * @method cloneBlk
  * @param {Integer} id of the Raphael element
  * */
@@ -253,23 +249,22 @@ var clone = function(id) {
 }
 
 /**
- * Update the shape properties data 'props' with values from
+ * Update the adapter properties data 'props' with values from
  * the properties panel
- * @method updateShape
+ * @method updateadapter
  * @param {Integer} id of Raphael element
  * */
-var update = function(id) {
+var update_adapter = function(id) {
   // TODO Fix it, values get borked in the panel
-  var shape = paper.getById(id);
-  shape.data("props").id = id;
-  shape.data("props").type = $('#step-type').val();
-  shape.data("props").name = $('#step-name').val();
-  shape.data("props").url = $('#step-url').val();
-  shape.attr({'title': shape.data("props").name,
-          'text':shape.data("props").name});
+  var adapter = paper.getById(id);
+  adapter.data("props").id = id;
+  adapter.data("props").type = $('#adapter-type').val();
+  adapter.data("props").name = $('#adapter-name').val();
+  adapter.data("props").url = $('#adapter-url').val();
+  adapter.attr({'title': adapter.data("props").name,
+          'text':adapter.data("props").name});
 }
 
-//////////////// adapters functions
 /**
  * Save adapters to YAML in the server
  * @method save
@@ -277,8 +272,8 @@ var update = function(id) {
 var save = function() {
   var payload = {'meta': null, 'data': []};
   payload.meta = JSON.stringify(work_meta);
-  adapters.forEach(function(shape) {
-    payload.data.push(JSON.stringify(shape.data("props")));
+  adapters.forEach(function(adapter) {
+    payload.data.push(JSON.stringify(adapter.data("props")));
   });
   $.post("/api/", {"__anti-forgery-token": $('#__anti-forgery-token').val(),
          "workspace":payload});
@@ -288,7 +283,7 @@ var save = function() {
  * Update work properties
  * @method
  */
-var updatework = function() {
+var update_workspace = function() {
   work_meta.type = $('#work-type').val();
   work_meta.guid= $('#work-guid').val();
   work_meta.name = $('#work-name').val();
@@ -302,7 +297,7 @@ var updatework = function() {
  * @method
  * @param id connector id
  */
-var updateConnector = function(id) {
+var update_connector = function(id) {
   var connector = paper.getById(id);
   connector.data("props").id = id;
   connector.data("props").name = connector.title;
@@ -312,43 +307,46 @@ var updateConnector = function(id) {
 // TODO Check if the values aren't overwriten when refreshing webpage
 $('#work-guid').val(work_guid);
 $('#work-guid-label').html("Id: " + work_guid);
-// Attach listeners to Toolbar elements
-generic_adapter.drag(move, dragger, release);
-connector.click(function(){addToDiagram(this)});
-startShape.drag(move, dragger, function(){});
-endShape.drag(move, dragger, function(){}).click(modify);
 // Bind listeners to Properties controls
 // TODO Do this in one iteration of all
 // adapters
+//Attach listeners to Toolbar elements
 //
+generic_adapter.drag(move, dragger, release);
+connector.click(function(){addToDiagram(this)});
+start.drag(move, dragger, function(){});
+finish.drag(move, dragger, function(){}).click(modify);
 $('#work-type-lst li a').on("click change", function(){
   var type = $(this).text().toUpperCase().replace(' ','').replace('.','');
   $('#btn-work-type').html(type + '<span class="caret"></span>');
   $('#work-type').val(type);
 });
-$('#adapters :input').on("click change keyup", function() {
-  updateadapters();
+$('#workspace :input').on("click change keyup", function() {
+    update_workspace();
 });
 //
 // Adapters
-//
-$('#step-type-lst li a').on("click change", function(){
+$('#adapter :input').on("click change keyup", function() {
+    update_adapter();
+});
+
+$('#adapter-type-lst li a').on("click change", function(){
   var type = $(this).text().toUpperCase().replace(' ','');
-  $('#btn-step-type').html(type + '<span class="caret"></span>');
-  $('#step-type').val(type);
-  update($('#step-id').val());
+  $('#btn-adapter-type').html(type + '<span class="caret"></span>');
+  $('#adapter-type').val(type);
+  update($('#adapter-id').val());
 });
 //
 // Connectors
 //
 $('#connector :input').on("click change keyup", function(){
-  update($('#step-id').val());
+  //update($('#adapter-id').val());
 });
 //
 // Form controls
 //
 // TODO Remove from workspace is badly broken
-$('#remove-btn').click(function(){remove($('#step-id').val())});
-$('#clone-btn').click(function(){clone($('#step-id').val())});
+$('#remove-btn').click(function(){remove($('#adapter-id').val())});
+$('#clone-btn').click(function(){clone($('#adapter-id').val())});
 $('#save-btn').click(function(){save()});
 
