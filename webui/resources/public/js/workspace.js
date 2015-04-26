@@ -334,13 +334,13 @@ $('#adapter-type-lst li a').on("click change", function(){
   var type = $(this).text().toUpperCase().replace(' ','');
   $('#btn-adapter-type').html(type + '<span class="caret"></span>');
   $('#adapter-type').val(type);
-  update($('#adapter-id').val());
+  update_adapter($('#adapter-id').val());
 });
 //
 // Connectors
 //
 $('#connector :input').on("click change keyup", function(){
-  //update($('#adapter-id').val());
+  update_adapter($('#adapter-id').val());
 });
 //
 // Form controls
