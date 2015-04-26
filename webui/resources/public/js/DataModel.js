@@ -25,3 +25,4 @@ var DataModel = function() {
   DataModel.prototype.name = null;
   DataModel.prototype.url = null;
 }
+

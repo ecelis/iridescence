@@ -23,12 +23,20 @@
             [honeysql.helpers :refer :all])
   (:gen-class))
 
-(defn init-connection [uri]
-  "Sets db-spec for Database connection
-  TODO Maybe this should be moved to somewhere else"
-  (def connection (jdbc/get-connection uri)))
+(defn get-connection "Get connection from" [uri]
+  ;TODO Maybe this should be moved to somewhere else
+  jdbc/get-connection uri)
 
-(defn build-select [data]
+(defn build-select "Build a select from" [statement]
   (def sqlmap (map data))
+  (jdbc/query (sql/format sqlmap)))
+
+(defn get-tables "Get tables from" [db]
+  (def sqlmap {:select [tables]
+               :from [db]})
+
+(defn get-columns "Get columns from" [table]
+  (def sqlmap {:select [columns]
+               :from [table]})
   (jdbc/query (sql/format sqlmap)))
 
