@@ -74,8 +74,7 @@
 
 (defn try-url "Test adapter url" [url]
   ; TODO test any type of data source
-  (db/test-url url)
-  (json-response "{OK}"))
+  (json-response (db/test-url url)))
 
 ;; API Definition
 ;;

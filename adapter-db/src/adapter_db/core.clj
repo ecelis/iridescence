@@ -25,8 +25,12 @@
   )
 
 (defn test-url "TEsts URL" [url]
-  (info (str "Trying " url))
-  (jdbc/get-connection url))
+  (try
+    (def db-handle (jdbc/get-connection url))
+    (str "{'status':'success'}")
+    (catch Exception e (info (str "Trying " url " " e)))
+    ;TODO proper json
+    ))
 
 (defn build-select "Build a select from" [statement]
   (def sqlmap (map statement))
