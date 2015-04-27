@@ -21,14 +21,23 @@
   (:require [clojure.java.jdbc :as jdbc]
             [honeysql.core :as sql]
             [honeysql.helpers :refer :all])
-  (:gen-class))
+  (:use [taoensso.timbre :only [trace debug info warn error fatal]])
+  )
 
-(defn init-connection [uri]
-  "Sets db-spec for Database connection
-  TODO Maybe this should be moved to somewhere else"
-  (def connection (jdbc/get-connection uri)))
+(defn test-url "TEsts URL" [url]
+  (info (str "Trying " url))
+  (jdbc/get-connection url))
 
-(defn build-select [data]
-  (def sqlmap (map data))
+(defn build-select "Build a select from" [statement]
+  (def sqlmap (map statement))
+>>>>>>> d10b8bd0cfbb78c265915495e9af6301dfa7fc1a
   (jdbc/query (sql/format sqlmap)))
 
+(defn get-tables "Get tables from" [db tables]
+  (def sqlmap {:select [tables]
+               :from [db]}))
+
+(defn get-columns "Get columns from" [table columns]
+  (def sqlmap {:select [columns]
+               :from [table]})
+  (jdbc/query (sql/format sqlmap)))

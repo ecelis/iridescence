@@ -23,8 +23,10 @@
             [cheshire.core :as json]
             [clojure.java.io :as io]
             [clj-yaml.core :as yaml]
-            [adapter-db.core :as db])
-  (:use [taoensso.timbre :only [trace debug info warn error fatal]]))
+[adapter-db.core :refer :all]
+            )
+  (:use [taoensso.timbre :only [trace debug info warn error fatal]]
+        ))
 
 (def savedir "/tmp")
 
@@ -42,12 +44,19 @@
    :headers {"Content-Type" "text/plain; charset=utf-8"}
    :body data})
 
-(defn save-workspace [workspace]
-  "Saves a YAML representation of a workspace"
+(defn save-workspace "Saves a YAML representation of a workspace" [workspace]
+  (info "Saving workspace")
   ; TODO handle nil or invalid data for spit
-  (def yaml-workspace (yaml/generate-string (json/parse-string workspace)))
+  ; TODO Do the yaml conversion in a functional way
+  (def yaml-workspace (yaml/generate-string
+    {:workspace (json/parse-string
+             (get workspace :meta) true)
+     :artifacts (map
+             #(json/parse-string % true)
+             (get workspace :data))}))
   (spit (str savedir "/workspace.sav") yaml-workspace); TODO dynamic filename
-  (yaml-response yaml-workspace))
+  (info yaml-workspace)
+  (yaml-response yaml-workspace)) ; TODO Send apropriate response
 
 (defn load-workspace []
   "Loads a workspace from YAML storage"
@@ -61,21 +70,26 @@
   "Delete workspace from YAML storage"
   (yaml-response (str "delete-workspace stub " id)))
 
-(defn run-workspace [id]
-  "Run workspace"
-  (db/build-select "ta")
+(defn run-workspace "Run workspace" [id]
+  (build-select "ta")
   (yaml-response (str "run-workspace stub " id)))
+
+(defn try-url "Test adapter url" [url]
+  ; TODO test any type of data source
+  (test-url url)
+  (json-response "{OK}"))
 
 ;; API Definition
 ;;
 ;; Everything in the /api context is a workspace
 ;; http://localhost:3000/api
 ;;
-;; POST     /             save-workspace to YAML
-;; GET      /             load-workspace from YAML
-;; PUT      /:id          update-workspace (existing) in YAML
-;; DELETE   /:id          delete-workspace (existing) in YAML
-;; GET      /run/:id      run-workspace by ID from YAML
+;; POST     /               save-workspace to YAML
+;; GET      /               load-workspace from YAML
+;; PUT      /:id            update-workspace (existing) in YAML
+;; DELETE   /:id            delete-workspace (existing) in YAML
+;; GET      /run/:id        run-workspace by ID from YAML
+;; GET      /adapter/test   test-url of adapter
 
 (defroutes api-routes
   (context "/api" []
@@ -86,4 +100,7 @@
     (DELETE "/:id" [id]
           (delete-workspace id))
     (GET "/run/:id" [id]
-         (run-workspace id))))
+         (run-workspace id))
+    )
+  (context "/api/adapter" []
+    (GET "/test/" [__anti-forgery-token url] (try-url url))))
