@@ -73,16 +73,23 @@
   (db/build-select "ta")
   (yaml-response (str "run-workspace stub " id)))
 
+(defn test-url [url]
+  "Test adapter url"
+  ; TODO test any type of data source
+  ;(db/test-connection url)
+  (json-response "{OK}"))
+
 ;; API Definition
 ;;
 ;; Everything in the /api context is a workspace
 ;; http://localhost:3000/api
 ;;
-;; POST     /             save-workspace to YAML
-;; GET      /             load-workspace from YAML
-;; PUT      /:id          update-workspace (existing) in YAML
-;; DELETE   /:id          delete-workspace (existing) in YAML
-;; GET      /run/:id      run-workspace by ID from YAML
+;; POST     /               save-workspace to YAML
+;; GET      /               load-workspace from YAML
+;; PUT      /:id            update-workspace (existing) in YAML
+;; DELETE   /:id            delete-workspace (existing) in YAML
+;; GET      /run/:id        run-workspace by ID from YAML
+;; GET      /adapter/test   test-url of adapter
 
 (defroutes api-routes
   (context "/api" []
@@ -93,4 +100,7 @@
     (DELETE "/:id" [id]
           (delete-workspace id))
     (GET "/run/:id" [id]
-         (run-workspace id))))
+         (run-workspace id))
+    )
+  (context "/api/adapter" []
+    (GET "/test/" [__anti-forgery-token url] (test-url url))))

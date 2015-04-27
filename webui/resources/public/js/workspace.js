@@ -263,6 +263,7 @@ var update_adapter = function(id) {
   adapter.data("props").url = $('#adapter-url').val();
   adapter.attr({'title': adapter.data("props").name,
           'text':adapter.data("props").name});
+  test_connection($('#adapter-url').val());
 }
 
 /**

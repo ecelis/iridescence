@@ -23,9 +23,11 @@
             [honeysql.helpers :refer :all])
   (:gen-class))
 
-(defn get-connection "Get connection from" [uri]
-  ;TODO Maybe this should be moved to somewhere else
-  jdbc/get-connection uri)
+;;(defn get "Get connection from" [url]
+;  ;TODO Make it poled persistentn Maybe this should be moved to somewhere else
+;  jdbc/get-connection url)
+(defn test-connection "Test URL" [url]
+  jdbc/get-connection url)
 
 (defn build-select "Build a select from" [statement]
   (def sqlmap (map data))

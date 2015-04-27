@@ -1,0 +1,32 @@
+<!-- connector
+      control prefix: adapter-
+      used in name and id properties
+      -->
+<div role="tabpanel" class="tab-pane" id="adapter">
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="form-group"><div class="input-group">
+        <span class="input-group-addon">Name</span>
+        <input type="text" class="form-control" placeholder="adapter..."
+        aria-describedby="property-name" name="adapter-name" id="adapter-name">
+      </div>
+    </div></div>
+    <div class="col-xs-6">
+      <div class="form-group"><div class="input-group">
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-default dropdown-toggle"
+            data-toggle="dropdown" aria-expanded="false"
+            id="btn-adapter-type">Type
+            <span class="caret"></span></button>
+          <ul class="dropdown-menu" id="adapter-type-lst" role="menu">
+            <li><a>PostgreSQL</a></li> <!-- TODO Fix keyboard -->
+            <li><a>Mirth Connect</a></li>
+          </ul>
+        </div> <!-- /btn-group -->
+        <input type="text" class="form-control" arial-label="..."
+        placeholder="url://" name="adapter-url" id="adapter-url">
+      </div></div> <!-- /input- group -->
+    </div> <!-- /.col-lg-6 -->
+  </div>
+</div> <!-- tab panel connector -->
+
