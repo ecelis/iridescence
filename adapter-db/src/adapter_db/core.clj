@@ -18,13 +18,15 @@
 ;;  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 (ns adapter-db.core
-  (:gen-class :main false)
   (:require [clojure.java.jdbc :as jdbc]
             [honeysql.core :as sql]
             [honeysql.helpers :refer :all])
   (:use [taoensso.timbre :only [trace debug info warn error fatal]])
   )
 
+(defn test-url "TEsts URL" [url]
+  (info (str "Trying " url))
+  (jdbc/get-connection url))
 
 (defn build-select "Build a select from" [statement]
   (def sqlmap (map statement))
@@ -34,7 +36,7 @@
   (def sqlmap {:select [tables]
                :from [db]}))
 
-(defn get-columns "Get columns from" [table]
+(defn get-columns "Get columns from" [table columns]
   (def sqlmap {:select [columns]
                :from [table]})
   (jdbc/query (sql/format sqlmap)))
