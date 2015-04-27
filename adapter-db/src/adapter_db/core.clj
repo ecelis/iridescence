@@ -18,27 +18,23 @@
 ;;  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 (ns adapter-db.core
+  (:gen-class :main false)
   (:require [clojure.java.jdbc :as jdbc]
             [honeysql.core :as sql]
             [honeysql.helpers :refer :all])
-  (:gen-class))
+  (:use [taoensso.timbre :only [trace debug info warn error fatal]])
+  )
 
-;;(defn get "Get connection from" [url]
-;  ;TODO Make it poled persistentn Maybe this should be moved to somewhere else
-;  jdbc/get-connection url)
-(defn test-connection "Test URL" [url]
-  jdbc/get-connection url)
 
 (defn build-select "Build a select from" [statement]
-  (def sqlmap (map data))
+  (def sqlmap (map statement))
   (jdbc/query (sql/format sqlmap)))
 
-(defn get-tables "Get tables from" [db]
+(defn get-tables "Get tables from" [db tables]
   (def sqlmap {:select [tables]
-               :from [db]})
+               :from [db]}))
 
 (defn get-columns "Get columns from" [table]
   (def sqlmap {:select [columns]
                :from [table]})
   (jdbc/query (sql/format sqlmap)))
-

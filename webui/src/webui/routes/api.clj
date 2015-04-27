@@ -42,19 +42,19 @@
    :headers {"Content-Type" "text/plain; charset=utf-8"}
    :body data})
 
-(defn save-workspace [workspace]
-  "Saves a YAML representation of a workspace"
+(defn save-workspace "Saves a YAML representation of a workspace" [workspace]
+  (info "Saving workspace")
   ; TODO handle nil or invalid data for spit
   ; TODO Do the yaml conversion in a functional way
-(.println System/out "")
- (def yaml-workspace (yaml/generate-string
+  (def yaml-workspace (yaml/generate-string
     {:workspace (json/parse-string
              (get workspace :meta) true)
      :artifacts (map
              #(json/parse-string % true)
              (get workspace :data))}))
   (spit (str savedir "/workspace.sav") yaml-workspace); TODO dynamic filename
-  (yaml-response yaml-workspace))
+  (info yaml-workspace)
+  (yaml-response yaml-workspace)) ; TODO Send apropriate response
 
 (defn load-workspace []
   "Loads a workspace from YAML storage"
@@ -68,15 +68,13 @@
   "Delete workspace from YAML storage"
   (yaml-response (str "delete-workspace stub " id)))
 
-(defn run-workspace [id]
-  "Run workspace"
+(defn run-workspace "Run workspace" [id]
   (db/build-select "ta")
   (yaml-response (str "run-workspace stub " id)))
 
-(defn test-url [url]
-  "Test adapter url"
+(defn test-url "Test adapter url" [url]
   ; TODO test any type of data source
-  ;(db/test-connection url)
+  (db/build-select url)
   (json-response "{OK}"))
 
 ;; API Definition
