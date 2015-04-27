@@ -19,12 +19,24 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var get_objects = function(url) {
+  console.log('Fetching objects...');
+  $.get("/api/adapter/object/",
+        {"__anti-forgery-token": $("#__anti-forgery-token").val(),
+        "url": url},
+        function(e) {
+          console.log('Adapter Objects OK');
+        }
+        );
+};
+
 var test_connection = function (url) {
   $.get("/api/adapter/test/",
         {"__anti-forgery-token": $("#__anti-forgery-token").val(),
           "url": url},
        function(e) {
         console.log('Adapter Test OK');
-       },
-       "json");
+        get_objects(url);
+       }
+       );
 };

@@ -74,7 +74,11 @@
 
 (defn try-url "Test adapter url" [url]
   ; TODO test any type of data source
-  (json-response (db/test-url url)))
+  (db/test-url url)
+  (yaml-response "FIX RESPONSE test-url"))
+
+(defn get-objects "Fetch data source objects" [url]
+  (db/get-tables url))
 
 ;; API Definition
 ;;
@@ -100,4 +104,5 @@
          (run-workspace id))
     )
   (context "/api/adapter" []
-    (GET "/test/" [__anti-forgery-token url] (try-url url))))
+    (GET "/test/" [__anti-forgery-token url] (try-url url))
+    (GET "/object/" [__anti-forgery-token url] (get-objects url))))

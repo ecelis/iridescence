@@ -14,37 +14,32 @@ be deleted until we reach the first stable and fully functional version.
 
 
 
-  * Basado en Yahoo Pipes, Scratch y TIBCO BusinessWorks
-  * El Workspace es una colección de Adaptadores
-    * La mayor parte de la pantalla la ocupa el Workspace
-    * A la Derecha el Drop Zone permite arrastrar plantillas y otras
-      funciones relacionadas a la inter-conexión entre Adaptadores
-    * Abajo el Panel de Propiedades
-      - Modifica propiedades de Adaptadores, Conectores y Workspace
-  * Adaptador se conecta a una fuente de datos
-    * Usando la minima información posible
-    * Inspecciona la fuente de datos y provee campos
-  * Conector determina el flujo de datos
-    * Contiene reglas de interconexón entre origenes de datos
-  * Los Adaptadores de Inicio y Fin son automáticos
-    * Un Conector se agrega automáticamente entre Inicio y el primer
-      Adptador arrastrado al Workspace
-    * El Inicio es simbólico
-    * El Fin por default va al Log, pero se puede editar
+  * Based onn Yahoo Pipes, Scratch and TIBCO BusinessWorks
+  * Workspace is a set of Adapters for assorted data sources
+    * Most of the screen is used by the workspace
+    * To the right there is the interactive area for D&D objects
+    * Properties Panel is bottom
+      - Edits properties for adapters and connections in the workspace
+  * Adapter connects toa data source
+    * An URL is the format to connect to any data source
+    * While editing the adapter propertis it tests the connection and
+      when successful fetches the data structures from it
+  * Connectors define the data flow and transformations between data
+    sources
+  * Start and Finish adapters are automatically added to the workspace
+    * One connection is added when the first connector is droped in the
+      workspace
+    * The Start adapter is symbolic only
+    * Finish adapter can be edited
 
-En Progreso
+In Progress
 -----------
 
    * API RESTful
-    * Motor de Reglas de Connectores
-    * Implementación de reglas bśicas de interconexión
-    * Implementación de Adaptadores deribados
-      - DB (PsotgreSQL, Oracle, MySQL, SQL Server)
-      - Mirth Connect
-      - Cirrus
+    * Connections Rule Engine
 
-Planeado
---------
+Planed
+------
 
   * Contenedor Docker (Actualmente en progreso, pero como extra)
   * Encriptación del lado del cliente (Browser/JavaScript)
@@ -52,6 +47,7 @@ Planeado
 Bugs
 ----
 
+  * Exceptions and logging is not beign handled properly
   * Eliminar Adaptadores o Conectores esta roto completamente
   * Iterconexión de Adaptadores no esta validada
   * Varios que se escapan a la mente :/
@@ -59,35 +55,6 @@ Bugs
 
 
 ## Installation
-
-
-
-
-
-## IGNORE EVERYTHING BELOW
-    git clone git@github.com:ecelis/iridescence.git
-    cd iridescence
-    git submodule init
-    git submodule update
-    gradle build
-
-## Usage
-
-FIXME: explanation
-
-
-## Options
-
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-  * build.gradle does nothing currently, its only a template for
-    subprojects
 
 ## License
 

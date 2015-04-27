@@ -27,7 +27,6 @@
 (defn test-url "TEsts URL" [url]
   (try
     (def db-handle (jdbc/get-connection url))
-    (str "{'status':'success'}")
     (catch Exception e (info (str "Trying " url " " e)))
     ;TODO proper json
     ))
@@ -36,9 +35,16 @@
   (def sqlmap (map statement))
   (jdbc/query (sql/format sqlmap)))
 
-(defn get-tables "Get tables from" [db tables]
-  (def sqlmap {:select [tables]
-               :from [db]}))
+(defn get-tables "Get tables from" [url]
+  (try (def db-handle (jdbc/get-connection url))
+       (def sqlmap (sql/build :select :*
+                              :from :information_schema.tables
+                              :where [:= :table_schema "public"]))
+        (jdbc/query db-handle (sql/format sqlmap))
+       (catch Exception e (info e)))
+;  (def sqlmap {:select [tables]
+ ;              :from [db]}))
+  (info (sql/format sqlmap)))
 
 (defn get-columns "Get columns from" [table columns]
   (def sqlmap {:select [columns]
