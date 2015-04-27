@@ -23,10 +23,8 @@
             [cheshire.core :as json]
             [clojure.java.io :as io]
             [clj-yaml.core :as yaml]
-[adapter-db.core :refer :all]
-            )
-  (:use [taoensso.timbre :only [trace debug info warn error fatal]]
-        ))
+            [adapter-db.core :as db])
+  (:use [taoensso.timbre :only [trace debug info warn error fatal]]))
 
 (def savedir "/tmp")
 
@@ -71,12 +69,12 @@
   (yaml-response (str "delete-workspace stub " id)))
 
 (defn run-workspace "Run workspace" [id]
-  (build-select "ta")
+  (db/build-select "ta")
   (yaml-response (str "run-workspace stub " id)))
 
 (defn try-url "Test adapter url" [url]
   ; TODO test any type of data source
-  (test-url url)
+  (db/test-url url)
   (json-response "{OK}"))
 
 ;; API Definition

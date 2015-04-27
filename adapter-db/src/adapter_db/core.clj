@@ -30,7 +30,6 @@
 
 (defn build-select "Build a select from" [statement]
   (def sqlmap (map statement))
->>>>>>> d10b8bd0cfbb78c265915495e9af6301dfa7fc1a
   (jdbc/query (sql/format sqlmap)))
 
 (defn get-tables "Get tables from" [db tables]
