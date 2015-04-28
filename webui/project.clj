@@ -56,7 +56,8 @@
   :plugins [[lein-ring "0.9.1"]
             [lein-environ "1.0.0"]
             [lein-ancient "0.6.5"]
-            [ragtime/ragtime.lein "0.3.8"]]
+            [ragtime/ragtime.lein "0.3.8"]
+            [codox "0.8.11"]]
 
   :ring {:handler webui.handler/app
          :init    webui.handler/init

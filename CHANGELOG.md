@@ -1,4 +1,24 @@
-### ADD CHANGELOG.md it should help track work better (HEAD, origin/master, origin/HEAD, master)
+### ADD Plugin to generate docs (HEAD, master)
+>Tue, 28 Apr 2015 07:29:34 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+>Commiter: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+
+
+
+### ADD CHANGELOG.md it should help track work better
+>Tue, 28 Apr 2015 07:12:49 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+>Commiter: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+
+
+
+### ADD CHANGELOG.md it should help track work better (origin/master, origin/HEAD)
 >Tue, 28 Apr 2015 07:06:14 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)

@@ -9,4 +9,5 @@
                  [com.taoensso/timbre "3.4.0"]
                  [com.taoensso/tower "3.0.2"]
                  [org.postgresql/postgresql "9.4-1201-jdbc41"]]
+  :plugins [[codox "0.8.11"]]
   )
