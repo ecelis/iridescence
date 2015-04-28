@@ -1,0 +1,131 @@
+## Change Log
+
+### upcoming (2015/04/28 12:01 +00:00)
+- [baaf404](https://github.com/ecelis/iridescence/commit/baaf4046812e8e455dbb84b053a6c263c0143dc8) DB Adapter get tables (@ecelis)
+- [fea0892](https://github.com/ecelis/iridescence/commit/fea089206971f5d9026c2d46f0f7346a50d05485) WIP DB schema tables (@ecelis)
+- [315d1c4](https://github.com/ecelis/iridescence/commit/315d1c416a3cd296ce437bfca88b82d84e663863) Adapter testing (@ecelis)
+- [b5d2351](https://github.com/ecelis/iridescence/commit/b5d2351e82f04daaaaa7e5341750ddc814a0d4fa) FIX directories in checkouts instead of symlinks :/ (@ecelis)
+- [b54fca8](https://github.com/ecelis/iridescence/commit/b54fca8f951959e82e5fefbd92b90898317cdb4a) Merge fixes (@ecelis)
+- [d10b8bd](https://github.com/ecelis/iridescence/commit/d10b8bd0cfbb78c265915495e9af6301dfa7fc1a) Too late to know what I am doing
+- [694f8ac](https://github.com/ecelis/iridescence/commit/694f8ac71324f40020b077be390792c36aca3ea2) Refactoring almost done
+- [ea20e7d](https://github.com/ecelis/iridescence/commit/ea20e7d9c26530cb3ad387dc794a4df56afa63eb) JS refactoring
+- [a4e7b49](https://github.com/ecelis/iridescence/commit/a4e7b49167edb02446c8bf1f5c2828988156c050) JS refactoring
+- [706d929](https://github.com/ecelis/iridescence/commit/706d9291c09fb2cd858f56ecb3c31195600401a8) JS refactoring
+- [a869c7f](https://github.com/ecelis/iridescence/commit/a869c7f1bf7d1aa3be2893477e9d208141938aa4) JS refactoring
+- [1dd3830](https://github.com/ecelis/iridescence/commit/1dd3830245abe88d639568c5b8379f86bb2503c1) JS refactoring
+- [25b1dc8](https://github.com/ecelis/iridescence/commit/25b1dc8ea13933cbed38bd9530f0ec3d45481f85) JS refactoring
+- [9fdd451](https://github.com/ecelis/iridescence/commit/9fdd451d7bb89ed093f349c75d619101094d31f5) JS refactoring
+- [f0df197](https://github.com/ecelis/iridescence/commit/f0df1976179e1aef7f564d301db763c26f1f186f) JS refactoring
+- [dbb76b9](https://github.com/ecelis/iridescence/commit/dbb76b9eae2c39336e85be6c1fff257ce6526ae4) Branching to add a JS loader
+- [70ec766](https://github.com/ecelis/iridescence/commit/70ec7660c44d298232c18f555db07b1722cb1483) Persisting GUI to YAML
+- [d76fe6a](https://github.com/ecelis/iridescence/commit/d76fe6a837f218f8d683f401272041749dad9679) Untangled
+- [7f4e799](https://github.com/ecelis/iridescence/commit/7f4e799651b25de9d1d8b76698fcba73b7718298) Untangled
+- [6b3c123](https://github.com/ecelis/iridescence/commit/6b3c12308829e9533740f3bdbbce29cc880529d1) Tangled up in bracesi... er. blue
+- [4db1619](https://github.com/ecelis/iridescence/commit/4db1619d8a597f5062c1e05ec7cb7cc230afb8f8) FIX weir behaviour when sending to API
+- [92181a4](https://github.com/ecelis/iridescence/commit/92181a49fbc6773c03adf3a75725af0b87b49ebe) ADD some notes to readme
+- [ce49819](https://github.com/ecelis/iridescence/commit/ce49819f9e2d0d25923b96c1c5c67b8a75248b9f) Where did I left last night?
+- [4b33c19](https://github.com/ecelis/iridescence/commit/4b33c19d19449b93a42ab98689e8f63cf2089a5c) WIP GUI Destination
+- [22d9429](https://github.com/ecelis/iridescence/commit/22d9429c3b1b3a4c6d32c1072259788fd9277b93) GUI Workspace properties metadata ready to be persisted
+- [6fdc4e2](https://github.com/ecelis/iridescence/commit/6fdc4e2d444adf5656c192fdbc0be95c7a670cb8) WIP GUI new properties, also new handling of values
+- [89a8925](https://github.com/ecelis/iridescence/commit/89a89253ca70f808ecaac3a180d3c0d8643686f6) ADD Start End steps by default in workspace
+- [0afef4f](https://github.com/ecelis/iridescence/commit/0afef4f3390a7d6f209f0acc01ceb05f73ceb5db) UPDATE GUI to add workspace details
+- [073829d](https://github.com/ecelis/iridescence/commit/073829d1022aca6030fbbcc1d2637c4fe4ea3517) GUI layout
+- [fdf7ab6](https://github.com/ecelis/iridescence/commit/fdf7ab6d95014303b285ccc1a50fa8bf81ac7ef9) UPDATE GUI to add workspace details
+- [3d25b58](https://github.com/ecelis/iridescence/commit/3d25b58ea12b6dea4fd26ef777ba1dc8936a3501) UPDATE GUI to add workspace details
+- [680fcc7](https://github.com/ecelis/iridescence/commit/680fcc789d55517825e0061d4c29e192717035e2) Merge branch 'master' of github.com:ecelis/iridescence
+- [33358fd](https://github.com/ecelis/iridescence/commit/33358fda0c404ddc8f63acb99690ac25858e02eb) UPDATE GUI to add workspace details
+- [cb4ab90](https://github.com/ecelis/iridescence/commit/cb4ab90f37d5450cb2ac01355e46fc191027cb37) ADD html templates to split up the properties panel
+- [35d1fab](https://github.com/ecelis/iridescence/commit/35d1fabf769083f8dfcdb4651b21ee57805a9921) Small fixes here and there
+- [5bf4896](https://github.com/ecelis/iridescence/commit/5bf48963356562079e489c615247b013c754b498) FIX typo
+- [d077bca](https://github.com/ecelis/iridescence/commit/d077bcaf09536d78a5617c7076164f844e5f6019) ADD TODO file, write the wishlist down there
+- [9a1174b](https://github.com/ecelis/iridescence/commit/9a1174b4b8057c3e18a4ebe5083be2b688f90524) Somthing ...I lost track between home and office :/
+- [374f570](https://github.com/ecelis/iridescence/commit/374f57004b63760143285d4de6d5bb9197eacd73) WIP review API+GUI (@ecelis)
+- [8aa5864](https://github.com/ecelis/iridescence/commit/8aa58648a972036178ced5469b36066cc6875b2a) WIP review API+GUI (@ecelis)
+- [4d5d338](https://github.com/ecelis/iridescence/commit/4d5d338a97e560f2245732fcfbabb92ce7d69122) WIP review API+GUI (@ecelis)
+- [48abe00](https://github.com/ecelis/iridescence/commit/48abe00410cdc0bd032ae648f68a78077a38f5f2) FIX adding connections between shapes with one click (@ecelis)
+- [3eeb784](https://github.com/ecelis/iridescence/commit/3eeb78481d0dc4bcc475d82c9b5bc39f8b5dad4f) UPDATE gui (@ecelis)
+- [bb52d7d](https://github.com/ecelis/iridescence/commit/bb52d7dddb85332db5c4273ca96cb298e9897d55) ADD TODO for tracking wishlist (@ecelis)
+- [719c0d6](https://github.com/ecelis/iridescence/commit/719c0d6c47fad34276c75c91183decef100001ab) Verysimple PGSQL DB for an early demo (@ecelis)
+- [db85f5d](https://github.com/ecelis/iridescence/commit/db85f5da7fad690b60003839c597ff2e79817276) Trivial, switching to office (@ecelis)
+- [2d3e434](https://github.com/ecelis/iridescence/commit/2d3e434593b949573cf3d38166a745efda828b8d) WIP Adapter or Databases (@ecelis)
+- [fc91f88](https://github.com/ecelis/iridescence/commit/fc91f887025d14e1d39876146799b7ab97790836) WIP RESFul API demo (@ecelis)
+- [a557cb0](https://github.com/ecelis/iridescence/commit/a557cb09e53037a4c6d8440d1dca306d540b69ea) WIP RESTful API (@ecelis)
+- [9169d03](https://github.com/ecelis/iridescence/commit/9169d031afd4fd4905c799125f021d5c4841d1bf) WIP RESTful API (@ecelis)
+- [dc67bbe](https://github.com/ecelis/iridescence/commit/dc67bbe2569fe241a35ff72ba1c2d6e7accb1b2c) Save workspace working, still needs some validations and dynamic filenames, check comments in code (@ecelis)
+- [ca46964](https://github.com/ecelis/iridescence/commit/ca46964b242b2f03e5b41cc0c5267046d538ca3a) Save workspace working, still needs some validations and dynamic filenames, check comments in code (@ecelis)
+- [c5d56d5](https://github.com/ecelis/iridescence/commit/c5d56d5545443cc90d402fcfd743774b78f8b599) FIX to YAML in save workspace (@ecelis)
+- [ae91a8b](https://github.com/ecelis/iridescence/commit/ae91a8bd9fb91fde971024c5550b8fa08cc43b01) FIX regresion (@ecelis)
+- [a0805c3](https://github.com/ecelis/iridescence/commit/a0805c3ecd9ef7acb78f7f40018dff5aaa987bdc) FIX regresion (@ecelis)
+- [5ba497e](https://github.com/ecelis/iridescence/commit/5ba497e2ff55af679d0eddb4c72916bf6e8adee6) FIX regresion (@ecelis)
+- [99ce57e](https://github.com/ecelis/iridescence/commit/99ce57e65f0cb5ae7948cb595e9c532ce5bdf97c) STAGE something went wrong between pushses (@ecelis)
+- [c83ae5b](https://github.com/ecelis/iridescence/commit/c83ae5b696fbf0657b532fd97edd7349c0fc2c44) UPDATE basic examples for hl7yaml (@ecelis)
+- [77f1829](https://github.com/ecelis/iridescence/commit/77f1829923b7de88edc8521ffcf28f37f5d79c59) WIP switching to home
+- [2f45d3a](https://github.com/ecelis/iridescence/commit/2f45d3a00cd74f4ecd5450ac73e15499353d0fd2) UPDATE dependecies to include hl7yaml parser\r
+- [1986549](https://github.com/ecelis/iridescence/commit/1986549dfb3c62a29e6796797bdb83966a68c50d) FIX invalid anti-forgery token
+- [13cec5a](https://github.com/ecelis/iridescence/commit/13cec5a6a92038243a2a1f339752f0f1c3962384) WIP Save diagram, type needs to be fixed when change selection and Invalid antoforgery token
+- [a6d749f](https://github.com/ecelis/iridescence/commit/a6d749f7baa3eec8c4e1e014d8e81da22cad483c) ADD local copy of bootstrap and jquery
+- [6ec3e88](https://github.com/ecelis/iridescence/commit/6ec3e88172822cb1a12c3d0fc6a44a13a98af939) FIX connection between shapes
+- [b69b641](https://github.com/ecelis/iridescence/commit/b69b641a93a8dbc0648f7867837132be5f6ee28e) Switching to office (@ecelis)
+- [f2a0ce5](https://github.com/ecelis/iridescence/commit/f2a0ce51b2c5b2353c66f618132db3c739808b25) WIP API routes (@ecelis)
+- [3afe435](https://github.com/ecelis/iridescence/commit/3afe435d912308c81893a7884abb168acec78c2c) WIP API routes (@ecelis)
+- [7044569](https://github.com/ecelis/iridescence/commit/7044569819c32614fc826b3147f1513d175ba18b) UPDATE dependencies mirth artifacts now are hosted ate v3ctor.club (@ecelis)
+- [349d04d](https://github.com/ecelis/iridescence/commit/349d04d714f55bf2791fa7f3008c6f2b86bade24) UPDATE build instructions, webui is somewhat ready for some screenshots :) (@ecelis)
+- [db78e73](https://github.com/ecelis/iridescence/commit/db78e7332326a50d073a47b7ee4bba9b76f46637) WIP GUI (@ecelis)
+- [b5a7355](https://github.com/ecelis/iridescence/commit/b5a7355c88c5199c5cd46cb5fcd0bf68d3481eb8) WIP GUI connections, add some comments (@ecelis)
+- [984c58d](https://github.com/ecelis/iridescence/commit/984c58db94aa209f9c3ea4ab885b2f1aeabc442c) WIP GUI connections between shapes half working (@ecelis)
+- [f31891d](https://github.com/ecelis/iridescence/commit/f31891d0654d523c564f20992137d886dc75e59b) WIP GUI Properties panel (@ecelis)
+- [9bba5b9](https://github.com/ecelis/iridescence/commit/9bba5b9238c5cb0f0f9232182a9b6663999531fd) WIP GUI (@ecelis)
+- [2bb40db](https://github.com/ecelis/iridescence/commit/2bb40db69da0f361baa653fe736bdb7d00b303f7) WIP GUI (@ecelis)
+- [efcfb2b](https://github.com/ecelis/iridescence/commit/efcfb2b6fd97a2422b25f0a32e8fd3779fa623a1) WIP webui (@ecelis)
+- [bca99cd](https://github.com/ecelis/iridescence/commit/bca99cd776f44e87a1a0f510fbae52e3fe73e6e2) WIP webui (@ecelis)
+- [c47cb24](https://github.com/ecelis/iridescence/commit/c47cb245c82b9aa4a16064b98638d51536e04d81) WIP webui (@ecelis)
+- [ff6d0cd](https://github.com/ecelis/iridescence/commit/ff6d0cd5b7005ac5cd5c2127f3bb939f6c8a4568) Improved dragger, still bugs (@ecelis)
+- [4e936bc](https://github.com/ecelis/iridescence/commit/4e936bc0a6880e3a891ea1a1df6475a68f218e0e) Improved dragger, still bugs (@ecelis)
+- [9a3cb5c](https://github.com/ecelis/iridescence/commit/9a3cb5cc0c9ecdea694613bff88fd434086213df) Basic workspace ADD RaphaelJS (@ecelis)
+- [d85286d](https://github.com/ecelis/iridescence/commit/d85286d7e295fb2f068d777f935f81ba3ccad3e3) Basic workspace (@ecelis)
+- [30a0ef3](https://github.com/ecelis/iridescence/commit/30a0ef377ea6cbce0a82a101e867b3e1381963a2) Luminus ADD (@ecelis)
+- [4124a19](https://github.com/ecelis/iridescence/commit/4124a199b7bd6890a58d097202d1229264823307) Something (@ecelis)
+- [7271928](https://github.com/ecelis/iridescence/commit/7271928c9d3454f0479509c645df1da26f11338f) meh ...trivial (@ecelis)
+- [c181791](https://github.com/ecelis/iridescence/commit/c181791ac00e25b808907430007db484dde8228a) UPDATE JDBC drivers for PostgrSQL and Derby for development (@ecelis)
+- [0eee39c](https://github.com/ecelis/iridescence/commit/0eee39c79ceaf311a522b2f8e4648b0bc1af2bdb) FIX more mirth dependencies (@ecelis)
+- [e5edc78](https://github.com/ecelis/iridescence/commit/e5edc7887f5373e59210e3946f54ee3fbb13288b) FIX mirth dependency (@ecelis)
+- [81e2cfd](https://github.com/ecelis/iridescence/commit/81e2cfda8a954b1dec6b53c21dae339f71225ac5) ADD Mirth Connect adapter, it depends on Mirth Connect JARs built from source, check README.mirth (@ecelis)
+- [b87e9b3](https://github.com/ecelis/iridescence/commit/b87e9b359a7b40321255ce15ffa27e3e8bc23588) UPDATE README.mirth (@ecelis)
+- [5c46a05](https://github.com/ecelis/iridescence/commit/5c46a05efac72aba5c6a8409ef938fd20b5ad57d) ADD Mirth Connect README for building from sources, we want to be able to debug, just in case (@ecelis)
+- [d738490](https://github.com/ecelis/iridescence/commit/d73849081be7748a011d8dd6065898a729292f86) UPDATE Licences (@ecelis)
+- [c304af9](https://github.com/ecelis/iridescence/commit/c304af90153501555a82af941100f19f06f819a7) ADD licences and seting up deploy to Clojars (@ecelis)
+- [f76254d](https://github.com/ecelis/iridescence/commit/f76254d03e75fb20903c9be3c75b85884495d06e) Grr >:[ (@ecelis)
+- [af624f8](https://github.com/ecelis/iridescence/commit/af624f83ce3dfb601af2c5f60a89d0300c8a2be8) UPDATE README.md for hl7yaml (@ecelis)
+- [4c84384](https://github.com/ecelis/iridescence/commit/4c8438483f9dc6d09b11e4c3e2025664e08ec355) WIP webui (@ecelis)
+- [2739d24](https://github.com/ecelis/iridescence/commit/2739d24aaf386103fe119a8eb70299ec4f761284) UPDATE READMe.md (@ecelis)
+- [f2802a3](https://github.com/ecelis/iridescence/commit/f2802a38931ccb39d71b6f29d608f2fdbed2aacc) UPDATE CirrusLoad/README.md (@ecelis)
+- [a423820](https://github.com/ecelis/iridescence/commit/a423820fb174661598bdd4a3dd55d154a34642d5) Document dev environment (@ecelis)
+- [8649014](https://github.com/ecelis/iridescence/commit/86490146c64b990b8029f8c7e00fd02538a3ce40) Saving to check server failure indicators (@ecelis)
+- [298ed5e](https://github.com/ecelis/iridescence/commit/298ed5ef2d5ba027b92e7e3fd92a242ae9bfa5f9) Smaple data, this is crap replace it with real data (@ecelis)
+- [bf5fe5b](https://github.com/ecelis/iridescence/commit/bf5fe5bd4059a5ff6644ae5eeda0bcd8cf88d777) ADD submodule clojure-hl7-messaging-2-parser (@ecelis)
+- [7403e56](https://github.com/ecelis/iridescence/commit/7403e566a453a7da4645f3da5f856448ac9dc171) We'll allow code in checkouts for leiningen subprojects (@ecelis)
+- [604f9d1](https://github.com/ecelis/iridescence/commit/604f9d13a56c1f6106de9068200093361878fe5d) WIP hl7yaml parser (@ecelis)
+- [e2a88a5](https://github.com/ecelis/iridescence/commit/e2a88a585f16b395f943fee8d1f410e775167103) ADD hl7yaml interpreter (@ecelis)
+- [0487352](https://github.com/ecelis/iridescence/commit/048735210d0ce6f0e6c07f46d4f72f4d6c46081c) bye bye (@ecelis)
+- [fa1d469](https://github.com/ecelis/iridescence/commit/fa1d4699fc301592e65e7b2469b5780dd9f7b589) Merge from legacy (@ecelis)
+- [50a7416](https://github.com/ecelis/iridescence/commit/50a7416328a9674d18500f0415b899abc6911b40) ADD Copy notice (@ecelis)
+- [a7c50da](https://github.com/ecelis/iridescence/commit/a7c50da0dddfb81c21b1dc4122a2b077978ff006) WIP Unit testing.. boring stuff,puff (@ecelis)
+- [cd949bc](https://github.com/ecelis/iridescence/commit/cd949bc0aa8774ffeacca9ec6050a10fa60a2b99) WIP unit tests (@ecelis)
+- [85443bc](https://github.com/ecelis/iridescence/commit/85443bcf965ee47a892531d37e765f31969edf63) WIP Unit tests (@ecelis)
+- [c153160](https://github.com/ecelis/iridescence/commit/c153160cc4951dffd09150e28ef00570e5c8f7ea) WIP Clean up legacy dbPort (@ecelis)
+- [303ff93](https://github.com/ecelis/iridescence/commit/303ff937afa77b82b75df91c9fc6beb7d3545a06) WIP dbPort legacy code clean up (@ecelis)
+- [bd672c0](https://github.com/ecelis/iridescence/commit/bd672c05486c6ca9f93e04d94696ce9d12d18c89) UPDATE gitignore (@ecelis)
+- [8db3dbe](https://github.com/ecelis/iridescence/commit/8db3dbefb969fee7260b78533d74504d0a26a1a5) ADD Classes from legacy dbPort (@ecelis)
+- [70235c6](https://github.com/ecelis/iridescence/commit/70235c66abbb7e6430e661e2ddd15750c0464fa8) UPDATE CirrusLoad/build.gradle cleaning up (@ecelis)
+- [13c46c2](https://github.com/ecelis/iridescence/commit/13c46c24271806e6c02111437a6790c8eade4a8d) WIP Gradle build.script for CirrusLoad (@ecelis)
+- [8d29414](https://github.com/ecelis/iridescence/commit/8d2941433d8ad06dc45ae5b6bdfcdde71802b78f) WIP CirrusLoad build.gradle, most maven deps included (@ecelis)
+- [232251f](https://github.com/ecelis/iridescence/commit/232251f3d54bf745798920fb39c3cbe97e323ce1) WIP CirrusLoad will replace dbPort (@ecelis)
+- [d7a684f](https://github.com/ecelis/iridescence/commit/d7a684f8ee0d969d7fc804515b6eaba6e926c5b4) UPDATE build.gradle for Java (@ecelis)
+- [080ff67](https://github.com/ecelis/iridescence/commit/080ff677db4d2da21981bfc23249e0e366f3b71a) UPDATE Commented out aparently unused import (@ecelis)
+- [24071e0](https://github.com/ecelis/iridescence/commit/24071e0e2402b77400d6179d898cbdd98ed2638e) ADD ECS dbPort legacy code (@ecelis)
+- [b918736](https://github.com/ecelis/iridescence/commit/b918736c8bf666f3765f4e98e0ffbf829dbae9d4) UPDATE gitignore for Eclipse (@ecelis)
+- [82aaf99](https://github.com/ecelis/iridescence/commit/82aaf99b4b4b5dc8c8533e94826348ec3f50c88d) Stating with Gradle (@ecelis)
+- [94d255b](https://github.com/ecelis/iridescence/commit/94d255b7bdcd4910d3b31bfa3b22d5a458256cbc) build.gradle added, working clojursque config (@ecelis)
+- [ce7684f](https://github.com/ecelis/iridescence/commit/ce7684f44b397be16184ee4dc907e3763239897f) Updated gitignore (@ecelis)
+- [bfe63bf](https://github.com/ecelis/iridescence/commit/bfe63bf9ab701da87d082ec58de7cc5c0852c82c) Update LICENSE (@ecelis)
+- [2d16db8](https://github.com/ecelis/iridescence/commit/2d16db833c815b6e9982283971039f73a8c9ecff) Initial commit (@ecelis)
