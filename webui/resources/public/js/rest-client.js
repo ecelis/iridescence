@@ -20,12 +20,12 @@
  */
 
 var get_objects = function(url) {
-  console.log('Fetching objects...');
+  //console.log('Fetching objects...');
   $.get("/api/adapter/object/",
         {"__anti-forgery-token": $("#__anti-forgery-token").val(),
         "url": url},
         function(e) {
-          console.log('Adapter Objects OK');
+          console.log(e);
         }
         );
 };
@@ -36,7 +36,7 @@ var test_connection = function (url) {
           "url": url},
        function(e) {
         console.log('Adapter Test OK');
-        get_objects(url);
+       // get_objects(url);
        }
        );
 };

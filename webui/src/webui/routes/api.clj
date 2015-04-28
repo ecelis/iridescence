@@ -74,8 +74,8 @@
 
 (defn try-url "Test adapter url" [url]
   ; TODO test any type of data source
-  (db/test-url url)
-  (yaml-response "FIX RESPONSE test-url"))
+  (if (db/test-url url)
+    (yaml-response "FIX RESPONSE test-url")))
 
 (defn get-objects "Fetch data source objects" [url]
   (db/get-tables url))
