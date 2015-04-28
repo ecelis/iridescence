@@ -7,12 +7,14 @@ manual intervention to build/run. Please refer to README.md files within
 each submodule directory for details. Modules can change name, split or
 be deleted until we reach the first stable and fully functional version.
 
-  * webui - SmartConnector Web User Interface
+  * webui         - SmartConnector Web User Interface
+  * adapter-db    - DB Adapter (PostgreSQL, MySQL, SQL Server, Oracle)
   * adapter-mirth - Mirth Connect Adapter
-  * CirrusLoad - Cirrus Adapter
-  * hl7yaml - HL7/YAML parser module
+  * CirrusLoad    - Cirrus Adapter
+  * hl7yaml       - HL7/YAML parser module
 
-
+Features
+--------
 
   * Based onn Yahoo Pipes, Scratch and TIBCO BusinessWorks
   * Workspace is a set of Adapters for assorted data sources
@@ -20,7 +22,7 @@ be deleted until we reach the first stable and fully functional version.
     * To the right there is the interactive area for D&D objects
     * Properties Panel is bottom
       - Edits properties for adapters and connections in the workspace
-  * Adapter connects toa data source
+  * Adapter connects to a data source
     * An URL is the format to connect to any data source
     * While editing the adapter propertis it tests the connection and
       when successful fetches the data structures from it
@@ -38,8 +40,8 @@ In Progress
    * API RESTful
     * Connections Rule Engine
 
-Planed
-------
+Planned
+-------
 
   * Contenedor Docker (Actualmente en progreso, pero como extra)
   * Encriptación del lado del cliente (Browser/JavaScript)
