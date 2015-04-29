@@ -34,8 +34,7 @@
                  [com.mirth.commons.encryption/mirth-crypto "1"]
                  [com.mirth.connect/mirth-donkey "3.2.1svn"]
                  [com.mirth.connect/mirth-server "3.2.1svn"]
-                 [com.mirth.connect/mirth-client "3.2.1svn"]
-                 [com.mirth.connect/mirth-dummie "3.2.1svn"]]
+                 [com.mirth.connect/mirth-client "3.2.1svn"]]
   :plugins [[lein-localrepo "0.5.3"]
             [codox "0.8.11"]]
   :main ^:skip-aot adapter-mirth.core

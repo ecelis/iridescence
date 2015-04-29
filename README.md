@@ -1,6 +1,6 @@
-# Iridescence
+##### Iridescence
 
-Smart Connector
+# Smart Connector
 
 This is a work in progress, some/many things might be broken or need
 manual intervention to build/run. Please refer to README.md files within
@@ -11,7 +11,7 @@ be deleted until we reach the first stable and fully functional version.
   * adapter-db    - DB Adapter (PostgreSQL, MySQL, SQL Server, Oracle)
   * adapter-mirth - Mirth Connect Adapter (WIP)
   * CirrusLoad    - Cirrus Adapter        (WIP)
-  * hl7yaml       - HL7/YAML parser module
+  * hl7yaml       - HL7/YAML parser module (LIMBO) <-might be deleted
 
 
 ## Installation
@@ -27,7 +27,7 @@ Build from source
 -----------------
 
 In order to build Smart Connector you need to install Leiningen first.
-(Java 8 SDK is a requirement for lein and Smart Connector, so it is
+(Java 8 SDK is a requirement for both lein and Smart Connector, so it is
 assumed to be already installed)
 
     mkdir ~/bin ; cd ~/bin
@@ -85,8 +85,8 @@ In Progress
 Planned
 -------
 
-  * Contenedor Docker (Actualmente en progreso, pero como extra)
-  * Encriptación del lado del cliente (Browser/JavaScript)
+  * Docker Container (WIP side project) [/milestones/1.0 beta]
+  * Client side encryption (Browser/JavaScript)
 
 Bugs
 ----
@@ -102,7 +102,7 @@ Bugs
 ## License
 
 Copyright © 2015 eCaresoft Inc.
-Ernesto Angel Celis de la Fuente <developer@celisdelafuente.net>
+Ernesto Angel Celis de la Fuente <ecelis@ecaresoft.com.mx>
 
 Copying and distribution of this file, with or without modification,
 are permitted in any medium without royalty provided the copyright
