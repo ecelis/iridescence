@@ -1,4 +1,14 @@
-### FIX Save workspace with GUID (HEAD, master)
+### FIX Save workspace returns its json (HEAD, master)
+>Wed, 29 Apr 2015 03:19:09 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### FIX Save workspace with GUID
 >Wed, 29 Apr 2015 03:15:11 -0500
 
 >
