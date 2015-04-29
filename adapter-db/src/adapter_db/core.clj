@@ -31,12 +31,18 @@
 
 (defn get-tables "Get tables from" [url]
   (info "===>> GET TABLES <<===")
+  (def h)
+  (def h "ha")
+  (info h)
   (try ; TODO reuse it (def db-handle (jdbc/get-connection url))
        (def sqlmap (sql/build :select :*
                               :from :information_schema.tables
                               :where [:= :table_schema "public"]))
-        (jdbc/query url (sql/format sqlmap))
-       (catch Exception e (info e))))
+        (def tables (jdbc/query url (sql/format sqlmap) :result-set-fn vec))
+  (info h)
+        (def h "i")
+  (info h)
+        (catch Exception e (info e))))
 
 (defn test-url "TEsts URL" [url]
   (try
