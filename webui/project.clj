@@ -44,7 +44,7 @@
                  [cheshire "5.4.0"]
                  [hl7yaml "0.1.2-SNAPSHOT"]
                  [clj-yaml "0.4.0"]
-                 [adapter-db "0.1.12-SNAPSHOT"]]
+                 [adapter-db "0.1.13-SNAPSHOT"]]
 
   :min-lein-version "2.0.0"
   :uberjar-name "webui.jar"

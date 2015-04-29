@@ -9,14 +9,50 @@ be deleted until we reach the first stable and fully functional version.
 
   * webui         - SmartConnector Web User Interface
   * adapter-db    - DB Adapter (PostgreSQL, MySQL, SQL Server, Oracle)
-  * adapter-mirth - Mirth Connect Adapter
-  * CirrusLoad    - Cirrus Adapter
+  * adapter-mirth - Mirth Connect Adapter (WIP)
+  * CirrusLoad    - Cirrus Adapter        (WIP)
   * hl7yaml       - HL7/YAML parser module
+
+
+## Installation
+
+Easier way to get up and running is by fetching the jar file from
+[http://maven.v3ctor.club/mx/com/ecaresoft/smartconnector/], run it and
+browse to http://127.0.0.1:3000
+
+    wget http://maven.v3ctor.club/mx/com/ecaresoft/smartconnector/smartconnector-latest.jar
+    java -jar smartconnector-latest.jar
+
+Build from source
+-----------------
+
+In order to build Smart Connector you need to install Leiningen first.
+(Java 8 SDK is a requirement for lein and Smart Connector, so it is
+assumed to be already installed)
+
+    mkdir ~/bin ; cd ~/bin
+    wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
+    chmod 755 lein
+    ./lein
+    export PATH=~/bin:$PATH
+
+Build the Adapters first, order does not matter.
+
+    git clone https://github.com/ecelis/iridescence.git
+    cd iridescence
+    for i in adapter-*; do cd $i; lein clean; lein deps; lein install; cd ..; done
+
+I everything goes well run the standalone web server.
+
+    cd webui
+    lein clean ; lein deps
+    lein ring server
+
 
 Features
 --------
 
-  * Based onn Yahoo Pipes, Scratch and TIBCO BusinessWorks
+  * Based on ideas scraped from Yahoo Pipes, Scratch and TIBCO BusinessWorks (TM)
   * Workspace is a set of Adapters for assorted data sources
     * Most of the screen is used by the workspace
     * To the right there is the interactive area for D&D objects
@@ -24,7 +60,7 @@ Features
       - Edits properties for adapters and connections in the workspace
   * Adapter connects to a data source
     * An URL is the format to connect to any data source
-    * While editing the adapter propertis it tests the connection and
+    * While editing the adapter properties it tests the connection and
       when successful fetches the data structures from it
   * Connectors define the data flow and transformations between data
     sources
@@ -33,6 +69,12 @@ Features
       workspace
     * The Start adapter is symbolic only
     * Finish adapter can be edited
+
+Use
+---
+
+
+
 
 In Progress
 -----------
@@ -49,14 +91,13 @@ Planned
 Bugs
 ----
 
-  * Exceptions and logging is not beign handled properly
-  * Eliminar Adaptadores o Conectores esta roto completamente
-  * Iterconexión de Adaptadores no esta validada
-  * Varios que se escapan a la mente :/
+  * Exceptions and logging are not beign handled properly
+  * Remove from workspace is badly broken
+  * Data is not beign validated in any way (yet)
+  * Several not very anoying bugs
 
 
 
-## Installation
 
 ## License
 

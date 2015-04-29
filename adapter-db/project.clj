@@ -1,4 +1,4 @@
-(defproject adapter-db "0.1.12-SNAPSHOT"
+(defproject adapter-db "0.1.13-SNAPSHOT"
   :description "Database Adapters"
   :url "http://github.com/ecelis/iridescence"
   :license {:name "Affero General Public License"

@@ -37,7 +37,7 @@
                  [com.mirth.connect/mirth-client "3.2.1svn"]
                  [com.mirth.connect/mirth-dummie "3.2.1svn"]]
   :plugins [[lein-localrepo "0.5.3"]
-            [codox "0.8.11"]
+            [codox "0.8.11"]]
   :main ^:skip-aot adapter-mirth.core
   :target-path "target/%s"
   :profiles {:dev

@@ -21,27 +21,31 @@
   (:require [clojure.java.jdbc :as jdbc]
             [honeysql.core :as sql]
             [honeysql.helpers :refer :all])
-  (:use [taoensso.timbre :only [trace debug info warn error fatal]])
-  )
+  (:use [taoensso.timbre :only [trace debug info warn error fatal]]))
 
-(defn test-url "TEsts URL" [url]
-  (try
-    (jdbc/get-connection url) true
-    (catch Exception e (info (str  url " " e)) false)))
-
-(defn build-select "Build a select from" [statement]
-  (def sqlmap (map statement))
-  (jdbc/query (sql/format sqlmap)))
+(defn get-columns "Get columns from" [tables]
+  (def sqlmap {:select :column_name
+               :from :information_schema.columns
+               :where [:= :table_name (first tables)]}))
+  ;(jdbc/query (sql/format sqlmap)))
 
 (defn get-tables "Get tables from" [url]
-  (try (def db-handle (jdbc/get-connection url))
+  (info "===>> GET TABLES <<===")
+  (try ; TODO reuse it (def db-handle (jdbc/get-connection url))
        (def sqlmap (sql/build :select :*
                               :from :information_schema.tables
                               :where [:= :table_schema "public"]))
-        (jdbc/query db-handle (sql/format sqlmap))
+        (jdbc/query url (sql/format sqlmap))
        (catch Exception e (info e))))
 
-(defn get-columns "Get columns from" [table columns]
-  (def sqlmap {:select [columns]
-               :from [table]})
+(defn test-url "TEsts URL" [url]
+  (try
+    ; TODO better reuse db-handle with-db-connection
+    ; TODO this true/flase flag hack sucks, fix it
+    (jdbc/get-connection url) (def s true) (get-tables url)
+    (catch Exception e (info (str  url " " e)))
+    (finally (str "finally " s))))
+
+(defn build-select "Build a select from" [statement]
+  (def sqlmap (map statement))
   (jdbc/query (sql/format sqlmap)))
