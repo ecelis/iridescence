@@ -26,7 +26,7 @@
             [adapter-db.core :as db])
   (:use [taoensso.timbre :only [trace debug info warn error fatal]]))
 
-(def savedir "/tmp")
+(def savedir "/tmp") ; TODO Set a definitive path
 
 ;; TODO Read http://www.luminusweb.net/docs/responses.md
 ;; for proper encoding reponses
@@ -43,7 +43,7 @@
    :body data})
 
 (defn save-workspace "Saves a YAML representation of a workspace" [workspace]
-  (info "Saving workspace")
+  (info "===>> Saving workspace <<===")
   ; TODO handle nil or invalid data for spit
   ; TODO Do the yaml conversion in a functional way
   (def yaml-workspace (yaml/generate-string
@@ -52,8 +52,9 @@
      :artifacts (map
              #(json/parse-string % true)
              (get workspace :data))}))
-  (spit (str savedir "/workspace.sav") yaml-workspace); TODO dynamic filename
-  (info yaml-workspace)
+;  (info (first (rest (json/parse-string (get workspace :meta)))))
+  (spit (str savedir "/" (get (json/parse-string (get workspace :meta) true)
+                              :guid)) yaml-workspace); TODO dynamic filename
   (yaml-response yaml-workspace)) ; TODO Send apropriate response
 
 (defn load-workspace []

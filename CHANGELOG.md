@@ -1,4 +1,14 @@
-### EOF? (HEAD, master)
+### FIX Save workspace with GUID (HEAD, master)
+>Wed, 29 Apr 2015 03:15:11 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### EOF? (origin/master, origin/HEAD)
 >Wed, 29 Apr 2015 02:14:49 -0500
 
 >
@@ -18,7 +28,7 @@
 
 
 
-### ADD Plugin to generate docs (origin/master, origin/HEAD)
+### ADD Plugin to generate docs
 >Tue, 28 Apr 2015 07:29:34 -0500
 
 >
