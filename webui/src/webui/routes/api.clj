@@ -30,19 +30,21 @@
 
 ;; TODO Read http://www.luminusweb.net/docs/responses.md
 ;; for proper encoding reponses
-(defn json-response [data & [status]]
-  "Returns a proper application/json response"
-  {:status (or status 200)
+(defn json-response "Returns a proper application/json response"
+  [data & [status]]
+    {:status (or status 200)
    :headers {"Content-Type" "application/json; charset=utf-8"}
    :body (json/generate-string data)})
 
-(defn yaml-response [data & [status]]
-  "Returns a text/plain response YAML"
-  {:status (or status 200)
+(defn yaml-response "Returns a text/plain response YAML"
+  [data & [status]]
+    {:status (or status 200)
    :headers {"Content-Type" "text/plain; charset=utf-8"}
    :body data})
 
-(defn save-workspace "Saves a YAML representation of a workspace" [workspace]
+(defn save-workspace "Saves a YAML representation of a workspace, it however
+                     returns the json representation of the workspace"
+  [workspace]
   (info "===>> Saving workspace <<===")
   ; TODO handle nil or invalid data for spit
   ; TODO Do the yaml conversion in a functional way
@@ -54,19 +56,17 @@
              (get workspace :data))}))
   (spit (str savedir "/" (get (json/parse-string (get workspace :meta) true)
                               :guid)) yaml-workspace); TODO dynamic filename
-  (json-response workspace)) ; TODO Send apropriate response
+  (json-response workspace))
 
-(defn load-workspace []
-  "Loads a workspace from YAML storage"
-  (json-response {:not "yet implemented"}))
+(defn load-workspace "Loads a workspace from YAML storage and returns its JSON
+                     representation" [id]
+    (json-response (yaml/parse-string (slurp (str savedir "/" id)))))
 
-(defn update-workspace [id]
-  "Update workspace in YAML storage"
-  (json-response {:not (str "yet implemented " id)}))
+(defn update-workspace "Update workspace in YAML storage" [id]
+    (json-response {:not (str "yet implemented " id)}))
 
-(defn delete-workspace [id]
-  "Delete workspace from YAML storage"
-  (json-response {:not (str "delete-workspace stub " id)}))
+(defn delete-workspace "Delete workspace from YAML storage" [id]
+    (json-response {:not (str "delete-workspace stub " id)}))
 
 (defn run-workspace "Run workspace" [id]
   (db/build-select "ta")
@@ -83,8 +83,10 @@
 
 ;; API Definition
 ;;
-;; Everything in the /api context is a workspace
-;; http://localhost:3000/api
+;; Everything in the /api/ context is a workspace
+;; /api/object/ is any DB, Class, File, Network connection, etc which happens
+;; to be an adapter in the workspace
+;; http://localhost:3000/api/
 ;;
 ;; POST     /               save-workspace to YAML
 ;; GET      /:id            load-workspace from YAML
