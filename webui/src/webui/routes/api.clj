@@ -58,19 +58,19 @@
 
 (defn load-workspace []
   "Loads a workspace from YAML storage"
-  (yaml-response "load-workspace stub"))
+  (json-response {:not "yet implemented"}))
 
 (defn update-workspace [id]
   "Update workspace in YAML storage"
-  (yaml-response (str "update-workspace stub " id)))
+  (json-response {:not (str "yet implemented " id)}))
 
 (defn delete-workspace [id]
   "Delete workspace from YAML storage"
-  (yaml-response (str "delete-workspace stub " id)))
+  (json-response {:not (str "delete-workspace stub " id)}))
 
 (defn run-workspace "Run workspace" [id]
   (db/build-select "ta")
-  (yaml-response (str "run-workspace stub " id)))
+  (yaml-response {:not (str "run-workspace stub " id)}))
 
 (defn try-url "Test adapter url" [url]
   ; TODO test any type of data source
@@ -87,7 +87,7 @@
 ;; http://localhost:3000/api
 ;;
 ;; POST     /               save-workspace to YAML
-;; GET      /               load-workspace from YAML
+;; GET      /:id            load-workspace from YAML
 ;; PUT      /:id            update-workspace (existing) in YAML
 ;; DELETE   /:id            delete-workspace (existing) in YAML
 ;; GET      /run/:id        run-workspace by ID from YAML
@@ -96,7 +96,7 @@
 (defroutes api-routes
   (context "/api" []
     (POST "/" [__anti-forgery-token workspace] (save-workspace workspace))
-    (GET "/" [] (load-workspace))
+    (GET "/:id" [id] (load-workspace id))
     (PUT "/:id" [id]
          (update-workspace id))
     (DELETE "/:id" [id]
