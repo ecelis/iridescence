@@ -1,4 +1,14 @@
-### FIX load-workspace (HEAD, master)
+### FIX delete-workspace (HEAD, master)
+>Wed, 29 Apr 2015 03:47:29 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### FIX load-workspace
 >Wed, 29 Apr 2015 03:39:29 -0500
 
 >

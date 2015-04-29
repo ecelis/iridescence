@@ -66,7 +66,8 @@
     (json-response {:not (str "yet implemented " id)}))
 
 (defn delete-workspace "Delete workspace from YAML storage" [id]
-    (json-response {:not (str "delete-workspace stub " id)}))
+  (io/delete-file (str savedir "/" id))
+    (json-response {:action (str "deleted workspace " id)}))
 
 (defn run-workspace "Run workspace" [id]
   (db/build-select "ta")
