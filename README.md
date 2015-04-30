@@ -17,7 +17,7 @@ be deleted until we reach the first stable and fully functional version.
 ## Installation
 
 Easier way to get up and running is by fetching the jar file from
-[http://maven.v3ctor.club/mx/com/ecaresoft/smartconnector/], run it and
+http://maven.v3ctor.club/mx/com/ecaresoft/smartconnector/, run it and
 browse to http://127.0.0.1:3000
 
     wget http://maven.v3ctor.club/mx/com/ecaresoft/smartconnector/smartconnector-latest.jar
