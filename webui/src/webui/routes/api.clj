@@ -75,12 +75,14 @@
 
 (defn try-url "Test adapter url" [url]
   ; TODO test any type of data source
-  (if (db/test-url url)
-    (json-response {:tables nil
-                    :columns nil})))
+  (def res (db/test-url url))
+  (if res
+    (json-response {:tables res
+                    })
+    (json-response {:tables nil :columns nil})))
 
 (defn get-objects "Fetch data source objects" [url]
-  (db/get-tables url))
+  (info (db/get-tables url)))
 
 ;; API Definition
 ;;

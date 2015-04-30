@@ -1,4 +1,14 @@
-### What? :/ (HEAD, master)
+### FIX get-tables response (HEAD, master)
+>Thu, 30 Apr 2015 00:35:18 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+>Commiter: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+
+
+
+### What? :/ (origin/master, origin/HEAD)
 >Wed, 29 Apr 2015 06:48:37 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
@@ -8,7 +18,7 @@
 
 
 
-### I'm falling asleep Zzzz... DB we're closer to the end (origin/master, origin/HEAD)
+### I'm falling asleep Zzzz... DB we're closer to the end
 >Wed, 29 Apr 2015 05:00:40 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
