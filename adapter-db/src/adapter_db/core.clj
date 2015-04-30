@@ -30,18 +30,18 @@
   ;(jdbc/query (sql/format sqlmap)))
 
 (defn get-tables "Get tables from" [url]
-  (info "===>> GET TABLES <<===")
-  (def tables)
+  (def tables nil)
   (try ; TODO reuse it (def db-handle (jdbc/get-connection url))
        (def sqlmap (sql/build :select :*
                               :from :information_schema.tables
                               :where [:= :table_schema "public"]))
-        (def tables (jdbc/query url (sql/format sqlmap) :result-set-fn vec))
+        (def tables (map #(get % :table_name)
+                         (jdbc/query url (sql/format sqlmap)
+                                     :result-set-fn vec)))
         (catch Exception e (info e)))
   tables)
 
 (defn test-url "TEsts URL" [url]
-  (def t)
   (try
     ; TODO better reuse db-handle with-db-connection
     ; TODO this true/flase flag hack sucks, fix it
