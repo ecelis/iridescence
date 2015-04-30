@@ -1,4 +1,14 @@
-### Start and Finish artifacts weren't persisted when saving workspace (HEAD, master)
+### ... lost (HEAD, master)
+>Thu, 30 Apr 2015 17:23:32 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### Start and Finish artifacts weren't persisted when saving workspace (origin/master, origin/HEAD)
 >Thu, 30 Apr 2015 15:08:53 -0500
 
 >
@@ -8,7 +18,7 @@
 
 
 
-### Defined new directories for workspace schemas, work in progress schemas and hl7 output (origin/master, origin/HEAD)
+### Defined new directories for workspace schemas, work in progress schemas and hl7 output
 >Thu, 30 Apr 2015 14:15:36 -0500
 
 >

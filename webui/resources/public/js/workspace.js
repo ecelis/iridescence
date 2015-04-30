@@ -231,7 +231,7 @@ var addToDiagram = function (adapter) {
                   "y": 70 + Math.floor(Math.random()*160)});
     newadapter.drag(move, dragger, up).click(modify);
     adapters.push(newadapter);   // Append new adapter to adapters
-    if(adapters.length == 1) {   // If adapters empty we start from scratch
+    if(adapters.length == 3) {  // First adapter of new workspace
       connect.push(start);
       connect.push(newadapter);
       var firstConnection = paper.connection(connect[0], connect[1], "#000");
@@ -240,7 +240,8 @@ var addToDiagram = function (adapter) {
           "stroke-width": 3});
       setData(firstConnection.line);
       firstConnection.line.click(modify);
-      connections.push(firstConnection); // connect to the begining
+      //connections.push(firstConnection); // connect to the begining
+      connectionPush(firstConnection);
       adapters.push(firstConnection.line);
     }
   }
