@@ -22,10 +22,16 @@
 /**
  * Workspace Metadata
  */
-var work_meta = {'type': null,
+var work_meta = {'type': null,      // Workspace metadata
   'guid': null,
   'name': null,
   'comments': null};
+var property = {
+  //this.data("props");    // Artifact's properties
+  'name': null,
+  'type': null,
+  'url': null
+};
 var util = new Util();      // Utilities such as guid generator and crypto
 // Global settings
 var connections = [];       // Connections between adapters
@@ -69,7 +75,8 @@ var start = paper.circle(tbX + 80, tbY + 75, 15)
         "stroke-width": 3,
         "stroke": "#298500",
         cursor: "move"})
-  .data("props", {"type":"start"});
+  .data("props", {"type":"START", "name":"Start", "url":null});
+adapters.push(start);
 
 /**
  * finishs is an adapter which is obviously the last adapter
@@ -82,7 +89,20 @@ var finish = paper.circle(paperW - 80, paperH - 75, 15)
         "stroke-width": 3,
         "stroke": "#990000",
         cursor: "move"})
-  .data("props", {"type":"end"});
+  .data("props", {"type":"FINISH", "name":"Finish", "url":null});
+adapters.push(finish);
+
+var connectionPush = function(artifact) {
+  if (connect.length < 2) {   // If the connection queue's length < 2
+    if(connect[0] != artifact) {  // and If adapter isn't already in queue
+      connect.push(artifact);     // add adapter to queue
+    }
+  }
+  $('#adapter-name').val(property.name);
+  $('#adapter-url').val(property.url);
+  $('#adapter-id').val(artifact.id);
+  $('#properties a[href="#adapter"]').tab('show');
+}
 
 /**
   Triggered when a adapter starts moving
@@ -144,10 +164,9 @@ var release = function() {
  * @method modify
  * */
 var modify = function() {
-  var property = this.data("props");
   switch(this.type) {
     case "rect":
-      if (connect.length < 2) {   // If the connection queue's length < 2
+/*      if (connect.length < 2) {   // If the connection queue's length < 2
         if(connect[0] != this) {  // and If adapter isn't already in queue
           connect.push(this);     // add adapter to queue
         }
@@ -155,10 +174,11 @@ var modify = function() {
       $('#adapter-name').val(property.name);
       $('#adapter-url').val(property.url);
       $('#adapter-id').val(this.id);
-      $('#properties a[href="#adapter"]').tab('show');
+      $('#properties a[href="#adapter"]').tab('show'); */
+     connectionPush(this);
       break;
     case "circle":
-      $('#properties a[href="#adapter"]').tab('show');
+      //connectionPush(this); // TODO WTF! Hunger is killing me
       break;
     case "path":
       $('#properties a[href="#connector"]').tab('show');

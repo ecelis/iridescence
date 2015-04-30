@@ -1,4 +1,14 @@
-### Defined new directories for workspace schemas, work in progress schemas and hl7 output (HEAD, master)
+### Start and Finish artifacts weren't persisted when saving workspace (HEAD, master)
+>Thu, 30 Apr 2015 15:08:53 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### Defined new directories for workspace schemas, work in progress schemas and hl7 output (origin/master, origin/HEAD)
 >Thu, 30 Apr 2015 14:15:36 -0500
 
 >
@@ -8,7 +18,7 @@
 
 
 
-### Switch to office (origin/master, origin/HEAD)
+### Switch to office
 >Thu, 30 Apr 2015 10:32:43 -0500
 
 >
