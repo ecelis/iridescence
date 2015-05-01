@@ -18,8 +18,17 @@
  *   You should have received a copy of the GNU Affero General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-/**
+var util = new Util();      // Utilities such as guid generator and crypto
+var tbX = 4,
+  tbY = 4,
+  tbW = 40,
+  tbH = 300,
+  paperW = 768,
+  paperH = 500;
+var paper = Raphael("work-canvas",
+                    paperW, paperH);  // Creates canvas 320×200@10,50
+////////////////////// ICONS ///////////////////////
+ /**
  * Workspace Metadata
  */
 var work_meta = {'type': null,      // Workspace metadata
@@ -32,18 +41,9 @@ var property = {            // TODO Get rid of it
   'type': null,
   'url': null
 };
-var util = new Util();      // Utilities such as guid generator and crypto
 // Global settings
 var connections = [];       // Connections between adapters
 var connect = [];           // Temporary queue for connections
-var tbX = 4,
-  tbY = 4,
-  tbW = 40,
-  tbH = 300,
-  paperW = 768,
-  paperH = 500;
-var paper = Raphael("work-canvas",
-                    paperW, paperH);  // Creates canvas 320×200@10,50
 var adapters = paper.set();           // Create a default adapters
 var work_guid = util.guid();          // Generate adapters GUID
 var toolbar = paper.rect(tbX, tbY,
@@ -236,8 +236,6 @@ var addToDiagram = function (adapter) {
       firstConnection.line.click(modify);
       connections.push(firstConnection); // connect to the begining
       connect = [];
-      //connectionPush(firstConnection);
-      //adapters.push(firstConnection.line);
     }
   }
 }

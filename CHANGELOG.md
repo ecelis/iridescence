@@ -1,4 +1,14 @@
-### FIX Various artifacts were saved twice (HEAD, master)
+### Time for a meal (HEAD, master)
+>Fri, 1 May 2015 14:46:00 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### FIX Various artifacts were saved twice (merge)
 >Fri, 1 May 2015 10:53:33 -0500
 
 >
@@ -28,7 +38,17 @@
 
 
 
-### ... lost (origin/master, origin/HEAD)
+### DELETE gradle.build from root directory, we won't need gradle for anything else than CirrusLoad maybe
+>Fri, 1 May 2015 02:07:56 -0500
+
+>
+
+>Commiter: Ernesto Celis (ecelis@ecaresoft.com.mx)
+
+
+
+
+### ... lost
 >Thu, 30 Apr 2015 17:23:32 -0500
 
 >
