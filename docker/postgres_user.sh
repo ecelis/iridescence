@@ -9,8 +9,8 @@ su --login postgres --command "/usr/bin/postgres -D /var/lib/pgsql/data -p 5432"
 sleep 10
 ps aux 
 
-su --login - postgres --command "psql -c \"CREATE USER dockeruser with CREATEROLE superuser PASSWORD 'password';\""
-su --login - postgres --command "psql -c \"CREATE DATABASE dockerdb;\""
+su --login - postgres --command "psql -c \"CREATE USER mirth with CREATEROLE superuser PASSWORD 'password';\""
+su --login - postgres --command "psql -c \"CREATE DATABASE mirthdb;\""
 su --login - postgres --command "psql -c \"\du;\""
 }
 
