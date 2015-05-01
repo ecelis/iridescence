@@ -1,4 +1,14 @@
-### ... lost (HEAD, master)
+### Small fixes after test in server (HEAD, master)
+>Fri, 1 May 2015 06:30:12 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### ... lost (origin/master, origin/HEAD)
 >Thu, 30 Apr 2015 17:23:32 -0500
 
 >
@@ -8,7 +18,7 @@
 
 
 
-### Start and Finish artifacts weren't persisted when saving workspace (origin/master, origin/HEAD)
+### Start and Finish artifacts weren't persisted when saving workspace
 >Thu, 30 Apr 2015 15:08:53 -0500
 
 >

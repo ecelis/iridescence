@@ -96,9 +96,6 @@ Bugs
   * Data is not beign validated in any way (yet)
   * Several not very anoying bugs
 
-
-
-
 ## License
 
 Copyright © 2015 eCaresoft Inc.
