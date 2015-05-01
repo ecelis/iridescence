@@ -235,6 +235,7 @@ var addToDiagram = function (adapter) {
       setData(firstConnection.line);
       firstConnection.line.click(modify);
       connections.push(firstConnection); // connect to the begining
+      connect = [];
       //connectionPush(firstConnection);
       //adapters.push(firstConnection.line);
     }

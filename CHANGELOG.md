@@ -1,4 +1,14 @@
-### FIX broken connections (HEAD, master)
+### FIX Various artifacts were saved twice (HEAD, master)
+>Fri, 1 May 2015 10:53:33 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### FIX broken connections
 >Fri, 1 May 2015 10:43:56 -0500
 
 >

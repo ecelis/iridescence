@@ -26,10 +26,10 @@
             [adapter-db.core :as db])
   (:use [taoensso.timbre :only [trace debug info warn error fatal]]))
 
-(def savedir "/tmp/iridescence") ; TODO Set a definitive path
+(def savedir "/home/ecelis/Projects/iridescence/data") ; TODO Set a definitive path
 (def wsdir "/workspace")
-(def tmpdir "/temp")
-(def outdir "/temp")
+(def tmpdir "/wip")
+(def outdir "/out")
 
 ;; TODO Read http://www.luminusweb.net/docs/responses.md
 ;; for proper encoding reponses

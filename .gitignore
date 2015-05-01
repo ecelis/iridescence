@@ -46,3 +46,4 @@ dbPort
 *.launch
 **/logs
 *.db
+data/**
