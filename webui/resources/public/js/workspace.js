@@ -26,7 +26,7 @@ var work_meta = {'type': null,      // Workspace metadata
   'guid': null,
   'name': null,
   'comments': null};
-var property = {
+var property = {            // TODO Get rid of it
   //this.data("props");    // Artifact's properties
   'name': null,
   'type': null,
@@ -49,23 +49,22 @@ var work_guid = util.guid();          // Generate adapters GUID
 var toolbar = paper.rect(tbX, tbY,
                          tbW,
                          tbH);        // Placeholder for the tools
-// We'll create adapters based it
+// We'll create adapters based on it
 var generic_adapter = paper
   .rect(tbX + 5, tbY + 5, 30, 20)
   .attr({"fill": "#CCC",
         "fill-opacity": 0,
         "stroke-width": 3,
         cursor: "move"});
+  
 // Same as generic_adapter its a basic connector, derive other from it
 var connector = paper
   .path("M9 35L40 60")
   .attr({"stroke-width": 3,
         cursor: "move"});
 // TODO Moar adapters
-
 // Start and End adapters, there should be one of each by default
 // in every adapters
-
 /**
 * start does nothing, only serves as a visual aid for the flow
 */
@@ -92,6 +91,11 @@ var finish = paper.circle(paperW - 80, paperH - 75, 15)
   .data("props", {"type":"FINISH", "name":"Finish", "url":null});
 adapters.push(finish);
 
+/**
+ * Add a connecto between adapters
+ * @method
+ * @param {Raphael.Element} artifact connector
+ * */
 var connectionPush = function(artifact) {
   if (connect.length < 2) {   // If the connection queue's length < 2
     if(connect[0] != artifact) {  // and If adapter isn't already in queue
@@ -164,25 +168,10 @@ var release = function() {
  * @method modify
  * */
 var modify = function() {
-  switch(this.type) {
-    case "rect":
-/*      if (connect.length < 2) {   // If the connection queue's length < 2
-        if(connect[0] != this) {  // and If adapter isn't already in queue
-          connect.push(this);     // add adapter to queue
-        }
-      }
-      $('#adapter-name').val(property.name);
-      $('#adapter-url').val(property.url);
-      $('#adapter-id').val(this.id);
-      $('#properties a[href="#adapter"]').tab('show'); */
+  if(this.type != "path") {
      connectionPush(this);
-      break;
-    case "circle":
-      //connectionPush(this); // TODO WTF! Hunger is killing me
-      break;
-    case "path":
-      $('#properties a[href="#connector"]').tab('show');
-      break;
+  } else {
+    $('#properties a[href="#connector"]').tab('show');
   }
 }
 
@@ -228,8 +217,13 @@ var addToDiagram = function (adapter) {
                   "width": 50,
                   "height": 30,
                   "x": 50 + Math.floor(Math.random()*160),
-                  "y": 70 + Math.floor(Math.random()*160)});
-    newadapter.drag(move, dragger, up).click(modify);
+                  "y": 70 + Math.floor(Math.random()*160)})
+              .data("props", {"type": "GENERIC",
+                    "id":this.id,
+                    "name":null,
+                    "url": null})
+              .drag(move, dragger, up)
+              .click(modify);
     adapters.push(newadapter);   // Append new adapter to adapters
     if(adapters.length == 3) {  // First adapter of new workspace
       connect.push(start);
@@ -240,9 +234,9 @@ var addToDiagram = function (adapter) {
           "stroke-width": 3});
       setData(firstConnection.line);
       firstConnection.line.click(modify);
-      //connections.push(firstConnection); // connect to the begining
-      connectionPush(firstConnection);
-      adapters.push(firstConnection.line);
+      connections.push(firstConnection); // connect to the begining
+      //connectionPush(firstConnection);
+      //adapters.push(firstConnection.line);
     }
   }
 }

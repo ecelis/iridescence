@@ -1,4 +1,14 @@
-### Small fixes after test in server (HEAD, master)
+### FIX broken connections (HEAD, master)
+>Fri, 1 May 2015 10:43:56 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### Small fixes after test in server
 >Fri, 1 May 2015 06:30:12 -0500
 
 >
