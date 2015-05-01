@@ -35,6 +35,7 @@ public class MessageSender {
 
 	public MessageSender(Client mirthClient) throws ClientException {
 		this.mirthClient = mirthClient;
+		
 		channelMap = loadChannel();
 	}
 

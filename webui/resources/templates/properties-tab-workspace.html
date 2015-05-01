@@ -1,0 +1,41 @@
+<!-- workspace
+      control prefix: work-
+      used in name and id properties
+      -->
+<div role="tabpanel" class="tab-pane active" id="workspace">
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="form-group"><div class="input-group">
+        <span class="input-group-addon" id="workspace-name">Name</span>
+        <input type="text" class="form-control" placeholder="workspace..."
+        aria-describedby="property-name" name="work-name" id="work-name">
+      </div></div>
+    </div>
+      <div class="col-xs-2">
+        <div class="form-group"><div class="input-group">
+          <div class="input-group-btn">
+            <button type="button" class="btn btn-default dropdown-toggle"
+              data-toggle="dropdown" aria-expanded="false"
+              id="btn-work-type">Type
+              <span class="caret"></span></button>
+            <ul class="dropdown-menu" id="work-type-lst" role="menu">
+              <li><a>HL7 v2.x</a></li> <!-- TODO Fix keyboard -->
+              <li><a>HL7 3.x</a></li>
+            </ul>
+          </div> <!-- /work-group -->
+        </div></div> <!-- /input- group -->
+      </div>
+      <div class="col-xs-4" id="work-guid-label">
+        Id:
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-group"><div class="input-group">
+          <span class="input-group-addon" id="workspace-comments">Notes</span>
+          <textarea class="form-control" id="work-comments" rows="3" cols="12"></textarea>
+        </div>
+      </div></div>
+  </div>
+</div> <!-- tab panel workspace -->
+

@@ -21,12 +21,33 @@
   (:require [clojure.java.jdbc :as jdbc]
             [honeysql.core :as sql]
             [honeysql.helpers :refer :all])
-  (:gen-class))
+  (:use [taoensso.timbre :only [trace debug info warn error fatal]]))
 
-(defn set-uri [uri]
-  "Sets db-spec for Database connection"
-  (def db-spec uri))
+(defn get-columns "Get columns from" [tables]
+  (def sqlmap {:select :column_name
+               :from :information_schema.columns
+               :where [:= :table_name (first tables)]}))
+  ;(jdbc/query (sql/format sqlmap)))
 
-(defn build-select [data]
-  (println "ta-da"))
+(defn get-tables "Get tables from" [url]
+  (def tables nil)
+  (try ; TODO reuse it (def db-handle (jdbc/get-connection url))
+       (def sqlmap (sql/build :select :*
+                              :from :information_schema.tables
+                              :where [:= :table_schema "public"]))
+        (def tables (map #(get % :table_name)
+                         (jdbc/query url (sql/format sqlmap)
+                                     :result-set-fn vec)))
+        (catch Exception e (info e)))
+  tables)
 
+(defn test-url "TEsts URL" [url]
+  (try
+    ; TODO better reuse db-handle with-db-connection
+    ; TODO this true/flase flag hack sucks, fix it
+    (jdbc/get-connection url) (get-tables url)
+    (catch Exception e (info e))))
+
+(defn build-select "Build a select from" [statement]
+  (def sqlmap (map statement))
+  (jdbc/query (sql/format sqlmap)))

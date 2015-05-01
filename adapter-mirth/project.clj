@@ -24,7 +24,6 @@
   :license {:name "GNU Affero Public General License version"
             :url "http://www.gnu.org/licenses/"}
   :dependencies [[org.clojure/clojure "1.6.0"]
-                 [org.clojure/java.jdbc "0.3.2"]
                  [org.postgresql/postgresql "9.4-1201-jdbc41"]
                  [log4j/log4j "1.2.17"]
                  [com.thoughtworks.xstream/xstream "1.4.8"]
@@ -36,7 +35,8 @@
                  [com.mirth.connect/mirth-donkey "3.2.1svn"]
                  [com.mirth.connect/mirth-server "3.2.1svn"]
                  [com.mirth.connect/mirth-client "3.2.1svn"]]
-  :plugins [[lein-localrepo "0.5.3"]]
+  :plugins [[lein-localrepo "0.5.3"]
+            [codox "0.8.11"]]
   :main ^:skip-aot adapter-mirth.core
   :target-path "target/%s"
   :profiles {:dev

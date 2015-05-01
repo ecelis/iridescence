@@ -4,6 +4,7 @@ Cirrus Adapter for Smart Connector
 
 ## Installation
 
+    gradle clean
     gradle eclipse
 
   1. Open Eclipse

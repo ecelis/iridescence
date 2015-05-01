@@ -18,7 +18,7 @@
 ;;  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-(defproject webui "0.1.0-SNAPSHOT"
+(defproject webui "0.1.3-SNAPSHOT"
 
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
@@ -44,7 +44,7 @@
                  [cheshire "5.4.0"]
                  [hl7yaml "0.1.2-SNAPSHOT"]
                  [clj-yaml "0.4.0"]
-                 [adapter-db "0.1.0-SNAPSHOT"]]
+                 [adapter-db "0.1.13-SNAPSHOT"]]
 
   :min-lein-version "2.0.0"
   :uberjar-name "webui.jar"
@@ -56,7 +56,8 @@
   :plugins [[lein-ring "0.9.1"]
             [lein-environ "1.0.0"]
             [lein-ancient "0.6.5"]
-            [ragtime/ragtime.lein "0.3.8"]]
+            [ragtime/ragtime.lein "0.3.8"]
+            [codox "0.8.11"]]
 
   :ring {:handler webui.handler/app
          :init    webui.handler/init

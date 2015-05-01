@@ -26,64 +26,91 @@
             [adapter-db.core :as db])
   (:use [taoensso.timbre :only [trace debug info warn error fatal]]))
 
-(def savedir "/tmp")
+(def savedir "/tmp/iridescence") ; TODO Set a definitive path
+(def wsdir "/workspace")
+(def tmpdir "/temp")
+(def outdir "/temp")
 
 ;; TODO Read http://www.luminusweb.net/docs/responses.md
 ;; for proper encoding reponses
-(defn json-response [data & [status]]
-  "Returns a proper application/json response"
-  {:status (or status 200)
+(defn json-response "Returns a proper application/json response"
+  [data & [status]]
+    {:status (or status 200)
    :headers {"Content-Type" "application/json; charset=utf-8"}
    :body (json/generate-string data)})
 
-(defn yaml-response [data & [status]]
-  "Returns a text/plain response YAML"
-  {:status (or status 200)
+(defn yaml-response "Returns a text/plain response YAML"
+  [data & [status]]
+    {:status (or status 200)
    :headers {"Content-Type" "text/plain; charset=utf-8"}
    :body data})
 
-(defn save-workspace [workspace]
-  "Saves a YAML representation of a workspace"
+(defn save-workspace "Saves a YAML representation of a workspace, it however
+                     returns the json representation of the workspace"
+  [workspace]
   ; TODO handle nil or invalid data for spit
-  (def yaml-workspace (yaml/generate-string (json/parse-string workspace)))
-  (spit (str savedir "/workspace.sav") yaml-workspace); TODO dynamic filename
-  (yaml-response yaml-workspace))
+  ; TODO Do the yaml conversion in a functional way
+  (def yaml-workspace (yaml/generate-string
+    {:workspace (json/parse-string
+             (get workspace :meta) true)
+     :artifacts (map
+             #(json/parse-string % true)
+             (get workspace :data))}))
+  (spit (str savedir wsdir "/" (get (json/parse-string (get workspace :meta) true)
+                              :guid)) yaml-workspace); TODO dynamic filename
+  (json-response workspace))
 
-(defn load-workspace []
-  "Loads a workspace from YAML storage"
-  (yaml-response "load-workspace stub"))
+(defn load-workspace "Loads a workspace from YAML storage and returns its JSON
+                     representation" [id]
+    (json-response (yaml/parse-string (slurp (str savedir "/" id)))))
 
-(defn update-workspace [id]
-  "Update workspace in YAML storage"
-  (yaml-response (str "update-workspace stub " id)))
+(defn update-workspace "Update workspace in YAML storage" [id]
+    (json-response {:not (str "yet implemented " id)}))
 
-(defn delete-workspace [id]
-  "Delete workspace from YAML storage"
-  (yaml-response (str "delete-workspace stub " id)))
+(defn delete-workspace "Delete workspace from YAML storage" [id]
+  (io/delete-file (str savedir "/" id))
+    (json-response {:action (str "deleted workspace " id)}))
 
-(defn run-workspace [id]
-  "Run workspace"
+(defn run-workspace "Run workspace" [id]
   (db/build-select "ta")
-  (yaml-response (str "run-workspace stub " id)))
+  (yaml-response {:not (str "run-workspace stub " id)}))
+
+(defn try-url "Test adapter url" [url]
+  ; TODO test any type of data source
+  (def res (db/test-url url))
+  (if res
+    (json-response {:tables res
+                    })
+    (json-response {:tables nil :columns nil})))
+
+(defn get-objects "Fetch data source objects" [url]
+  (info (db/get-tables url)))
 
 ;; API Definition
 ;;
-;; Everything in the /api context is a workspace
-;; http://localhost:3000/api
+;; Everything in the /api/ context is a workspace
+;; /api/object/ is any DB, Class, File, Network connection, etc which happens
+;; to be an adapter in the workspace
+;; http://localhost:3000/api/
 ;;
-;; POST     /             save-workspace to YAML
-;; GET      /             load-workspace from YAML
-;; PUT      /:id          update-workspace (existing) in YAML
-;; DELETE   /:id          delete-workspace (existing) in YAML
-;; GET      /run/:id      run-workspace by ID from YAML
+;; POST     /               save-workspace to YAML
+;; GET      /:id            load-workspace from YAML
+;; PUT      /:id            update-workspace (existing) in YAML
+;; DELETE   /:id            delete-workspace (existing) in YAML
+;; GET      /run/:id        run-workspace by ID from YAML
+;; GET      /adapter/test   test-url of adapter
 
 (defroutes api-routes
   (context "/api" []
     (POST "/" [__anti-forgery-token workspace] (save-workspace workspace))
-    (GET "/" [] (load-workspace))
+    (GET "/:id" [id] (load-workspace id))
     (PUT "/:id" [id]
          (update-workspace id))
     (DELETE "/:id" [id]
           (delete-workspace id))
     (GET "/run/:id" [id]
-         (run-workspace id))))
+         (run-workspace id))
+    )
+  (context "/api/adapter" []
+    (GET "/test/" [__anti-forgery-token url] (try-url url))
+    (GET "/object/" [__anti-forgery-token url] (get-objects url))))

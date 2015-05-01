@@ -1,62 +1,80 @@
 {% extends "base.html" %}
 {% block content %}
-  <div class="row" style="height: 320px;">
-    <div class="span12">
+  <div class="row clearfix">
+    <div class="col-xs-10 column">
+      <div class="panel panel-default" id="work-canvas"></div>
     </div>
-  </div>
-  <div class="row">
-    <div class="panel panel-default">
-      <div class="panel-heading">Properties</div>
-        <form name="properties-frm" id="properties-frm">
-          {% csrf-field %}
-          <div class="panel-body">
-            <div class="row">
-              <div class="col-xs-6">
-                <div class="input-group">
-                  <span class="input-group-addon" id="property-name">Name</span>
-                  <input type="text" class="form-control" placeholder="Name"
-                  aria-describedby="property-name" name="blk-name" id="blk-name">
-                </div>
-              </div>
-              <div class="col-xs-6">
-                <div class="input-group">
-                  <div class="input-group-btn">
-                    <button type="button" class="btn btn-default dropdown-toggle"
-                      data-toggle="dropdown" aria-expanded="false"
-                      id="btn-type">Type
-                      <span class="caret"></span></button>
-                    <ul class="dropdown-menu" id="type-lst" role="menu">
-                      <li><a>PostgreSQL</a></li> <!-- TODO Fix keyboard -->
-                      <li><a>Mirth Connect</a></li>
-                    </ul>
-                  </div> <!-- /btn-group -->
-                  <input type="text" class="form-control" arial-label="..."
-                  placeholder="url://" name="blk-url" id="blk-url">
-                </div> <!-- /input- group -->
-              </div> <!-- /.col-lg-6 -->
-            </div>
-            <div class="row">
-              <div class="col-xs-6">
-                <div class="btn-group" role="group" aria-label="...">
-                  <button type="button" class="btn btn-default" name="save-btn"
-                    id="save-btn">Save</button>
-                  <button type="button" class="btn btn-default" name="clone-btn"
-                    id="clone-btn">Clone</button>
-                  <button type="button" class="btn btn-default" name="remove-btn"
-                    id="remove-btn">Remove</button>
-                </div>
-              </div>
-              <div class="col-xs-6">
-                <div class="input-group">
-                  <input type="text" class="form-control"
-                  name="blk-id" id="blk-id">
-                  <input type="text" class="form-control"
-                  name="blk-type" id="blk-type">
-                </div>
-              </div>
+    <div class="col-xs-2 column">
+      <div class="panel-group" id="work-manager">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <a class="panel-title" data-toggle="collapse"
+              data-parent="#work-manager"
+              href="#work-manager-element">Data</a>
+          </div>
+          <div id="#work-manager-element"
+            class="panel-collapse collpase in">
+            <div class="panel-body">
+              Interactive area
             </div>
           </div>
-        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row clearfix">
+    <div class="col-xs-12 column">
+      <div class="panel panel-default">
+        <div class="panel-heading">Properties</div>
+          <form name="properties-frm" id="properties-frm">
+            {% csrf-field %}
+            <div class="panel-body">
+              <!-- Tab panels -->
+              <div class="tab-panel">
+                  <!-- Navigation Tabs -->
+                  <ul class="nav nav-tabs" role="tablist" id="properties">
+                  <li role="presentation" class="active">
+                    <a href="#workspace" aria-controls="workspace"
+                      role="tab" data-toggle="tab">Workspace</a></li>
+                  <li role="presentation">
+                    <a href="#adapter" aria-controls="adapter"
+                      role="tab" data-toggle="tab">Adapter</a></li>
+                  <li role="presentation"><a href="#connector"
+                    aria-controls="connector"
+                    role="tab" data-toggle="tab">Connector</a></li>
+                  </ul>
+
+                  <!-- Tab Content -->
+                  <div class="tab-content">
+                  {% include "properties-tab-workspace.html" %}
+                  {% include "properties-tab-adapter.html" %}
+                  {% include "properties-tab-connector.html" %}
+                  </div> <!-- /tab-content -->
+              </div>
+            </div>
+            <div class="panel-footer clearfix">
+              <!-- Form Controls -->
+              <div class="row clearfix">
+                <div class="col-xs-12 column">
+                  <div class="form-group"><div class="input-group">
+                    <div class="btn-group" role="group" aria-label="...">
+                      <button type="button" class="btn btn-default" name="save-btn"
+                        id="save-btn">Save</button>
+                      <button type="button" class="btn btn-default" name="clone-btn"
+                        id="clone-btn">Clone</button>
+                      <button type="button" class="btn btn-default" name="remove-btn"
+                        id="remove-btn">Remove</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> <!-- Panel footer -->
+            <input type="hidden" name="work-type" id="work-type">
+            <input type="hidden" name="work-guid" id="work-guid">
+            <input type="hidden" name="adapter-id" id="adapter-id">
+            <input type="hidden" name="adapter-type" id="adapter-type">
+          </form>
+        </div>
       </div>
     </div>
   </div>
