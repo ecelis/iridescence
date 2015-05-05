@@ -46,3 +46,5 @@ dbPort
 *.launch
 **/logs
 *.db
+.vagrant
+*.log
