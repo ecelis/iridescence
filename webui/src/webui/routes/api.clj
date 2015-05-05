@@ -56,9 +56,10 @@
      :artifacts (map
              #(json/parse-string % true)
              (get workspace :data))}))
-  (spit (str savedir wsdir "/" (get (json/parse-string (get workspace :meta) true)
-                              :guid)) yaml-workspace); TODO dynamic filename
-  (json-response workspace))
+  (try (spit (str savedir wsdir "/" (get (json/parse-string
+                                           (get workspace :meta) true) :guid))
+             yaml-workspace) (json-response workspace)
+       (catch Exception e (info e))))
 
 (defn load-workspace "Loads a workspace from YAML storage and returns its JSON
                      representation" [id]

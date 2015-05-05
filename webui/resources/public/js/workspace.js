@@ -102,6 +102,7 @@ var connectionPush = function(artifact) {
       connect.push(artifact);     // add adapter to queue
     }
   }
+  property = artifact.data("props");
   $('#adapter-name').val(property.name);
   $('#adapter-url').val(property.url);
   $('#adapter-id').val(artifact.id);
