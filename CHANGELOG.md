@@ -1,4 +1,14 @@
-### WIP fixing logging (HEAD, master)
+### WIP load workspace from persistent storage (HEAD, master)
+>Tue, 5 May 2015 17:14:24 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+>Commiter: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+
+
+
+### WIP fixing logging
 >Tue, 5 May 2015 15:29:20 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)

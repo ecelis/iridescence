@@ -63,7 +63,8 @@
 
 (defn load-workspace "Loads a workspace from YAML storage and returns its JSON
                      representation" [id]
-    (json-response (yaml/parse-string (slurp (str savedir "/" id)))))
+  (try (json-response (yaml/parse-string (slurp (str savedir wsdir "/" id))))
+       (catch Exception e (info e))))
 
 (defn update-workspace "Update workspace in YAML storage" [id]
     (json-response {:not (str "yet implemented " id)}))
