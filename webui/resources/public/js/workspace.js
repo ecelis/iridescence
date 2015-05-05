@@ -34,7 +34,9 @@ var paper = Raphael("work-canvas",
 var work_meta = {'type': null,      // Workspace metadata
   'guid': null,
   'name': null,
-  'comments': null};
+  'comments': null,
+  'draft': true
+};
 var property = {            // TODO Get rid of it
   //this.data("props");    // Artifact's properties
   'name': null,
@@ -301,10 +303,14 @@ var save = function() {
  */
 var update_workspace = function() {
   work_meta.type = $('#work-type').val();
-  work_meta.guid= $('#work-guid').val();
+  work_meta.guid = $('#work-guid').val();
   work_meta.name = $('#work-name').val();
   work_meta.comments = $('#work-comments').val();
-
+  if($('#work-draft').is(':checked')) {
+    work_meta.draft = true;
+  } else {
+    work_meta.draft = false;
+  }
 }
 
 ////////// Connectors functions
