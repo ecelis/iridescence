@@ -1,9 +1,14 @@
-### WIP adapter-db (HEAD, master)
+### WIP adapter-db full table-def return (HEAD, master)
+>Wed, 6 May 2015 04:34:35 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### WIP adapter-db (origin/master, origin/HEAD)
 >Tue, 5 May 2015 20:35:48 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
 
-### WIP Save drafts vs finished workspaces (origin/master, origin/HEAD)
+### WIP Save drafts vs finished workspaces
 >Tue, 5 May 2015 18:30:11 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)

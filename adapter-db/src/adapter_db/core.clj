@@ -27,7 +27,8 @@
   (def sqlmap (sql/build :select :column_name
                :from :information_schema.columns
                :where [:= :table_name table]))
-  (jdbc/query url (sql/format sqlmap) :result-set-fn vec))
+  (hash-map (keyword table) (jdbc/query url (sql/format sqlmap)
+                                        :result-set-fn vec)))
 
 (defn get-tables "Get tables from" [url]
   (def tables nil)
@@ -39,8 +40,8 @@
                          (jdbc/query url (sql/format sqlmap)
                                      :result-set-fn vec)))
         (catch Exception e (info e)))
-  (info (map #(get-columns url %) tables))
-  tables)
+  (def table-defs (conj (map #(get-columns url %) tables) nil))
+  (rest table-defs))
 
 (defn test-url "TEsts URL" [url]
   (try
