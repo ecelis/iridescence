@@ -1,4 +1,9 @@
-### WIP Save drafts vs finished workspaces (HEAD, master)
+### WIP adapter-db (HEAD, master)
+>Tue, 5 May 2015 20:35:48 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### WIP Save drafts vs finished workspaces (origin/master, origin/HEAD)
 >Tue, 5 May 2015 18:30:11 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
@@ -13,7 +18,7 @@
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
 
-### Time for a meal (origin/master, origin/HEAD)
+### Time for a meal
 >Fri, 1 May 2015 14:46:00 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
