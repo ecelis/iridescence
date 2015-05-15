@@ -1,4 +1,14 @@
-### Time for a meal (HEAD, master)
+### FIX when the columns from DB got borked? (HEAD, master)
+>Fri, 15 May 2015 00:41:38 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### Time for a meal (origin/master, origin/HEAD)
 >Fri, 1 May 2015 14:46:00 -0500
 
 >

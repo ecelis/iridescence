@@ -23,14 +23,14 @@
             [honeysql.helpers :refer :all])
   (:use [taoensso.timbre :only [trace debug info warn error fatal]]))
 
-(defn get-columns "Get columns from" [tables]
-  (def sqlmap {:select :column_name
-               :from :information_schema.columns
-               :where [:= :table_name (first tables)]}))
-  ;(jdbc/query (sql/format sqlmap)))
+(defn get-columns "Get columns from" [url table]
+  (def sqlmap (sql/build :select [:column_name]
+                         :from :information_schema.columns
+                         :where [:= :table_name (str table)]))
+  {table (jdbc/query url (sql/format sqlmap) :result-set-fn vec)})
 
 (defn get-tables "Get tables from" [url]
-  (def tables nil)
+  (def tables)
   (try ; TODO reuse it (def db-handle (jdbc/get-connection url))
        (def sqlmap (sql/build :select :*
                               :from :information_schema.tables
@@ -38,6 +38,7 @@
         (def tables (map #(get % :table_name)
                          (jdbc/query url (sql/format sqlmap)
                                      :result-set-fn vec)))
+        (info (vec (map #(get-columns url %) tables)))
         (catch Exception e (info e)))
   tables)
 
