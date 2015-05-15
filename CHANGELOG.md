@@ -1,4 +1,14 @@
 ### FIX when the columns from DB got borked? (HEAD, master)
+>Fri, 15 May 2015 05:37:11 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### FIX when the columns from DB got borked?
 >Fri, 15 May 2015 00:41:38 -0500
 
 >

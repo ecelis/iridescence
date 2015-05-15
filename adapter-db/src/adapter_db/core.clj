@@ -38,7 +38,7 @@
         (def tables (map #(get % :table_name)
                          (jdbc/query url (sql/format sqlmap)
                                      :result-set-fn vec)))
-        (info (vec (map #(get-columns url %) tables)))
+        (def tables (vec (map #(get-columns url %) tables)))
         (catch Exception e (info e)))
   tables)
 
