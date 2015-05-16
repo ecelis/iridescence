@@ -177,6 +177,8 @@ var modify = function() {
     connect_queue(this);
   } else {
     $('#properties a[href="#connector"]').tab('show');
+    var src_item = property.name.split("to")[0];
+    console.log(paper.getById(src_item).data("props").items);
   }
 }
 
@@ -284,7 +286,6 @@ var update_adapter = function(id) {
   adapter.attr({'title': adapter.data("props").name,
           'text':adapter.data("props").name});
   test_connection($('#adapter-url').val());
-  console.log(adapter_items);
   if(adapter_items.length > 0) {
     adapter.data("props").items = adapter_items;
   }

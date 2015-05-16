@@ -1,4 +1,14 @@
-### REFACTOR workspace.js (HEAD, master)
+### REFACTOR workspace (HEAD, master)
+>Sat, 16 May 2015 13:24:51 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### REFACTOR workspace.js (origin/master, origin/HEAD)
 >Sat, 16 May 2015 12:17:47 -0500
 
 >
@@ -28,7 +38,7 @@
 
 
 
-### UPDATE handling of DB objects response (origin/master, origin/HEAD)
+### UPDATE handling of DB objects response
 >Sat, 16 May 2015 02:33:48 -0500
 
 >
