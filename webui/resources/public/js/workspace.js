@@ -100,17 +100,12 @@ adapters.push(finish);
  * @method
  * @param {Raphael.Element} artifact connector
  * */
-var connectionPush = function(artifact) {
+var connect_queue = function(artifact) {
   if (connect.length < 2) {   // If the connection queue's length < 2
     if(connect[0] != artifact) {  // and If adapter isn't already in queue
       connect.push(artifact);     // add adapter to queue
     }
   }
-  property = artifact.data("props");
-  $('#adapter-name').val(property.name);
-  $('#adapter-url').val(property.url);
-  $('#adapter-id').val(artifact.id);
-  $('#properties a[href="#adapter"]').tab('show');
 }
 
 /**
@@ -173,8 +168,13 @@ var release = function() {
  * @method modify
  * */
 var modify = function() {
+  property = this.data("props");
+  $('#adapter-name').val(property.name);
+  $('#adapter-url').val(property.url);
+  $('#adapter-id').val(this.id);
   if(this.type != "path") {
-     connectionPush(this);
+    $('#properties a[href="#adapter"]').tab('show');
+    connect_queue(this);
   } else {
     $('#properties a[href="#connector"]').tab('show');
   }

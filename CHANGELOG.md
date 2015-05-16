@@ -1,4 +1,14 @@
-### UPDATE moved ajax function to rest-client.js (HEAD, master)
+### REFACTOR workspace.js (HEAD, master)
+>Sat, 16 May 2015 12:17:47 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### UPDATE moved ajax function to rest-client.js
 >Sat, 16 May 2015 10:58:21 -0500
 
 >
