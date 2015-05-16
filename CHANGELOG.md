@@ -1,4 +1,14 @@
-### FIX when the columns from DB got borked? (HEAD, master)
+### ADD Test script (origin/master, origin/HEAD)
+>Fri, 15 May 2015 08:29:35 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+
+
+
+### FIX when the columns from DB got borked?
 >Fri, 15 May 2015 05:37:11 -0500
 
 >
@@ -18,7 +28,57 @@
 
 
 
-### Time for a meal (origin/master, origin/HEAD)
+### WIP adapter-db full table-def return
+>Wed, 6 May 2015 04:34:35 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+
+
+
+### WIP adapter-db
+>Tue, 5 May 2015 20:35:48 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+
+
+
+### WIP Save drafts vs finished workspaces
+>Tue, 5 May 2015 18:30:11 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+
+
+
+### WIP load workspace from persistent storage
+>Tue, 5 May 2015 17:14:24 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+
+
+
+### WIP fixing logging
+>Tue, 5 May 2015 15:29:20 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+
+
+
+### Time for a meal
 >Fri, 1 May 2015 14:46:00 -0500
 
 >

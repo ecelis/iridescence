@@ -28,7 +28,7 @@
 
 (def savedir "/home/ecelis/Projects/iridescence/data") ; TODO Set a definitive path
 (def wsdir "/workspace")
-(def tmpdir "/wip")
+(def wipdir "/wip")
 (def outdir "/out")
 
 ;; TODO Read http://www.luminusweb.net/docs/responses.md
@@ -50,26 +50,33 @@
   [workspace]
   ; TODO handle nil or invalid data for spit
   ; TODO Do the yaml conversion in a functional way
-  (def yaml-workspace (yaml/generate-string
-    {:workspace (json/parse-string
+  (def workspace-map {:workspace (json/parse-string
              (get workspace :meta) true)
      :artifacts (map
              #(json/parse-string % true)
-             (get workspace :data))}))
-  (spit (str savedir wsdir "/" (get (json/parse-string (get workspace :meta) true)
-                              :guid)) yaml-workspace); TODO dynamic filename
-  (json-response workspace))
+             (get workspace :data))})
+  (def yaml-workspace (yaml/generate-string workspace-map))
+  (if (get (get workspace-map :workspace true) :draft true)
+    (def save-to (str savedir wipdir "/"))
+    (def save-to (str savedir wsdir "/")))
+  (info save-to)
+  (try (spit (str save-to (get (json/parse-string
+                                           (get workspace :meta) true) :guid))
+             yaml-workspace) (json-response workspace)
+       (catch Exception e (info e))))
 
 (defn load-workspace "Loads a workspace from YAML storage and returns its JSON
                      representation" [id]
-    (json-response (yaml/parse-string (slurp (str savedir "/" id)))))
+  (try (json-response (yaml/parse-string (slurp (str savedir wsdir "/" id))))
+       (catch Exception e (info e))))
 
 (defn update-workspace "Update workspace in YAML storage" [id]
     (json-response {:not (str "yet implemented " id)}))
 
 (defn delete-workspace "Delete workspace from YAML storage" [id]
-  (io/delete-file (str savedir "/" id))
-    (json-response {:action (str "deleted workspace " id)}))
+  (try (io/delete-file (str savedir "/" id))
+       (json-response {:action (str "deleted workspace " id)})
+       (catch Exception e (info e))))
 
 (defn run-workspace "Run workspace" [id]
   (db/build-select "ta")
