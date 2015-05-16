@@ -18,7 +18,7 @@
  *   You should have received a copy of the GNU Affero General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
+// TODO Unused it seems
 var get_objects = function(url) {
   //console.log('Fetching objects...');
   $.get("/api/adapter/object/",
@@ -26,22 +26,30 @@ var get_objects = function(url) {
         "url": url},
         function(e) {
           console.log(e);
-        }
-        );
+        });
 };
 
+/**
+ * Stores in a variable the Table Definition retrieved by test_connection
+ *
+ * @method adapter_connection_handler
+ * @param {Object} JSON response
+ */
 var adapter_connection_handler = function(data) {
   var table_schema = [];
+  var table_definition = [];
+  // Get table names
   data.tables.forEach(function(item){
     table_schema.push({"name":Object.getOwnPropertyNames(item)[0],
     "columns":item.valueOf()});
   });
-
+  // Get columns and return associative array of tables:columns
   table_schema.map(function(table){
-    console.log("table:" + table.name);
+    var cols = [];
     table.columns[table.name].map(function(column){
-      console.log("  column: " + column.column_name);
+      cols.push(column.column_name);
     });
+    adapter_items.push({"name": table.name, "columns": cols});
   });
 };
 
@@ -50,8 +58,7 @@ var test_connection = function (url) {
         {"__anti-forgery-token": $("#__anti-forgery-token").val(),
           "url": url
         },
-       function(e) {
-        adapter_connection_handler(e)
-       // get_objects(url);
-  });
+        function(e) {
+          adapter_connection_handler(e);
+        });
 };

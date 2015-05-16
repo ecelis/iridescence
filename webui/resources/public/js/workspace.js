@@ -41,8 +41,10 @@ var property = {            // TODO Get rid of it
   //this.data("props");    // Artifact's properties
   'name': null,
   'type': null,
-  'url': null
+  'url': null,
+  'items': null
 };
+var adapter_items = [];       // Adapter Items from source
 // Global settings
 var connections = [];       // Connections between adapters
 var connect = [];           // Temporary queue for connections
@@ -224,7 +226,8 @@ var addToDiagram = function (adapter) {
               .data("props", {"type": "GENERIC",
                     "id":this.id,
                     "name":null,
-                    "url": null})
+                    "url": null,
+                    "items": null})
               .drag(move, dragger, up)
               .click(modify);
     adapters.push(newadapter);   // Append new adapter to adapters
@@ -238,7 +241,7 @@ var addToDiagram = function (adapter) {
       setData(firstConnection.line);
       firstConnection.line.click(modify);
       connections.push(firstConnection); // connect to the begining
-      connect = [];
+      connect = [];     // Empty queue
     }
   }
 }
@@ -281,6 +284,10 @@ var update_adapter = function(id) {
   adapter.attr({'title': adapter.data("props").name,
           'text':adapter.data("props").name});
   test_connection($('#adapter-url').val());
+  console.log(adapter_items);
+  if(adapter_items.length > 0) {
+    adapter.data("props").items = adapter_items;
+  }
 }
 
 /**

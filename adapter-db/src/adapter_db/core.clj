@@ -42,6 +42,7 @@
 ;        (def tables (vec (map #(get-columns url %) tables)))
         (catch Exception e (info e)))
   (def table-defs (conj (map #(get-columns url %) tables) nil))
+  (info table-defs)
   (rest table-defs))
 
 (defn test-url "TEsts URL" [url]

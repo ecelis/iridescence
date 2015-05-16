@@ -1,4 +1,14 @@
 ### UPDATE handling of DB objects response (HEAD, master)
+>Sat, 16 May 2015 10:47:10 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### UPDATE handling of DB objects response (origin/master, origin/HEAD)
 >Sat, 16 May 2015 02:33:48 -0500
 
 >
@@ -18,7 +28,7 @@
 
 
 
-### ADD Test script (origin/master, origin/HEAD)
+### ADD Test script
 >Fri, 15 May 2015 08:29:35 -0500
 
 >
