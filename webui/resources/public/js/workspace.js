@@ -290,19 +290,6 @@ var update_adapter = function(id) {
   }
 }
 
-/**
- * Save adapters to YAML in the server
- * @method save
- * */
-var save = function() {
-  var payload = {'meta': null, 'data': []};
-  payload.meta = JSON.stringify(work_meta);
-  adapters.forEach(function(adapter) {
-    payload.data.push(JSON.stringify(adapter.data("props")));
-  });
-  $.post("/api/", {"__anti-forgery-token": $('#__anti-forgery-token').val(),
-         "workspace":payload});
-}
 
 /**
  * Update work properties

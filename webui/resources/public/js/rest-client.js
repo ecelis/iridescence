@@ -28,6 +28,19 @@ var get_objects = function(url) {
           console.log(e);
         });
 };
+/**
+ * Save adapters to YAML in the server
+ * @method save
+ * */
+var save = function() {
+  var payload = {'meta': null, 'data': []};
+  payload.meta = JSON.stringify(work_meta);
+  adapters.forEach(function(adapter) {
+    payload.data.push(JSON.stringify(adapter.data("props")));
+  });
+  $.post("/api/", {"__anti-forgery-token": $('#__anti-forgery-token').val(),
+         "workspace":payload});
+}
 
 /**
  * Stores in a variable the Table Definition retrieved by test_connection
@@ -53,6 +66,12 @@ var adapter_connection_handler = function(data) {
   });
 };
 
+/**
+ * Makes AJAX requests to adapter source and fills workspace's adapter_items
+ * global variable
+ * @method test_connection
+ * @param {String} url
+ */
 var test_connection = function (url) {
   $.get("/api/adapter/test/",
         {"__anti-forgery-token": $("#__anti-forgery-token").val(),

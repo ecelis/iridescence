@@ -1,4 +1,14 @@
-### UPDATE handling of DB objects response (HEAD, master)
+### UPDATE moved ajax function to rest-client.js (HEAD, master)
+>Sat, 16 May 2015 10:58:21 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### UPDATE handling of DB objects response
 >Sat, 16 May 2015 10:47:10 -0500
 
 >
