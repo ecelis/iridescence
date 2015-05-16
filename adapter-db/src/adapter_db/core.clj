@@ -24,18 +24,11 @@
   (:use [taoensso.timbre :only [trace debug info warn error fatal]]))
 
 (defn get-columns "Get columns from" [url table]
-<<<<<<< HEAD
-  (def sqlmap (sql/build :select [:column_name]
-                         :from :information_schema.columns
-                         :where [:= :table_name (str table)]))
-  {table (jdbc/query url (sql/format sqlmap) :result-set-fn vec)})
-=======
   (def sqlmap (sql/build :select :column_name
                :from :information_schema.columns
                :where [:= :table_name table]))
   (hash-map (keyword table) (jdbc/query url (sql/format sqlmap)
                                         :result-set-fn vec)))
->>>>>>> 36116f64e3aa9dedbde16016a7bc3550e1cf03ed
 
 (defn get-tables "Get tables from" [url]
   (def tables)
@@ -46,7 +39,7 @@
         (def tables (map #(get % :table_name)
                          (jdbc/query url (sql/format sqlmap)
                                      :result-set-fn vec)))
-        (def tables (vec (map #(get-columns url %) tables)))
+;        (def tables (vec (map #(get-columns url %) tables)))
         (catch Exception e (info e)))
   (def table-defs (conj (map #(get-columns url %) tables) nil))
   (rest table-defs))

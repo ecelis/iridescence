@@ -1,3 +1,13 @@
+### FIX Damn table-spec, keeps breaking (HEAD, master)
+>Fri, 15 May 2015 23:09:59 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
 ### ADD Test script (origin/master, origin/HEAD)
 >Fri, 15 May 2015 08:29:35 -0500
 
