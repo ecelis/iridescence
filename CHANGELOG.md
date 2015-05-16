@@ -1,4 +1,14 @@
-### FIX Damn table-spec, keeps breaking (HEAD, master)
+### UPDATE handling of DB objects response (HEAD, master)
+>Sat, 16 May 2015 02:33:48 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### FIX Damn table-spec, keeps breaking
 >Fri, 15 May 2015 23:09:59 -0500
 
 >

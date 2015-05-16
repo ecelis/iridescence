@@ -30,13 +30,28 @@ var get_objects = function(url) {
         );
 };
 
+var adapter_connection_handler = function(data) {
+  var table_schema = [];
+  data.tables.forEach(function(item){
+    table_schema.push({"name":Object.getOwnPropertyNames(item)[0],
+    "columns":item.valueOf()});
+  });
+
+  table_schema.map(function(table){
+    console.log("table:" + table.name);
+    table.columns[table.name].map(function(column){
+      console.log("  column: " + column.column_name);
+    });
+  });
+};
+
 var test_connection = function (url) {
   $.get("/api/adapter/test/",
         {"__anti-forgery-token": $("#__anti-forgery-token").val(),
-          "url": url},
+          "url": url
+        },
        function(e) {
-        console.log('Adapter Test OK');
+        adapter_connection_handler(e)
        // get_objects(url);
-       }
-       );
+  });
 };
