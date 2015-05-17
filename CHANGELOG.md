@@ -1,4 +1,14 @@
-### WIP Connector properties panel (HEAD, master)
+### WIP Connector Source Adapter Items (HEAD, master)
+>Sun, 17 May 2015 04:14:18 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### WIP Connector properties panel
 >Sun, 17 May 2015 04:00:02 -0500
 
 >
