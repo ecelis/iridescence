@@ -325,7 +325,8 @@ var update_connector = function(id) {
   var adapter_src = paper.getById(id);
   adapter_src.data("props").items.forEach(function(item) {
     $("#connector-items-lst")
-      .append('<option value="' + item.name + '">' + item.name + '</option>');
+      .append('<option value="' + item.name + '">' + item.name + '</option>')
+      .click(console.log(item.name));
   });
   //console.log(adapter_src.data("props"));
 
