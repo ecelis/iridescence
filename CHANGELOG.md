@@ -1,4 +1,14 @@
-### REFACTOR workspace (HEAD, master)
+### WIP Connector properties panel (HEAD, master)
+>Sun, 17 May 2015 04:00:02 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### REFACTOR workspace
 >Sun, 17 May 2015 02:59:43 -0500
 
 >

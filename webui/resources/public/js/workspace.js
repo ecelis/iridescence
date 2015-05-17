@@ -175,13 +175,14 @@ var release = function() {
  * */
 var modify = function() {
   property = this.data("props");
-  $('#adapter-name').val(property.name);
-  $('#adapter-url').val(property.url);
-  $('#adapter-id').val(this.id);
   if(this.type != "path") {
+    $('#adapter-name').val(property.name);
+    $('#adapter-url').val(property.url);
+    $('#adapter-id').val(this.id);
     $('#properties a[href="#adapter"]').tab('show');
     connect_queue(this);
   } else {
+    // TODO initialize properties, Name, etc
     $('#properties a[href="#connector"]').tab('show');
     var adapter_id = property.name.split("to")[0];
     update_connector(adapter_id);
@@ -299,7 +300,6 @@ var update_adapter = function(id) {
   }
 }
 
-
 /**
  * Update work properties
  * @method
@@ -322,9 +322,15 @@ var update_workspace = function() {
  * @param id connector id
  */
 var update_connector = function(id) {
-  var connector = paper.getById(id);
-  connector.data("props").id = id;
-  connector.data("props").name = connector.title;
+  var adapter_src = paper.getById(id);
+  adapter_src.data("props").items.forEach(function(item) {
+    $("#connector-items-lst")
+      .append('<option value="' + item.name + '">' + item.name + '</option>');
+  });
+  //console.log(adapter_src.data("props"));
+
+ // adapter_src.data("props").id = id;
+//  adapter_src.data("props").name = connector.title;
 }
 
 // TODO Check if the values aren't overwriten when refreshing webpage
@@ -359,8 +365,7 @@ $('#adapter :input').on("click change keyup",   // Adapter properties listener
         update_adapter($('#adapter-id').val());
 });
 
-$('#adapter-type-lst li a')
-  .on("click change",                           // Adapter type listener
+$('#adapter-type-lst li a').on("click change",  // Adapter type listener
       function() {
         var type = $(this).text().toUpperCase().replace(' ','');
         $('#btn-adapter-type').html(type + '<span class="caret"></span>');
@@ -369,8 +374,8 @@ $('#adapter-type-lst li a')
 });
 
 $('#connector :input').on("click change keyup",   // Connector properties listener
-                          function() {
-                            update_adapter($('#adapter-id').val());
+      function() {
+        update_adapter($('#adapter-id').val());
 });
 // TODO Remove from workspace is badly broken
 $('#remove-btn').click(function() {     // Remove item button listener
