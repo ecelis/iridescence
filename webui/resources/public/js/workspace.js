@@ -19,56 +19,61 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 var util = new Util();      // Utilities such as guid generator and crypto
-var tbX = 4,
-  tbY = 4,
-  tbW = 40,
-  tbH = 300,
-  paperW = 768,
-  paperH = 500;
+var tbX = 4,                // Toolbar X position
+  tbY = 4,                  // Toolbar Y position
+  tbW = 40,                 // Toolbar Width
+  tbH = 300,                // Toolbar Heigth
+  paperW = 768,             // Workspace Width
+  paperH = 500;             // Workspace Height
 var paper = Raphael("work-canvas",
-                    paperW, paperH);  // Creates canvas 320×200@10,50
-////////////////////// ICONS ///////////////////////
- /**
- * Workspace Metadata
- */
-var work_meta = {'type': null,      // Workspace metadata
+                    paperW, paperH);  // Workspace
+
+/**
+* Workspace Metadata
+* @property
+*/
+var work_meta = {'type': null,        // Workspace metadata
   'guid': null,
   'name': null,
   'comments': null,
   'draft': true
 };
-var property = {            // TODO Get rid of it
-  //this.data("props");    // Artifact's properties
+/**
+ * Adapter property model
+ * @property
+ */
+var property = {                      // TODO Get rid of it
+  //this.data("props");               // Artifact's properties
   'name': null,
   'type': null,
   'url': null,
   'items': null
 };
-var adapter_items = [];       // Adapter Items from source
+
+var adapter_items = [];               // Adapter Items from source
 // Global settings
-var connections = [];       // Connections between adapters
-var connect = [];           // Temporary queue for connections
+var connections = [];                 // Connections between adapters
+var connect = [];                     // Temporary queue for connections
 var adapters = paper.set();           // Create a default adapters
 var work_guid = util.guid();          // Generate adapters GUID
 var toolbar = paper.rect(tbX, tbY,
                          tbW,
-                         tbH);        // Placeholder for the tools
-// We'll create adapters based on it
+                         tbH);        // Toolbar
+// We'll create adapters based on generic_adapter
 var generic_adapter = paper
   .rect(tbX + 5, tbY + 5, 30, 20)
   .attr({"fill": "#CCC",
         "fill-opacity": 0,
         "stroke-width": 3,
         cursor: "move"});
-  
-// Same as generic_adapter its a basic connector, derive other from it
+
+// Same as generic_adapter its a base connector, derive others from it
 var connector = paper
   .path("M9 35L40 60")
   .attr({"stroke-width": 3,
         cursor: "move"});
-// TODO Moar adapters
-// Start and End adapters, there should be one of each by default
-// in every adapters
+
+        // TODO Moar adapters
 /**
 * start does nothing, only serves as a visual aid for the flow
 */
@@ -82,7 +87,7 @@ var start = paper.circle(tbX + 80, tbY + 75, 15)
 adapters.push(start);
 
 /**
- * finishs is an adapter which is obviously the last adapter
+ * Finish is an adapter which is obviously the last adapter
  * in the work flow. By default it is configured to end in
  * Smart Connector's log with INFO level.
  */
@@ -96,12 +101,13 @@ var finish = paper.circle(paperW - 80, paperH - 75, 15)
 adapters.push(finish);
 
 /**
- * Add a connecto between adapters
+ * Connect queue, Adapters are pushed to the queue in order to add a Connector
+ * between them
  * @method
  * @param {Raphael.Element} artifact connector
  * */
 var connect_queue = function(artifact) {
-  if (connect.length < 2) {   // If the connection queue's length < 2
+  if (connect.length < 2) {       // If the connection queue's length < 2
     if(connect[0] != artifact) {  // and If adapter isn't already in queue
       connect.push(artifact);     // add adapter to queue
     }
@@ -109,8 +115,8 @@ var connect_queue = function(artifact) {
 }
 
 /**
-  Triggered when a adapter starts moving
-*/
+ * Triggered when an adapter starts moving
+ */
 var dragger = function() {
   // TODO Fix for paths
   switch(this.type) {
@@ -128,8 +134,8 @@ var dragger = function() {
 }
 
 /**
-  Triggered when a adapter is moving
-  */
+ * Triggered when a adapter is moving
+ */
 var move = function(dx, dy) {
   var coordinates;
   if (this.type == "rect") {
@@ -146,8 +152,8 @@ var move = function(dx, dy) {
 }
 
 /**
-  Triggered when a adapter stops moving
-  */
+ * Triggered when a adapter stops moving
+ */
 var up = function() {
   this.animate({"fill-opacity": 0}, 500);
 }
@@ -155,7 +161,7 @@ var up = function() {
 /**
  * Triggers when an element from Toolbar is dragged into adapters
  * @method toolUp
- * */
+ */
 var release = function() {
   this.attr("x", tbX + 5);
   this.attr("y", tbY + 5);
@@ -177,11 +183,14 @@ var modify = function() {
     connect_queue(this);
   } else {
     $('#properties a[href="#connector"]').tab('show');
-    var src_item = property.name.split("to")[0];
-    console.log(paper.getById(src_item).data("props").items);
+    var adapter_id = property.name.split("to")[0];
+    update_connector(adapter_id);
   }
 }
 
+/**
+ * Set default model to new Adapters or Connector
+ */
 var setData = function(adapter) {
   var data = null;
   if(adapter.type != "path") {
@@ -248,7 +257,6 @@ var addToDiagram = function (adapter) {
   }
 }
 
-/////////// Adapter functions
 /**
  * Remove adapter from adapters
  * @method remove
@@ -308,7 +316,6 @@ var update_workspace = function() {
   }
 }
 
-////////// Connectors functions
 /**
  * Update Connector properties
  * @method
@@ -320,50 +327,59 @@ var update_connector = function(id) {
   connector.data("props").name = connector.title;
 }
 
-// Initialize some properties for a new workspace
 // TODO Check if the values aren't overwriten when refreshing webpage
-$('#work-guid').val(work_guid);
-$('#work-guid-label').html("Id: " + work_guid);
-// Bind listeners to Properties controls
+$('#work-guid').val(work_guid);                   // Workspace GUID field
+$('#work-guid-label').html("Id: " + work_guid);   // Workspace GUID label
 // TODO Do this in one iteration of all
 // adapters
-//Attach listeners to Toolbar elements
-//
-generic_adapter.drag(move, dragger, release);
-connector.click(function(){addToDiagram(this)});
-start.drag(move, dragger, function(){});
-finish.drag(move, dragger, function(){}).click(modify);
-$('#work-type-lst li a').on("click change", function(){
-  var type = $(this).text().toUpperCase().replace(' ','').replace('.','');
-  $('#btn-work-type').html(type + '<span class="caret"></span>');
-  $('#work-type').val(type);
-});
-$('#workspace :input').on("click change keyup", function() {
-    update_workspace();
-});
-//
-// Adapters
-$('#adapter :input').on("click change keyup", function() {
-    update_adapter($('#adapter-id').val());
+generic_adapter.drag(move, dragger, release);     // Adapter onDrag listener
+
+connector.click(function() {                      // Connector onClick listener
+  addToDiagram(this)
 });
 
-$('#adapter-type-lst li a').on("click change", function(){
-  var type = $(this).text().toUpperCase().replace(' ','');
-  $('#btn-adapter-type').html(type + '<span class="caret"></span>');
-  $('#adapter-type').val(type);
-  update_adapter($('#adapter-id').val());
+start.drag(move, dragger, function(){});          // Start adapter onDrag
+
+finish.drag(move, dragger, function(){}).click(modify); // Finish adapter onDrag
+
+$('#work-type-lst li a').on("click change",       // Workspace type listener
+      function() {
+      var type = $(this).text().toUpperCase().replace(' ','').replace('.','');
+      $('#btn-work-type').html(type + '<span class="caret"></span>');
+      $('#work-type').val(type);
 });
-//
-// Connectors
-//
-$('#connector :input').on("click change keyup", function(){
-  update_adapter($('#adapter-id').val());
+
+$('#workspace :input').on("click change keyup", // Workspace properties listener
+      function() {
+        update_workspace();
 });
-//
-// Form controls
-//
+
+$('#adapter :input').on("click change keyup",   // Adapter properties listener
+      function() {
+        update_adapter($('#adapter-id').val());
+});
+
+$('#adapter-type-lst li a')
+  .on("click change",                           // Adapter type listener
+      function() {
+        var type = $(this).text().toUpperCase().replace(' ','');
+        $('#btn-adapter-type').html(type + '<span class="caret"></span>');
+        $('#adapter-type').val(type);
+        update_adapter($('#adapter-id').val());
+});
+
+$('#connector :input').on("click change keyup",   // Connector properties listener
+                          function() {
+                            update_adapter($('#adapter-id').val());
+});
 // TODO Remove from workspace is badly broken
-$('#remove-btn').click(function(){remove($('#adapter-id').val())});
-$('#clone-btn').click(function(){clone($('#adapter-id').val())});
-$('#save-btn').click(function(){save()});
+$('#remove-btn').click(function() {     // Remove item button listener
+  remove($('#adapter-id').val())
+});
+$('#clone-btn').click(function() {      // Clone item button listener
+  clone($('#adapter-id').val())
+});
+$('#save-btn').click(function() {       // Save workspace button listener
+  save()
+});
 
