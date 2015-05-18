@@ -1,4 +1,14 @@
-### UPDATE GUI (HEAD, master)
+### FIX connector sub-items list (HEAD, master)
+>Mon, 18 May 2015 14:57:43 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### UPDATE GUI
 >Mon, 18 May 2015 13:50:05 -0500
 
 >

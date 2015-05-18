@@ -395,5 +395,14 @@ $('#save-btn').click(function() {       // Save workspace button listener
 $("#files").change(util.handleFileSelect);   // File upload listener
 
 $("#connector-items-lst").change(function() {
-  console.log($this).attr('value');
+  var name = $(this).val();
+  adapter_items.filter(function(obj) {
+    if(name == obj.name) {
+      obj.columns.forEach(function(value) {
+        $("#connector-sub_items-lst")
+              .append('<option value="' +
+                      name + "." + value + '">' + value + '</option>');
+      });
+    }
+  });
 })
