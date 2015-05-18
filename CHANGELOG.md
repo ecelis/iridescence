@@ -1,4 +1,14 @@
-### WIP Connector Source Adapter Items (HEAD, master)
+### UPDATE GUI and JS docs (HEAD, master)
+>Mon, 18 May 2015 13:12:09 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### WIP Connector Source Adapter Items (origin/master, origin/HEAD)
 >Sun, 17 May 2015 04:34:35 -0500
 
 >
@@ -68,7 +78,7 @@
 
 
 
-### REFACTOR workspace.js (origin/master, origin/HEAD)
+### REFACTOR workspace.js
 >Sat, 16 May 2015 12:17:47 -0500
 
 >
