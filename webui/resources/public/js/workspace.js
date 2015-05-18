@@ -325,8 +325,8 @@ var update_connector = function(id) {
   var adapter_src = paper.getById(id);
   adapter_src.data("props").items.forEach(function(item) {
     $("#connector-items-lst")
-      .append('<option value="' + item.name + '">' + item.name + '</option>')
-      .click(console.log(item.name));
+      .append('<option value="' +
+              item.name + '">' + item.name + '</option>');
   });
   //console.log(adapter_src.data("props"));
 
@@ -392,5 +392,8 @@ $('#save-btn').click(function() {       // Save workspace button listener
   save()
 });
 
-$("#files").on("change",                // File upload listener
-              handleFileSelect);
+$("#files").change(util.handleFileSelect);   // File upload listener
+
+$("#connector-items-lst").change(function() {
+  console.log($this).attr('value');
+})

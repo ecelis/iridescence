@@ -1,4 +1,14 @@
-### WIP File uploads (HEAD, master)
+### UPDATE GUI (HEAD, master)
+>Mon, 18 May 2015 13:50:05 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### WIP File uploads
 >Mon, 18 May 2015 13:34:54 -0500
 
 >
