@@ -378,14 +378,19 @@ $('#connector :input').on("click change keyup",   // Connector properties listen
       function() {
         update_adapter($('#adapter-id').val());
 });
+
 // TODO Remove from workspace is badly broken
 $('#remove-btn').click(function() {     // Remove item button listener
   remove($('#adapter-id').val())
 });
+
 $('#clone-btn').click(function() {      // Clone item button listener
   clone($('#adapter-id').val())
 });
+
 $('#save-btn').click(function() {       // Save workspace button listener
   save()
 });
 
+$("#files").on("change",                // File upload listener
+              handleFileSelect);

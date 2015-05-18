@@ -1,4 +1,14 @@
-### UPDATE GUI and JS docs (HEAD, master)
+### WIP File uploads (HEAD, master)
+>Mon, 18 May 2015 13:34:54 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### UPDATE GUI and JS docs (origin/master, origin/HEAD)
 >Mon, 18 May 2015 13:12:09 -0500
 
 >
@@ -8,7 +18,7 @@
 
 
 
-### WIP Connector Source Adapter Items (origin/master, origin/HEAD)
+### WIP Connector Source Adapter Items
 >Sun, 17 May 2015 04:34:35 -0500
 
 >
