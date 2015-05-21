@@ -1,4 +1,14 @@
-### FIX connector sub-items list (HEAD, master)
+### WIP items from source duplicated (HEAD, master)
+>Thu, 21 May 2015 12:36:16 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### FIX connector sub-items list
 >Mon, 18 May 2015 18:14:35 -0500
 
 >

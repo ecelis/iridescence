@@ -52,18 +52,20 @@ var adapter_connection_handler = function(data) {
   var table_schema = [];
   var table_definition = [];
   // Get table names
-  data.tables.forEach(function(item){
-    table_schema.push({"name":Object.getOwnPropertyNames(item)[0],
-    "columns":item.valueOf()});
-  });
-  // Get columns and return associative array of tables:columns
-  table_schema.map(function(table){
-    var cols = [];
-    table.columns[table.name].map(function(column){
-      cols.push(column.column_name);
+  if(data.tables != null) {
+    data.tables.forEach(function(item){
+      table_schema.push({"name":Object.getOwnPropertyNames(item)[0],
+      "columns":item.valueOf()});
     });
-    adapter_items.push({"name": table.name, "columns": cols});
-  });
+    // Get columns and return associative array of tables:columns
+    table_schema.map(function(table){
+      var cols = [];
+      table.columns[table.name].map(function(column){
+        cols.push(column.column_name);
+      });
+      adapter_items.push({"name": table.name, "columns": cols});
+    });
+  }
 };
 
 /**

@@ -26,3 +26,14 @@ Smart Connector Test Workflow
   18. Click over one connector and fill in the Properties Panel
   19. Save the workspace
   20. Run the workspace
+
+Use Case
+--------
+
+### Patient Admission
+
+
+### Lab Test Order for Patient
+
+
+
