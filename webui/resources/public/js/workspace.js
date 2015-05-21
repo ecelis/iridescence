@@ -395,22 +395,17 @@ $('#save-btn').click(function() {       // Save workspace button listener
 $("#files").change(util.handleFileSelect);   // File upload listener
 
 $("#connector-items-lst").change(function() {   // Connector source listener
-//  $("#connector-sub_items-lst").find("option").remove().end();
+  $("#connector-sub_items-lst").find("option").remove().end();
   var name = $(this).val();
+  var values = [];
   adapter_items.filter(function(obj) {
     if(name == obj.name) {
-      obj.columns.forEach(function(value) {
-        $("#connector-sub_items-lst")
-          .append('<option value="' + name + '">' + value + '</option>');
-      console.log(obj.name +" " +  obj.columns.length);
-      });
-      /*
-      obj.columns.map(function(value) {
-        $("#connector-sub_items-lst")
-              .append('<option value="' +
-                      name + "." + value + '">' + value + '</option>');
-      });*/
-      console.log(obj.name +" " +  obj.columns.length);
+      values = obj.columns;
     }
+  });
+  values.map(function(value) {
+    $("#connector-sub_items-lst")
+        .append('<option value="' + name + '.' + value + '">' +
+                value + '</option>');
   });
 })

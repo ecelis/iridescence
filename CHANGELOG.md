@@ -1,4 +1,14 @@
-### WIP items from source duplicated (HEAD, master)
+### WIP JS hl7 (HEAD, master)
+>Thu, 21 May 2015 17:36:28 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### WIP items from source duplicated
 >Thu, 21 May 2015 12:36:16 -0500
 
 >
