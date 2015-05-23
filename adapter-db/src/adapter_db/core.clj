@@ -45,7 +45,8 @@
   (info table-defs)
   (rest table-defs))
 
-(defn test-url "TEsts URL" [url]
+(defn test-url "Tests URL" [url]
+  ; TODO ASAP retrieve other schemas along public
   (try
     ; TODO better reuse db-handle with-db-connection
     ; TODO this true/flase flag hack sucks, fix it

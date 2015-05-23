@@ -1,4 +1,14 @@
-### WIP JS hl7 (HEAD, master)
+### Wtf I was doing? (HEAD, master)
+>Fri, 22 May 2015 19:30:08 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### WIP JS hl7 (origin/master, origin/HEAD)
 >Thu, 21 May 2015 17:36:28 -0500
 
 >
@@ -68,7 +78,7 @@
 
 
 
-### UPDATE GUI and JS docs (origin/master, origin/HEAD)
+### UPDATE GUI and JS docs
 >Mon, 18 May 2015 13:12:09 -0500
 
 >

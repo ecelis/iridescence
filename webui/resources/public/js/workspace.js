@@ -376,7 +376,7 @@ $('#adapter-type-lst li a').on("click change",  // Adapter type listener
 
 $('#connector :input').on("click change keyup",   // Connector properties listener
       function() {
-        update_adapter($('#adapter-id').val());
+        // TODO update_adapter($('#adapter-id').val());
 });
 
 // TODO Remove from workspace is badly broken
