@@ -26,7 +26,7 @@
             [adapter-db.core :as db])
   (:use [taoensso.timbre :only [trace debug info warn error fatal]]))
 
-(def savedir "/home/ecelis/Projects/iridescence/data") ; TODO Set a definitive path
+(def savedir "/tmp") ; TODO Set a definitive path
 (def wsdir "/workspace")
 (def wipdir "/wip")
 (def outdir "/out")

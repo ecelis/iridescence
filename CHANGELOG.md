@@ -1,4 +1,14 @@
-### Wtf I was doing? (HEAD, master)
+### Deploy to test vServer (HEAD, master)
+>Sun, 24 May 2015 18:26:09 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### Wtf I was doing?
 >Fri, 22 May 2015 19:30:08 -0500
 
 >
