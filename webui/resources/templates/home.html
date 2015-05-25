@@ -1,14 +1,74 @@
 {% extends "base.html" %}
 {% block content %}
-  <div class="row clearfix">
-    <div class="col-xs-10 column">
-      <div class="panel panel-default" id="work-canvas"></div>
+  <div class="row">
+    <div class="cols-xs-10 column">
+      <div class="row">
+        <div class="cols-xs-10 column">
+          <div class="panel panel-default" id="work-canvas"></div>
+        </div>
+      </div>
+      <div class="row">
+          <div class="panel panel-default">
+            <div class="panel-heading">Properties</div>
+              <form name="properties-frm" id="properties-frm">
+                {% csrf-field %}
+                <div class="panel-body" id="properties-panel">
+                  <!-- Tab panels -->
+                  <div class="tab-panel">
+                      <!-- Navigation Tabs -->
+                      <ul class="nav nav-tabs" role="tablist" id="properties">
+                      <li role="presentation" class="active">
+                        <a href="#workspace" aria-controls="workspace"
+                          role="tab" data-toggle="tab">Workspace</a></li>
+                      <li role="presentation">
+                        <a href="#adapter" aria-controls="adapter"
+                          role="tab" data-toggle="tab">Adapter</a></li>
+                      <li role="presentation"><a href="#connector"
+                        aria-controls="connector"
+                        role="tab" data-toggle="tab">Connector</a></li>
+                      </ul>
+
+                      <!-- Tab Content -->
+                      <div class="tab-content">
+                      {% include "properties-tab-workspace.html" %}
+                      {% include "properties-tab-adapter.html" %}
+                      {% include "properties-tab-connector.html" %}
+                      </div> <!-- /tab-content -->
+                  </div>
+                </div>
+                <div class="panel-footer clearfix">
+                  <!-- Form Controls -->
+                  <div class="row clearfix">
+                    <div class="col-xs-12 column">
+                      <div class="form-group">
+                        <div class="input-group input-group-sm">
+                          <div class="btn-group" role="group" aria-label="...">
+                            <button type="button" class="btn btn-default btn-sm" name="save-btn"
+                              id="save-btn">Save</button>
+                            <button type="button" class="btn btn-default btn-sm" name="clone-btn"
+                              id="clone-btn">Clone</button>
+                            <button type="button" class="btn btn-default btn-sm" name="remove-btn"
+                              id="remove-btn">Remove</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div> <!-- Panel footer -->
+                <input type="hidden" name="work-type" id="work-type">
+                <input type="hidden" name="work-guid" id="work-guid">
+                <input type="hidden" name="adapter-id" id="adapter-id">
+                <input type="hidden" name="adapter-type" id="adapter-type">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="col-xs-2 column">
       <div class="panel-group" id="work-manager">
         <div class="panel panel-default">
           <div class="panel-heading">
-                     </div>
+          </div>
           <div id="#work-manager-element"
             class="panel-collapse collpase in">
             <div class="panel-body">
@@ -17,63 +77,6 @@
               <output id="list"></output>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row clearfix">
-    <div class="col-xs-12 column">
-      <div class="panel panel-default">
-        <div class="panel-heading">Properties</div>
-          <form name="properties-frm" id="properties-frm">
-            {% csrf-field %}
-            <div class="panel-body" style="height:200px;">
-              <!-- Tab panels -->
-              <div class="tab-panel">
-                  <!-- Navigation Tabs -->
-                  <ul class="nav nav-tabs" role="tablist" id="properties">
-                  <li role="presentation" class="active">
-                    <a href="#workspace" aria-controls="workspace"
-                      role="tab" data-toggle="tab">Workspace</a></li>
-                  <li role="presentation">
-                    <a href="#adapter" aria-controls="adapter"
-                      role="tab" data-toggle="tab">Adapter</a></li>
-                  <li role="presentation"><a href="#connector"
-                    aria-controls="connector"
-                    role="tab" data-toggle="tab">Connector</a></li>
-                  </ul>
-
-                  <!-- Tab Content -->
-                  <div class="tab-content">
-                  {% include "properties-tab-workspace.html" %}
-                  {% include "properties-tab-adapter.html" %}
-                  {% include "properties-tab-connector.html" %}
-                  </div> <!-- /tab-content -->
-              </div>
-            </div>
-            <div class="panel-footer clearfix">
-              <!-- Form Controls -->
-              <div class="row clearfix">
-                <div class="col-xs-12 column">
-                  <div class="form-group">
-                    <div class="input-group input-group-sm">
-                      <div class="btn-group" role="group" aria-label="...">
-                        <button type="button" class="btn btn-default btn-sm" name="save-btn"
-                          id="save-btn">Save</button>
-                        <button type="button" class="btn btn-default btn-sm" name="clone-btn"
-                          id="clone-btn">Clone</button>
-                        <button type="button" class="btn btn-default btn-sm" name="remove-btn"
-                          id="remove-btn">Remove</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> <!-- Panel footer -->
-            <input type="hidden" name="work-type" id="work-type">
-            <input type="hidden" name="work-guid" id="work-guid">
-            <input type="hidden" name="adapter-id" id="adapter-id">
-            <input type="hidden" name="adapter-type" id="adapter-type">
-          </form>
         </div>
       </div>
     </div>

@@ -22,9 +22,9 @@ var util = new Util();      // Utilities such as guid generator and crypto
 var tbX = 4,                // Toolbar X position
   tbY = 4,                  // Toolbar Y position
   tbW = 40,                 // Toolbar Width
-  tbH = 300,                // Toolbar Heigth
+  tbH = 80,                // Toolbar Heigth
   paperW = 768,             // Workspace Width
-  paperH = 500;             // Workspace Height
+  paperH = 100;             // Workspace Height
 var paper = Raphael("work-canvas",
                     paperW, paperH);  // Workspace
 
@@ -77,7 +77,7 @@ var connector = paper
 /**
 * start does nothing, only serves as a visual aid for the flow
 */
-var start = paper.circle(tbX + 80, tbY + 75, 15)
+var start = paper.circle(tbX + 80, paperH - 75, 15)
   .attr({"fill": "#7AC200",
         "fill-opacity": 100,
         "stroke-width": 3,
@@ -99,12 +99,6 @@ var finish = paper.circle(paperW - 80, paperH - 75, 15)
         cursor: "move"})
   .data("props", {"type":"FINISH", "name":"Finish", "url":null});
 adapters.push(finish);
-
-var hl7segments = [];
-var hl7message = "MSH" + FIELD + encoding_chars + FIELD + FIELD;
-hl7segments.push(hl7message);
-// TODO use something else to keek track of connectorca
-var current_connector;
 
 /**
  * Connect queue, Adapters are pushed to the queue in order to add a Connector
@@ -239,8 +233,8 @@ var addToDiagram = function (adapter) {
                   "stroke-width": 3,
                   "width": 50,
                   "height": 30,
-                  "x": 50 + Math.floor(Math.random()*160),
-                  "y": 70 + Math.floor(Math.random()*160)})
+                  "x": 390,
+                  "y": 8})
               .data("props", {"type": "GENERIC",
                     "id":this.id,
                     "name":null,
@@ -257,7 +251,7 @@ var addToDiagram = function (adapter) {
           "title": id = connect[0].id + 'to' + connect[1].id,
           "stroke-width": 3});
       setData(firstConnection.line);
-      firstConnection.line.click(modify);
+      //firstConnection.line.click(modify);
       connections.push(firstConnection); // connect to the begining
       connect = [];     // Empty queue
     }
@@ -321,18 +315,6 @@ var update_workspace = function() {
     work_meta.draft = false;
   }
 }
-
-/**
- * Build JSON representation of an HL7 message with data from
- * connector
- * @method
- * @param {String} segment htl7 segment type
- * @param {String}
- */
-var build_hl7json = function(name, value) {
-  // TODO use hl7json.js Objects
-  hl7_segments.push(set_field(name, value));
-};
 
 /**
  * Update Connector properties
@@ -434,5 +416,5 @@ $("#connector-sub_items-lst").on("click", // Connector sub-items listener
 $("#connector-out_items-lst").on("click", // HL7 segments chooser listener
   function() {
     var selected_segment = $(this).val().pop();
-    build_hl7json(selected_segment);
+    //build_hl7json(selected_segment);
 });

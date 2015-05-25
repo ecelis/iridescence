@@ -1,4 +1,14 @@
-### New, simpler mirth based layout (HEAD, alt-layout)
+### WIP Adapter new layout (HEAD, alt-layout)
+>Mon, 25 May 2015 13:24:05 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### New, simpler mirth based layout (origin/alt-layout)
 >Mon, 25 May 2015 10:59:25 -0500
 
 >
