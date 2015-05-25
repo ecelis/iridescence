@@ -25,7 +25,9 @@ var COMPONENT = '^';
 var FIELDREPEAT = '~';
 var ESCAPE = '\\';
 var SUBCOMPONENT = '&';
+var encoding_chars = COMPONENT + FIELDREPEAT + ESCAPE + SUBCOMPONENT;
 var seg_types = [];
+
 
 var set_field = function(name, value) {
   switch(name) {

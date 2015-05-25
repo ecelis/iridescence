@@ -1,4 +1,14 @@
 ### Maybe JavaScript wasn't the right choice for the UI :/ (HEAD, master)
+>Mon, 25 May 2015 08:20:41 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### Maybe JavaScript wasn't the right choice for the UI :/ (origin/master, origin/HEAD)
 >Mon, 25 May 2015 07:35:30 -0500
 
 >
@@ -8,7 +18,7 @@
 
 
 
-### Long delayed, grrr.. (origin/master, origin/HEAD)
+### Long delayed, grrr..
 >Mon, 25 May 2015 06:57:27 -0500
 
 >

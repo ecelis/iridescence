@@ -100,7 +100,9 @@ var finish = paper.circle(paperW - 80, paperH - 75, 15)
   .data("props", {"type":"FINISH", "name":"Finish", "url":null});
 adapters.push(finish);
 
-var hl7msg = [];
+var hl7segments = [];
+var hl7message = "MSH" + FIELD + encoding_chars + FIELD + FIELD;
+hl7segments.push(hl7message);
 // TODO use something else to keek track of connectorca
 var current_connector;
 
@@ -329,7 +331,7 @@ var update_workspace = function() {
  */
 var build_hl7json = function(name, value) {
   // TODO use hl7json.js Objects
-  hl7msg.push(set_field(name, value));
+  hl7_segments.push(set_field(name, value));
 };
 
 /**
