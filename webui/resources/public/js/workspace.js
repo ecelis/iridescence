@@ -100,6 +100,8 @@ var finish = paper.circle(paperW - 80, paperH - 75, 15)
   .data("props", {"type":"FINISH", "name":"Finish", "url":null});
 adapters.push(finish);
 
+var hl7msg = [];
+
 /**
  * Connect queue, Adapters are pushed to the queue in order to add a Connector
  * between them
@@ -323,10 +325,11 @@ var update_workspace = function() {
  * @param {String} segment htl7 segment type
  * @param {String}
  */
-var build_hl7json = function(segment_header, value) {
-  var hl7json = {segment_header: value};
-  console.log(hl7json);
-}
+var build_hl7json = function(name, value) {
+  // TODO use hl7json.js Objects
+  hl7msg.push(set_field(name, value));
+  console.log(hl7msg);
+};
 
 /**
  * Update Connector properties
@@ -426,7 +429,6 @@ $("#connector-sub_items-lst").on("click", // Connector sub-items listener
 
 $("#connector-out_items-lst").on("click", // HL7 segments chooser listener
   function() {
-    var selected_segment = $(this).val();
-    build_hl7json($(this).text(),
-      $(this).val());
+    var selected_segment = $(this).val().pop();
+    build_hl7json(selected_segment);
 });

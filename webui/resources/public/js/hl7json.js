@@ -57,6 +57,15 @@ var set_field = function(name, value) {
       this.element_name = value;
       break;
   }
+  var isSegment = seg_types.forEach(function(segment) {
+    if(name == segment.type)
+      return segment.type;
+  });
+  if(isSegment = name) {
+    return isSegment;
+  } else {
+    return {name: value};
+  }
 };
 
 var Segment = function() {
