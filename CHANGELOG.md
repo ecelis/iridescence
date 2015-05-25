@@ -1,4 +1,14 @@
-### Long delayed, grrr.. (HEAD, master)
+### Maybe JavaScript wasn't the right choice for the UI :/ (HEAD, master)
+>Mon, 25 May 2015 07:35:30 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### Long delayed, grrr.. (origin/master, origin/HEAD)
 >Mon, 25 May 2015 06:57:27 -0500
 
 >
@@ -38,7 +48,7 @@
 
 
 
-### Deploy to test vServer (stage/master, origin/master, origin/HEAD)
+### Deploy to test vServer (stage/master)
 >Sun, 24 May 2015 18:44:30 -0500
 
 >

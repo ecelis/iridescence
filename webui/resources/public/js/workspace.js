@@ -101,6 +101,8 @@ var finish = paper.circle(paperW - 80, paperH - 75, 15)
 adapters.push(finish);
 
 var hl7msg = [];
+// TODO use something else to keek track of connectorca
+var current_connector;
 
 /**
  * Connect queue, Adapters are pushed to the queue in order to add a Connector
@@ -328,7 +330,6 @@ var update_workspace = function() {
 var build_hl7json = function(name, value) {
   // TODO use hl7json.js Objects
   hl7msg.push(set_field(name, value));
-  console.log(hl7msg);
 };
 
 /**
@@ -336,8 +337,9 @@ var build_hl7json = function(name, value) {
  * @method
  * @param {Integer} connector id
  */
-var update_connector = function(id) {
-  var adapter_src = paper.getById(id);
+var update_connector = function(adapter_id) {
+  // TODO adapter_src??
+  var adapter_src = paper.getById(adapter_id);
   adapter_src.data("props").items.forEach(function(item) {
     $("#connector-items-lst")
       .append('<option value="' +
