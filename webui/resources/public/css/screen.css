@@ -7,8 +7,12 @@ body {
 }
 
 #connector select {
-height:140px; width:140px; box-sizing: border-box;
-              -moz-box-sizing: border-box; -webkit-box-sizing: border-box;
+  height:140px; width:140px; box-sizing: border-box;
+            -moz-box-sizing: border-box; -webkit-box-sizing: border-box;
+}
+
+#connector-out_items-lst {
+  height:100px; width:140px;
 }
 
 #drop_zone {

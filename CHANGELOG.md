@@ -1,4 +1,14 @@
-### Deploy to test vServer (HEAD, master)
+### Deply to test server (HEAD, master)
+>Sun, 24 May 2015 20:21:08 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### Deploy to test vServer (stage/master, origin/master, origin/HEAD)
 >Sun, 24 May 2015 18:44:30 -0500
 
 >
@@ -8,7 +18,7 @@
 
 
 
-### Deploy to test vServer (origin/master, origin/HEAD)
+### Deploy to test vServer
 >Sun, 24 May 2015 18:26:09 -0500
 
 >
