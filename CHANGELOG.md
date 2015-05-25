@@ -1,4 +1,14 @@
-### Maybe JavaScript wasn't the right choice for the UI :/ (HEAD, master)
+### New, simpler mirth based layout (HEAD, alt-layout)
+>Mon, 25 May 2015 10:59:25 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### Maybe JavaScript wasn't the right choice for the UI :/ (origin/master, origin/HEAD, master)
 >Mon, 25 May 2015 08:20:41 -0500
 
 >
@@ -8,7 +18,7 @@
 
 
 
-### Maybe JavaScript wasn't the right choice for the UI :/ (origin/master, origin/HEAD)
+### Maybe JavaScript wasn't the right choice for the UI :/
 >Mon, 25 May 2015 07:35:30 -0500
 
 >
