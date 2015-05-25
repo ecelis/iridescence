@@ -324,7 +324,7 @@ var update_workspace = function() {
  * @param {String}
  */
 var build_hl7json = function(segment_header, value) {
-  var h7ljson = {segment_header: value};
+  var hl7json = {segment_header: value};
   console.log(hl7json);
 }
 
@@ -427,6 +427,6 @@ $("#connector-sub_items-lst").on("click", // Connector sub-items listener
 $("#connector-out_items-lst").on("click", // HL7 segments chooser listener
   function() {
     var selected_segment = $(this).val();
-    build_hl7json(selected_segment,
-      $("#connector-sub_items-lst").val());
+    build_hl7json($(this).text(),
+      $(this).val());
 });
