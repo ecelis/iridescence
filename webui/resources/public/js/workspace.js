@@ -317,9 +317,21 @@ var update_workspace = function() {
 }
 
 /**
+ * Build JSON representation of an HL7 message with data from
+ * connector
+ * @method
+ * @param {String} segment htl7 segment type
+ * @param {String}
+ */
+var build_hl7json = function(segment_header, value) {
+  var h7ljson = {segment_header: value};
+  console.log(hl7json);
+}
+
+/**
  * Update Connector properties
  * @method
- * @param id connector id
+ * @param {Integer} connector id
  */
 var update_connector = function(id) {
   var adapter_src = paper.getById(id);
@@ -328,10 +340,6 @@ var update_connector = function(id) {
       .append('<option value="' +
               item.name + '">' + item.name + '</option>');
   });
-  //console.log(adapter_src.data("props"));
-
- // adapter_src.data("props").id = id;
-//  adapter_src.data("props").name = connector.title;
 }
 
 // TODO Check if the values aren't overwriten when refreshing webpage
@@ -394,7 +402,7 @@ $('#save-btn').click(function() {       // Save workspace button listener
 
 $("#files").change(util.handleFileSelect);   // File upload listener
 
-$("#connector-items-lst").change(function() {   // Connector source listener
+$("#connector-items-lst").on("click change", function() {   // Connector source listener
   $("#connector-sub_items-lst").find("option").remove().end();
   var name = $(this).val();
   var values = [];
@@ -408,4 +416,17 @@ $("#connector-items-lst").change(function() {   // Connector source listener
         .append('<option value="' + name + '.' + value + '">' +
                 value + '</option>');
   });
-})
+});
+
+$("#connector-sub_items-lst").on("click", // Connector sub-items listener
+  function() {
+    var selected_sub_item = $(this).val();
+    console.log(selected_sub_item);
+});
+
+$("#connector-out_items-lst").on("click", // HL7 segments chooser listener
+  function() {
+    var selected_segment = $(this).val();
+    build_hl7json(selected_segment,
+      $("#connector-sub_items-lst").val());
+});
