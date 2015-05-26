@@ -373,11 +373,12 @@ $('#adapter-type-lst li a').on("click change",  // Adapter type listener
 var s_driver, s_host, s_src, s_user, s_password, s_url;
 
 var update_srcurl = function() {
-  s_url = $('#adapter-url').val(s_driver + "://" + s_host + "/" + s_src);
+  s_url = s_driver + "://" + s_host + "/" + s_src;
   // TODO use Array for URL parameters
   if(s_usr != null) {
     s_url += "?user=" + s_user + "&password=" + s_password
   }
+  $('#adapter-url').val(s_url);
 };
 
 $('#adapter-driver-lst li a').on("click change",
