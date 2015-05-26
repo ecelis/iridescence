@@ -184,7 +184,7 @@ var modify = function() {
     // TODO initialize properties, Name, etc
     $('#properties a[href="#connector"]').tab('show');
     var adapter_id = property.name.split("to")[0];
-    update_connector(adapter_id);
+    update_connector(this);
   }
 }
 
