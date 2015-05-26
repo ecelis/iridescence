@@ -391,7 +391,7 @@ var update_srcurl = function() {
 var update_tgturl = function() {
   //t_driver = $('#connector-driver-lst li a').text().toLowerCase().replace(' ','');
   t_host = $('#connector-host').val();
-  t_target = $('#connector-source').val();
+  t_target = $('#connector-target').val();
   t_user = $('#connector-user').val();
   t_password = $('#connector-password').val();
   t_url = t_driver + "://" + t_host + "/" + t_target;
@@ -422,6 +422,7 @@ $('#adapter :input').on("click change keyup",
       function() {
         update_srcurl();
 });
+
 $('#connector :input').on("click change keyup",   // Connector properties listener
       function() {
         // TODO update_adapter($('#adapter-id').val());

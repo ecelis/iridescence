@@ -1,4 +1,14 @@
 ### UI refactor (HEAD, alt-layout)
+>Tue, 26 May 2015 17:53:35 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### UI refactor
 >Tue, 26 May 2015 17:47:20 -0500
 
 >
