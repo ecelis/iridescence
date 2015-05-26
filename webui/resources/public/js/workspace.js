@@ -238,7 +238,6 @@ var addToDiagram = function (adapter) {
                     "name":null,
                     "url": null,
                     "items": null})
-              .drag(move, dragger, up)
               .click(modify);
     adapters.push(newadapter);   // Append new adapter to adapters
     if(adapters.length == 3) {  // First adapter of new workspace
