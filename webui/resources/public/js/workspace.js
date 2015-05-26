@@ -360,7 +360,7 @@ $('#workspace :input').on("click change keyup", // Workspace properties listener
 
 $('#adapter :input').on("click change keyup",   // Adapter properties listener
       function() {
-        update_adapter($('#adapter-id').val());
+        update_adapter(adapters[3].id);
 });
 
 $('#adapter-type-lst li a').on("click change",  // Adapter type listener
