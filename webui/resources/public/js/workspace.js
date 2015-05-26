@@ -319,7 +319,7 @@ var update_workspace = function() {
  * @method
  * @param {Integer} connector id
  */
-var update_connector = function(adapter_id) {
+var update_connector = function(adapter) {
   // TODO adapter_src??
   var adapter_src = paper.getById(adapter.id);
   adapter_src.data("props").items.forEach(function(item) {
