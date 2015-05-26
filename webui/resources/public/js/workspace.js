@@ -388,10 +388,14 @@ $('#adapter-driver-lst li a').on("click change",
         update_adapter($('#adapter-id').val());
 });
 
+$('#adapter :input').on("click change keyup",
+      function() {
+        update_srcurl();
+});
 $('#connector :input').on("click change keyup",   // Connector properties listener
       function() {
         // TODO update_adapter($('#adapter-id').val());
-        update_srcurl();
+        // update_srcurl();
 });
 
 // TODO Remove from workspace is badly broken
