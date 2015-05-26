@@ -319,14 +319,15 @@ var update_workspace = function() {
  * @method
  * @param {Integer} connector id
  */
-var update_connector = function(adapter) {
+var update_connector = function(connector) {
   // TODO adapter_src??
-  var adapter_src = paper.getById(adapter.id);
-  adapter_src.data("props").items.forEach(function(item) {
-    $("#connector-items-lst")
-      .append('<option value="' +
-              item.name + '">' + item.name + '</option>');
-  });
+  var adapter_src = paper.getById(connector.id);
+  if(adapter_src != undefined)
+    adapter_src.data("props").items.forEach(function(item) {
+      $("#connector-items-lst")
+        .append('<option value="' +
+                item.name + '">' + item.name + '</option>');
+    });
 }
 
 // TODO Check if the values aren't overwriten when refreshing webpage
