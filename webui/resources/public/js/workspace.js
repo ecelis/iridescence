@@ -406,7 +406,15 @@ $('#adapter-driver-lst li a').on("click change",
       function() {
         s_driver = $(this).text().toLowerCase().replace(' ','');
         $('#btn-adapter-driver').html(s_driver + '<span class="caret"></span>');
-        $('#adapter-url').val(s_driver + "://host:port/database?user=someone&password=secret");
+        $('#adapter-url').val(s_driver + "://host:port/source?user=someone&password=secret");
+        update_adapter($('#adapter-id').val());
+});
+
+$('#connector-driver-lst li a').on("click change",
+      function() {
+        t_driver = $(this).text().toLowerCase().replace(' ','');
+        $('#btn-connector-driver').html(t_driver + '<span class="caret"></span>');
+        $('#connector-url').val(t_driver + "://host:port/target?user=someone&password=secret");
         update_adapter($('#adapter-id').val());
 });
 
