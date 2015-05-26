@@ -173,7 +173,8 @@ var release = function() {
  * */
 var modify = function() {
   property = this.data("props");
-  if(this.type != "path") {
+  // TODO clean all those ugly hacks introduced since alt-layout
+  if(this.type != "circle") {
     $('#adapter-name').val(property.name);
     $('#adapter-url').val(property.url);
     $('#adapter-id').val(this.id);
