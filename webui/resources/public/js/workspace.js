@@ -391,12 +391,12 @@ $('#adapter-driver-lst li a').on("click change",
 $('#adapter-url').on("click change",
       function() {
         s_url = $(this).val().toLowerCase().replace(' ','');
-        update_srcurl();
 });
 
 $('#connector :input').on("click change keyup",   // Connector properties listener
       function() {
         // TODO update_adapter($('#adapter-id').val());
+        update_srcurl();
 });
 
 // TODO Remove from workspace is badly broken
