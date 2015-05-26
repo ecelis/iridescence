@@ -38,27 +38,30 @@
         </div>
       </div>
     </div>
+    <div class="col-xs-3">
+      <div class="form-group">
+        <div class="input-group input-group-sm">
+          <div class="input-group-btn">
+            <button type="button" class="btn btn-default btn-sm dropdown-toggle"
+              data-toggle="dropdown" aria-expanded="false"
+              id="btn-work-type">Driver
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" id="work-type-lst" role="menu">
+              <li><a>PostgreSQL</a></li> <!-- TODO Fix keyboard -->
+              <li><a>MySQL</a></li>
+              <li><a>MS SQL Server</a></li>
+              <li><a>Oracle</a></li>
+            </ul>
+          </div>
+          <input type="url" class="form-control" arial-label="..."
+          placeholder="url://" name="adapter-url" id="adapter-url">
+        </div>
+      </div>
+    </div>
   </div>
   <div class="row">
-    <div class="col-xs-3">
-      <div class="form-group"><div class="input-group input-group-sm">
-        <div class="input-group-btn">
-          <button type="button" class="btn btn-default btn-sm dropdown-toggle"
-            data-toggle="dropdown" aria-expanded="false"
-            id="btn-work-type">Driver
-            <span class="caret"></span></button>
-          <ul class="dropdown-menu" id="work-type-lst" role="menu">
-            <li><a>PostgreSQL</a></li> <!-- TODO Fix keyboard -->
-            <li><a>MySQL</a></li>
-            <li><a>MS SQL Server</a></li>
-            <li><a>Oracle</a></li>
-          </ul>
-        </div> <!-- /work-group -->
-        <input type="url" class="form-control" arial-label="..."
-        placeholder="url://" name="adapter-url" id="adapter-url">
-      </div></div> <!-- /input- group -->
-    </div>
-    <div class="col-xs-2">
+        <div class="col-xs-2">
       <div class="form-group">
         <div class="input-group input-group-sm">
           <span class="input-group-addon">Host</span>
