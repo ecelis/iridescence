@@ -1,4 +1,14 @@
-### WIP Adapter new layout (HEAD, alt-layout)
+### REFACTOR workspace (HEAD, alt-layout)
+>Tue, 26 May 2015 07:29:53 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### WIP Adapter new layout (origin/alt-layout)
 >Mon, 25 May 2015 13:24:05 -0500
 
 >
@@ -8,7 +18,7 @@
 
 
 
-### New, simpler mirth based layout (origin/alt-layout)
+### New, simpler mirth based layout
 >Mon, 25 May 2015 10:59:25 -0500
 
 >
