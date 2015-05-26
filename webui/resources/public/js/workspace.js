@@ -375,6 +375,7 @@ $('#adapter-driver-lst li a').on("click change",
         var driver = $(this).text().toUpperCase().replace(' ','');
         $('#btn-adapter-driver').html(driver + '<span class="caret"></span>');
         $('#adapter-url').val(driver.toLowerCase() + "://host:port/database?user=someone&password=secret");
+        update_adapter($('#adapter-id').val());
 });
 
 $('#connector :input').on("click change keyup",   // Connector properties listener
