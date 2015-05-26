@@ -56,12 +56,9 @@ var connections = [];                 // Connections between adapters
 var connect = [];                     // Temporary queue for connections
 var adapters = paper.set();           // Create a default adapters
 var work_guid = util.guid();          // Generate adapters GUID
-var toolbar = paper.rect(tbX, tbY,
-                         tbW,
-                         tbH);        // Toolbar
 // We'll create adapters based on generic_adapter
 var generic_adapter = paper
-  .rect(tbX + 5, tbY + 5, 30, 20)
+  .rect(-100, -100, 30, 20)
   .attr({"fill": "#CCC",
         "fill-opacity": 0,
         "stroke-width": 3,
@@ -69,7 +66,7 @@ var generic_adapter = paper
 
 // Same as generic_adapter its a base connector, derive others from it
 var connector = paper
-  .path("M9 35L40 60")
+  .path("M-10 0L0 0")
   .attr({"stroke-width": 3,
         cursor: "move"});
 
