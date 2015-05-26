@@ -372,7 +372,7 @@ $('#adapter-type-lst li a').on("click change",  // Adapter type listener
 
 $('#adapter-driver-lst li a').on("click change",
       function() {
-        console.log($(this).text().toUpperCase().replace(' ',''););
+        console.log($(this).text().toUpperCase().replace(' ',''));
 });
 
 $('#connector :input').on("click change keyup",   // Connector properties listener
