@@ -394,7 +394,7 @@ var update_tgturl = function() {
   t_target = $('#connector-source').val();
   t_user = $('#connector-user').val();
   t_password = $('#connector-password').val();
-  t_url = t_driver + "://" + t_host + "/" + t_src;
+  t_url = t_driver + "://" + t_host + "/" + t_target;
   // TODO use Array for URL parameters
   if(t_user != null) {
     t_url += "?user=" + t_user + "&password=" + t_password
