@@ -401,7 +401,7 @@ $('#adapter :input').on("click change keyup",
 $('#connector :input').on("click change keyup",   // Connector properties listener
       function() {
         // TODO update_adapter($('#adapter-id').val());
-        // update_srcurl();
+        update_tgturl();
 });
 
 // TODO Remove from workspace is badly broken
