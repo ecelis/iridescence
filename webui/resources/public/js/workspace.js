@@ -97,8 +97,7 @@ var finish = paper.circle(paperW - 80, paperH - 75, 15)
         cursor: "move"})
   .data("props", {"type":"FINISH", "name":"Finish", "url":null});
 adapters.push(finish);
-// Add adapter TODO its temporary since alt-layout
-addToDiagram(connector);
+
 /**
  * Connect queue, Adapters are pushed to the queue in order to add a Connector
  * between them
@@ -417,3 +416,9 @@ $("#connector-out_items-lst").on("click", // HL7 segments chooser listener
     var selected_segment = $(this).val().pop();
     //build_hl7json(selected_segment);
 });
+
+
+
+/// To execute onLoad() TODO temporary since alt-layout
+// Add adapter TODO its temporary since alt-layout
+addToDiagram(connector);
