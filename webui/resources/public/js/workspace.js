@@ -322,7 +322,7 @@ var update_workspace = function() {
 var update_connector = function(connector) {
   // TODO adapter_src??
   var adapter_src = paper.getById(connector.id);
-  if(adapter_src != undefined)
+  if(adapter_src.data("props").items != undefined)
     adapter_src.data("props").items.forEach(function(item) {
       $("#connector-items-lst")
         .append('<option value="' +
