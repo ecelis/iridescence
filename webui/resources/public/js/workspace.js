@@ -388,11 +388,6 @@ $('#adapter-driver-lst li a').on("click change",
         update_adapter($('#adapter-id').val());
 });
 
-$('#adapter-url').on("click change",
-      function() {
-        s_url = $(this).val().toLowerCase().replace(' ','');
-});
-
 $('#connector :input').on("click change keyup",   // Connector properties listener
       function() {
         // TODO update_adapter($('#adapter-id').val());
