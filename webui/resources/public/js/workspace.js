@@ -215,7 +215,7 @@ var addToDiagram = function (adapter) {
           "title": id = connect[0].id + 'to' + connect[1].id,
           "stroke-width": 3});
       setData(newConnection.line);
-      newConnection.line.click(modify);
+      // TODO remove newConnection.line.click(modify);
       connections.push(newConnection);
       adapters.push(newConnection.line);
       connect = [];               // Empty queue
