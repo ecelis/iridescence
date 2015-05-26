@@ -372,6 +372,7 @@ $('#adapter-type-lst li a').on("click change",  // Adapter type listener
 });
 
 var s_driver, s_host, s_src, s_user, s_password, s_url;
+var t_driver, t_host, t_target, t_user, t_password, t_url;
 
 var update_srcurl = function() {
   //s_driver = $('#adapter-driver-lst li a').text().toLowerCase().replace(' ','');
@@ -385,6 +386,20 @@ var update_srcurl = function() {
     s_url += "?user=" + s_user + "&password=" + s_password
   }
   $('#adapter-url').val(s_url);
+};
+
+var update_tgturl = function() {
+  //t_driver = $('#connector-driver-lst li a').text().toLowerCase().replace(' ','');
+  t_host = $('#connector-host').val();
+  t_target = $('#connector-source').val();
+  t_user = $('#connector-user').val();
+  t_password = $('#connector-password').val();
+  t_url = t_driver + "://" + t_host + "/" + t_src;
+  // TODO use Array for URL parameters
+  if(t_user != null) {
+    t_url += "?user=" + t_user + "&password=" + t_password
+  }
+  $('#adapter-url').val(t_url);
 };
 
 $('#adapter-driver-lst li a').on("click change",
