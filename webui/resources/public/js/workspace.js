@@ -424,4 +424,4 @@ $("#connector-out_items-lst").on("click", // HL7 segments chooser listener
 addToDiagram(generic_adapter);
 connect_queue(generic_adapter);
 connect_queue(finish);
-
+addToDiagram(connector);
