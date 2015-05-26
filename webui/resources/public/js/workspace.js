@@ -334,15 +334,16 @@ $('#work-guid').val(work_guid);                   // Workspace GUID field
 $('#work-guid-label').html("Id: " + work_guid);   // Workspace GUID label
 // TODO Do this in one iteration of all
 // adapters
-generic_adapter.drag(move, dragger, release);     // Adapter onDrag listener
+//generic_adapter.drag(move, dragger, release);     // Adapter onDrag listener
 
 connector.click(function() {                      // Connector onClick listener
   addToDiagram(this)
 });
 
-start.drag(move, dragger, function(){});          // Start adapter onDrag
+//start.drag(move, dragger, function(){});          // Start adapter onDrag
 
-finish.drag(move, dragger, function(){}).click(modify); // Finish adapter onDrag
+//finish.drag(move, dragger, function(){}).click(modify); // Finish adapter onDrag
+finish.click(modify); // Finish adapter onDrag
 
 $('#work-type-lst li a').on("click change",       // Workspace type listener
       function() {
