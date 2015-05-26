@@ -415,7 +415,7 @@ $('#connector-driver-lst li a').on("click change",
         t_driver = $(this).text().toLowerCase().replace(' ','');
         $('#btn-connector-driver').html(t_driver + '<span class="caret"></span>');
         $('#connector-url').val(t_driver + "://host:port/target?user=someone&password=secret");
-        update_adapter($('#adapter-id').val());
+        update_connector(adapters[2]);
 });
 
 $('#adapter :input').on("click change keyup",
