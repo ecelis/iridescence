@@ -373,7 +373,7 @@ $('#adapter-type-lst li a').on("click change",  // Adapter type listener
 var s_driver, s_host, s_src, s_user, s_password, s_url;
 
 var update_srcurl = function() {
-  s_driver = $('#adapter-driver-lst li a').text().toLowerCase().replace(' ','');
+  //s_driver = $('#adapter-driver-lst li a').text().toLowerCase().replace(' ','');
   s_host = $('#adapter-host').val();
   s_src = $('#adapter-source').val();
   s_user = $('#adapter-user').val();
