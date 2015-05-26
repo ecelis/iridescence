@@ -373,7 +373,7 @@ $('#adapter-type-lst li a').on("click change",  // Adapter type listener
 $('#adapter-driver-lst li a').on("click change",
       function() {
         var driver = $(this).text().toUpperCase().replace(' ','');
-        $('#btn-adapter-driver').text(driver + '<span class="caret"></span>');
+        $('#btn-adapter-driver').html(driver + '<span class="caret"></span>');
         $('#adapter-url').val(driver.toLowerCase() + "://host:port/database?user=someone&password=secret");
 });
 
