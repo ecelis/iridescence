@@ -423,4 +423,5 @@ $("#connector-out_items-lst").on("click", // HL7 segments chooser listener
 // Add adapter TODO its temporary since alt-layout
 addToDiagram(generic_adapter);
 connect_queue(generic_adapter);
-connect_queue(connect_queue);
+connect_queue(finish);
+
