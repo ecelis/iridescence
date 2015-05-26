@@ -57,6 +57,7 @@ var connect = [];                     // Temporary queue for connections
 var adapters = paper.set();           // Create a default adapters
 var work_guid = util.guid();          // Generate adapters GUID
 // We'll create adapters based on generic_adapter
+// TODO avoid cloning in alt-yaout branch
 var generic_adapter = paper
   .rect(-100, -100, 30, 20)
   .attr({"fill": "#CCC",
@@ -65,12 +66,12 @@ var generic_adapter = paper
         cursor: "move"});
 
 // Same as generic_adapter its a base connector, derive others from it
+// TODO avoid cloning in alt-yaout branch
 var connector = paper
   .path("M-10 0L0 0")
   .attr({"stroke-width": 3,
         cursor: "move"});
 
-        // TODO Moar adapters
 /**
 * start does nothing, only serves as a visual aid for the flow
 */
@@ -96,7 +97,8 @@ var finish = paper.circle(paperW - 80, paperH - 75, 15)
         cursor: "move"})
   .data("props", {"type":"FINISH", "name":"Finish", "url":null});
 adapters.push(finish);
-
+// Add adapter TODO its temporary since alt-layout
+addToDiagram(connector);
 /**
  * Connect queue, Adapters are pushed to the queue in order to add a Connector
  * between them

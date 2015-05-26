@@ -1,4 +1,14 @@
 ### REFACTOR workspace (HEAD, alt-layout)
+>Tue, 26 May 2015 09:37:52 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### REFACTOR workspace
 >Tue, 26 May 2015 09:32:30 -0500
 
 >
