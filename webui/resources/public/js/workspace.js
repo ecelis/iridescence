@@ -370,12 +370,24 @@ $('#adapter-type-lst li a').on("click change",  // Adapter type listener
         update_adapter($('#adapter-id').val());
 });
 
+var s_driver, s_url;
+
+var update_adapter = function() {
+  $('#adapter-url').val();
+};
+
 $('#adapter-driver-lst li a').on("click change",
       function() {
-        var driver = $(this).text().toUpperCase().replace(' ','');
+        s_driver = $(this).text().toUpperCase().replace(' ','');
         $('#btn-adapter-driver').html(driver + '<span class="caret"></span>');
         $('#adapter-url').val(driver.toLowerCase() + "://host:port/database?user=someone&password=secret");
         update_adapter($('#adapter-id').val());
+});
+
+$('#adapter-url').on("click change",
+      function() {
+        s_url = $(this).val().toLowerCase().replace(' ','');
+        update_srcurl();
 });
 
 $('#connector :input').on("click change keyup",   // Connector properties listener
