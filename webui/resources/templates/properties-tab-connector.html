@@ -1,49 +1,53 @@
 <div role="tabpanel" class="tab-pane" id="connector">
   <div class="row">
     <div class="col-xs-2">
-      <div class="form-group"><div class="input-group input-group-sm">
-        <div class="input-group-btn">
-          <button type="button" class="btn btn-default btn-sm dropdown-toggle"
-            data-toggle="dropdown" aria-expanded="false"
-            id="btn-adapter-type">Type
-            <span class="caret"></span></button>
-          <ul class="dropdown-menu" id="adapter-type-lst" role="menu">
-            <li><a>SMTP Sender</a></li> <!-- TODO Fix keyboard -->
-            <li><a>Channel Writer</a></li> <!-- TODO Fix keyboard -->
-            <li><a>DICOM Sender</a></li> <!-- TODO Fix keyboard -->
-            <li><a>Database Writer</a></li> <!-- TODO Fix keyboard -->
-            <li><a>Document Writer</a></li>
-            <li><a>File Writer</a></li>
-            <li><a>HTTP Sender</a></li>
-            <li><a>JMS Sender</a></li>
-            <li><a>SMTP Sender</a></li>
-            <li><a>TCP Sender</a></li>
-            <li><a>Web Service Sender</a></li>
-          </ul>
-        </div> <!-- /btn-group -->
-      </div></div> <!-- /input- group -->
+      <div class="form-group">
+        <div class="input-group input-group-sm">
+          <div class="input-group-btn">
+            <button type="button" class="btn btn-default btn-sm dropdown-toggle"
+              data-toggle="dropdown" aria-expanded="false"
+              id="btn-connector-type">Type
+              <span class="caret"></span></button>
+            <ul class="dropdown-menu" id="connector-type-lst" role="menu">
+              <li><a>SMTP Sender</a></li> <!-- TODO Fix keyboard -->
+              <li><a>Channel Writer</a></li> <!-- TODO Fix keyboard -->
+              <li><a>DICOM Sender</a></li> <!-- TODO Fix keyboard -->
+              <li><a>Database Writer</a></li> <!-- TODO Fix keyboard -->
+              <li><a>Document Writer</a></li>
+              <li><a>File Writer</a></li>
+              <li><a>HTTP Sender</a></li>
+              <li><a>JMS Sender</a></li>
+              <li><a>SMTP Sender</a></li>
+              <li><a>TCP Sender</a></li>
+              <li><a>Web Service Sender</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="form-group">
+        <div class="input-group input-group-sm">
+          <div class="input-group-btn">
+            <button type="button" class="btn btn-default btn-sm dropdown-toggle"
+              data-toggle="dropdown" aria-expanded="false"
+              id="btn-connector-type">Driver
+              <span class="caret"></span></button>
+            <ul class="dropdown-menu" id="connector-type-lst" role="menu">
+              <li><a>PostgreSQL</a></li> <!-- TODO Fix keyboard -->
+              <li><a>MySQL</a></li>
+              <li><a>MS SQL Server</a></li>
+              <li><a>Oracle</a></li>
+            </ul>
+          </div>
+          <input type="url" class="form-control" arial-label="..."
+            placeholder="url://" name="connector-url" id="connector-url">
+        </div>
+      </div> <!-- /input- group -->
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-3">
-      <div class="form-group"><div class="input-group input-group-sm">
-        <div class="input-group-btn">
-          <button type="button" class="btn btn-default btn-sm dropdown-toggle"
-            data-toggle="dropdown" aria-expanded="false"
-            id="btn-work-type">Driver
-            <span class="caret"></span></button>
-          <ul class="dropdown-menu" id="work-type-lst" role="menu">
-            <li><a>PostgreSQL</a></li> <!-- TODO Fix keyboard -->
-            <li><a>MySQL</a></li>
-            <li><a>MS SQL Server</a></li>
-            <li><a>Oracle</a></li>
-          </ul>
-        </div> <!-- /work-group -->
-        <input type="url" class="form-control" arial-label="..."
-        placeholder="url://" name="adapter-url" id="adapter-url">
-      </div></div> <!-- /input- group -->
-    </div>
-    <div class="col-xs-2">
+        <div class="col-xs-2">
       <div class="form-group">
         <div class="input-group input-group-sm">
           <span class="input-group-addon">Host</span>
