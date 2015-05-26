@@ -422,6 +422,6 @@ $("#connector-out_items-lst").on("click", // HL7 segments chooser listener
 /// To execute onLoad() TODO temporary since alt-layout
 // Add adapter TODO its temporary since alt-layout
 addToDiagram(generic_adapter);
-connect_queue(adapters[3]);
+connect_queue(adapters[2]);
 connect_queue(finish);
 addToDiagram(connector);
