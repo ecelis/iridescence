@@ -1,4 +1,14 @@
-### WIP UI refactor (HEAD, alt-layout)
+### UI refactor (HEAD, alt-layout)
+>Tue, 26 May 2015 13:50:50 -0500
+
+>
+
+>Commiter: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+
+
+
+### WIP UI refactor (origin/alt-layout)
 >Tue, 26 May 2015 11:53:44 -0500
 
 >
@@ -358,7 +368,7 @@
 
 
 
-### REFACTOR workspace (origin/alt-layout)
+### REFACTOR workspace
 >Tue, 26 May 2015 07:29:53 -0500
 
 >
