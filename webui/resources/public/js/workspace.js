@@ -384,7 +384,7 @@ $('#adapter-driver-lst li a').on("click change",
       function() {
         s_driver = $(this).text().toUpperCase().replace(' ','');
         $('#btn-adapter-driver').html(s_driver + '<span class="caret"></span>');
-        $('#adapter-url').val(driver.toLowerCase() + "://host:port/database?user=someone&password=secret");
+        $('#adapter-url').val(s_driver.toLowerCase() + "://host:port/database?user=someone&password=secret");
         update_adapter($('#adapter-id').val());
 });
 
