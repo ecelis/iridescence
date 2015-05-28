@@ -406,7 +406,7 @@ $('#adapter-driver-lst li a').on("click change",
       function() {
         s_driver = $(this).text().toLowerCase().replace(' ','');
         $('#btn-adapter-driver').html(s_driver + '<span class="caret"></span>');
-        $('#adapter-url').val(s_driver + "://host:port/source?user=someone&password=secret");
+        //$('#adapter-url').val(s_driver + "://host:port/source?user=someone&password=secret");
         update_adapter($('#adapter-id').val());
 });
 
@@ -414,7 +414,7 @@ $('#connector-driver-lst li a').on("click change",
       function() {
         t_driver = $(this).text().toLowerCase().replace(' ','');
         $('#btn-connector-driver').html(t_driver + '<span class="caret"></span>');
-        $('#connector-url').val(t_driver + "://host:port/target?user=someone&password=secret");
+        //$('#connector-url').val(t_driver + "://host:port/target?user=someone&password=secret");
         update_connector(adapters[2]);
 });
 
@@ -442,7 +442,7 @@ $('#save-btn').click(function() {       // Save workspace button listener
   save()
 });
 
-$("#files").change(util.handleFileSelect);   // File upload listener
+//$("#files").change(util.handleFileSelect);   // File upload listener
 
 $("#connector-items-lst").on("click change", function() {   // Connector source listener
   $("#connector-sub_items-lst").find("option").remove().end();
@@ -480,3 +480,73 @@ addToDiagram(generic_adapter);
 connect_queue(adapters[2]);
 connect_queue(finish);
 addToDiagram(connector);
+/*
+MSH|^~\&||SEDNA HOSPITAL, S.A. DE C.V.||NIMBOIMG|201503241450||ORM^O01|Message_Control_ID|P|2.6
+PID|1||8888888||XXXXXXX^XXXXXX^XXXXXXXXX|MALDONADO|888888888888|F|||^XXXXX 88 XXXXXXXXXXX XXXXXXXXX^XXXXXX^XX^88888^XX||88888888
+PV1|1|I|^URGENCIAS CONSULTORIO^CON. 01^URGENCIAS||||||||||||||||1002895|||||||||||||||||||||||||20150324
+ORC|NW|1006457|||IP||^^^20150324143000^^^ROUTINE||201503241430|||910057^ITURBE&FUENTES^ARMANDO^|URGENCIAS
+OBR|1|197537||32980^CR Columna Cervical 1 Proyeccion|||20150324|||||||||||||||||
+   */
+var sample = [
+{
+  text: 'MESSAGE',
+         nodes: [
+         {
+          text: "MSH",
+                nodes: [
+                {text: "^~\\&"},
+                {text: "SEDNA HOSPITAL, S.A. DE C.V."},
+                {text: "NIMBOIMG"},
+                {text: "201503241450"},
+                {text: "ORM^O01"},
+                {text: "Message_Control_ID"},
+                {text: "P"},
+                {text: "2.6"}
+                  ]
+         },
+         {
+          text: "PID",
+          nodes: [
+            {text: "1"},
+            {text: "8888888"},
+            {text: "XXXXXXX^XXXXXX^XXXXXXXXX"},
+            {text: "MALDONADO"},
+            {text: "888888888888"},
+            {text: "F"},
+            {text: "^XXXXX 88 XXXXXXXXXXX XXXXXXXXX^XXXXXX^XX^88888^XX"},
+            {text: "88888888"}
+          ]
+         },
+         {text: "PV1",
+           nodes: [
+             {text: "1"},
+             {text: "I"},
+             {text: "^URGENCIAS CONSULTORIO^CON. 01^URGENCIAS"},
+             {text: "1002895"},
+             {text: "20150324"}
+           ]},
+           {
+            text: "ORC",
+            nodes: [
+              {text: "NW"},
+              {text: "1006457"},
+              {text: "IP"},
+              {text: "^^^20150324143000^^^ROUTINE"},
+              {text: "201503241430"},
+              {text: "910057^ITURBE&FUENTES^ARMANDO^"},
+              {text: "URGENCIAS"}
+            ]},
+            {
+              text: "OBR",
+              nodes: [
+                {text: "1"},
+                {text: "197537"},
+                {text: "32980^CR Columna Cervical 1 Proyeccion"},
+                {text: "20150324"}
+            ]}
+           ]
+}
+];
+$("#up").click(function() {
+  $('#tree').treeview({data: sample});
+});
