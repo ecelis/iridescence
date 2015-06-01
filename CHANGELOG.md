@@ -1,4 +1,9 @@
-### UI refactor (HEAD, alt-layout)
+### UPDATE gitignore (HEAD, alt-layout)
+>Mon, 1 Jun 2015 18:29:17 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### UI refactor
 >Mon, 1 Jun 2015 18:05:13 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)

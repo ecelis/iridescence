@@ -47,3 +47,5 @@ dbPort
 **/logs
 *.db
 data/**
+mirth
+**/doc
