@@ -1,4 +1,9 @@
-### UPDATE gitignore (HEAD, alt-layout)
+### ADD hl7yaml checkouts directory placeholder' (HEAD, alt-layout)
+>Mon, 1 Jun 2015 18:29:56 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### UPDATE gitignore
 >Mon, 1 Jun 2015 18:29:17 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
