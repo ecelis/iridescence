@@ -89,6 +89,13 @@ Util.prototype.srctype = [
    'Web Service Listener'
 ];
 
+Util.prototype.srcdriver = [
+  'PostgreSQL',
+  'MySQL',
+  'SQL Server',
+  'Oracle'
+];
+
 Util.prototype.tgttype = [
   'SMTP Sender',
   'Channel Writer',
@@ -101,6 +108,12 @@ Util.prototype.tgttype = [
   'SMTP Sender',
   'TCP Sender',
   'Web Service Sender'
+];
+
+Util.prototype.tgtdriver = [
+  'file',
+  'ftp',
+  'scp'
 ];
 
 // From http://raphaeljs.com/graffle.html

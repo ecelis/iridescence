@@ -1,4 +1,9 @@
-### ADD hl7yaml checkouts directory placeholder' (HEAD, alt-layout)
+### UI refactor (HEAD, alt-layout)
+>Mon, 1 Jun 2015 18:35:46 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### ADD hl7yaml checkouts directory placeholder'
 >Mon, 1 Jun 2015 18:29:56 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
