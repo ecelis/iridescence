@@ -69,7 +69,24 @@
               <div id="drop_zone">Drop files here</div>
               <output id="list"></output>
               <button id="up" value="Upload">Upload</button>
-              <div id="tree">...</div>
+              <div class="tab-panel">
+                <!-- Navigation Tabs -->
+                <ul class="nav nav-tabs" role="tablist" id="datamap">
+                <li role="presentation" class="active">
+                  <a href="#datasrc" aria-controls="datasrc"
+                    role="tab" data-toggle="tab">Source</a></li>
+                <li role="presentation">
+                  <a href="#datatarget" aria-controls="datatarget"
+                    role="tab" data-toggle="tab">Target</a></li>
+                </ul>
+                <!-- Tab Content -->
+                <div class="tab-content">
+                  <div role="tabpanel" class="tab-pane active" id="datasrc">...</div>
+                  <div role="tabpanel" class="tab-pane" id="datatarget">
+                    <div id="tree"></div>
+                  </div>
+                </div> <!-- /tab-content -->
+              </div>
             </div>
           </div>
         </div>

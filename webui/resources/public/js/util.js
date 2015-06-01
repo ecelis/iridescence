@@ -75,7 +75,33 @@ Util.prototype.check_api = function() {
   } else {
     alert('The File APIs are not fully supported in this browser.');
   }
-}
+};
+
+Util.prototype.srctype = [
+  'Channel Reader',
+  'DICOM Listener',
+   'Database Reader',
+   'File Reader',
+   'HTTP Listener',
+   'JMS Listener',
+   'JavaScript Reader',
+   'TCP Listener',
+   'Web Service Listener'
+];
+
+Util.prototype.tgttype = [
+  'SMTP Sender',
+  'Channel Writer',
+  'DICOM Sender',
+  'Database Writer',
+  'Document Writer',
+  'File Writer',
+  'HTTP Sender',
+  'JMS Sender',
+  'SMTP Sender',
+  'TCP Sender',
+  'Web Service Sender'
+];
 
 // From http://raphaeljs.com/graffle.html
 Raphael.fn.connection = function (obj1, obj2, line, bg) {
