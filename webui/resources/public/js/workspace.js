@@ -363,16 +363,6 @@ $('#adapter :input').on("click change keyup",   // Adapter properties listener
         update_adapter(adapters[3].id);
 });
 
-/*
-$('#adapter-type-lst li a').on("click change",  // Adapter type listener
-      function() {
-        var type = $(this).text().toUpperCase().replace(' ','');
-        $('#btn-adapter-type').html(type + '<span class="caret"></span>');
-        $('#adapter-type').val(type);
-        update_adapter($('#adapter-id').val());
-});
-*/
-
 var src_driver, src_host, src_src, src_user, src_password, src_url;
 var tgt_driver, tgt_host, tgt_message, tgt_user, tgt_password, tgt_url;
 
@@ -405,6 +395,7 @@ var update_tgturl = function() {
 };
 
 var fill_adapter_driver = function(src_type) {
+  $("#adapter-driver-lst").find("li").remove().end();
   var items = [];
   util.srctype[src_type].forEach(function(item) {
     items.push('<li><a href="#">'+item+'</a></li>');
@@ -412,9 +403,8 @@ var fill_adapter_driver = function(src_type) {
   $('#adapter-driver-lst').append(items.join(''));
   $('#adapter-driver-lst li a').on("click change",
       function() {
-        s_driver = $(this).text().toLowerCase().replace(' ','');
-        $('#btn-adapter-driver').html(s_driver + '<span class="caret"></span>');
-        //$('#adapter-url').val(s_driver + "://host:port/source?user=someone&password=secret");
+        src_driver = $(this).text().toLowerCase().replace(' ','');
+        $('#btn-adapter-driver').html(src_driver + '<span class="caret"></span>');
         update_adapter($('#adapter-id').val());
       });
 }

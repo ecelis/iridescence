@@ -1,4 +1,9 @@
 ### UI refactor (HEAD, alt-layout)
+>Tue, 2 Jun 2015 07:43:05 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### UI refactor
 >Tue, 2 Jun 2015 07:32:55 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
