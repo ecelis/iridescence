@@ -402,6 +402,19 @@ var update_tgturl = function() {
   $('#adapter-url').val(t_url);
 };
 
+var fill_adapter_types = function() {
+  var items = [];
+  util.srctype.forEach(function(item) {
+    items.push('<li><a href="#">'+item+'</a></li>');
+  });
+  $('#adapter-type-lst').append(items.join(''));
+  $('#adapter-type-lst li a').on('click change',
+        function() {
+          var src_type = $(this).text().toLowerCase().replace(' ', '');
+          $('#btn-adapter-type').html(src_type + '<span class="caret"></span>');
+  });
+};
+
 $('#adapter-driver-lst li a').on("click change",
       function() {
         s_driver = $(this).text().toLowerCase().replace(' ','');
@@ -549,4 +562,8 @@ var sample = [
 ];
 $("#up").click(function() {
   $('#tree').treeview({data: sample});
+});
+
+$(document).ready(function() {
+  fill_adapter_types();
 });
