@@ -402,6 +402,21 @@ var update_tgturl = function() {
   $('#adapter-url').val(t_url);
 };
 
+var fill_adapter_driver = function(src_type) {
+  var items = [];
+  util.srctype[src_type].forEach(function(item) {
+    items.push('<li><a href="#">'+item+'</a></li>');
+  });
+  $('#adapter-driver-lst').append(items.join(''));
+  $('#adapter-driver-lst li a').on("click change",
+      function() {
+        s_driver = $(this).text().toLowerCase().replace(' ','');
+        $('#btn-adapter-driver').html(s_driver + '<span class="caret"></span>');
+        //$('#adapter-url').val(s_driver + "://host:port/source?user=someone&password=secret");
+        update_adapter($('#adapter-id').val());
+      });
+}
+
 var fill_adapter_types = function() {
   var items = [];
   for(var key in util.srctype) {
@@ -409,20 +424,13 @@ var fill_adapter_types = function() {
   };
   $('#adapter-type-lst').append(items.join(''));
   $('#adapter-type-lst li a').on('click change',
-        function() {
-          var src_type = $(this).text();
-          $('#btn-adapter-type').html(src_type + '<span class="caret"></span>');
-  });
+      function() {
+        var src_type = $(this).text();
+        $('#btn-adapter-type').html(src_type + '<span class="caret"></span>');
+        fill_adapter_driver($(this).text())
+      });
 }
 
-
-$('#adapter-driver-lst li a').on("click change",
-      function() {
-        s_driver = $(this).text().toLowerCase().replace(' ','');
-        $('#btn-adapter-driver').html(s_driver + '<span class="caret"></span>');
-        //$('#adapter-url').val(s_driver + "://host:port/source?user=someone&password=secret");
-        update_adapter($('#adapter-id').val());
-});
 
 $('#connector-driver-lst li a').on("click change",
       function() {
