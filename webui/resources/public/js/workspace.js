@@ -360,7 +360,7 @@ $('#workspace :input').on("click change keyup", // Workspace properties listener
 
 $('#adapter :input').on("click change keyup",   // Adapter properties listener
       function() {
-        update_adapter(adapters[3].id);
+        update_adapter(adapters[2].id); // TODO fixed value since alt-layout
 });
 
 var src_driver, src_host, src_src, src_user, src_password, src_url;
