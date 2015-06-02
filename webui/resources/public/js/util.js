@@ -77,43 +77,44 @@ Util.prototype.check_api = function() {
   }
 };
 
-Util.prototype.srctype = [
-  'Channel Reader',
-  'DICOM Listener',
-   'Database Reader',
-   'File Reader',
-   'HTTP Listener',
-   'JMS Listener',
-   'JavaScript Reader',
-   'TCP Listener',
-   'Web Service Listener'
+Util.prototype.file_driver = [
+  'file',
+  'ftp',
+  'scp'
 ];
 
-Util.prototype.srcdriver = [
+Util.prototype.db_driver = [
   'PostgreSQL',
   'MySQL',
   'SQL Server',
   'Oracle'
 ];
 
-Util.prototype.tgttype = [
-  'SMTP Sender',
-  'Channel Writer',
-  'DICOM Sender',
-  'Database Writer',
-  'Document Writer',
-  'File Writer',
-  'HTTP Sender',
-  'JMS Sender',
-  'SMTP Sender',
-  'TCP Sender',
-  'Web Service Sender'
+
+Util.prototype.srctype = [
+  {'Channel Reader': []},
+  {'DICOM Listener': []},
+  {'Database Reader': this.db_driver},
+  {'File Reader': this.file_driver},
+  {'HTTP Listener': []},
+  {'JMS Listener': []},
+  {'JavaScript Reader': []},
+  {'TCP Listener': []},
+  {'Web Service Listener': []}
 ];
 
-Util.prototype.tgtdriver = [
-  'file',
-  'ftp',
-  'scp'
+Util.prototype.tgttype = [
+  {'SMTP Sender': []},
+    {'Channel Writer': []},
+      {'DICOM Sender': []},
+      {'Database Writer': this.db_driver},
+      {'Document Writer': []},
+  {'File Writer': this.file_driver},
+  {'HTTP Sender': []},
+  {'JMS Sender': []},
+  {'SMTP Sender': []},
+  {'TCP Sender': []},
+  {'Web Service Sender': []}
 ];
 
 // From http://raphaeljs.com/graffle.html
