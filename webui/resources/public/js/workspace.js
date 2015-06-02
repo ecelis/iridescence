@@ -427,8 +427,8 @@ var fill_adapter_types = function() {
 
 $('#connector-driver-lst li a').on("click change",
       function() {
-        t_driver = $(this).text().toLowerCase().replace(' ','');
-        $('#btn-connector-driver').html(t_driver + '<span class="caret"></span>');
+        tgt_driver = $(this).text().toLowerCase().replace(' ','');
+        $('#btn-connector-driver').html(tgt_driver + '<span class="caret"></span>');
         //$('#connector-url').val(t_driver + "://host:port/target?user=someone&password=secret");
         update_connector(adapters[2]);
 });
