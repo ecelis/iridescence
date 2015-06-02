@@ -404,17 +404,17 @@ var update_tgturl = function() {
 
 var fill_adapter_types = function() {
   var items = [];
-  util.srctype.forEach(function(item) {
-    console.log(item);
-    items.push('<li><a href="#">'+item+'</a></li>');
-  });
+  for(var key in util.srctype) {
+    items.push('<li><a href="#">'+key+'</a></li>');
+  };
   $('#adapter-type-lst').append(items.join(''));
   $('#adapter-type-lst li a').on('click change',
         function() {
           var src_type = $(this).text();
           $('#btn-adapter-type').html(src_type + '<span class="caret"></span>');
   });
-};
+}
+
 
 $('#adapter-driver-lst li a').on("click change",
       function() {
