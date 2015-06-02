@@ -57,7 +57,7 @@ var connect = [];                     // Temporary queue for connections
 var adapters = paper.set();           // Create a default adapters
 var work_guid = util.guid();          // Generate adapters GUID
 // We'll create adapters based on generic_adapter
-// TODO avoid cloning in alt-yaout branch
+// TODO avoid cloning in alt-layout branch
 var generic_adapter = paper
   .rect(-100, -100, 30, 20)
   .attr({"fill": "#CCC",
@@ -270,7 +270,7 @@ var remove = function(id) {
 
 /**
  * Clone a adapter by id
- * @method cloneBlk
+ * @method clone
  * @param {Integer} id of the Raphael element
  * */
 var clone = function(id) {
@@ -363,6 +363,7 @@ $('#adapter :input').on("click change keyup",   // Adapter properties listener
         update_adapter(adapters[3].id);
 });
 
+/*
 $('#adapter-type-lst li a').on("click change",  // Adapter type listener
       function() {
         var type = $(this).text().toUpperCase().replace(' ','');
@@ -370,36 +371,37 @@ $('#adapter-type-lst li a').on("click change",  // Adapter type listener
         $('#adapter-type').val(type);
         update_adapter($('#adapter-id').val());
 });
+*/
 
-var s_driver, s_host, s_src, s_user, s_password, s_url;
-var t_driver, t_host, t_target, t_user, t_password, t_url;
+var src_driver, src_host, src_src, src_user, src_password, src_url;
+var tgt_driver, tgt_host, tgt_message, tgt_user, tgt_password, tgt_url;
 
 var update_srcurl = function() {
   //s_driver = $('#adapter-driver-lst li a').text().toLowerCase().replace(' ','');
-  s_host = $('#adapter-host').val();
-  s_src = $('#adapter-source').val();
-  s_user = $('#adapter-user').val();
-  s_password = $('#adapter-password').val();
-  s_url = s_driver + "://" + s_host + "/" + s_src;
+  src_host = $('#adapter-host').val();
+  src_src = $('#adapter-source').val();
+  src_user = $('#adapter-user').val();
+  src_password = $('#adapter-password').val();
+  src_url = src_driver + "://" + src_host + "/" + src_src;
   // TODO use Array for URL parameters
-  if(s_user != null) {
-    s_url += "?user=" + s_user + "&password=" + s_password
+  if(src_user != null) {
+    src_url += "?user=" + src_user + "&password=" + src_password
   }
-  $('#adapter-url').val(s_url);
+  $('#adapter-url').val(src_url);
 };
 
 var update_tgturl = function() {
   //t_driver = $('#connector-driver-lst li a').text().toLowerCase().replace(' ','');
-  t_host = $('#connector-host').val();
-  t_target = $('#connector-target').val();
-  t_user = $('#connector-user').val();
-  t_password = $('#connector-password').val();
-  t_url = t_driver + "://" + t_host + "/" + t_target;
+  tgt_host = $('#connector-host').val();
+  tgt_target = $('#connector-target').val();
+  tgt_user = $('#connector-user').val();
+  tgt_password = $('#connector-password').val();
+  tgt_url = tgt_driver + "://" + tgt_host + "/" + tgt_target;
   // TODO use Array for URL parameters
-  if(t_user != null) {
-    t_url += "?user=" + t_user + "&password=" + t_password
+  if(tgt_user != null) {
+    tgt_url += "?user=" + tgt_user + "&password=" + tgt_password
   }
-  $('#adapter-url').val(t_url);
+  $('#adapter-url').val(tgt_url);
 };
 
 var fill_adapter_driver = function(src_type) {
@@ -428,6 +430,7 @@ var fill_adapter_types = function() {
         var src_type = $(this).text();
         $('#btn-adapter-type').html(src_type + '<span class="caret"></span>');
         fill_adapter_driver($(this).text())
+        update_adapter($('#adapter-id').val());
       });
 }
 
