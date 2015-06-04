@@ -1,4 +1,9 @@
 ### UI refactor (HEAD, alt-layout)
+>Thu, 4 Jun 2015 09:32:29 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+### UI refactor
 >Tue, 2 Jun 2015 18:22:01 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
@@ -443,7 +448,7 @@
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
 
-### Deploy to test vServer
+### Deploy to test vServer (stage/master)
 >Sun, 24 May 2015 18:44:30 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
@@ -603,7 +608,7 @@
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
 
-### FIX Various artifacts were saved twice
+### FIX Various artifacts were saved twice (merge)
 >Fri, 1 May 2015 10:53:33 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
@@ -743,7 +748,7 @@
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
 
-### Refactoring almost done (origin/jsl)
+### Refactoring almost done (origin/jsl, jsl)
 >Mon, 27 Apr 2015 03:14:55 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
