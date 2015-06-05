@@ -1,4 +1,9 @@
-### UI refactor (HEAD, alt-layout)
+### Clena up (HEAD, alt-layout)
+>Fri, 5 Jun 2015 04:00:18 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+### UI refactor
 >Fri, 5 Jun 2015 02:17:55 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)

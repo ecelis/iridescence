@@ -407,7 +407,7 @@ var fill_adapter_driver = function(src_type) {
         $('#btn-adapter-driver').html(src_driver + '<span class="caret"></span>');
         update_adapter($('#adapter-id').val());
       });
-}
+};
 
 var fill_adapter_types = function() {
   var items = [];
@@ -430,7 +430,7 @@ $('#connector-driver-lst li a').on("click change",
         tgt_driver = $(this).text().toLowerCase().replace(' ','');
         $('#btn-connector-driver').html(tgt_driver + '<span class="caret"></span>');
         //$('#connector-url').val(t_driver + "://host:port/target?user=someone&password=secret");
-        update_connector(adapters[2]);
+        // TODO update_connector(adapters[2]);
 });
 
 $('#adapter :input').on("click change keyup",
@@ -475,20 +475,6 @@ $("#connector-items-lst").on("click change", function() {   // Connector source 
   });
 });
 
-$("#connector-sub_items-lst").on("click", // Connector sub-items listener
-  function() {
-    var selected_sub_item = $(this).val();
-    console.log(selected_sub_item);
-});
-
-$("#connector-out_items-lst").on("click", // HL7 segments chooser listener
-  function() {
-    var selected_segment = $(this).val().pop();
-    //build_hl7json(selected_segment);
-});
-
-
-
 /// To execute onLoad() TODO temporary since alt-layout
 // Add adapter TODO its temporary since alt-layout
 addToDiagram(generic_adapter);
@@ -502,6 +488,7 @@ PV1|1|I|^URGENCIAS CONSULTORIO^CON. 01^URGENCIAS||||||||||||||||1002895|||||||||
 ORC|NW|1006457|||IP||^^^20150324143000^^^ROUTINE||201503241430|||910057^ITURBE&FUENTES^ARMANDO^|URGENCIAS
 OBR|1|197537||32980^CR Columna Cervical 1 Proyeccion|||20150324|||||||||||||||||
    */
+  /*
 var sample = [
 {
   text: 'MESSAGE',
@@ -562,9 +549,7 @@ var sample = [
            ]
 }
 ];
-$("#up").click(function() {
-  $('#tree').treeview({data: sample});
-});
+*/
 
 $(document).ready(function() {
   fill_adapter_types();
