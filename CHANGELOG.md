@@ -1,9 +1,14 @@
-### MERGE alt-layout to master (HEAD, master)
+### Cleanup (HEAD, master)
+>Fri, 5 Jun 2015 09:00:15 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+### MERGE alt-layout to master (origin/master, origin/HEAD)
 >Fri, 5 Jun 2015 06:55:49 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
 
-### Clean up (origin/master, origin/alt-layout, origin/HEAD, alt-layout)
+### Clean up (origin/alt-layout, alt-layout)
 >Fri, 5 Jun 2015 04:26:27 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
