@@ -120,4 +120,6 @@
     )
   (context "/api/adapter" []
     (GET "/test/" [__anti-forgery-token url] (try-url url))
-    (GET "/object/" [__anti-forgery-token url] (get-objects url))))
+    (GET "/object/" [__anti-forgery-token url] (get-objects url))
+    (GET "/build_select/" [__anti-forgery-token url query]
+         (db/build-select url query))))

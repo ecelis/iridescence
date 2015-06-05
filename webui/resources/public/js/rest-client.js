@@ -89,3 +89,14 @@ var test_connection = function (url) {
           adapter_connection_handler(e);
         });
 };
+
+var build_select = function() {
+  $.get("/api/adapter/build_select",
+        {"__anti-forgery-token": $("#__anti-forgery-token").val(),
+          "url": $('#adapter-url').val(),
+          "query": $('#adapter-query').val()
+        },
+       function(res) {
+        console.log(res);
+       });
+};

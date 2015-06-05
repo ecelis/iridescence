@@ -479,6 +479,9 @@ $('#save-btn').click(function() {       // Save workspace button listener
   save()
 });
 
+$('#up').click(function() {
+  build_select();
+});
 //$("#files").change(util.handleFileSelect);   // File upload listener
 
 

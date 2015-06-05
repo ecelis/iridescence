@@ -53,6 +53,11 @@
     (jdbc/get-connection url) (get-tables url)
     (catch Exception e (info e))))
 
-(defn build-select "Build a select from" [statement]
-  (def sqlmap (map statement))
-  (jdbc/query (sql/format sqlmap)))
+(defn build-select "Build a select from" [url tables columns conditions]
+  (def sqlmap {:select (map keyword columns)
+               :from (map keyword tables)})
+  ;; TODO :where [conditions]}
+  sqlmap)
+
+(defn exec-query [url query-map]
+  (jdbc/query (sql/format query-map) :result-set-fn vec))

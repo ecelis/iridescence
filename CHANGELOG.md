@@ -1,4 +1,9 @@
-### Clean up (HEAD, alt-layout)
+### MERGE alt-layout to master (HEAD, master)
+>Fri, 5 Jun 2015 06:55:49 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+### Clean up (origin/master, origin/alt-layout, origin/HEAD, alt-layout)
 >Fri, 5 Jun 2015 04:26:27 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
@@ -18,7 +23,7 @@
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
 
-### UI refactor (origin/alt-layout)
+### UI refactor
 >Thu, 4 Jun 2015 09:32:29 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
@@ -438,7 +443,7 @@
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
 
-### Maybe JavaScript wasn't the right choice for the UI :/ (origin/master, origin/HEAD, master)
+### Maybe JavaScript wasn't the right choice for the UI :/
 >Mon, 25 May 2015 08:20:41 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
