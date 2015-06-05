@@ -375,7 +375,7 @@ var update_srcurl = function() {
   src_url = src_driver + "://" + src_host + "/" + src_src;
   // TODO use Array for URL parameters
   if(src_user != null) {
-    src_url += "?user=" + src_user + "&password=" + src_password
+    src_url += "?user=" + src_user + "&password=" + src_password;
   }
   $('#adapter-url').val(src_url);
 };
@@ -389,7 +389,7 @@ var update_tgturl = function() {
   tgt_url = tgt_driver + "://" + tgt_host + "/" + tgt_target;
   // TODO use Array for URL parameters
   if(tgt_user != null) {
-    tgt_url += "?user=" + tgt_user + "&password=" + tgt_password
+    tgt_url += "?user=" + tgt_user + "&password=" + tgt_password;
   }
   $('#adapter-url').val(tgt_url);
 };
@@ -419,19 +419,40 @@ var fill_adapter_types = function() {
       function() {
         var src_type = $(this).text();
         $('#btn-adapter-type').html(src_type + '<span class="caret"></span>');
-        fill_adapter_driver($(this).text())
+        fill_adapter_driver($(this).text());
         update_adapter($('#adapter-id').val());
       });
-}
+};
 
+var fill_connector_driver = function(tgt_type) {
+  $('#connector-driver-lst').find('li').remove().end();
+  var items = [];
+  util.tgttype[tgt_type].forEach(function(item) {
+    items.push('<li><a href="#">'+item+'</a></li>');
+  });
+  $('#connector-driver-lst').append(items.join(''));
+  $('#connector-driver-lst li a').on("click change",
+        function() {
+          tgt_driver = $(this).text().toLowerCase().replace(' ','');
+          $('#btn-connector-driver').html(tgt_driver + '<span class="caret"></span>');
+          // TODO update_connector(adapters[2]);
+  });
+};
 
-$('#connector-driver-lst li a').on("click change",
-      function() {
-        tgt_driver = $(this).text().toLowerCase().replace(' ','');
-        $('#btn-connector-driver').html(tgt_driver + '<span class="caret"></span>');
-        //$('#connector-url').val(t_driver + "://host:port/target?user=someone&password=secret");
-        // TODO update_connector(adapters[2]);
-});
+var fill_connector_types = function() {
+  var items = [];
+  for(var key in util.tgttype) {
+    items.push('<li><a href="#">'+key+'</a></li>');
+  };
+  $('#connector-type-lst').append(items.join(''));
+  $('#connector-type-lst li a').on('click change',
+    function() {
+      var tgt_type = $(this).text();
+      $('#btn-connector-type').html(tgt_type+'<span class="caret"></span>');
+      fill_connector_driver($(this).text());
+      //update_connector($('#connector-id').val());
+    });
+};
 
 $('#adapter :input').on("click change keyup",
       function() {
@@ -449,6 +470,7 @@ $('#remove-btn').click(function() {     // Remove item button listener
   remove($('#adapter-id').val())
 });
 
+// TODO change this to work for workspace
 $('#clone-btn').click(function() {      // Clone item button listener
   clone($('#adapter-id').val())
 });
@@ -459,21 +481,6 @@ $('#save-btn').click(function() {       // Save workspace button listener
 
 //$("#files").change(util.handleFileSelect);   // File upload listener
 
-$("#connector-items-lst").on("click change", function() {   // Connector source listener
-  $("#connector-sub_items-lst").find("option").remove().end();
-  var name = $(this).val();
-  var values = [];
-  adapter_items.filter(function(obj) {
-    if(name == obj.name) {
-      values = obj.columns;
-    }
-  });
-  values.map(function(value) {
-    $("#connector-sub_items-lst")
-        .append('<option value="' + name + '.' + value + '">' +
-                value + '</option>');
-  });
-});
 
 /// To execute onLoad() TODO temporary since alt-layout
 // Add adapter TODO its temporary since alt-layout
@@ -481,6 +488,12 @@ addToDiagram(generic_adapter);
 connect_queue(adapters[2]);
 connect_queue(finish);
 addToDiagram(connector);
+
+// Keep it in the bottom
+$(document).ready(function() {
+  fill_adapter_types();
+  fill_connector_types();
+});
 /*
 MSH|^~\&||SEDNA HOSPITAL, S.A. DE C.V.||NIMBOIMG|201503241450||ORM^O01|Message_Control_ID|P|2.6
 PID|1||8888888||XXXXXXX^XXXXXX^XXXXXXXXX|MALDONADO|888888888888|F|||^XXXXX 88 XXXXXXXXXXX XXXXXXXXX^XXXXXX^XX^88888^XX||88888888
@@ -551,6 +564,4 @@ var sample = [
 ];
 */
 
-$(document).ready(function() {
-  fill_adapter_types();
-});
+

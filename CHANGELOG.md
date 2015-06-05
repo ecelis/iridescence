@@ -1,4 +1,9 @@
-### Clena up (HEAD, alt-layout)
+### Clean up (HEAD, alt-layout)
+>Fri, 5 Jun 2015 04:26:27 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+### Clena up
 >Fri, 5 Jun 2015 04:00:18 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
