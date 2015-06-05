@@ -174,3 +174,64 @@ Raphael.fn.connection = function (obj1, obj2, line, bg) {
         };
     }
 };
+
+var sample = [
+{
+  text: 'MESSAGE',
+         nodes: [
+         {
+          text: "MSH",
+                nodes: [
+                {text: "^~\\&"},
+                {text: "SEDNA HOSPITAL, S.A. DE C.V."},
+                {text: "NIMBOIMG"},
+                {text: "201503241450"},
+                {text: "ORM^O01"},
+                {text: "Message_Control_ID"},
+                {text: "P"},
+                {text: "2.6"}
+                  ]
+         },
+         {
+          text: "PID",
+          nodes: [
+            {text: "1"},
+            {text: "8888888"},
+            {text: "XXXXXXX^XXXXXX^XXXXXXXXX"},
+            {text: "MALDONADO"},
+            {text: "888888888888"},
+            {text: "F"},
+            {text: "^XXXXX 88 XXXXXXXXXXX XXXXXXXXX^XXXXXX^XX^88888^XX"},
+            {text: "88888888"}
+          ]
+         },
+         {text: "PV1",
+           nodes: [
+             {text: "1"},
+             {text: "I"},
+             {text: "^URGENCIAS CONSULTORIO^CON. 01^URGENCIAS"},
+             {text: "1002895"},
+             {text: "20150324"}
+           ]},
+           {
+            text: "ORC",
+            nodes: [
+              {text: "NW"},
+              {text: "1006457"},
+              {text: "IP"},
+              {text: "^^^20150324143000^^^ROUTINE"},
+              {text: "201503241430"},
+              {text: "910057^ITURBE&FUENTES^ARMANDO^"},
+              {text: "URGENCIAS"}
+            ]},
+            {
+              text: "OBR",
+              nodes: [
+                {text: "1"},
+                {text: "197537"},
+                {text: "32980^CR Columna Cervical 1 Proyeccion"},
+                {text: "20150324"}
+            ]}
+           ]
+}
+];

@@ -66,7 +66,7 @@
             class="panel-collapse collpase in">
             <div class="panel-body">
               <input type="file" id="files" name="files[]" multiple />
-              <div id="drop_zone">Drop files here</div>
+              <div id="drop_zone">UPLOAD BROKEN Drop files here</div>
               <output id="list"></output>
               <button id="up" value="Upload">Upload</button>
               <div class="tab-panel">
@@ -85,7 +85,27 @@
                     <div id="srcdata"></div>
                   </div>
                   <div role="tabpanel" class="tab-pane" id="datatarget">
-                    <div id="outmsg"></div>
+                    <div class="row">
+                      <div class="form-group">
+                        <div class="input-group input-group-sm">
+                          <div class="input-group-btn">
+                            <button type="button" class="btn btn-default btn-sm dropdown-toggle"
+                              data-toggle="dropdown" aria-expanded="false"
+                              id="msg-template-btn">Templates
+                              <span class="caret"></span></button>
+                            <ul class="dropdown-menu" id="msg-template-lst" role="menu">
+                              <li><a>HL7V2 SEDENA</a></li> <!-- TODO Fix keyboard -->
+                              <li><a>Some other</a></li>
+                              <li><a>version specific</a></li>
+                              <li><a>maybe</a></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div id="msg-template"></div>
+                    </div>
                   </div>
                 </div> <!-- /tab-content -->
               </div>

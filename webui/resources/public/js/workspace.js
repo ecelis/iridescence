@@ -353,6 +353,14 @@ $('#work-type-lst li a').on("click change",       // Workspace type listener
       $('#work-type').val(type);
 });
 
+$('#msg-template-lst li a').on('click change',
+      function() {
+        var template = $(this).text().toUpperCase();
+        $('#msg-template-btn').html(template + '<span class="caret"></span>');
+        // TODO Assign the template
+        $('#msg-template').treeview({data: sample});
+});
+
 $('#workspace :input').on("click change keyup", // Workspace properties listener
       function() {
         update_workspace();

@@ -1,4 +1,9 @@
-### FIX broser freezeing while testing urls (HEAD, master)
+### FIX upload broken, we'll use predefined templates by now (HEAD, master)
+>Fri, 5 Jun 2015 09:56:11 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+### FIX broser freezeing while testing urls
 >Fri, 5 Jun 2015 09:27:22 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)

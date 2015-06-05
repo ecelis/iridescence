@@ -29,6 +29,6 @@ box-sizing: border-box;
   height: 100%;
 }
 
-#adapter-query {
+#adapter-query, #connector-query {
   height: 100px;
 }
