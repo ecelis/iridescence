@@ -1,4 +1,9 @@
 ### UI refactor (HEAD, alt-layout)
+>Fri, 5 Jun 2015 02:08:18 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+### UI refactor (origin/alt-layout)
 >Thu, 4 Jun 2015 09:32:29 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
@@ -68,7 +73,7 @@
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
 
-### WIP UI refactor (origin/alt-layout)
+### WIP UI refactor
 >Thu, 28 May 2015 13:45:02 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)

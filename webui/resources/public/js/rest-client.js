@@ -49,24 +49,29 @@ var save = function() {
  * @method adapter_connection_handler
  * @param {Object} JSON response
  */
-var adapter_connection_handler = function(data) {
+var adapter_connection_handler = function(json_data) {
   var table_schema = [];
   var table_definition = [];
   // Get table names
-  if(data.tables != null) {
-    data.tables.forEach(function(item){
-      table_schema.push({"name":Object.getOwnPropertyNames(item)[0],
-      "columns":item.valueOf()});
+  if(json_data.tables != null) {
+    json_data.tables.forEach(function(item){
+      table_schema.push({"text":Object.getOwnPropertyNames(item)[0],
+        "nodes":item.valueOf()});
     });
     // Get columns and return associative array of tables:columns
     table_schema.map(function(table){
       var cols = [];
-      table.columns[table.name].map(function(column){
-        cols.push(column.column_name);
+      table.nodes[table.text].map(function(column){
+        cols.push({text: column.column_name});
       });
-      adapter_items.push({"name": table.name, "columns": cols});
+      adapter_items.push({"text": table.text, "nodes": cols});
     });
+    var srcdata = [{text: "src", nodes: adapter_items}];
   }
+  if(adapter_items.length > 0) {
+    $('#srcdata').treeview({data: srcdata});
+  }
+  console.log(adapter_items);
 };
 
 /**
