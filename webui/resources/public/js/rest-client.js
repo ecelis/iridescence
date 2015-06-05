@@ -69,7 +69,8 @@ var adapter_connection_handler = function(json_data) {
     var srcdata = [{text: "src", nodes: adapter_items}];
   }
   if(adapter_items.length > 0) {
-    $('#srcdata').treeview({data: srcdata});
+    $('#srcdata').treeview({data: srcdata,
+    multiSelect: true});
   }
   console.log(adapter_items);
 };

@@ -129,7 +129,7 @@ var dragger = function() {
       break;
   }
   this.animate({"fill-opacity": .2}, 500);
-}
+};
 
 /**
  * Triggered when a adapter is moving
@@ -147,14 +147,14 @@ var move = function(dx, dy) {
     paper.connection(connections[i]);
   }
   paper.safari();
-}
+};
 
 /**
  * Triggered when a adapter stops moving
  */
 var up = function() {
   this.animate({"fill-opacity": 0}, 500);
-}
+};
 
 /**
  * Triggers when an element from Toolbar is dragged into adapters
@@ -164,7 +164,7 @@ var release = function() {
   this.attr("x", tbX + 5);
   this.attr("y", tbY + 5);
   addToDiagram(this);
-}
+};
 
 /**
  * Triggered when a adapter is clicked, populates the
@@ -186,7 +186,7 @@ var modify = function() {
     var adapter_id = property.name.split("to")[0];
     update_connector(this);
   }
-}
+};
 
 /**
  * Set default model to new Adapters or Connector
@@ -328,22 +328,16 @@ var update_connector = function(connector) {
         .append('<option value="' +
                 item.name + '">' + item.name + '</option>');
     });
-}
+};
 
 // TODO Check if the values aren't overwriten when refreshing webpage
 $('#work-guid').val(work_guid);                   // Workspace GUID field
 $('#work-guid-label').html("Id: " + work_guid);   // Workspace GUID label
-// TODO Do this in one iteration of all
-// adapters
-//generic_adapter.drag(move, dragger, release);     // Adapter onDrag listener
 
 connector.click(function() {                      // Connector onClick listener
   addToDiagram(this)
 });
 
-//start.drag(move, dragger, function(){});          // Start adapter onDrag
-
-//finish.drag(move, dragger, function(){}).click(modify); // Finish adapter onDrag
 finish.click(modify); // Finish adapter onDrag
 
 $('#work-type-lst li a').on("click change",       // Workspace type listener
@@ -358,7 +352,8 @@ $('#msg-template-lst li a').on('click change',
         var template = $(this).text().toUpperCase();
         $('#msg-template-btn').html(template + '<span class="caret"></span>');
         // TODO Assign the template
-        $('#msg-template').treeview({data: sample});
+        $('#msg-template').treeview({data: sample,
+        multiSelect: true});
 });
 
 $('#workspace :input').on("click change keyup", // Workspace properties listener
@@ -370,7 +365,6 @@ var src_driver, src_host, src_src, src_user, src_password, src_url;
 var tgt_driver, tgt_host, tgt_message, tgt_user, tgt_password, tgt_url;
 
 var update_srcurl = function() {
-  //s_driver = $('#adapter-driver-lst li a').text().toLowerCase().replace(' ','');
   src_host = $('#adapter-host').val();
   src_src = $('#adapter-source').val();
   src_user = $('#adapter-user').val();
@@ -384,7 +378,6 @@ var update_srcurl = function() {
 };
 
 var update_tgturl = function() {
-  //t_driver = $('#connector-driver-lst li a').text().toLowerCase().replace(' ','');
   tgt_host = $('#connector-host').val();
   tgt_target = $('#connector-target').val();
   tgt_user = $('#connector-user').val();
@@ -453,7 +446,7 @@ var fill_connector_types = function() {
       var tgt_type = $(this).text();
       $('#btn-connector-type').html(tgt_type+'<span class="caret"></span>');
       fill_connector_driver($(this).text());
-      //update_connector($('#connector-id').val());
+      // TODO update_connector($('#connector-id').val());
     });
 };
 

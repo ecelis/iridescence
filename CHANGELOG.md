@@ -1,4 +1,9 @@
-### FIX upload broken, we'll use predefined templates by now (HEAD, master)
+### FIX tree views multiSelect enabled (HEAD, master)
+>Fri, 5 Jun 2015 10:37:49 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+### FIX upload broken, we'll use predefined templates by now
 >Fri, 5 Jun 2015 09:56:11 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
