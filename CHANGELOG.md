@@ -1,4 +1,9 @@
-### Cleanup (HEAD, master)
+### FIX broser freezeing while testing urls (HEAD, master)
+>Fri, 5 Jun 2015 09:27:22 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
+
+### Cleanup
 >Fri, 5 Jun 2015 09:00:15 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)

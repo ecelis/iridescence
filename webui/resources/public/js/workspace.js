@@ -358,11 +358,6 @@ $('#workspace :input').on("click change keyup", // Workspace properties listener
         update_workspace();
 });
 
-$('#adapter :input').on("click change keyup",   // Adapter properties listener
-      function() {
-        update_adapter(adapters[2].id); // TODO fixed value since alt-layout
-});
-
 var src_driver, src_host, src_src, src_user, src_password, src_url;
 var tgt_driver, tgt_host, tgt_message, tgt_user, tgt_password, tgt_url;
 
@@ -454,9 +449,10 @@ var fill_connector_types = function() {
     });
 };
 
-$('#adapter :input').on("click change keyup",
+$('#adapter-test-btn').on("click change keyup",
       function() {
         update_srcurl();
+        update_adapter(adapters[2].id); // TODO fixed value since alt-layout
 });
 
 $('#connector :input').on("click change keyup",   // Connector properties listener
