@@ -1,4 +1,9 @@
-### FIX tree views multiSelect enabled (HEAD, master)
+### UPDATE build query (HEAD, master)
+>Mon, 8 Jun 2015 05:08:19 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### FIX tree views multiSelect enabled (origin/master, origin/HEAD)
 >Fri, 5 Jun 2015 10:37:49 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
@@ -18,7 +23,7 @@
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
 
-### MERGE alt-layout to master (origin/master, origin/HEAD)
+### MERGE alt-layout to master
 >Fri, 5 Jun 2015 06:55:49 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
@@ -493,7 +498,7 @@
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
 
-### Deploy to test vServer (stage/master)
+### Deploy to test vServer
 >Sun, 24 May 2015 18:44:30 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
@@ -653,7 +658,7 @@
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
 
-### FIX Various artifacts were saved twice (merge)
+### FIX Various artifacts were saved twice
 >Fri, 1 May 2015 10:53:33 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
@@ -793,7 +798,7 @@
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
 
-### Refactoring almost done (origin/jsl, jsl)
+### Refactoring almost done (origin/jsl)
 >Mon, 27 Apr 2015 03:14:55 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)

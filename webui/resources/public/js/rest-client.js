@@ -43,6 +43,16 @@ var save = function() {
          "workspace":payload});
 }
 
+var build_query = function(event, node) {
+        var nodes = $('#srcdata').treeview('getSelected', node.nodeId);
+        var col_names = ' ';
+        nodes.forEach(function(column) {
+          console.log(column);
+          col_names += $('#srcdata').treeview('getParent', column).text +
+                                '.' + column.text + ' ';
+        });
+        $('#adapter-query').val(col_names);
+}
 /**
  * Stores in a variable the Table Definition retrieved by test_connection
  *
@@ -70,9 +80,11 @@ var adapter_connection_handler = function(json_data) {
   }
   if(adapter_items.length > 0) {
     $('#srcdata').treeview({data: srcdata,
-    multiSelect: true});
+      multiSelect: true,
+      onNodeSelected: build_query,
+      onNodeUnselected: build_query
+    });
   }
-  console.log(adapter_items);
 };
 
 /**
