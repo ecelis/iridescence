@@ -1,4 +1,9 @@
-### RENAME CirrusLoad to adapter-cirrus to make standard (HEAD, file-iface)
+### ADD build.sh script (HEAD, file-iface)
+>Tue, 9 Jun 2015 15:15:04 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### RENAME CirrusLoad to adapter-cirrus to make standard
 >Tue, 9 Jun 2015 14:57:24 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
