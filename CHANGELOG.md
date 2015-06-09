@@ -1,4 +1,9 @@
-### ADD adapter-csv (HEAD, file-iface)
+### UPDATE CSV reader (HEAD, file-iface)
+>Mon, 8 Jun 2015 23:17:42 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### ADD adapter-csv (origin/file-iface)
 >Mon, 8 Jun 2015 22:45:30 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)

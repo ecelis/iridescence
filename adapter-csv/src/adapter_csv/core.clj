@@ -17,7 +17,10 @@
 ;;  You should have received a copy of the GNU Affero General Public License
 ;;  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-(ns adapter-csv.core)
+(ns adapter-csv.core
+  (:require [clojure.data.csv :as csv]
+             [clojure.java.io :as io])
+  (:use [taoensso.timbre :only [trace debug info warn error fatal]]))
 
 (defn get-columns "Get columns from CSV" [url]
   (println url))
@@ -26,7 +29,11 @@
   (println url))
 
 (defn test-url "Test CSV URL" [url]
-  (println url))
+  (with-open [in-file (io/reader "/tmp/my.csv")]
+  (def csv_response (doall
+    (csv/read-csv in-file))))
+  csv_response)
+
 
 (defn build-select "Build a SELECT FROM CSV" [url tables query]
   (println url))
