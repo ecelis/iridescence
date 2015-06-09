@@ -48,3 +48,6 @@ dbPort
 *.db
 .vagrant
 *.log
+data/**
+mirth
+**/doc

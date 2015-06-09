@@ -20,17 +20,20 @@
 (ns adapter-db.core
   (:require [clojure.java.jdbc :as jdbc]
             [honeysql.core :as sql]
-            [honeysql.helpers :refer :all])
-  (:use [taoensso.timbre :only [trace debug info warn error fatal]]))
+            [honeysql.helpers :refer :all]
+            [clojure.string :as string])
+  (:use [taoensso.timbre :only [trace debug info warn error fatal]]
+        [clojure.walk]))
 
-(defn get-columns "Get columns from" [tables]
-  (def sqlmap {:select :column_name
+(defn get-columns "Get columns from" [url table]
+  (def sqlmap (sql/build :select :column_name
                :from :information_schema.columns
-               :where [:= :table_name (first tables)]}))
-  ;(jdbc/query (sql/format sqlmap)))
+               :where [:= :table_name table]))
+  (hash-map (keyword table) (jdbc/query url (sql/format sqlmap)
+                                        :result-set-fn vec)))
 
 (defn get-tables "Get tables from" [url]
-  (def tables nil)
+  (def tables)
   (try ; TODO reuse it (def db-handle (jdbc/get-connection url))
        (def sqlmap (sql/build :select :*
                               :from :information_schema.tables
@@ -38,16 +41,27 @@
         (def tables (map #(get % :table_name)
                          (jdbc/query url (sql/format sqlmap)
                                      :result-set-fn vec)))
+;        (def tables (vec (map #(get-columns url %) tables)))
         (catch Exception e (info e)))
-  tables)
+  (def table-defs (conj (map #(get-columns url %) tables) nil))
+  (rest table-defs))
 
-(defn test-url "TEsts URL" [url]
+(defn test-url "Tests URL" [url]
+  ; TODO ASAP retrieve other schemas along public
   (try
     ; TODO better reuse db-handle with-db-connection
     ; TODO this true/flase flag hack sucks, fix it
     (jdbc/get-connection url) (get-tables url)
     (catch Exception e (info e))))
 
-(defn build-select "Build a select from" [statement]
-  (def sqlmap (map statement))
-  (jdbc/query (sql/format sqlmap)))
+(defn build-select "Build a select from" [url tables query]
+  (def fro (vec (map keyword (seq (string/split tables #" ")))))
+  (def sele (vec (map keyword (seq (string/split query #" ")))))
+  (def sqlmap {:select sele
+               :from fro})
+  ;; TODO :where [conditions]}
+  ;sqlmap)
+  (info (sql/format sqlmap)))
+
+(defn exec-query [url query-map]
+  (jdbc/query (sql/format query-map) :result-set-fn vec))

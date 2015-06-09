@@ -23,13 +23,15 @@
             [cheshire.core :as json]
             [clojure.java.io :as io]
             [clj-yaml.core :as yaml]
-            [adapter-db.core :as db])
+            [adapter-db.core :as db]
+            [adapter-csv.core :as csv]
+            [clojure.string :as string])
   (:use [taoensso.timbre :only [trace debug info warn error fatal]]))
 
-(def savedir "/tmp/iridescence") ; TODO Set a definitive path
+(def savedir "/tmp") ; TODO Set a definitive path
 (def wsdir "/workspace")
-(def tmpdir "/temp")
-(def outdir "/temp")
+(def wipdir "/wip")
+(def outdir "/out")
 
 ;; TODO Read http://www.luminusweb.net/docs/responses.md
 ;; for proper encoding reponses
@@ -50,38 +52,60 @@
   [workspace]
   ; TODO handle nil or invalid data for spit
   ; TODO Do the yaml conversion in a functional way
-  (def yaml-workspace (yaml/generate-string
-    {:workspace (json/parse-string
+  (def workspace-map {:workspace (json/parse-string
              (get workspace :meta) true)
      :artifacts (map
              #(json/parse-string % true)
-             (get workspace :data))}))
-  (spit (str savedir wsdir "/" (get (json/parse-string (get workspace :meta) true)
-                              :guid)) yaml-workspace); TODO dynamic filename
-  (json-response workspace))
+             (get workspace :data))})
+  (def yaml-workspace (yaml/generate-string workspace-map))
+  (if (get (get workspace-map :workspace true) :draft true)
+    (def save-to (str savedir wipdir "/"))
+    (def save-to (str savedir wsdir "/")))
+  (info save-to)
+  (try (spit (str save-to (get (json/parse-string
+                                           (get workspace :meta) true) :guid))
+             yaml-workspace) (json-response workspace)
+       (catch Exception e (info e))))
 
 (defn load-workspace "Loads a workspace from YAML storage and returns its JSON
                      representation" [id]
-    (json-response (yaml/parse-string (slurp (str savedir "/" id)))))
+  (try (json-response (yaml/parse-string (slurp (str savedir wsdir "/" id))))
+       (catch Exception e (info e))))
 
 (defn update-workspace "Update workspace in YAML storage" [id]
     (json-response {:not (str "yet implemented " id)}))
 
 (defn delete-workspace "Delete workspace from YAML storage" [id]
-  (io/delete-file (str savedir "/" id))
-    (json-response {:action (str "deleted workspace " id)}))
+  (try (io/delete-file (str savedir "/" id))
+       (json-response {:action (str "deleted workspace " id)})
+       (catch Exception e (info e))))
 
 (defn run-workspace "Run workspace" [id]
   (db/build-select "ta")
   (yaml-response {:not (str "run-workspace stub " id)}))
 
-(defn try-url "Test adapter url" [url]
-  ; TODO test any type of data source
+(defn try_dburl "Docstring " [url]
   (def res (db/test-url url))
   (if res
     (json-response {:tables res
                     })
     (json-response {:tables nil :columns nil})))
+
+(defn try_csvurl "Docstring " [url]
+  (def res (csv/test-url url))
+  (if res
+    (json-response {:tables res
+                    })
+    (json-response {:tables nil :columns nil})))
+
+
+(defn try-url "Test adapter url" [url]
+  ; TODO test any type of data source
+  (def url_type (first (string/split url #":")))
+  (cond (= "csv" url_type) (try_csvurl url)
+        (= "postgresql" url_type) (try_dburl url)
+        :else (info "Unknown"))
+  )
 
 (defn get-objects "Fetch data source objects" [url]
   (info (db/get-tables url)))
@@ -113,4 +137,6 @@
     )
   (context "/api/adapter" []
     (GET "/test/" [__anti-forgery-token url] (try-url url))
-    (GET "/object/" [__anti-forgery-token url] (get-objects url))))
+    (GET "/object/" [__anti-forgery-token url] (get-objects url))
+    (GET "/build_select/" [__anti-forgery-token url tables query]
+         (db/build-select url tables query))))

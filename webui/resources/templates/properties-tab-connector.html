@@ -1,11 +1,88 @@
 <div role="tabpanel" class="tab-pane" id="connector">
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-xs-2">
+      <div class="form-group">
+        <div class="input-group input-group-sm">
+          <div class="input-group-btn">
+            <button type="button" class="btn btn-default btn-sm dropdown-toggle"
+              data-toggle="dropdown" aria-expanded="false"
+              id="btn-connector-type">Type
+              <span class="caret"></span></button>
+            <ul class="dropdown-menu" id="connector-type-lst" role="menu">
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="form-group">
+        <div class="input-group input-group-sm">
+          <div class="input-group-btn">
+            <button type="button" class="btn btn-default btn-sm dropdown-toggle"
+              data-toggle="dropdown" aria-expanded="false"
+              id="btn-connector-driver">Driver
+              <span class="caret"></span></button>
+            <ul class="dropdown-menu" id="connector-driver-lst" role="menu">
+            </ul>
+          </div>
+          <input type="url" class="form-control" arial-label="..."
+            placeholder="url://" name="connector-url" id="connector-url"
+            disabled>
+        </div>
+      </div>
     </div>
   </div>
-   <div class="row">
-    <div class="col-xs-12">
+  <div class="row">
+    <div class="col-xs-3">
+      <div class="form-group">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon">Host</span>
+          <input type="text" class="form-control" placeholder="Server"
+          aria-describedby="property-name" name="connector-host" id="connector-host">
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-3">
+      <div class="form-group">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon">Target</span>
+          <input type="text" class="form-control" placeholder="Target"
+          aria-describedby="property-name" name="connector-target" id="connector-target">
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-3">
+      <div class="form-group">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon">User</span>
+          <input type="text" class="form-control" placeholder="User"
+          aria-describedby="property-name" name="connector-user" id="connector-user">
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-3">
+      <div class="form-group">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon">Password</span>
+          <input type="text" class="form-control" placeholder="Password"
+          aria-describedby="property-name" name="connector-password" id="connector-password">
+        </div>
+      </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-xs-9">
+      <div class="form-group">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon">Source Data</span>
+          <textarea class="form-control" id="connector-query" rows="3"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-3">
+      <button class="btn btn-default" type="button" id="connector-test-btn">Test</button>
+    </div>
+  </div>
+
 </div> <!-- tab panel connection -->
 

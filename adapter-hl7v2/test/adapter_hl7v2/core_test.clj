@@ -1,6 +1,6 @@
-(ns hl7yaml.core-test
+(ns adapter-hl7v2.core-test
   (:require [clojure.test :refer :all]
-            [hl7yaml.core :refer :all]))
+            [adapter-hl7v2.core :refer :all]))
 
 (deftest a-test
   (testing "FIXME, I fail."

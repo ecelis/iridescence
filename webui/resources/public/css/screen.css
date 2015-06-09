@@ -5,3 +5,30 @@ body {
     height: 100%;
     padding-top: 40px;
 }
+
+#properties-panel {
+  height: 100%;
+}
+
+#connector select {
+  height:140px; width:140px; box-sizing: border-box;
+            -moz-box-sizing: border-box; -webkit-box-sizing: border-box;
+}
+
+#work-manager {
+  height: 100%;
+box-sizing: border-box;
+            -moz-box-sizing: border-box; -webkit-box-sizing: border-box;
+}
+
+#drop_zone {
+  border: 2px dashed #BBB;
+  border-radius: 5px;
+  padding: 25px;
+  text-align: center;
+  height: 100%;
+}
+
+#adapter-query, #connector-query {
+  height: 100px;
+}

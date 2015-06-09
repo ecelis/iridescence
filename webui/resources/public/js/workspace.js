@@ -18,58 +18,64 @@
  *   You should have received a copy of the GNU Affero General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+var util = new Util();      // Utilities such as guid generator and crypto
+var tbX = 4,                // Toolbar X position
+  tbY = 4,                  // Toolbar Y position
+  tbW = 40,                 // Toolbar Width
+  tbH = 80,                // Toolbar Heigth
+  paperW = 768,             // Workspace Width
+  paperH = 100;             // Workspace Height
+var paper = Raphael("work-canvas",
+                    paperW, paperH);  // Workspace
 
 /**
- * Workspace Metadata
- */
-var work_meta = {'type': null,      // Workspace metadata
+* Workspace Metadata
+* @property
+*/
+var work_meta = {'type': null,        // Workspace metadata
   'guid': null,
   'name': null,
-  'comments': null};
-var property = {
-  //this.data("props");    // Artifact's properties
+  'comments': null,
+  'draft': true
+};
+/**
+ * Adapter property model
+ * @property
+ */
+var property = {                      // TODO Get rid of it
+  //this.data("props");               // Artifact's properties
   'name': null,
   'type': null,
-  'url': null
+  'url': null,
+  'items': null
 };
-var util = new Util();      // Utilities such as guid generator and crypto
+
+var adapter_items = [];               // Adapter Items from source
 // Global settings
-var connections = [];       // Connections between adapters
-var connect = [];           // Temporary queue for connections
-var tbX = 4,
-  tbY = 4,
-  tbW = 40,
-  tbH = 300,
-  paperW = 768,
-  paperH = 500;
-var paper = Raphael("work-canvas",
-                    paperW, paperH);  // Creates canvas 320×200@10,50
+var connections = [];                 // Connections between adapters
+var connect = [];                     // Temporary queue for connections
 var adapters = paper.set();           // Create a default adapters
 var work_guid = util.guid();          // Generate adapters GUID
-var toolbar = paper.rect(tbX, tbY,
-                         tbW,
-                         tbH);        // Placeholder for the tools
-// We'll create adapters based it
+// We'll create adapters based on generic_adapter
+// TODO avoid cloning in alt-layout branch
 var generic_adapter = paper
-  .rect(tbX + 5, tbY + 5, 30, 20)
+  .rect(-100, -100, 30, 20)
   .attr({"fill": "#CCC",
         "fill-opacity": 0,
         "stroke-width": 3,
         cursor: "move"});
-// Same as generic_adapter its a basic connector, derive other from it
+
+// Same as generic_adapter its a base connector, derive others from it
+// TODO avoid cloning in alt-yaout branch
 var connector = paper
-  .path("M9 35L40 60")
+  .path("M-10 0L0 0")
   .attr({"stroke-width": 3,
         cursor: "move"});
-// TODO Moar adapters
-
-// Start and End adapters, there should be one of each by default
-// in every adapters
 
 /**
 * start does nothing, only serves as a visual aid for the flow
 */
-var start = paper.circle(tbX + 80, tbY + 75, 15)
+var start = paper.circle(tbX + 80, paperH - 75, 15)
   .attr({"fill": "#7AC200",
         "fill-opacity": 100,
         "stroke-width": 3,
@@ -79,7 +85,7 @@ var start = paper.circle(tbX + 80, tbY + 75, 15)
 adapters.push(start);
 
 /**
- * finishs is an adapter which is obviously the last adapter
+ * Finish is an adapter which is obviously the last adapter
  * in the work flow. By default it is configured to end in
  * Smart Connector's log with INFO level.
  */
@@ -92,21 +98,23 @@ var finish = paper.circle(paperW - 80, paperH - 75, 15)
   .data("props", {"type":"FINISH", "name":"Finish", "url":null});
 adapters.push(finish);
 
-var connectionPush = function(artifact) {
-  if (connect.length < 2) {   // If the connection queue's length < 2
+/**
+ * Connect queue, Adapters are pushed to the queue in order to add a Connector
+ * between them
+ * @method
+ * @param {Raphael.Element} artifact connector
+ * */
+var connect_queue = function(artifact) {
+  if (connect.length < 2) {       // If the connection queue's length < 2
     if(connect[0] != artifact) {  // and If adapter isn't already in queue
       connect.push(artifact);     // add adapter to queue
     }
   }
-  $('#adapter-name').val(property.name);
-  $('#adapter-url').val(property.url);
-  $('#adapter-id').val(artifact.id);
-  $('#properties a[href="#adapter"]').tab('show');
 }
 
 /**
-  Triggered when a adapter starts moving
-*/
+ * Triggered when an adapter starts moving
+ */
 var dragger = function() {
   // TODO Fix for paths
   switch(this.type) {
@@ -121,11 +129,11 @@ var dragger = function() {
       break;
   }
   this.animate({"fill-opacity": .2}, 500);
-}
+};
 
 /**
-  Triggered when a adapter is moving
-  */
+ * Triggered when a adapter is moving
+ */
 var move = function(dx, dy) {
   var coordinates;
   if (this.type == "rect") {
@@ -139,24 +147,24 @@ var move = function(dx, dy) {
     paper.connection(connections[i]);
   }
   paper.safari();
-}
+};
 
 /**
-  Triggered when a adapter stops moving
-  */
+ * Triggered when a adapter stops moving
+ */
 var up = function() {
   this.animate({"fill-opacity": 0}, 500);
-}
+};
 
 /**
  * Triggers when an element from Toolbar is dragged into adapters
  * @method toolUp
- * */
+ */
 var release = function() {
   this.attr("x", tbX + 5);
   this.attr("y", tbY + 5);
   addToDiagram(this);
-}
+};
 
 /**
  * Triggered when a adapter is clicked, populates the
@@ -164,28 +172,25 @@ var release = function() {
  * @method modify
  * */
 var modify = function() {
-  switch(this.type) {
-    case "rect":
-/*      if (connect.length < 2) {   // If the connection queue's length < 2
-        if(connect[0] != this) {  // and If adapter isn't already in queue
-          connect.push(this);     // add adapter to queue
-        }
-      }
-      $('#adapter-name').val(property.name);
-      $('#adapter-url').val(property.url);
-      $('#adapter-id').val(this.id);
-      $('#properties a[href="#adapter"]').tab('show'); */
-     connectionPush(this);
-      break;
-    case "circle":
-      //connectionPush(this); // TODO WTF! Hunger is killing me
-      break;
-    case "path":
-      $('#properties a[href="#connector"]').tab('show');
-      break;
+  property = this.data("props");
+  // TODO clean all those ugly hacks introduced since alt-layout
+  if(this.type != "circle") {
+    $('#adapter-name').val(property.name);
+    $('#adapter-url').val(property.url);
+    $('#adapter-id').val(this.id);
+    $('#properties a[href="#adapter"]').tab('show');
+    connect_queue(this);
+  } else {
+    // TODO initialize properties, Name, etc
+    $('#properties a[href="#connector"]').tab('show');
+    var adapter_id = property.name.split("to")[0];
+    update_connector(this);
   }
-}
+};
 
+/**
+ * Set default model to new Adapters or Connector
+ */
 var setData = function(adapter) {
   var data = null;
   if(adapter.type != "path") {
@@ -211,7 +216,7 @@ var addToDiagram = function (adapter) {
           "title": id = connect[0].id + 'to' + connect[1].id,
           "stroke-width": 3});
       setData(newConnection.line);
-      newConnection.line.click(modify);
+      // TODO remove newConnection.line.click(modify);
       connections.push(newConnection);
       adapters.push(newConnection.line);
       connect = [];               // Empty queue
@@ -227,9 +232,14 @@ var addToDiagram = function (adapter) {
                   "stroke-width": 3,
                   "width": 50,
                   "height": 30,
-                  "x": 50 + Math.floor(Math.random()*160),
-                  "y": 70 + Math.floor(Math.random()*160)});
-    newadapter.drag(move, dragger, up).click(modify);
+                  "x": 390,
+                  "y": 8})
+              .data("props", {"type": "GENERIC",
+                    "id":this.id,
+                    "name":null,
+                    "url": null,
+                    "items": null})
+              .click(modify);
     adapters.push(newadapter);   // Append new adapter to adapters
     if(adapters.length == 3) {  // First adapter of new workspace
       connect.push(start);
@@ -239,15 +249,13 @@ var addToDiagram = function (adapter) {
           "title": id = connect[0].id + 'to' + connect[1].id,
           "stroke-width": 3});
       setData(firstConnection.line);
-      firstConnection.line.click(modify);
-      //connections.push(firstConnection); // connect to the begining
-      connectionPush(firstConnection);
-      adapters.push(firstConnection.line);
+      //firstConnection.line.click(modify);
+      connections.push(firstConnection); // connect to the begining
+      connect = [];     // Empty queue
     }
   }
 }
 
-/////////// Adapter functions
 /**
  * Remove adapter from adapters
  * @method remove
@@ -262,7 +270,7 @@ var remove = function(id) {
 
 /**
  * Clone a adapter by id
- * @method cloneBlk
+ * @method clone
  * @param {Integer} id of the Raphael element
  * */
 var clone = function(id) {
@@ -285,20 +293,9 @@ var update_adapter = function(id) {
   adapter.attr({'title': adapter.data("props").name,
           'text':adapter.data("props").name});
   test_connection($('#adapter-url').val());
-}
-
-/**
- * Save adapters to YAML in the server
- * @method save
- * */
-var save = function() {
-  var payload = {'meta': null, 'data': []};
-  payload.meta = JSON.stringify(work_meta);
-  adapters.forEach(function(adapter) {
-    payload.data.push(JSON.stringify(adapter.data("props")));
-  });
-  $.post("/api/", {"__anti-forgery-token": $('#__anti-forgery-token').val(),
-         "workspace":payload});
+  if(adapter_items.length > 0) {
+    adapter.data("props").items = adapter_items;
+  }
 }
 
 /**
@@ -307,68 +304,197 @@ var save = function() {
  */
 var update_workspace = function() {
   work_meta.type = $('#work-type').val();
-  work_meta.guid= $('#work-guid').val();
+  work_meta.guid = $('#work-guid').val();
   work_meta.name = $('#work-name').val();
   work_meta.comments = $('#work-comments').val();
-
+  if($('#work-draft').is(':checked')) {
+    work_meta.draft = true;
+  } else {
+    work_meta.draft = false;
+  }
 }
 
-////////// Connectors functions
 /**
  * Update Connector properties
  * @method
- * @param id connector id
+ * @param {Integer} connector id
  */
-var update_connector = function(id) {
-  var connector = paper.getById(id);
-  connector.data("props").id = id;
-  connector.data("props").name = connector.title;
-}
+var update_connector = function(connector) {
+  // TODO adapter_src??
+  var adapter_src = paper.getById(connector.id);
+  if(adapter_src.data("props").items != undefined)
+    adapter_src.data("props").items.forEach(function(item) {
+      $("#connector-items-lst")
+        .append('<option value="' +
+                item.name + '">' + item.name + '</option>');
+    });
+};
 
-// Initialize some properties for a new workspace
 // TODO Check if the values aren't overwriten when refreshing webpage
-$('#work-guid').val(work_guid);
-$('#work-guid-label').html("Id: " + work_guid);
-// Bind listeners to Properties controls
-// TODO Do this in one iteration of all
-// adapters
-//Attach listeners to Toolbar elements
-//
-generic_adapter.drag(move, dragger, release);
-connector.click(function(){addToDiagram(this)});
-start.drag(move, dragger, function(){});
-finish.drag(move, dragger, function(){}).click(modify);
-$('#work-type-lst li a').on("click change", function(){
-  var type = $(this).text().toUpperCase().replace(' ','').replace('.','');
-  $('#btn-work-type').html(type + '<span class="caret"></span>');
-  $('#work-type').val(type);
-});
-$('#workspace :input').on("click change keyup", function() {
-    update_workspace();
-});
-//
-// Adapters
-$('#adapter :input').on("click change keyup", function() {
-    update_adapter($('#adapter-id').val());
+$('#work-guid').val(work_guid);                   // Workspace GUID field
+$('#work-guid-label').html("Id: " + work_guid);   // Workspace GUID label
+
+connector.click(function() {                      // Connector onClick listener
+  addToDiagram(this)
 });
 
-$('#adapter-type-lst li a').on("click change", function(){
-  var type = $(this).text().toUpperCase().replace(' ','');
-  $('#btn-adapter-type').html(type + '<span class="caret"></span>');
-  $('#adapter-type').val(type);
-  update_adapter($('#adapter-id').val());
+finish.click(modify); // Finish adapter onDrag
+
+$('#work-type-lst li a').on("click change",       // Workspace type listener
+      function() {
+      var type = $(this).text().toUpperCase().replace(' ','').replace('.','');
+      $('#btn-work-type').html(type + '<span class="caret"></span>');
+      $('#work-type').val(type);
 });
-//
-// Connectors
-//
-$('#connector :input').on("click change keyup", function(){
-  update_adapter($('#adapter-id').val());
+
+$('#msg-template-lst li a').on('click change',
+      function() {
+        var template = $(this).text().toUpperCase();
+        $('#msg-template-btn').html(template + '<span class="caret"></span>');
+        // TODO Assign the template
+        $('#msg-template').treeview({data: sample,
+        multiSelect: true});
 });
-//
-// Form controls
-//
+
+$('#workspace :input').on("click change keyup", // Workspace properties listener
+      function() {
+        update_workspace();
+});
+
+var src_driver, src_host, src_src, src_user, src_password, src_url;
+var tgt_driver, tgt_host, tgt_message, tgt_user, tgt_password, tgt_url;
+
+var update_srcurl = function() {
+  src_host = $('#adapter-host').val();
+  src_src = $('#adapter-source').val();
+  src_user = $('#adapter-user').val();
+  src_password = $('#adapter-password').val();
+  src_url = src_driver + "://" + src_host + "/" + src_src;
+  // TODO use Array for URL parameters
+  if(src_user != null) {
+    src_url += "?user=" + src_user + "&password=" + src_password;
+  }
+  $('#adapter-url').val(src_url);
+};
+
+var update_tgturl = function() {
+  tgt_host = $('#connector-host').val();
+  tgt_target = $('#connector-target').val();
+  tgt_user = $('#connector-user').val();
+  tgt_password = $('#connector-password').val();
+  tgt_url = tgt_driver + "://" + tgt_host + "/" + tgt_target;
+  // TODO use Array for URL parameters
+  if(tgt_user != null) {
+    tgt_url += "?user=" + tgt_user + "&password=" + tgt_password;
+  }
+  $('#adapter-url').val(tgt_url);
+};
+
+var fill_adapter_driver = function(src_type) {
+  $("#adapter-driver-lst").find("li").remove().end();
+  var items = [];
+  util.srctype[src_type].forEach(function(item) {
+    items.push('<li><a href="#">'+item+'</a></li>');
+  });
+  $('#adapter-driver-lst').append(items.join(''));
+  $('#adapter-driver-lst li a').on("click change",
+      function() {
+        src_driver = $(this).text().toLowerCase().replace(' ','');
+        $('#btn-adapter-driver').html(src_driver + '<span class="caret"></span>');
+        update_adapter($('#adapter-id').val());
+      });
+};
+
+var fill_adapter_types = function() {
+  var items = [];
+  for(var key in util.srctype) {
+    items.push('<li><a href="#">'+key+'</a></li>');
+  };
+  $('#adapter-type-lst').append(items.join(''));
+  $('#adapter-type-lst li a').on('click change',
+      function() {
+        var src_type = $(this).text();
+        $('#btn-adapter-type').html(src_type + '<span class="caret"></span>');
+        fill_adapter_driver($(this).text());
+        update_adapter($('#adapter-id').val());
+      });
+};
+
+var fill_connector_driver = function(tgt_type) {
+  $('#connector-driver-lst').find('li').remove().end();
+  var items = [];
+  util.tgttype[tgt_type].forEach(function(item) {
+    items.push('<li><a href="#">'+item+'</a></li>');
+  });
+  $('#connector-driver-lst').append(items.join(''));
+  $('#connector-driver-lst li a').on("click change",
+        function() {
+          tgt_driver = $(this).text().toLowerCase().replace(' ','');
+          $('#btn-connector-driver').html(tgt_driver + '<span class="caret"></span>');
+          // TODO update_connector(adapters[2]);
+  });
+};
+
+var fill_connector_types = function() {
+  var items = [];
+  for(var key in util.tgttype) {
+    items.push('<li><a href="#">'+key+'</a></li>');
+  };
+  $('#connector-type-lst').append(items.join(''));
+  $('#connector-type-lst li a').on('click change',
+    function() {
+      var tgt_type = $(this).text();
+      $('#btn-connector-type').html(tgt_type+'<span class="caret"></span>');
+      fill_connector_driver($(this).text());
+      // TODO update_connector($('#connector-id').val());
+    });
+};
+
+$('#adapter-test-btn').on("click change keyup",
+      function() {
+        update_srcurl();
+        update_adapter(adapters[2].id); // TODO fixed value since alt-layout
+        if($('#adapter-query').val() != '') {
+          build_select();
+        }
+});
+
+$('#connector :input').on("click change keyup",   // Connector properties listener
+      function() {
+        // TODO update_adapter($('#adapter-id').val());
+        update_tgturl();
+});
+
 // TODO Remove from workspace is badly broken
-$('#remove-btn').click(function(){remove($('#adapter-id').val())});
-$('#clone-btn').click(function(){clone($('#adapter-id').val())});
-$('#save-btn').click(function(){save()});
+$('#remove-btn').click(function() {     // Remove item button listener
+  remove($('#adapter-id').val())
+});
+
+// TODO change this to work for workspace
+$('#clone-btn').click(function() {      // Clone item button listener
+  clone($('#adapter-id').val())
+});
+
+$('#save-btn').click(function() {       // Save workspace button listener
+  save()
+});
+
+$('#up').click(function() {
+  build_select();
+});
+//$("#files").change(util.handleFileSelect);   // File upload listener
+
+
+/// To execute onLoad() TODO temporary since alt-layout
+// Add adapter TODO its temporary since alt-layout
+addToDiagram(generic_adapter);
+connect_queue(adapters[2]);
+connect_queue(finish);
+addToDiagram(connector);
+
+// Keep it in the bottom
+$(document).ready(function() {
+  fill_adapter_types();
+  fill_connector_types();
+});
 

@@ -1,4 +1,4 @@
-;;  HL7 YAMl converter
+;;  CSV adapters for Iridescence Smart Connector
 ;;  Copyright (C) 2015 eCaresoft Inc
 ;;  Ernesto Angel Celis de la Fuente <developer@celisdelafuente.net>
 ;;
@@ -17,15 +17,26 @@
 ;;  You should have received a copy of the GNU Affero General Public License
 ;;  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+(ns adapter-csv.core
+  (:require [clojure.data.csv :as csv]
+             [clojure.java.io :as io])
+  (:use [taoensso.timbre :only [trace debug info warn error fatal]]))
 
-(defproject hl7yaml "0.1.2-SNAPSHOT"
-  :description "HL7 to YAML interpreter"
-  :url "http://ecaresoft.com"
-  :license {:name "GNU Affero General Public License"
-            :url "http://www.gnu.org/licenses/"}
-  :dependencies [[org.clojure/clojure "1.6.0"]
-                 [clj-yaml "0.4.0"]
-                 [com.taoensso/timbre "3.4.0"]
-                 [clojure-hl7-parser "3.4"]]
-  :target-path "target/%s"
-  :profiles {:uberjar {:aot :all}})
+(defn get-columns "Get columns from CSV" [url]
+  (println url))
+
+(defn get-tables "Get tables from CSV" [url]
+  (println url))
+
+(defn test-url "Test CSV URL" [url]
+  (with-open [in-file (io/reader "/tmp/my.csv")]
+  (def csv_response (doall
+    (csv/read-csv in-file))))
+  csv_response)
+
+
+(defn build-select "Build a SELECT FROM CSV" [url tables query]
+  (println url))
+
+(defn exec-query [url query-map]
+  (println url))

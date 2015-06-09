@@ -17,31 +17,26 @@
 ;;  You should have received a copy of the GNU Affero General Public License
 ;;  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-(ns hl7yaml.core
-  (:gen-class)
-  (:require
-    [clj-yaml.core :as yaml]
-    [com.nervestaple.hl7-parser.parser :as hl7parser]
-    [com.nervestaple.hl7-parser.message :as hl7message]))
-;; Read the message from a file, just like unix everything is a file!
-;(def rawmsg (slurp "../data/data.hl7")) ; TODO make a funtion
-;(def rawyaml (slurp "../data/data.yaml"))
-;(def s {:1 "Uno" :2 "Dos" :3 "Tres"})
-;(def t [:3 :2 :1])
+(ns adapter-hl7v2.core
+  (:require [com.nervestaple.hl7-parser.parser :as hl7parser]
+    [com.nervestaple.hl7-parser.message :as hl7message])
+  (:use [taoensso.timbre :only [trace debug info warn error fatal]]))
 
-(defn rechl7
-  "HL7 message reception and parsing"
-  [rawhl7]
-  (hl7parser/parse rawhl7))
+(defn get-columns
+  "I don't do a whole lot."
+  [url]
+  (println url))
 
-(defn recyaml
-  "YAML message definition & configuration reception"
-  [rawyaml]
-  (yaml/parse-string rawyaml))
+(defn get-tables "Doc string" [url]
+  (println url))
 
-;; TODO SCRATCHPAD
+(defn test-url "Test HL7v2 URL" [url]
+  (def hl7file (slurp "/tmp/my.hl7")
+  (println url))
 
-(defn map-elements
-  "Map elements from YAML to HL7"
-  [source-map target-vector]
-  (zipmap target-vector (vals source-map)))
+(defn build-select "Build a SELECT FROM HL7v2" [url tables query]
+  (println url))
+
+(defn exec-query "Exec query against HL7v2" [url query-map]
+  (println url))
+
