@@ -1,9 +1,14 @@
-### WIP adapter-hl7v2 replacement for hl7yaml (HEAD, file-iface)
+### RENAME CirrusLoad to adapter-cirrus to make standard (HEAD, file-iface)
+>Tue, 9 Jun 2015 14:57:24 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### WIP adapter-hl7v2 replacement for hl7yaml (origin/file-iface)
 >Tue, 9 Jun 2015 06:59:07 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
 
-### REPLACE hl7yaml for adapter-hl7v2 (origin/file-iface)
+### REPLACE hl7yaml for adapter-hl7v2
 >Tue, 9 Jun 2015 06:41:44 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
