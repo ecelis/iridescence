@@ -1,9 +1,14 @@
-### UPDATE Do not fear non-compliant SQL (HEAD, master)
+### ADD adapter-csv (HEAD, file-iface)
+>Mon, 8 Jun 2015 22:45:30 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### UPDATE Do not fear non-compliant SQL (origin/master, origin/HEAD, master)
 >Mon, 8 Jun 2015 21:28:18 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
 
-### UPDATE build query (origin/master, origin/HEAD)
+### UPDATE build query
 >Mon, 8 Jun 2015 05:08:19 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)

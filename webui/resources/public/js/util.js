@@ -78,9 +78,9 @@ Util.prototype.check_api = function() {
 };
 
 file_driver = [
-  'file',
-  'ftp',
-  'scp'
+  'hl7v2',
+  'hl7v3',
+  'csv'
 ];
 
 db_driver = [

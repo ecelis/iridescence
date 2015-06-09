@@ -23,7 +23,9 @@
             [cheshire.core :as json]
             [clojure.java.io :as io]
             [clj-yaml.core :as yaml]
-            [adapter-db.core :as db])
+            [adapter-db.core :as db]
+            [adapter-csv.core :as csv]
+            [clojure.string :as string])
   (:use [taoensso.timbre :only [trace debug info warn error fatal]]))
 
 (def savedir "/tmp") ; TODO Set a definitive path
@@ -82,13 +84,28 @@
   (db/build-select "ta")
   (yaml-response {:not (str "run-workspace stub " id)}))
 
-(defn try-url "Test adapter url" [url]
-  ; TODO test any type of data source
+(defn try_dburl "Docstring " [url]
   (def res (db/test-url url))
   (if res
     (json-response {:tables res
                     })
     (json-response {:tables nil :columns nil})))
+
+(defn try_csvurl "Docstring " [url]
+  (def res (csv/test-url url))
+  (if res
+    (json-response {:tables res
+                    })
+    (json-response {:tables nil :columns nil})))
+
+
+(defn try-url "Test adapter url" [url]
+  ; TODO test any type of data source
+  (def url_type (first (string/split url #":")))
+  (cond (= "csv" url_type) (try_csvurl url)
+        (= "postgresql" url_type) (try_dburl url)
+        :else (info "Unknown"))
+  )
 
 (defn get-objects "Fetch data source objects" [url]
   (info (db/get-tables url)))
