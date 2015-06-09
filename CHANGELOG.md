@@ -1,4 +1,9 @@
-### ADD travis-ci yml script (HEAD, file-iface)
+### UPDATE clojure language for TravisCI (HEAD, master)
+>Tue, 9 Jun 2015 16:03:00 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### ADD travis-ci yml script (origin/master, origin/file-iface, origin/alt-layout, origin/HEAD, file-iface, alt-layout)
 >Tue, 9 Jun 2015 15:52:54 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
@@ -13,7 +18,7 @@
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
 
-### WIP adapter-hl7v2 replacement for hl7yaml (origin/file-iface)
+### WIP adapter-hl7v2 replacement for hl7yaml
 >Tue, 9 Jun 2015 06:59:07 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
@@ -38,7 +43,7 @@
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
 
-### UPDATE Do not fear non-compliant SQL (origin/master, origin/HEAD, master)
+### UPDATE Do not fear non-compliant SQL
 >Mon, 8 Jun 2015 21:28:18 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
@@ -73,7 +78,7 @@
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
 
-### Clean up (origin/alt-layout, alt-layout)
+### Clean up
 >Fri, 5 Jun 2015 04:26:27 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
