@@ -31,6 +31,7 @@
   (println url))
 
 (defn test-url "Test HL7v2 URL" [url]
+  (def hl7file (slurp "/tmp/my.hl7")
   (println url))
 
 (defn build-select "Build a SELECT FROM HL7v2" [url tables query]

@@ -1,4 +1,9 @@
-### ADD build.sh script (HEAD, file-iface)
+### ADD travis-ci yml script (HEAD, file-iface)
+>Tue, 9 Jun 2015 15:52:54 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### ADD build.sh script
 >Tue, 9 Jun 2015 15:15:04 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
