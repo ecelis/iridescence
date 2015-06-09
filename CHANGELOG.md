@@ -1,4 +1,9 @@
-### REPLACE hl7yaml for adapter-hl7v2 (HEAD, file-iface)
+### WIP adapter-hl7v2 replacement for hl7yaml (HEAD, file-iface)
+>Tue, 9 Jun 2015 06:59:07 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### REPLACE hl7yaml for adapter-hl7v2 (origin/file-iface)
 >Tue, 9 Jun 2015 06:41:44 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
@@ -8,7 +13,7 @@
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
 
-### UPDATE CSV reader (origin/file-iface)
+### UPDATE CSV reader
 >Mon, 8 Jun 2015 23:17:42 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
