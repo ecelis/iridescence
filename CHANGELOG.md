@@ -1,9 +1,14 @@
-### UPDATE clojure language for TravisCI (HEAD, master)
+### ADD lein mock project to pass Travis test report (HEAD, master)
+>Tue, 9 Jun 2015 16:16:14 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### UPDATE clojure language for TravisCI (origin/master, origin/HEAD)
 >Tue, 9 Jun 2015 16:03:00 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
 
-### ADD travis-ci yml script (origin/master, origin/file-iface, origin/alt-layout, origin/HEAD, file-iface, alt-layout)
+### ADD travis-ci yml script (origin/file-iface, origin/alt-layout, file-iface, alt-layout)
 >Tue, 9 Jun 2015 15:52:54 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
