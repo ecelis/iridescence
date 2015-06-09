@@ -45,12 +45,14 @@ var save = function() {
 
 var build_query = function(event, node) {
         var nodes = $('#srcdata').treeview('getSelected', node.nodeId);
-        var col_names = ' ';
+        var col_names = '';
+        var table_names = '';
         nodes.forEach(function(column) {
-          console.log(column);
+          table_names += $('#srcdata').treeview('getParent', column).text + ' ';
           col_names += $('#srcdata').treeview('getParent', column).text +
                                 '.' + column.text + ' ';
         });
+        $('#adapter-from').val(table_names);
         $('#adapter-query').val(col_names);
 }
 /**
@@ -107,6 +109,7 @@ var build_select = function() {
   $.get("/api/adapter/build_select/",
         {"__anti-forgery-token": $("#__anti-forgery-token").val(),
           "url": $('#adapter-url').val(),
+          "tables": $('#adapter-from').val(),
           "query": $('#adapter-query').val()
         },
        function(res) {

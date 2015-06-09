@@ -1,9 +1,14 @@
-### UPDATE build query (HEAD, master)
+### UPDATE Do not fear non-compliant SQL (HEAD, master)
+>Mon, 8 Jun 2015 21:28:18 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### UPDATE build query (origin/master, origin/HEAD)
 >Mon, 8 Jun 2015 05:08:19 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
 
-### FIX tree views multiSelect enabled (origin/master, origin/HEAD)
+### FIX tree views multiSelect enabled
 >Fri, 5 Jun 2015 10:37:49 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)

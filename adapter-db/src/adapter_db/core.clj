@@ -20,8 +20,10 @@
 (ns adapter-db.core
   (:require [clojure.java.jdbc :as jdbc]
             [honeysql.core :as sql]
-            [honeysql.helpers :refer :all])
-  (:use [taoensso.timbre :only [trace debug info warn error fatal]]))
+            [honeysql.helpers :refer :all]
+            [clojure.string :as string])
+  (:use [taoensso.timbre :only [trace debug info warn error fatal]]
+        [clojure.walk]))
 
 (defn get-columns "Get columns from" [url table]
   (def sqlmap (sql/build :select :column_name
@@ -42,7 +44,6 @@
 ;        (def tables (vec (map #(get-columns url %) tables)))
         (catch Exception e (info e)))
   (def table-defs (conj (map #(get-columns url %) tables) nil))
-  (info table-defs)
   (rest table-defs))
 
 (defn test-url "Tests URL" [url]
@@ -53,11 +54,14 @@
     (jdbc/get-connection url) (get-tables url)
     (catch Exception e (info e))))
 
-(defn build-select "Build a select from" [url tables columns conditions]
-  (def sqlmap {:select (map keyword columns)
-               :from (map keyword tables)})
+(defn build-select "Build a select from" [url tables query]
+  (def fro (vec (map keyword (seq (string/split tables #" ")))))
+  (def sele (vec (map keyword (seq (string/split query #" ")))))
+  (def sqlmap {:select sele
+               :from fro})
   ;; TODO :where [conditions]}
-  sqlmap)
+  ;sqlmap)
+  (info (sql/format sqlmap)))
 
 (defn exec-query [url query-map]
   (jdbc/query (sql/format query-map) :result-set-fn vec))

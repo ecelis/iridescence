@@ -454,6 +454,9 @@ $('#adapter-test-btn').on("click change keyup",
       function() {
         update_srcurl();
         update_adapter(adapters[2].id); // TODO fixed value since alt-layout
+        if($('#adapter-query').val() != '') {
+          build_select();
+        }
 });
 
 $('#connector :input').on("click change keyup",   // Connector properties listener
