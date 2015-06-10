@@ -1,6 +1,7 @@
-##### Iridescence
+Smart Connector
+===============
 
-# Smart Connector
+[![Build Status](https://travis-ci.org/ecelis/iridescence.svg?branch=master)](https://travis-ci.org/ecelis/iridescence)
 
 This is a work in progress, some/many things might be broken or need
 manual intervention to build/run. Please refer to README.md files within

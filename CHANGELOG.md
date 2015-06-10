@@ -1,9 +1,14 @@
 ### FIX some Travis build errors (HEAD, master)
+>Tue, 9 Jun 2015 22:12:05 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### FIX some Travis build errors (origin/master, origin/HEAD)
 >Tue, 9 Jun 2015 21:58:29 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
 
-### Travis Openshift test (origin/master, origin/HEAD)
+### Travis Openshift test
 >Tue, 9 Jun 2015 21:53:47 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
