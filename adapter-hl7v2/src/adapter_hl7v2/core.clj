@@ -18,8 +18,6 @@
 ;;  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 (ns adapter-hl7v2.core
-  (:require [com.nervestaple.hl7-parser.parser :as hl7parser]
-            [com.nervestaple.hl7-parser.message :as hl7message])
   (:use [taoensso.timbre :only [trace debug info warn error fatal]]))
 
 (defn get-columns

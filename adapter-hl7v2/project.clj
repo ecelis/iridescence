@@ -5,4 +5,4 @@
             :url ""}
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [com.taoensso/timbre "3.4.0"]
-                 [clojure-hl7-parser "3.4"]])
+                 ])

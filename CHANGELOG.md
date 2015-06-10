@@ -1,4 +1,9 @@
-### UPDATE README (HEAD, master)
+### FIX something broke (HEAD, master)
+>Wed, 10 Jun 2015 06:31:13 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### UPDATE README
 >Tue, 9 Jun 2015 22:16:20 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
