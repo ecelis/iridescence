@@ -1,0 +1,1 @@
+web: java $JVM_OPTS -cp target/webui.jar clojure.main -m webui.core

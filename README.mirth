@@ -1,0 +1,48 @@
+# Mirth Connect
+
+Iridescence Smart Connector depends on Mirth Connect 3.2.1
+
+## Notes
+
+  * Eclipse requires Subclipse
+
+## Build
+
+### Manual build
+
+  1. Checout Mirth connect `svn co https://svn.mirthcorp.com/connect/tags/3.2.1 mirth`
+  2. `cd mirth/server`
+  3. `export JAVA_TOOL_OPTIONS=-Dfile.conding=UTF8 ; ant -f mirth-build.xml`
+
+
+
+### Eclipse build
+
+  1. From Eclipse, go to File > New > Other... > SVN > Checkout Projects
+  from SVN.
+  2. Create a new repository location with "https://svn.mirthcorp.com/connect/"
+  3. Select the tags/3.2.1/server directory and click Finish.
+  4. Repeat the above steps with the client, command, manager, donkey, and
+  webadmin directories under trunk.
+  5. You should now have six separate projects in Eclipse named Client,
+  Command, Manager, Donkey, WebAdmin, and Server. You will notice that
+  several of the projects have build errors. This is because you need to run
+  an initial build that will copy artifacts across projects.
+  6. Close Eclipse and navigate to your workspace directory (usually in your
+  user directory) and locate the Server directory
+  7. Edit `mirt-build.properties` and make sure project names are CamelCased,
+  otherwise build will fail.
+  8. From the command line, run "ant -f mirth-build.xml", or if you are in
+  Windows you can run the build.bat file.
+  9. When the build completes, refresh and clean the Client, Command, Manager,
+  Donkey, WebAdmin, and Server projects.
+  10. From Eclipse export the jar files, select Donkey project, Right click->
+  Export->Java->JAR File
+
+    Note that if you need the embedded Derby database to be recreated
+    because of any changes in the trunk code, you should delete the mirthdb
+    directory in appdata.
+
+## References
+
+  * http://www.mirthcorp.com/community/wiki/display/mirth/Home

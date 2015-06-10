@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="row">
+    <div class="col-xs-9">
+      <div class="row">
+        <div class="panel panel-default" id="work-canvas"></div>
+      </div>
+      <div class="row">
+        <div class="panel panel-default">
+          <div class="panel-heading">Properties</div>
+            <form name="properties-frm" id="properties-frm">
+              {% csrf-field %}
+              <div class="panel-body" id="properties-panel">
+                <!-- Tab panels -->
+                <div class="tab-panel">
+                    <!-- Navigation Tabs -->
+                    <ul class="nav nav-tabs" role="tablist" id="properties">
+                    <li role="presentation" class="active">
+                      <a href="#workspace" aria-controls="workspace"
+                        role="tab" data-toggle="tab">Workspace</a></li>
+                    <li role="presentation">
+                      <a href="#adapter" aria-controls="adapter"
+                        role="tab" data-toggle="tab">Source</a></li>
+                    <li role="presentation"><a href="#connector"
+                      aria-controls="connector"
+                      role="tab" data-toggle="tab">Target</a></li>
+                    </ul>
+
+                    <!-- Tab Content -->
+                    <div class="tab-content">
+                    {% include "properties-tab-workspace.html" %}
+                    {% include "properties-tab-adapter.html" %}
+                    {% include "properties-tab-connector.html" %}
+                    </div> <!-- /tab-content -->
+                </div>
+              </div>
+              <div class="panel-footer">
+                <!-- Form Controls -->
+                <div class="form-group">
+                  <div class="input-group input-group-sm">
+                    <div class="btn-group" role="group" aria-label="...">
+                      <button type="button" class="btn btn-default btn-sm" name="save-btn"
+                        id="save-btn">Save</button>
+                      <button type="button" class="btn btn-default btn-sm" name="clone-btn"
+                        id="clone-btn">Clone</button>
+                      <button type="button" class="btn btn-default btn-sm" name="remove-btn"
+                        id="remove-btn">Remove</button>
+                  </div>
+                </div>
+              </div>
+              <input type="hidden" name="work-type" id="work-type">
+              <input type="hidden" name="work-guid" id="work-guid">
+              <input type="hidden" name="adapter-id" id="adapter-id">
+              <input type="hidden" name="adapter-type" id="adapter-type">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-3">
+      <div class="panel-group" id="work-manager">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+          </div>
+          <div id="#work-manager-element"
+            class="panel-collapse collpase in">
+            <div class="panel-body">
+              <input type="file" id="files" name="files[]" multiple />
+              <div id="drop_zone">UPLOAD BROKEN Drop files here</div>
+              <output id="list"></output>
+              <button id="up" value="Upload">Upload</button>
+              <div class="tab-panel">
+                <!-- Navigation Tabs -->
+                <ul class="nav nav-tabs" role="tablist" id="datamap">
+                <li role="presentation" class="active">
+                  <a href="#datasrc" aria-controls="datasrc"
+                    role="tab" data-toggle="tab">Source</a></li>
+                <li role="presentation">
+                  <a href="#datatarget" aria-controls="datatarget"
+                    role="tab" data-toggle="tab">Target</a></li>
+                </ul>
+                <!-- Tab Content -->
+                <div class="tab-content">
+                  <div role="tabpanel" class="tab-pane active" id="datasrc">
+                    <div id="srcdata"></div>
+                  </div>
+                  <div role="tabpanel" class="tab-pane" id="datatarget">
+                    <div class="row">
+                      <div class="form-group">
+                        <div class="input-group input-group-sm">
+                          <div class="input-group-btn">
+                            <button type="button" class="btn btn-default btn-sm dropdown-toggle"
+                              data-toggle="dropdown" aria-expanded="false"
+                              id="msg-template-btn">Templates
+                              <span class="caret"></span></button>
+                            <ul class="dropdown-menu" id="msg-template-lst" role="menu">
+                              <li><a>HL7V2 SEDENA</a></li> <!-- TODO Fix keyboard -->
+                              <li><a>Some other</a></li>
+                              <li><a>version specific</a></li>
+                              <li><a>maybe</a></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div id="msg-template"></div>
+                    </div>
+                  </div>
+                </div> <!-- /tab-content -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}

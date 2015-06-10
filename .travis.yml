@@ -1,0 +1,11 @@
+language: clojure
+install: ./build.sh
+deploy:
+  provider: openshift
+  user: celisdelafuente@gmail.com
+  password:
+    secure: axZk5unUb1HFbSozjgGB8aYy3lJlTTYnrCejLLBlRO8j21tyZq3aDW6XfNhb9YiijxQuX/91ZyWAIcINWJA3Bdv/+Ijvbivd9MOZ2zb4901vhNt0uv+M8hzI/QDwhQo4zOjmH4aAWAt9OLZ61+Mbl9arF+5bX5k71/MFG8JnxKzfaEDoa+ZzEyw9Hfs2MuRRdO2LLKGHrwnk1gZjXjqDNsyn8jX53edkqao/IGOBJBw8R8/c36jebyHv0GiteUDDpS7AS6ZQsI9NibI0UbEZ8ZEDPjYp97Ry+v1ciruooTQKmiMkh5YSiZU7qiHx/0bhAQ4TVf4+AHjiruaHJiRmgF8PC7LTNGSGtjSf2DEEThvqjr+0juYHl9bjmtogQPCxIsMGjq6os19q/ZE/ESUh/teXpvhspd+I0gydBuGfTUWPdxzkz0Su0yUTT4CyqBmRbWKgk1C66tIXqj7Xw/CSMWT2HSWLC72CYN1UZAMHp2bYeXiZE4K17gIUzmg8o8t2+ikTbp2v6FAJ8hU5VMnJJtJOMr8YU2n7un63grsPk35xx1FDmcdeoqmyERGX8dgzoNBoNC1X3jHyF4Hz55F2UnYDO6vZv/Th45jovSUUOVPaX4+gzAgMy1ze8JU+vP5xenf8BIXYlg3oS2gbEClKjXnU5U5u/hoRyc59QyznlhE=
+  app: iridescence
+  domain: valhala
+  on:
+    repo: ecelis/iridescence

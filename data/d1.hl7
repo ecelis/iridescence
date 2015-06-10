@@ -1,0 +1,17 @@
+MSH|^~\&|PATHL7|BCB|HTTPCLIENT|universal1|20031030160839||ORU^R01|MED20031030160839483|P|2.3|||ER|AL
+PID||9129129122|||LIPIDCOMMENT^HIAN 
+KWANG||19470318|M|||7775-CHOLESTEROL ST||604-666-0099
+ORC|RE||03-1350023-LIP-0|||||||||22333^MEDIC^IAN^TEST
+OBR|1||03-1350023-LIP-0|LIP^Lipids||20031004073300|20031004073300|||||||20031004073300||22333^MEDIC^IAN^TEST||031350023||03-1350023|031350023|20031004131600||CHEM|F|||22333^MEDIC^IAN^TEST
+OBX|1|NM|14647-2^Cholesterol||6.5|mmol/L|2.0 - 5.2|H|||F|||20031004130600
+NTE|||At risk:>6.2   mmol/L
+OBX|2|NM|22748-8^LDL Cholesterol||4.0|mmol/L|1.5 - 3.4|H|||F|||20031004073300
+NTE|||At risk:>3.4   mmol/L\.br\An LDL cholesterol level of less than 
+2.6 mmol/L\.br\is suggested for patients with established CAD.
+OBX|3|NM|14646-4^HDL Cholesterol||2.1|mmol/L|> 0.9||||F|||20031004130600
+OBX|4|NM|9322-9^Chol/HDL (Risk Ratio)||3.1||< 5.0||||F|||20031004073300
+NTE|||A ratio of 5.0 in males is associated with\.br\average risk. 
+Increased ratios are associated\.br\with higher risk for CAD.
+OBX|5|NM|14927-8^Triglycerides||0.9|mmol/L|< 2.3||||F|||20031004130600
+OBX|6|NM|xBCB 0017^Time Since Eating||12.5|h pc|||||F|||20031004073600
+
