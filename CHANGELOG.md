@@ -1,9 +1,14 @@
-### ADD OpenShift files (origin/master, origin/HEAD, master)
+### Travis Openshift test (HEAD, master)
+>Tue, 9 Jun 2015 21:53:47 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### ADD OpenShift files
 >Tue, 9 Jun 2015 21:11:25 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
 
-### Creating template (openshift/master)
+### Creating template
 >Tue, 9 Jun 2015 22:06:06 -0400
 
 >Author: Template builder (builder@example.com)
