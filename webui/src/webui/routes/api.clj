@@ -100,7 +100,10 @@
     (json-response {:tables nil :columns nil})))
 
 (defn try_hl7url "Test HL7 URL" [url]
-  (info (hl7/test-url url)))
+  (def res(hl7/test-url url))
+  (if res
+    (json-response {:tables res})
+    (json-response {:tables nil})))
 
 (defn try-url "Test adapter url" [url]
   ; TODO test any type of data source

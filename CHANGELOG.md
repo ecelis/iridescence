@@ -1,9 +1,14 @@
-### FIX hl7 read (HEAD, master)
+### FIX hl7 read JSON response (HEAD, master)
+>Wed, 10 Jun 2015 08:10:47 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### FIX hl7 read (origin/master, origin/HEAD)
 >Wed, 10 Jun 2015 08:01:39 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
 
-### FIX something broke (origin/master, origin/HEAD)
+### FIX something broke
 >Wed, 10 Jun 2015 06:31:13 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
