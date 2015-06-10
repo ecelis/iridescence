@@ -49,3 +49,5 @@ dbPort
 data/**
 mirth
 **/doc
+.dpl/
+.lein-failures
