@@ -19,7 +19,7 @@
 
 (ns adapter-hl7v2.core
   (:require [com.nervestaple.hl7-parser.parser :as hl7parser]
-    [com.nervestaple.hl7-parser.message :as hl7message])
+            [com.nervestaple.hl7-parser.message :as hl7message])
   (:use [taoensso.timbre :only [trace debug info warn error fatal]]))
 
 (defn get-columns
@@ -31,8 +31,8 @@
   (println url))
 
 (defn test-url "Test HL7v2 URL" [url]
-  (def hl7file (slurp "/tmp/my.hl7")
-  (println url))
+  (def hl7file (slurp "/tmp/my.hl7"))
+  hl7file)
 
 (defn build-select "Build a SELECT FROM HL7v2" [url tables query]
   (println url))
