@@ -25,6 +25,7 @@
             [clj-yaml.core :as yaml]
             [adapter-db.core :as db]
             [adapter-csv.core :as csv]
+            [adapter-hl7v2.core :as hl7]
             [clojure.string :as string])
   (:use [taoensso.timbre :only [trace debug info warn error fatal]]))
 
@@ -99,13 +100,14 @@
     (json-response {:tables nil :columns nil})))
 
 (defn try_hl7url "Test HL7 URL" [url]
-  (info (str "some")))
+  (info (hl7/test-url url)))
 
 (defn try-url "Test adapter url" [url]
   ; TODO test any type of data source
   (def url_type (first (string/split url #":")))
   (cond (= "csv" url_type) (try_csvurl url)
         (= "postgresql" url_type) (try_dburl url)
+        (= "hl7v2" url_type) (try_hl7url url)
         :else (warn "Unknown URL type"))
   )
 
