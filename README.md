@@ -8,11 +8,12 @@ manual intervention to build/run. Please refer to README.md files within
 each submodule directory for details. Modules can change name, split or
 be deleted until we reach the first stable and fully functional version.
 
-  * webui         - SmartConnector Web User Interface
-  * adapter-db    - DB Adapter (PostgreSQL, MySQL, SQL Server, Oracle)
-  * adapter-mirth - Mirth Connect Adapter (WIP)
-  * CirrusLoad    - Cirrus Adapter        (WIP)
-  * hl7yaml       - HL7/YAML parser module (LIMBO) <-might be deleted
+  * webui           - SmartConnector Web User Interface
+  * adapter-db      - DB Adapter (PostgreSQL, MySQL, SQL Server, Oracle)
+  * adapter-mirth   - Mirth Connect Adapter (WIP)
+  * adapter-cirrus  - Cirrus Adapter        (WIP)
+  * adapter-hl7v2   - HL7v2 parser module (WIP)
+  * adapter-csv     - CSV Adapter (WIP)
 
 
 ## Installation
