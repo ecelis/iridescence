@@ -1,14 +1,19 @@
-### FIX hl7 read JSON response (HEAD, master)
+### DELETE unused migrations (HEAD, master)
+>Fri, 19 Jun 2015 00:08:39 -0400
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### FIX hl7 read JSON response (origin/master, origin/HEAD)
 >Wed, 10 Jun 2015 08:10:47 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
 
-### FIX hl7 read (origin/master, origin/HEAD)
+### FIX hl7 read
 >Wed, 10 Jun 2015 08:01:39 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
 
-### FIX something broke
+### FIX something broke (openshift/master)
 >Wed, 10 Jun 2015 06:31:13 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
@@ -603,7 +608,7 @@
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
 
-### Deploy to test vServer
+### Deploy to test vServer (stage/master)
 >Sun, 24 May 2015 18:44:30 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
@@ -763,7 +768,7 @@
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
 
-### FIX Various artifacts were saved twice
+### FIX Various artifacts were saved twice (merge)
 >Fri, 1 May 2015 10:53:33 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
@@ -903,7 +908,7 @@
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
 
-### Refactoring almost done (origin/jsl)
+### Refactoring almost done (origin/jsl, jsl)
 >Mon, 27 Apr 2015 03:14:55 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
