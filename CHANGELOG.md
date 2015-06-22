@@ -1,4 +1,9 @@
-### DELETE unused migrations (HEAD, master)
+### CSV reader almost working, display in web needs some delay or something (HEAD, master)
+>Mon, 22 Jun 2015 18:56:18 -0400
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### DELETE unused migrations
 >Fri, 19 Jun 2015 00:08:39 -0400
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)

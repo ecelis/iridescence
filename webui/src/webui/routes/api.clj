@@ -90,20 +90,20 @@
   (if res
     (json-response {:tables res
                     })
-    (json-response {:tables nil :columns nil})))
+    (json-response {:tables nil})))
 
 (defn try_csvurl "Test CSV URL" [url]
   (def res (csv/test-url url))
   (if res
-    (json-response {:tables res
+    (json-response {:matrix res
                     })
-    (json-response {:tables nil :columns nil})))
+    (json-response {:matrix nil})))
 
 (defn try_hl7url "Test HL7 URL" [url]
   (def res(hl7/test-url url))
   (if res
-    (json-response {:tables res})
-    (json-response {:tables nil})))
+    (json-response {:message res})
+    (json-response {:message nil})))
 
 (defn try-url "Test adapter url" [url]
   ; TODO test any type of data source

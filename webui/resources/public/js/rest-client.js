@@ -28,6 +28,7 @@ var get_objects = function(url) {
           console.log(e);
         });
 };
+
 /**
  * Save adapters to YAML in the server
  * @method save
@@ -41,27 +42,78 @@ var save = function() {
   //payload.data.push(hl7message);
   $.post("/api/", {"__anti-forgery-token": $('#__anti-forgery-token').val(),
          "workspace":payload});
-}
+};
 
 var build_query = function(event, node) {
-        var nodes = $('#srcdata').treeview('getSelected', node.nodeId);
-        var col_names = '';
-        var table_names = '';
-        nodes.forEach(function(column) {
-          table_names += $('#srcdata').treeview('getParent', column).text + ' ';
-          col_names += $('#srcdata').treeview('getParent', column).text +
-                                '.' + column.text + ' ';
-        });
-        $('#adapter-from').val(table_names);
-        $('#adapter-query').val(col_names);
-}
+  var nodes = $('#srcdata').treeview('getSelected', node.nodeId);
+  var col_names = '';
+  var table_names = '';
+  nodes.forEach(function(column) {
+    table_names += $('#srcdata').treeview('getParent', column).text + ' ';
+    col_names += $('#srcdata').treeview('getParent', column).text +
+                          '.' + column.text + ' ';
+  });
+  $('#adapter-from').val(table_names);
+  $('#adapter-query').val(col_names);
+};
+
 /**
- * Stores in a variable the Table Definition retrieved by test_connection
+ * Handles JSON response for HL7v2 adapter
  *
- * @method adapter_connection_handler
- * @param {Object} JSON response
+ * { { delimiters } 
+ *   { segments [
+ *    { id:
+ *      fields [
+ *        { content: }
+ *      ]
+ *    }]
+ *   }
+ * }
+ *
+ * @method hl7v2_handler
+ * @param {Object} json_data response
  */
-var adapter_connection_handler = function(json_data) {
+var hl7v2_handler = function(json_data) {
+  var segments = json_data.segments;
+};
+
+/**
+ * Handles JSON response for CSV adapter
+ * TODO handle first row column names
+ *
+ * { matrix [
+ *  [ "xxx" ] ] }
+ *
+ * @method csv_handler
+ * @param {Object} json_data response
+ */
+var csv_handler = function(json_data) {
+  var matrix = [];
+  var row_number = 0;
+  json_data.matrix.forEach(function(row) {
+    var cells = [];
+    row.forEach(function(cell) {
+      cells.push({text: cell});
+    });
+    matrix.push({text: row_number.toString(), nodes: cells});
+    row_number++;
+  });
+  return [{text: "src", nodes: matrix}];
+};
+
+/**
+ * Handles JSON response for RDMS
+ *
+ * { tables [
+ *  { table_name: [
+ *    { column_name: "xxx" }
+ *  ] }
+ * ] }
+ *
+ * @method db_handler
+ * @param {Object} json_data response
+ */
+var db_handler = function(json_data) {
   var table_schema = [];
   var table_definition = [];
   // Get table names
@@ -78,8 +130,34 @@ var adapter_connection_handler = function(json_data) {
       });
       adapter_items.push({"text": table.text, "nodes": cols});
     });
-    var srcdata = [{text: "src", nodes: adapter_items}];
+    return [{text: "src", nodes: adapter_items}];
   }
+};
+
+/**
+ * Stores in a variable the Table Definition retrieved by test_connection
+ *
+ * @method adapter_connection_handler
+ * @param {Object} JSON response
+ */
+var adapter_connection_handler = function(url, json_data) {
+  var srcdata;
+  var srctype = url.substr(0, url.indexOf(":"));
+  switch(srctype) {
+    case "postgres":
+    case "postgresql":
+      srcdata = db_handler(json_data);
+      break;
+    case "csv":
+      srcdata = csv_handler(json_data);
+      break;
+    case "hl7v2":
+      srcdata = hl7v2_handler(json_data);
+      break;
+    default:
+      console.log("Empty response");
+  }
+console.log(srcdata);
   if(adapter_items.length > 0) {
     $('#srcdata').treeview({data: srcdata,
       multiSelect: true,
@@ -101,7 +179,7 @@ var test_connection = function (url) {
           "url": url
         },
         function(res) {
-          adapter_connection_handler(res);
+          adapter_connection_handler(url, res);
         });
 };
 
