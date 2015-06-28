@@ -25,6 +25,18 @@
   (:use [taoensso.timbre :only [trace debug info warn error fatal]]
         [clojure.walk]))
 
+(defn tables-sqlmap-by-dbms "Depending on the DBMS in the URL build
+                           an appropriate sqlmap" [dbms]
+  (def sqlmap (cond (= "postgres" dbms) (sql/build :select :*
+                              :from :information_schema.tables
+                              :where [:= :table_schema "public"])
+                    (= "postgresql" dbms) (sql/build :select :*
+                              :from :information_schema.tables
+                              :where [:= :table_schema "public"])
+                    (= "mysql" dbms) ()
+                    :else (warn "Unknown DBMS type"))
+  ))
+
 (defn get-columns "Get columns from" [url table]
   (def sqlmap (sql/build :select :column_name
                :from :information_schema.columns
@@ -35,9 +47,7 @@
 (defn get-tables "Get tables from" [url]
   (def tables)
   (try ; TODO reuse it (def db-handle (jdbc/get-connection url))
-       (def sqlmap (sql/build :select :*
-                              :from :information_schema.tables
-                              :where [:= :table_schema "public"]))
+       (def sqlmap (tables-sqlmap-by-dbms (first (string/split url #":"))))
         (def tables (map #(get % :table_name)
                          (jdbc/query url (sql/format sqlmap)
                                      :result-set-fn vec)))

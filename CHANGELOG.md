@@ -1,4 +1,9 @@
-### WIP aPI responses (HEAD, master)
+### UPDATE adapter-db to handle various dbms (HEAD, master)
+>Sun, 28 Jun 2015 18:21:57 -0400
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### WIP aPI responses
 >Sun, 28 Jun 2015 17:43:11 -0400
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
