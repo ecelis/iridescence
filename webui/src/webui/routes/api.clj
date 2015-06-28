@@ -114,6 +114,16 @@
         :else (warn "Unknown URL type"))
   )
 
+(defn execute-adapter "Execute adapter query aginst data source"
+  [url tables query]
+  (def url_type (first (string/split url #":")))
+  (def adapter-response
+    (cond (= "csv" url_type) (try_csvurl url)
+          (= "postgresql" url_type) (db/build-select url tables query)
+          (= "hl7v2" url_type) (try_hl7url url)
+          :else (warn "Unknown URL type")))
+  (info adapter-response))
+
 (defn get-objects "Fetch data source objects" [url]
   (info (db/get-tables url)))
 
@@ -146,4 +156,4 @@
     (GET "/test/" [__anti-forgery-token url] (try-url url))
     (GET "/object/" [__anti-forgery-token url] (get-objects url))
     (GET "/build_select/" [__anti-forgery-token url tables query]
-         (db/build-select url tables query))))
+         (execute-adapter url tables query))))

@@ -1,4 +1,9 @@
-### UPDATE something I can't recall (HEAD, master)
+### WIP aPI responses (HEAD, master)
+>Sun, 28 Jun 2015 17:43:11 -0400
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### UPDATE something I can't recall
 >Sun, 28 Jun 2015 15:59:02 -0400
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)

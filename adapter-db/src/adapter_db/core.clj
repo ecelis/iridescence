@@ -61,7 +61,7 @@
                :from fro})
   ;; TODO :where [conditions]}
   ;sqlmap)
-  (info (sql/format sqlmap)))
+  (sql/format sqlmap))
 
 (defn exec-query [url query-map]
   (jdbc/query (sql/format query-map) :result-set-fn vec))

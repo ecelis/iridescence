@@ -38,6 +38,7 @@ var work_meta = {'type': null,        // Workspace metadata
   'comments': null,
   'draft': true
 };
+
 /**
  * Adapter property model
  * @property
@@ -112,6 +113,9 @@ var connect_queue = function(artifact) {
   }
 }
 
+var connector_tab = $('#properties a[href="#connector"]');
+var adapter_tab = $('#properties a[href="#adapter"]');
+
 /**
  * Triggered when an adapter starts moving
  */
@@ -178,11 +182,11 @@ var modify = function() {
     $('#adapter-name').val(property.name);
     $('#adapter-url').val(property.url);
     $('#adapter-id').val(this.id);
-    $('#properties a[href="#adapter"]').tab('show');
+    adapter_tab.tab('show');
     connect_queue(this);
   } else {
     // TODO initialize properties, Name, etc
-    $('#properties a[href="#connector"]').tab('show');
+    connector_tab.tab('show');
     var adapter_id = property.name.split("to")[0];
     update_connector(this);
   }
@@ -484,6 +488,9 @@ $('#up').click(function() {
 });
 //$("#files").change(util.handleFileSelect);   // File upload listener
 
+connector_tab.on('show.bs.tab', function(e) {
+  console.log(e);
+});
 
 /// To execute onLoad() TODO temporary since alt-layout
 // Add adapter TODO its temporary since alt-layout
