@@ -102,7 +102,7 @@ adapters.push(finish);
  * Connect queue, Adapters are pushed to the queue in order to add a Connector
  * between them
  * @method
- * @param {Raphael.Element} artifact connector
+ * @param {Object} artifact connector
  * */
 var connect_queue = function(artifact) {
   if (connect.length < 2) {       // If the connection queue's length < 2
@@ -205,7 +205,7 @@ var setData = function(adapter) {
 /**
  * Add a new element from Toolbar to adapters
  * @method addToDiagram
- * @param {Object} adapter Raphael Element object
+ * @param {Object} adapter Raphael Element
  * */
 var addToDiagram = function (adapter) {
   var color = Raphael.getColor(); // Get next color in spectrum

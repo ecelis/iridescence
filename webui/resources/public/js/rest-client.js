@@ -74,7 +74,20 @@ var build_query = function(event, node) {
  * @param {Object} json_data response
  */
 var hl7v2_handler = function(json_data) {
-  var segments = json_data.segments;
+  var segments = json_data.message.segments;
+  var fields = [];
+  var msg_tree = [];
+  segments.forEach(function(segment) {
+    segment.fields.forEach(function(field) {
+      if(Object.prototype.toString.call(field.content) === '[object Array]') {
+        fields.push({nodes: [{text: field.content}]});
+      } else {
+        fields.push({text: field.content});
+      }
+    });
+   console.log({text: segment.id, nodes: fields});
+  });
+  //console.log(fields);
 };
 
 /**

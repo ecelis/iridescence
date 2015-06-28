@@ -1,4 +1,9 @@
-### CSV reader almost working, display in web needs some delay or something (HEAD, master)
+### UPDATE something I can't recall (HEAD, master)
+>Sun, 28 Jun 2015 15:59:02 -0400
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### CSV reader almost working, display in web needs some delay or something
 >Mon, 22 Jun 2015 18:56:18 -0400
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
