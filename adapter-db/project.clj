@@ -1,4 +1,4 @@
-(defproject adapter-db "0.1.13-SNAPSHOT"
+(defproject adapter-db "0.1.14-SNAPSHOT"
   :description "Database Adapters"
   :url "http://github.com/ecelis/iridescence"
   :license {:name "Affero General Public License"
@@ -8,6 +8,7 @@
                  [honeysql "0.5.2"]
                  [com.taoensso/timbre "3.4.0"]
                  [com.taoensso/tower "3.0.2"]
-                 [org.postgresql/postgresql "9.4-1201-jdbc41"]]
+                 [org.postgresql/postgresql "9.4-1201-jdbc41"]
+                 [mysql/mysql-connector-java "5.1.35"]]
   :plugins [[codox "0.8.11"]]
   )

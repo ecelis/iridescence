@@ -110,6 +110,7 @@
   (def url_type (first (string/split url #":")))
   (cond (= "csv" url_type) (try_csvurl url)
         (= "postgresql" url_type) (try_dburl url)
+        (= "mysql" url_type) (try_dburl url)
         (= "hl7v2" url_type) (try_hl7url url)
         :else (warn "Unknown URL type"))
   )

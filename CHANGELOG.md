@@ -1,4 +1,9 @@
-### UPDATE adapter-db to handle various dbms (HEAD, master)
+### WIP DB adapters (HEAD, master)
+>Mon, 29 Jun 2015 00:55:38 -0400
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### UPDATE adapter-db to handle various dbms
 >Sun, 28 Jun 2015 18:21:57 -0400
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)

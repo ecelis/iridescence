@@ -27,15 +27,19 @@
 
 (defn tables-sqlmap-by-dbms "Depending on the DBMS in the URL build
                            an appropriate sqlmap" [dbms]
-  (def sqlmap (cond (= "postgres" dbms) (sql/build :select :*
-                              :from :information_schema.tables
-                              :where [:= :table_schema "public"])
-                    (= "postgresql" dbms) (sql/build :select :*
-                              :from :information_schema.tables
-                              :where [:= :table_schema "public"])
-                    (= "mysql" dbms) ()
-                    :else (warn "Unknown DBMS type"))
-  ))
+  (cond (= "postgres" dbms)
+          (sql/build :select :*
+                :from :information_schema.tables
+                :where [:= :table_schema "public"])
+        (= "postgresql" dbms)
+          (sql/build :select :*
+              :from :information_schema.tables
+              :where [:= :table_schema "public"])
+        (= "mysql" dbms)
+          (sql/build :select :table_name
+              :from :information_schema.tables
+              :where [:= :table_schema "database()"])
+        :else (warn "Unknown DBMS type")))
 
 (defn get-columns "Get columns from" [url table]
   (def sqlmap (sql/build :select :column_name
@@ -51,7 +55,7 @@
         (def tables (map #(get % :table_name)
                          (jdbc/query url (sql/format sqlmap)
                                      :result-set-fn vec)))
-;        (def tables (vec (map #(get-columns url %) tables)))
+;;        (def tables (vec (map #(get-columns url %) tables)))
         (catch Exception e (info e)))
   (def table-defs (conj (map #(get-columns url %) tables) nil))
   (rest table-defs))
