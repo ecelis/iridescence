@@ -1,4 +1,9 @@
-### WIP DB adapters (HEAD, master)
+### Finish it, ASAP (HEAD, master)
+>Wed, 1 Jul 2015 00:59:13 -0400
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### WIP DB adapters
 >Mon, 29 Jun 2015 00:55:38 -0400
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)

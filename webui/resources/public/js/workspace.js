@@ -25,14 +25,13 @@ var tbX = 4,                // Toolbar X position
   tbH = 80,                // Toolbar Heigth
   paperW = 768,             // Workspace Width
   paperH = 100;             // Workspace Height
-var paper = Raphael("work-canvas",
-                    paperW, paperH);  // Workspace
+var paper = Raphael("work-canvas", paperW, paperH);  // Workspace
 
 /**
 * Workspace Metadata
 * @property
 */
-var work_meta = {'type': null,        // Workspace metadata
+var work_meta = {        // Workspace metadata
   'guid': null,
   'name': null,
   'comments': null,
@@ -48,7 +47,9 @@ var property = {                      // TODO Get rid of it
   'name': null,
   'type': null,
   'url': null,
-  'items': null
+  'items': null,
+  'from': null,
+  'query': null
 };
 
 var adapter_items = [];               // Adapter Items from source
@@ -115,6 +116,7 @@ var connect_queue = function(artifact) {
 
 var connector_tab = $('#properties a[href="#connector"]');
 var adapter_tab = $('#properties a[href="#adapter"]');
+var adapter_tab_fields = $('#adapter :input');
 
 /**
  * Triggered when an adapter starts moving
@@ -242,7 +244,9 @@ var addToDiagram = function (adapter) {
                     "id":this.id,
                     "name":null,
                     "url": null,
-                    "items": null})
+                    "items": null,
+                    "from": null,
+                    "query": null})
               .click(modify);
     adapters.push(newadapter);   // Append new adapter to adapters
     if(adapters.length == 3) {  // First adapter of new workspace
@@ -294,6 +298,8 @@ var update_adapter = function(id) {
   adapter.data("props").type = $('#adapter-type').val();
   adapter.data("props").name = $('#adapter-name').val();
   adapter.data("props").url = $('#adapter-url').val();
+  adapter.data("props").from = $('#adapter-from').val();
+  adapter.data("props").query = $('#adapter-query').val();
   adapter.attr({'title': adapter.data("props").name,
           'text':adapter.data("props").name});
   test_connection($('#adapter-url').val());
@@ -307,7 +313,6 @@ var update_adapter = function(id) {
  * @method
  */
 var update_workspace = function() {
-  work_meta.type = $('#work-type').val();
   work_meta.guid = $('#work-guid').val();
   work_meta.name = $('#work-name').val();
   work_meta.comments = $('#work-comments').val();
@@ -344,13 +349,6 @@ connector.click(function() {                      // Connector onClick listener
 
 finish.click(modify); // Finish adapter onDrag
 
-$('#work-type-lst li a').on("click change",       // Workspace type listener
-      function() {
-      var type = $(this).text().toUpperCase().replace(' ','').replace('.','');
-      $('#btn-work-type').html(type + '<span class="caret"></span>');
-      $('#work-type').val(type);
-});
-
 $('#msg-template-lst li a').on('click change',
       function() {
         var template = $(this).text().toUpperCase();
@@ -368,6 +366,11 @@ $('#workspace :input').on("click change keyup", // Workspace properties listener
 var src_driver, src_host, src_src, src_user, src_password, src_url;
 var tgt_driver, tgt_host, tgt_message, tgt_user, tgt_password, tgt_url;
 
+/**
+ * Fill th URL for adapters
+ *
+ * @method
+ */
 var update_srcurl = function() {
   src_host = $('#adapter-host').val();
   src_src = $('#adapter-source').val();
@@ -381,6 +384,10 @@ var update_srcurl = function() {
   $('#adapter-url').val(src_url);
 };
 
+/**
+ * Fill the URL for connectors
+ * @method
+ */
 var update_tgturl = function() {
   tgt_host = $('#connector-host').val();
   tgt_target = $('#connector-target').val();
@@ -394,6 +401,12 @@ var update_tgturl = function() {
   $('#adapter-url').val(tgt_url);
 };
 
+/**
+ * Fill the adpter's driver dropdown
+ *
+ * @method
+ * @param {String} src_type
+ */
 var fill_adapter_driver = function(src_type) {
   $("#adapter-driver-lst").find("li").remove().end();
   var items = [];
@@ -453,6 +466,10 @@ var fill_connector_types = function() {
       // TODO update_connector($('#connector-id').val());
     });
 };
+
+/*adapter_tab_fields.on('change', function() {
+  update_adapter($('#adapter-id').val());
+});*/
 
 $('#adapter-test-btn').on("click change keyup",
       function() {
