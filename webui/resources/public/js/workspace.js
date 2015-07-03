@@ -100,6 +100,10 @@ var finish = paper.circle(paperW - 80, paperH - 75, 15)
   .data("props", {"type":"FINISH", "name":"Finish", "url":null});
 adapters.push(finish);
 
+var connector_tab = $('#properties a[href="#connector"]');
+var adapter_tab = $('#properties a[href="#adapter"]');
+var adapter_tab_fields = $('#adapter :input');
+
 /**
  * Connect queue, Adapters are pushed to the queue in order to add a Connector
  * between them
@@ -113,10 +117,6 @@ var connect_queue = function(artifact) {
     }
   }
 }
-
-var connector_tab = $('#properties a[href="#connector"]');
-var adapter_tab = $('#properties a[href="#adapter"]');
-var adapter_tab_fields = $('#adapter :input');
 
 /**
  * Triggered when an adapter starts moving
@@ -285,6 +285,27 @@ var clone = function(id) {
   addToDiagram(paper.getById(id));
 }
 
+var build_query = function(event, node) {
+  var nodes = $('#srcdata').treeview('getSelected', node.nodeId);
+  var col_names = '';
+  var table_names = '';
+  nodes.forEach(function(column) {
+    table_names += $('#srcdata').treeview('getParent', column).text + ' ';
+    col_names += $('#srcdata').treeview('getParent', column).text +
+                          '.' + column.text + ' ';
+  });
+  $('#adapter-from').val(table_names);
+  $('#adapter-query').val(col_names);
+};
+
+var srcdata_treview = function() {
+  $('#srcdata').treeview({data: srcdata,
+    multiSelect: true,
+    onNodeSelected: build_query,
+    onNodeUnselected: build_query
+  });
+};
+
 /**
  * Update the adapter properties data 'props' with values from
  * the properties panel
@@ -305,6 +326,7 @@ var update_adapter = function(id) {
   test_connection($('#adapter-url').val());
   if(adapter_items.length > 0) {
     adapter.data("props").items = adapter_items;
+    srcdata_treview();
   }
 }
 

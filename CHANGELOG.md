@@ -1,4 +1,9 @@
-### Finish it, ASAP (HEAD, master)
+### ADD JavaScript functions to handle treeview in workspace.js (HEAD, master)
+>Thu, 2 Jul 2015 23:34:10 -0400
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### Finish it, ASAP
 >Wed, 1 Jul 2015 00:59:13 -0400
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)

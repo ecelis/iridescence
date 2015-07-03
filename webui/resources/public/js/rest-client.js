@@ -18,16 +18,8 @@
  *   You should have received a copy of the GNU Affero General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-// TODO Unused it seems
-var get_objects = function(url) {
-  //console.log('Fetching objects...');
-  $.get("/api/adapter/object/",
-        {"__anti-forgery-token": $("#__anti-forgery-token").val(),
-        "url": url},
-        function(e) {
-          console.log(e);
-        });
-};
+
+var srcdata;
 
 /**
  * Save adapters to YAML in the server
@@ -44,23 +36,10 @@ var save = function() {
          "workspace":payload});
 };
 
-var build_query = function(event, node) {
-  var nodes = $('#srcdata').treeview('getSelected', node.nodeId);
-  var col_names = '';
-  var table_names = '';
-  nodes.forEach(function(column) {
-    table_names += $('#srcdata').treeview('getParent', column).text + ' ';
-    col_names += $('#srcdata').treeview('getParent', column).text +
-                          '.' + column.text + ' ';
-  });
-  $('#adapter-from').val(table_names);
-  $('#adapter-query').val(col_names);
-};
-
 /**
  * Handles JSON response for HL7v2 adapter
  *
- * { { delimiters } 
+ * { { delimiters }
  *   { segments [
  *    { id:
  *      fields [
@@ -85,9 +64,7 @@ var hl7v2_handler = function(json_data) {
         fields.push({text: field.content});
       }
     });
-   console.log({text: segment.id, nodes: fields});
   });
-  //console.log(fields);
 };
 
 /**
@@ -151,10 +128,10 @@ var db_handler = function(json_data) {
  * Stores in a variable the Table Definition retrieved by test_connection
  *
  * @method adapter_connection_handler
- * @param {Object} JSON response
+ * @param {String} url Adapters URL
+ * @param {Object} json_data response
  */
 var adapter_connection_handler = function(url, json_data) {
-  var srcdata;
   var srctype = url.substr(0, url.indexOf(":"));
   switch(srctype) {
     case "postgres":
@@ -169,14 +146,6 @@ var adapter_connection_handler = function(url, json_data) {
       break;
     default:
       console.log("Empty response");
-  }
-console.log(srcdata);
-  if(adapter_items.length > 0) {
-    $('#srcdata').treeview({data: srcdata,
-      multiSelect: true,
-      onNodeSelected: build_query,
-      onNodeUnselected: build_query
-    });
   }
 };
 
@@ -207,3 +176,16 @@ var build_select = function() {
         console.log(res);
        });
 };
+
+// TODO Unused it seems
+var get_objects = function(url) {
+  //console.log('Fetching objects...');
+  $.get("/api/adapter/object/",
+        {"__anti-forgery-token": $("#__anti-forgery-token").val(),
+        "url": url},
+        function(e) {
+          console.log(e);
+        });
+};
+
+
