@@ -43,7 +43,7 @@
                  [com.h2database/h2 "1.4.182"]
                  [cheshire "5.4.0"]
                  [clj-yaml "0.4.0"]
-                 [adapter-db "0.1.14-SNAPSHOT"]
+                 [adapter-db "0.1.15-SNAPSHOT"]
                  [adapter-csv "0.1.0-SNAPSHOT"]
                  [adapter-hl7v2 "0.1.2-SNAPSHOT"]]
 

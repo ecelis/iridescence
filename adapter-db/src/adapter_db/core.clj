@@ -21,7 +21,9 @@
   (:require [clojure.java.jdbc :as jdbc]
             [honeysql.core :as sql]
             [honeysql.helpers :refer :all]
-            [clojure.string :as string])
+            [clojure.string :as string]
+            [fuzzy-urls.url :refer :all]
+            [fuzzy-urls.lens :as lens :refer [build-url-lens]])
   (:use [taoensso.timbre :only [trace debug info warn error fatal]]
         [clojure.walk]))
 
@@ -51,7 +53,7 @@
 (defn get-tables "Get tables from" [url]
   (def tables)
   (try ; TODO reuse it (def db-handle (jdbc/get-connection url))
-       (def sqlmap (tables-sqlmap-by-dbms (first (string/split url #":"))))
+      (def sqlmap (tables-sqlmap-by-dbms (:scheme (string->url url))))
         (def tables (map #(get % :table_name)
                          (jdbc/query url (sql/format sqlmap)
                                      :result-set-fn vec)))

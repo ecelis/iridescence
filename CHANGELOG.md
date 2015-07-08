@@ -1,4 +1,9 @@
-### ADD JavaScript functions to handle treeview in workspace.js (HEAD, master)
+### ADD fuzzy-urls to parse URLs (HEAD, master)
+>Wed, 8 Jul 2015 14:54:58 -0400
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### ADD JavaScript functions to handle treeview in workspace.js
 >Thu, 2 Jul 2015 23:34:10 -0400
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
