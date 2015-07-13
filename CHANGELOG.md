@@ -1,4 +1,115 @@
-### ADD travis-ci yml script (origin/master, origin/file-iface, origin/HEAD, master, file-iface)
+### Laptop broke, moving things (HEAD, master)
+>Mon, 13 Jul 2015 01:45:12 -0400
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### ADD fuzzy-urls to parse URLs (origin/master, origin/HEAD)
+>Wed, 8 Jul 2015 14:54:58 -0400
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### ADD JavaScript functions to handle treeview in workspace.js
+>Thu, 2 Jul 2015 23:34:10 -0400
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### Finish it, ASAP
+>Wed, 1 Jul 2015 00:59:13 -0400
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### WIP DB adapters
+>Mon, 29 Jun 2015 00:55:38 -0400
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### UPDATE adapter-db to handle various dbms
+>Sun, 28 Jun 2015 18:21:57 -0400
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### WIP aPI responses
+>Sun, 28 Jun 2015 17:43:11 -0400
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### UPDATE something I can't recall
+>Sun, 28 Jun 2015 15:59:02 -0400
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### CSV reader almost working, display in web needs some delay or something
+>Mon, 22 Jun 2015 18:56:18 -0400
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### DELETE unused migrations
+>Fri, 19 Jun 2015 00:08:39 -0400
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### FIX hl7 read JSON response
+>Wed, 10 Jun 2015 08:10:47 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### FIX hl7 read
+>Wed, 10 Jun 2015 08:01:39 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### FIX something broke (openshift/master)
+>Wed, 10 Jun 2015 06:31:13 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### UPDATE README
+>Tue, 9 Jun 2015 22:16:20 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### FIX some Travis build errors
+>Tue, 9 Jun 2015 22:12:05 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### FIX some Travis build errors
+>Tue, 9 Jun 2015 21:58:29 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### Travis Openshift test
+>Tue, 9 Jun 2015 21:53:47 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### ADD OpenShift files
+>Tue, 9 Jun 2015 21:11:25 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### Creating template
+>Tue, 9 Jun 2015 22:06:06 -0400
+
+>Author: Template builder (builder@example.com)
+
+### ADD Openshift deployment
+>Tue, 9 Jun 2015 16:46:11 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### ADD lein mock project to pass Travis test report
+>Tue, 9 Jun 2015 16:16:14 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### UPDATE clojure language for TravisCI
+>Tue, 9 Jun 2015 16:03:00 -0500
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### ADD travis-ci yml script (origin/file-iface, origin/alt-layout, file-iface, alt-layout)
+>>>>>>> master
 >Tue, 9 Jun 2015 15:52:54 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
@@ -73,7 +184,7 @@
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
 
-### Clean up (origin/alt-layout, alt-layout)
+### Clean up
 >Fri, 5 Jun 2015 04:26:27 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
@@ -543,7 +654,7 @@
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
 
-### Deploy to test vServer
+### Deploy to test vServer (stage/master)
 >Sun, 24 May 2015 18:44:30 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
@@ -708,7 +819,7 @@
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
 
-### FIX Various artifacts were saved twice
+### FIX Various artifacts were saved twice (merge)
 >Fri, 1 May 2015 10:53:33 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
@@ -858,7 +969,7 @@
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)
 
-### Refactoring almost done (origin/jsl)
+### Refactoring almost done (origin/jsl, jsl)
 >Mon, 27 Apr 2015 03:14:55 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (ecelis@ecaresoft.com.mx)

@@ -25,19 +25,19 @@ var tbX = 4,                // Toolbar X position
   tbH = 80,                // Toolbar Heigth
   paperW = 768,             // Workspace Width
   paperH = 100;             // Workspace Height
-var paper = Raphael("work-canvas",
-                    paperW, paperH);  // Workspace
+var paper = Raphael("work-canvas", paperW, paperH);  // Workspace
 
 /**
 * Workspace Metadata
 * @property
 */
-var work_meta = {'type': null,        // Workspace metadata
+var work_meta = {        // Workspace metadata
   'guid': null,
   'name': null,
   'comments': null,
   'draft': true
 };
+
 /**
  * Adapter property model
  * @property
@@ -47,7 +47,9 @@ var property = {                      // TODO Get rid of it
   'name': null,
   'type': null,
   'url': null,
-  'items': null
+  'items': null,
+  'from': null,
+  'query': null
 };
 
 var adapter_items = [];               // Adapter Items from source
@@ -98,11 +100,15 @@ var finish = paper.circle(paperW - 80, paperH - 75, 15)
   .data("props", {"type":"FINISH", "name":"Finish", "url":null});
 adapters.push(finish);
 
+var connector_tab = $('#properties a[href="#connector"]');
+var adapter_tab = $('#properties a[href="#adapter"]');
+var adapter_tab_fields = $('#adapter :input');
+
 /**
  * Connect queue, Adapters are pushed to the queue in order to add a Connector
  * between them
  * @method
- * @param {Raphael.Element} artifact connector
+ * @param {Object} artifact connector
  * */
 var connect_queue = function(artifact) {
   if (connect.length < 2) {       // If the connection queue's length < 2
@@ -178,11 +184,11 @@ var modify = function() {
     $('#adapter-name').val(property.name);
     $('#adapter-url').val(property.url);
     $('#adapter-id').val(this.id);
-    $('#properties a[href="#adapter"]').tab('show');
+    adapter_tab.tab('show');
     connect_queue(this);
   } else {
     // TODO initialize properties, Name, etc
-    $('#properties a[href="#connector"]').tab('show');
+    connector_tab.tab('show');
     var adapter_id = property.name.split("to")[0];
     update_connector(this);
   }
@@ -205,7 +211,7 @@ var setData = function(adapter) {
 /**
  * Add a new element from Toolbar to adapters
  * @method addToDiagram
- * @param {Object} adapter Raphael Element object
+ * @param {Object} adapter Raphael Element
  * */
 var addToDiagram = function (adapter) {
   var color = Raphael.getColor(); // Get next color in spectrum
@@ -238,7 +244,9 @@ var addToDiagram = function (adapter) {
                     "id":this.id,
                     "name":null,
                     "url": null,
-                    "items": null})
+                    "items": null,
+                    "from": null,
+                    "query": null})
               .click(modify);
     adapters.push(newadapter);   // Append new adapter to adapters
     if(adapters.length == 3) {  // First adapter of new workspace
@@ -277,6 +285,27 @@ var clone = function(id) {
   addToDiagram(paper.getById(id));
 }
 
+var build_query = function(event, node) {
+  var nodes = $('#srcdata').treeview('getSelected', node.nodeId);
+  var col_names = '';
+  var table_names = '';
+  nodes.forEach(function(column) {
+    table_names += $('#srcdata').treeview('getParent', column).text + ' ';
+    col_names += $('#srcdata').treeview('getParent', column).text +
+                          '.' + column.text + ' ';
+  });
+  $('#adapter-from').val(table_names);
+  $('#adapter-query').val(col_names);
+};
+
+var srcdata_treview = function() {
+  $('#srcdata').treeview({data: srcdata,
+    multiSelect: true,
+    onNodeSelected: build_query,
+    onNodeUnselected: build_query
+  });
+};
+
 /**
  * Update the adapter properties data 'props' with values from
  * the properties panel
@@ -290,11 +319,14 @@ var update_adapter = function(id) {
   adapter.data("props").type = $('#adapter-type').val();
   adapter.data("props").name = $('#adapter-name').val();
   adapter.data("props").url = $('#adapter-url').val();
+  adapter.data("props").from = $('#adapter-from').val();
+  adapter.data("props").query = $('#adapter-query').val();
   adapter.attr({'title': adapter.data("props").name,
           'text':adapter.data("props").name});
   test_connection($('#adapter-url').val());
   if(adapter_items.length > 0) {
     adapter.data("props").items = adapter_items;
+    srcdata_treview();
   }
 }
 
@@ -303,7 +335,6 @@ var update_adapter = function(id) {
  * @method
  */
 var update_workspace = function() {
-  work_meta.type = $('#work-type').val();
   work_meta.guid = $('#work-guid').val();
   work_meta.name = $('#work-name').val();
   work_meta.comments = $('#work-comments').val();
@@ -340,13 +371,6 @@ connector.click(function() {                      // Connector onClick listener
 
 finish.click(modify); // Finish adapter onDrag
 
-$('#work-type-lst li a').on("click change",       // Workspace type listener
-      function() {
-      var type = $(this).text().toUpperCase().replace(' ','').replace('.','');
-      $('#btn-work-type').html(type + '<span class="caret"></span>');
-      $('#work-type').val(type);
-});
-
 $('#msg-template-lst li a').on('click change',
       function() {
         var template = $(this).text().toUpperCase();
@@ -364,6 +388,11 @@ $('#workspace :input').on("click change keyup", // Workspace properties listener
 var src_driver, src_host, src_src, src_user, src_password, src_url;
 var tgt_driver, tgt_host, tgt_message, tgt_user, tgt_password, tgt_url;
 
+/**
+ * Fill th URL for adapters
+ *
+ * @method
+ */
 var update_srcurl = function() {
   src_host = $('#adapter-host').val();
   src_src = $('#adapter-source').val();
@@ -377,6 +406,10 @@ var update_srcurl = function() {
   $('#adapter-url').val(src_url);
 };
 
+/**
+ * Fill the URL for connectors
+ * @method
+ */
 var update_tgturl = function() {
   tgt_host = $('#connector-host').val();
   tgt_target = $('#connector-target').val();
@@ -390,6 +423,12 @@ var update_tgturl = function() {
   $('#adapter-url').val(tgt_url);
 };
 
+/**
+ * Fill the adpter's driver dropdown
+ *
+ * @method
+ * @param {String} src_type
+ */
 var fill_adapter_driver = function(src_type) {
   $("#adapter-driver-lst").find("li").remove().end();
   var items = [];
@@ -450,6 +489,10 @@ var fill_connector_types = function() {
     });
 };
 
+/*adapter_tab_fields.on('change', function() {
+  update_adapter($('#adapter-id').val());
+});*/
+
 $('#adapter-test-btn').on("click change keyup",
       function() {
         update_srcurl();
@@ -484,6 +527,9 @@ $('#up').click(function() {
 });
 //$("#files").change(util.handleFileSelect);   // File upload listener
 
+connector_tab.on('show.bs.tab', function(e) {
+  console.log(e);
+});
 
 /// To execute onLoad() TODO temporary since alt-layout
 // Add adapter TODO its temporary since alt-layout

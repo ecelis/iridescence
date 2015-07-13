@@ -77,13 +77,13 @@ Util.prototype.check_api = function() {
   }
 };
 
-file_driver = [
+var file_driver = [
   'hl7v2',
   'hl7v3',
   'csv'
 ];
 
-db_driver = [
+var db_driver = [
   'PostgreSQL',
   'MySQL',
   'SQL Server',

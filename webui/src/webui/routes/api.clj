@@ -25,6 +25,7 @@
             [clj-yaml.core :as yaml]
             [adapter-db.core :as db]
             [adapter-csv.core :as csv]
+            [adapter-hl7v2.core :as hl7]
             [clojure.string :as string])
   (:use [taoensso.timbre :only [trace debug info warn error fatal]]))
 
@@ -84,28 +85,45 @@
   (db/build-select "ta")
   (yaml-response {:not (str "run-workspace stub " id)}))
 
-(defn try_dburl "Docstring " [url]
+(defn try_dburl "Test DB URL" [url]
   (def res (db/test-url url))
   (if res
     (json-response {:tables res
                     })
-    (json-response {:tables nil :columns nil})))
+    (json-response {:tables nil})))
 
-(defn try_csvurl "Docstring " [url]
+(defn try_csvurl "Test CSV URL" [url]
   (def res (csv/test-url url))
   (if res
-    (json-response {:tables res
+    (json-response {:matrix res
                     })
-    (json-response {:tables nil :columns nil})))
+    (json-response {:matrix nil})))
 
+(defn try_hl7url "Test HL7 URL" [url]
+  (def res(hl7/test-url url))
+  (if res
+    (json-response {:message res})
+    (json-response {:message nil})))
 
 (defn try-url "Test adapter url" [url]
   ; TODO test any type of data source
   (def url_type (first (string/split url #":")))
   (cond (= "csv" url_type) (try_csvurl url)
         (= "postgresql" url_type) (try_dburl url)
-        :else (info "Unknown"))
+        (= "mysql" url_type) (try_dburl url)
+        (= "hl7v2" url_type) (try_hl7url url)
+        :else (warn "Unknown URL type"))
   )
+
+(defn execute-adapter "Execute adapter query aginst data source"
+  [url tables query]
+  (def url_type (first (string/split url #":")))
+  (def adapter-response
+    (cond (= "csv" url_type) (try_csvurl url)
+          (= "postgresql" url_type) (db/build-select url tables query)
+          (= "hl7v2" url_type) (try_hl7url url)
+          :else (warn "Unknown URL type")))
+  (info adapter-response))
 
 (defn get-objects "Fetch data source objects" [url]
   (info (db/get-tables url)))
@@ -139,4 +157,4 @@
     (GET "/test/" [__anti-forgery-token url] (try-url url))
     (GET "/object/" [__anti-forgery-token url] (get-objects url))
     (GET "/build_select/" [__anti-forgery-token url tables query]
-         (db/build-select url tables query))))
+         (execute-adapter url tables query))))
