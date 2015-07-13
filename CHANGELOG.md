@@ -1,4 +1,9 @@
-### ADD fuzzy-urls to parse URLs (HEAD, master)
+### Laptop broke, moving things (HEAD, master)
+>Mon, 13 Jul 2015 01:45:12 -0400
+
+>Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
+
+### ADD fuzzy-urls to parse URLs (origin/master, origin/HEAD)
 >Wed, 8 Jul 2015 14:54:58 -0400
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
@@ -43,7 +48,7 @@
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)
 
-### FIX hl7 read JSON response (origin/master, origin/HEAD)
+### FIX hl7 read JSON response
 >Wed, 10 Jun 2015 08:10:47 -0500
 
 >Author: Ernesto Angel Celis de la Fuente (developer@celisdelafuente.net)

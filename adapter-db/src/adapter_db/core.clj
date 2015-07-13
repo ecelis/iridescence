@@ -27,8 +27,9 @@
   (:use [taoensso.timbre :only [trace debug info warn error fatal]]
         [clojure.walk]))
 
-(defn tables-sqlmap-by-dbms "Depending on the DBMS in the URL build
-                           an appropriate sqlmap" [dbms]
+(defn tables-sqlmap "Depending on the DBMS in the URL build
+                           an appropriate sqlmap" [dbms database]
+  (info database)
   (cond (= "postgres" dbms)
           (sql/build :select :*
                 :from :information_schema.tables
@@ -40,25 +41,36 @@
         (= "mysql" dbms)
           (sql/build :select :table_name
               :from :information_schema.tables
-              :where [:= :table_schema "database()"])
+              :where [:= :table_schema database])
         :else (warn "Unknown DBMS type")))
 
 (defn get-columns "Get columns from" [url table]
-  (def sqlmap (sql/build :select :column_name
+  (def dbms (:scheme (string->url url)))
+  (def sqlmap (cond (= "postgres" dbms) (sql/build :select :column_name
                :from :information_schema.columns
-               :where [:= :table_name table]))
+               :where [:= :table_name table])
+        (= "postgresql" dbms) (sql/build :select :column_name
+               :from :information_schema.columns
+               :where [:= :table_name table])
+        (= "mysql" dbms) (sql/build :select :column_name
+                :from :information_schema.columns
+                :where [:= :table_name table])
+        :else (warn "Unknown DBMS type")))
+    (info sqlmap)
+    (info (str "  "))
+    (info (sql/format sqlmap))
+
   (hash-map (keyword table) (jdbc/query url (sql/format sqlmap)
                                         :result-set-fn vec)))
 
 (defn get-tables "Get tables from" [url]
   (def tables)
   (try ; TODO reuse it (def db-handle (jdbc/get-connection url))
-      (def sqlmap (tables-sqlmap-by-dbms (:scheme (string->url url))))
-        (def tables (map #(get % :table_name)
-                         (jdbc/query url (sql/format sqlmap)
-                                     :result-set-fn vec)))
-;;        (def tables (vec (map #(get-columns url %) tables)))
-        (catch Exception e (info e)))
+      (def sqlmap (tables-sqlmap (:scheme (string->url url))
+                                 (:path (string->url url))))
+      (def tables (map #(get % :table_name) (jdbc/query url (sql/format sqlmap)
+                                                        :result-set-fn vec)))
+  (catch Exception e (fatal e))
   (def table-defs (conj (map #(get-columns url %) tables) nil))
   (rest table-defs))
 
