@@ -29,7 +29,6 @@
 
 (defn tables-sqlmap "Depending on the DBMS in the URL build
                            an appropriate sqlmap" [dbms database]
-  (info database)
   (cond (= "postgres" dbms)
           (sql/build :select :*
                 :from :information_schema.tables
@@ -56,10 +55,6 @@
                 :from :information_schema.columns
                 :where [:= :table_name table])
         :else (warn "Unknown DBMS type")))
-    (info sqlmap)
-    (info (str "  "))
-    (info (sql/format sqlmap))
-
   (hash-map (keyword table) (jdbc/query url (sql/format sqlmap)
                                         :result-set-fn vec)))
 
@@ -70,7 +65,7 @@
                                  (:path (string->url url))))
       (def tables (map #(get % :table_name) (jdbc/query url (sql/format sqlmap)
                                                         :result-set-fn vec)))
-  (catch Exception e (fatal e))
+  (catch Exception e (fatal e)))
   (def table-defs (conj (map #(get-columns url %) tables) nil))
   (rest table-defs))
 
