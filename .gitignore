@@ -54,3 +54,4 @@ mirth
 .dpl/
 .lein-failures
 .lein-repl-history
+tmp/
