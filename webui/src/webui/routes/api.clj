@@ -26,7 +26,9 @@
             [adapter-db.core :as db]
             [adapter-csv.core :as csv]
             [adapter-hl7v2.core :as hl7]
-            [clojure.string :as string])
+            [clojure.string :as string]
+            [fuzzy-urls.url :refer :all]
+            [fuzzy-urls.lens :as lens :refer [build-url-lens]])
   (:use [taoensso.timbre :only [trace debug info warn error fatal]]))
 
 (def savedir "/tmp") ; TODO Set a definitive path
@@ -62,7 +64,6 @@
   (if (get (get workspace-map :workspace true) :draft true)
     (def save-to (str savedir wipdir "/"))
     (def save-to (str savedir wsdir "/")))
-  (info save-to)
   (try (spit (str save-to (get (json/parse-string
                                            (get workspace :meta) true) :guid))
              yaml-workspace) (json-response workspace)
@@ -95,8 +96,7 @@
 (defn try_csvurl "Test CSV URL" [url]
   (def res (csv/test-url url))
   (if res
-    (json-response {:matrix res
-                    })
+    (json-response {:matrix res})
     (json-response {:matrix nil})))
 
 (defn try_hl7url "Test HL7 URL" [url]
@@ -107,17 +107,16 @@
 
 (defn try-url "Test adapter url" [url]
   ; TODO test any type of data source
-  (def url_type (first (string/split url #":")))
+  (def url_type (:scheme (string->url url)))
   (cond (= "csv" url_type) (try_csvurl url)
         (= "postgresql" url_type) (try_dburl url)
         (= "mysql" url_type) (try_dburl url)
         (= "hl7v2" url_type) (try_hl7url url)
-        :else (warn "Unknown URL type"))
-  )
+        :else (warn "Unknown URL type")))
 
 (defn execute-adapter "Execute adapter query aginst data source"
   [url tables query]
-  (def url_type (first (string/split url #":")))
+  (def url_type (:scheme (string->url url)))
   (def adapter-response
     (cond (= "csv" url_type) (try_csvurl url)
           (= "postgresql" url_type) (db/build-select url tables query)
