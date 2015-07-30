@@ -133,10 +133,12 @@ var db_handler = function(json_data) {
  * @param {Object} json_data response
  */
 var adapter_connection_handler = function(url, json_data) {
-  var srctype = url.substr(0, url.indexOf(":"));
-  switch(srctype) {
+  var proto = new URI(url).scheme();
+  //var srctype = uri.protocol;
+  switch(proto) {
     case "postgres":
     case "postgresql":
+    case "mysql":
       srcdata = db_handler(json_data);
       break;
     case "csv":
