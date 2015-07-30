@@ -65,6 +65,7 @@ var hl7v2_handler = function(json_data) {
       }
     });
   });
+  return [{text: "src", nodes: fields}];
 };
 
 /**

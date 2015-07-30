@@ -389,7 +389,7 @@ var src_driver, src_host, src_src, src_user, src_password, src_url;
 var tgt_driver, tgt_host, tgt_message, tgt_user, tgt_password, tgt_url;
 
 /**
- * Fill th URL for adapters
+ * Fill the URL for adapters
  *
  * @method
  */

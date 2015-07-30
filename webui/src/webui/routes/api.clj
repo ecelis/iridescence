@@ -89,8 +89,7 @@
 (defn try_dburl "Test DB URL" [url]
   (def res (db/test-url url))
   (if res
-    (json-response {:tables res
-                    })
+    (json-response {:tables res})
     (json-response {:tables nil})))
 
 (defn try_csvurl "Test CSV URL" [url]
