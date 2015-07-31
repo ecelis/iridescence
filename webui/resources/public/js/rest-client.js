@@ -134,7 +134,6 @@ var db_handler = function(json_data) {
  */
 var adapter_connection_handler = function(url, json_data) {
   var proto = new URI(url).scheme();
-  //var srctype = uri.protocol;
   switch(proto) {
     case "postgres":
     case "postgresql":
