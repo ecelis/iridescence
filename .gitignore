@@ -37,7 +37,6 @@ local.properties
 .classpath
 .settings/
 .loadpath
-**/bin
 
 # Legacy code
 dbPort
