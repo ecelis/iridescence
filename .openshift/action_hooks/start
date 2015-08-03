@@ -10,6 +10,7 @@ export PORT=$OPENSHIFT_DIY_PORT
 export HOME=$OPENSHIFT_DATA_DIR
 export LEIN_JVM_OPTS=-Duser.home=$HOME
 export LEIN=$OPENSHIFT_REPO_DIR/bin/lein
+export JAVA_OPTS="-server -XX:PermSize=32M -XX:MaxPermSize=32m -Xms256m -Xmx256m -XX:NewRatio=1 -XX:SurvivorRatio=32"
 cd $OPENSHIFT_REPO_DIR
 for dep in $PROJECTS;
 do
@@ -21,6 +22,5 @@ done
 cd webui
 echo "$(pwd) clean..."
 $LEIN clean; $LEIN deps
-#export JAVA_OPTS="-server -XX:PermSize=32M -XX:MaxPermSize=32m -Xms256m -Xmx256m -XX:NewRatio=1 -XX:SurvivorRatio=32"
-$LEIN ring server-headless $PORT 2>&1
+$LEIN ring server-headless $PORT 2>&1 >>$OPENSHIFT_DIY_LOG_DIR/diy.log
 #nohup $OPENSHIFT_REPO_DIR/bin/lein ring server-headless $PORT 2>&1 | /usr/bin/logshifter -tag diy &
