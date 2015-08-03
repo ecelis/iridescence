@@ -15,16 +15,6 @@ be deleted until we reach the first stable and fully functional version.
   * adapter-hl7v2   - HL7v2 parser module (WIP)
   * adapter-csv     - CSV Adapter (WIP)
 
-
-## Installation
-
-Easier way to get up and running is by fetching the jar file from
-http://maven.v3ctor.club/mx/com/ecaresoft/smartconnector/, run it and
-browse to http://127.0.0.1:3000
-
-    wget http://maven.v3ctor.club/mx/com/ecaresoft/smartconnector/smartconnector-latest.jar
-    java -jar smartconnector-latest.jar
-
 Build from source
 -----------------
 
@@ -37,58 +27,34 @@ assumed to be already installed)
     chmod 755 lein
     ./lein
     export PATH=~/bin:$PATH
-
-Build the Adapters first, order does not matter.
-
-    git clone https://github.com/ecelis/iridescence.git
+    cd ~
+    git clone git@github.com:ecelis/iridescence.git
     cd iridescence
-    for i in adapter-*; do cd $i; lein clean; lein deps; lein install; cd ..; done
+    ./build.sh
 
-I everything goes well run the standalone web server.
+I everything goes well run the standalone application and browse to
+http://127.0.0.1:3000
 
-    cd webui
-    lein clean ; lein deps
-    lein ring server
+    java -jar ~/iridescence/webui/target/webui.jar
 
 
 Features
 --------
 
-  * Based on ideas scraped from Yahoo Pipes, Scratch and TIBCO BusinessWorks (TM)
-  * Workspace is a set of Adapters for assorted data sources
-    * Most of the screen is used by the workspace
-    * To the right there is the interactive area for D&D objects
-    * Properties Panel is bottom
-      - Edits properties for adapters and connections in the workspace
-  * Adapter connects to a data source
+    * Adapter connects to a data source
     * An URL is the format to connect to any data source
     * While editing the adapter properties it tests the connection and
       when successful fetches the data structures from it
-  * Connectors define the data flow and transformations between data
-    sources
-  * Start and Finish adapters are automatically added to the workspace
-    * One connection is added when the first connector is droped in the
-      workspace
-    * The Start adapter is symbolic only
-    * Finish adapter can be edited
-
-Use
----
-
-
+    * Connectors define the data flow and transformations between data
+      sources
 
 
 In Progress
 -----------
 
-   * API RESTful
+    * API RESTful
     * Connections Rule Engine
 
-Planned
--------
-
-  * Docker Container (WIP side project) [/milestones/1.0 beta]
-  * Client side encryption (Browser/JavaScript)
 
 Bugs
 ----

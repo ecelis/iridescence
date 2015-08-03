@@ -19,10 +19,8 @@
 
 
 (defproject webui "0.1.3-SNAPSHOT"
-
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
-
+  :description "Iridescence Smart Connector WebUI"
+  :url "http://github.com/ecelis/iridescence"
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [ring-server "0.4.0"]
                  [selmer "0.8.2"]
