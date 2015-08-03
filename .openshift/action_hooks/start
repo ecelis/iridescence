@@ -22,5 +22,5 @@ cd webui
 echo "$(pwd) clean..."
 $LEIN clean; $LEIN deps
 #export JAVA_OPTS="-server -XX:PermSize=32M -XX:MaxPermSize=32m -Xms256m -Xmx256m -XX:NewRatio=1 -XX:SurvivorRatio=32"
-nohup $LEIN ring server-headless $PORT 2>&1
+$LEIN ring server-headless $PORT 2>&1
 #nohup $OPENSHIFT_REPO_DIR/bin/lein ring server-headless $PORT 2>&1 | /usr/bin/logshifter -tag diy &
