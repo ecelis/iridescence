@@ -15,6 +15,15 @@ be deleted until we reach the first stable and fully functional version.
   * adapter-hl7v2   - HL7v2 parser module (WIP)
   * adapter-csv     - CSV Adapter (WIP)
 
+
+Docker
+------
+
+    git clone git@github.com:ecelis/iridescence.git
+    cd iridescence
+    docker pull ecaresoft/smartconnector
+    TODO... 
+    
 Build from source
 -----------------
 
