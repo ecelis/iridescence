@@ -41,7 +41,7 @@ assumed to be already installed)
     cd iridescence
     ./build.sh
 
-I everything goes well run the standalone application and browse to
+If everything goes well run the standalone application and browse to
 http://127.0.0.1:3000
 
     java -jar ~/iridescence/webui/target/webui.jar
@@ -50,19 +50,19 @@ http://127.0.0.1:3000
 Features
 --------
 
-    * Adapter connects to a data source
-    * An URL is the format to connect to any data source
-    * While editing the adapter properties it tests the connection and
-      when successful fetches the data structures from it
-    * Connectors define the data flow and transformations between data
-      sources
+  * Adapter connects to a data source
+  * An URL is the format to connect to any data source
+  * While editing the adapter properties it tests the connection and
+    when successful fetches the data structures from it
+  * Connectors define the data flow and transformations between data
+    sources
 
 
 In Progress
 -----------
 
-    * API RESTful
-    * Connections Rule Engine
+  * API RESTful
+  * Connections Rule Engine
 
 
 Bugs
