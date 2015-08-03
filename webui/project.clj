@@ -1,4 +1,4 @@
-;;  HL7 YAMl converter
+;;  Iridescence
 ;;  Copyright (C) 2015 eCaresoft Inc
 ;;  Ernesto Angel Celis de la Fuente <developer@celisdelafuente.net>
 ;;
@@ -46,7 +46,7 @@
                  [adapter-hl7v2 "0.1.2-SNAPSHOT"]]
 
   :min-lein-version "2.0.0"
-  :uberjar-name "webui.jar"
+  :uberjar-name "iridescence_web_standalone.jar"
   :repl-options {:init-ns webui.handler}
   :jvm-opts ["-server"]
 
@@ -61,7 +61,7 @@
   :ring {:handler webui.handler/app
          :init    webui.handler/init
          :destroy webui.handler/destroy
-         :uberwar-name "webui.war"}
+         :uberwar-name "iridescence.war"}
   
   :ragtime
   {:migrations ragtime.sql.files/migrations
