@@ -13,6 +13,9 @@ case $1 in
 	cd webui
 	lein clean;
 	;;
+"help")
+  echo "$0 [clean|build|help] withouth commands default is build everything"
+  ;;
 *)
 	for dep in $PROJECTS;
 	do
