@@ -37,7 +37,11 @@
   ;; TODO handle remote urls
   (def u (string->url url))
   (def hl7file (string/join "/" (:path u)))
-  (hl7parser/parse (slurp hl7file)))
+  ;; :id :fields
+  (try (def segments (get (hl7parser/parse (slurp hl7file)) :segments))
+       (info segments)
+       
+  (catch Exception e (error e))))
 
 (defn build-select "Build a SELECT FROM HL7v2" [url tables query]
   (println url))
