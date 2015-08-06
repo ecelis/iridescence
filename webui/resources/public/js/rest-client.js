@@ -53,19 +53,25 @@ var save = function() {
  * @param {Object} json_data response
  */
 var hl7v2_handler = function(json_data) {
-  var segments = json_data.message.segments;
+  var segments = json_data;
+  console.log(segments);
+  console.log(segments.keys());
+
   var fields = [];
   var msg_tree = [];
-  segments.forEach(function(segment) {
+  /*
+  json_data.segments.forEach(function(segment) {
+    fields.push({text: segment.id});
     segment.fields.forEach(function(field) {
       if(Object.prototype.toString.call(field.content) === '[object Array]') {
-        fields.push({nodes: [{text: field.content}]});
+        fields.push({nodes: field.content});
       } else {
-        fields.push({text: field.content});
+//        fields.push({text: Object.getOwnPropertyNames(field.content)[0]});
       }
     });
-  });
-  console.log([{text: "src", nodes: fields}]);
+  });*/
+  console.log({text: Object.getOwnPropertyNames(json_data)[0],
+              nodes: fields});
 };
 
 /**
@@ -121,7 +127,7 @@ var db_handler = function(json_data) {
       });
       adapter_items.push({"text": table.text, "nodes": cols});
     });
-    return [{text: "src", nodes: adapter_items}];
+    return [{text: "tables", nodes: adapter_items}];
   }
 };
 
