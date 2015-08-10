@@ -53,10 +53,6 @@ var save = function() {
  * @param {Object} json_data response
  */
 var hl7v2_handler = function(json_data) {
-  var segments = json_data;
-  console.log(segments);
-  console.log(segments.keys());
-
   var fields = [];
   var msg_tree = [];
   /*
@@ -70,8 +66,8 @@ var hl7v2_handler = function(json_data) {
       }
     });
   });*/
-  console.log({text: Object.getOwnPropertyNames(json_data)[0],
-              nodes: fields});
+  console.log([{text: Object.getOwnPropertyNames(json_data)[0],
+              nodes: fields}]);
 };
 
 /**
