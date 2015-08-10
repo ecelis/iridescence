@@ -18,12 +18,12 @@
 ;;  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-(defproject adapter-mirth "0.1.0-SNAPSHOT"
+(defproject adapter-mirth "0.1.1-SNAPSHOT"
   :description "Mirth Connect adapter for Iridescence Smart Connector"
-  :url "http://example.com/FIXME"
+  :url "http://github/ecelis/iridescence"
   :license {:name "GNU Affero Public General License version"
             :url "http://www.gnu.org/licenses/"}
-  :dependencies [[org.clojure/clojure "1.6.0"]
+  :dependencies [[org.clojure/clojure "1.7.0"]
                  [org.postgresql/postgresql "9.4-1201-jdbc41"]
                  [log4j/log4j "1.2.17"]
                  [com.thoughtworks.xstream/xstream "1.4.8"]

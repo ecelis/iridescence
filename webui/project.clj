@@ -18,10 +18,12 @@
 ;;  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-(defproject webui "0.1.3-SNAPSHOT"
+(defproject webui "0.1.4-SNAPSHOT"
   :description "Iridescence Smart Connector WebUI"
   :url "http://github.com/ecelis/iridescence"
-  :dependencies [[org.clojure/clojure "1.6.0"]
+  :license {:name "Affero General Public License"
+            :url "http://www.gnu.org/licenses/"}
+  :dependencies [[org.clojure/clojure "1.7.0"]
                  [ring-server "0.4.0"]
                  [selmer "0.8.2"]
                  [com.taoensso/timbre "3.4.0"]
