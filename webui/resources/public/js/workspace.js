@@ -452,7 +452,8 @@ var fill_adapter_types = function() {
   $('#adapter-type-lst').append(items.join(''));
   $('#adapter-type-lst li a').on('click change',
       function() {
-        var src_type = $(this).text();
+        var src_type = $(this).text(); // TODO useful?
+        $('#adapter-type').val($(this).text());
         $('#btn-adapter-type').html(src_type + '<span class="caret"></span>');
         fill_adapter_driver($(this).text());
         update_adapter($('#adapter-id').val());
@@ -489,9 +490,13 @@ var fill_connector_types = function() {
     });
 };
 
+// TODO implement a jQuery filter for interesting fields
 /*adapter_tab_fields.on('change', function() {
   update_adapter($('#adapter-id').val());
 });*/
+$('#adapter-name').on("change", function() {
+  update_adapter(adapters[2].id); // TODO fixed value after alt-layout
+});
 
 $('#adapter-test-btn').on("click change keyup",
       function() {
