@@ -65,7 +65,6 @@
   (try ; TODO reuse it (def db-handle (jdbc/get-connection url))
       (def sqlmap (tables-sqlmap (:scheme (string->url url))
                                  (:path (string->url url))))
-      (info sqlmap)
       (def tables (map #(get % :table_name) (jdbc/query url (sql/format sqlmap)
                                                         :result-set-fn vec)))
   (catch Exception e (fatal e)))
@@ -81,13 +80,12 @@
     (catch Exception e (info e))))
 
 (defn build-select "Build a select from" [url tables query]
-  (def fro (vec (map keyword (seq (string/split tables #" ")))))
-  (def sele (vec (map keyword (seq (string/split query #" ")))))
-  (def sqlmap {:select sele
-               :from fro})
-  ;; TODO :where [conditions]}
-  ;sqlmap)
-  (sql/format sqlmap))
+  (def fro (map keyword (set (string/split tables #" "))))
+  (def sele (vec (map keyword (set (string/split query #" ")))))
+(info (sql/format (sql/build :select sele
+                         :from fro)))
+  (jdbc/query url (sql/format (sql/build :select sele
+                         :from fro))))
 
 (defn exec-query [url query-map]
   (jdbc/query (sql/format query-map) :result-set-fn vec))

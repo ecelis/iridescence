@@ -119,6 +119,7 @@
   (def adapter-response
     (cond (= "csv" url_type) (try_csvurl url)
           (= "postgresql" url_type) (db/build-select url tables query)
+          (= "mysql" url_type) (db/build-select url tables query)
           (= "hl7v2" url_type) (try_hl7url url)
           :else (warn "Unknown URL type")))
   (info adapter-response))
