@@ -30,17 +30,19 @@
 (defn tables-sqlmap "Depending on the DBMS in the URL build
                            an appropriate sqlmap" [dbms database]
   (cond (= "postgres" dbms)
-          (sql/build :select :*
-                :from :information_schema.tables
-                :where [:= :table_schema "public"])
+          (-> (select :*)
+              (from :information_schema.tables)
+              (where [:not= :table_schema "pg_catalog"]
+                     [:not= :table_schema "information_schema"]))
         (= "postgresql" dbms)
-          (sql/build :select :*
-              :from :information_schema.tables
-              :where [:= :table_schema "public"])
+          (-> (select :*)
+              (from :information_schema.tables)
+              (where [:not= :table_schema "pg_catalog"]
+                     [:not= :table_schema "information_schema"]))
         (= "mysql" dbms)
-          (sql/build :select :table_name
-              :from :information_schema.tables
-              :where [:= :table_schema database])
+          (-> (select :table_name)
+              (from :information_schema.tables)
+              (where [:= :table_schema database]))
         :else (warn "Unknown DBMS type")))
 
 (defn get-columns "Get columns from" [url table]
@@ -63,6 +65,7 @@
   (try ; TODO reuse it (def db-handle (jdbc/get-connection url))
       (def sqlmap (tables-sqlmap (:scheme (string->url url))
                                  (:path (string->url url))))
+      (info sqlmap)
       (def tables (map #(get % :table_name) (jdbc/query url (sql/format sqlmap)
                                                         :result-set-fn vec)))
   (catch Exception e (fatal e)))
