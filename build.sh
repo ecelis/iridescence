@@ -34,7 +34,7 @@ case $1 in
 	done
 	cd webui
   echo "$(pwd) clean..."
-	lein clean; lein deps; lein ring uberjar
+	lein clean; lein deps; lein ring uberjar; lein ring uberwar
 	;;
 esac
 
