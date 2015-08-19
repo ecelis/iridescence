@@ -37,6 +37,18 @@ http://127.0.0.1:3000
 `build.sh` by default cleans and build Smart Connector, it also takes
 the `clean` sub-command, to clean only.
 
+Build User Manual
+-----------------
+
+The user manual is included in the `doc` directory, which is a clone of
+the github wiki for the project. It is writen in markdown and can be
+rendered to ODT and HTML with `pandoc`
+
+    cd doc
+    pandoc Home.md -f markdown -t odt -s -o User-Manual.odt
+    pandoc Home.md -f markdown -t html -s -o User-Manual.html
+
+
 ## License
 
 Copyright © 2015 eCaresoft Inc.
