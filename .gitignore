@@ -47,7 +47,6 @@ dbPort
 .vagrant
 *.log
 mirth
-**/doc
 .dpl/
 .lein-failures
 .lein-repl-history

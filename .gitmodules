@@ -1,3 +1,6 @@
 [submodule "hl7yaml/checkouts/hl7-messaging-2-parser"]
 	path = hl7yaml/checkouts/hl7-messaging-2-parser
 	url = git@github.com:ecelis/clojure-hl7-messaging-2-parser.git
+[submodule "doc"]
+	path = doc
+	url = git@github.com:ecelis/iridescence.wiki.git
