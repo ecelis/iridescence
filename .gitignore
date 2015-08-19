@@ -51,3 +51,4 @@ mirth
 .lein-failures
 .lein-repl-history
 tmp/
+*.odt
