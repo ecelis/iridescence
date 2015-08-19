@@ -122,7 +122,7 @@
           (= "mysql" url_type) (db/build-select url tables query)
           (= "hl7v2" url_type) (try_hl7url url)
           :else (warn "Unknown URL type")))
-  (info adapter-response))
+  (json-response {:message adapter-response}))
 
 (defn get-objects "Fetch data source objects" [url]
   (info (db/get-tables url)))

@@ -82,10 +82,8 @@
 (defn build-select "Build a select from" [url tables query]
   (def fro (map keyword (set (string/split tables #" "))))
   (def sele (vec (map keyword (set (string/split query #" ")))))
-(info (sql/format (sql/build :select sele
-                         :from fro)))
-  [(jdbc/query url (sql/format (sql/build :select sele
-                         :from fro)))])
+  (jdbc/query url (sql/format (sql/build :select sele
+                         :from fro)) :result-set-fn vec))
 
 (defn exec-query [url query-map]
   (jdbc/query (sql/format query-map) :result-set-fn vec))

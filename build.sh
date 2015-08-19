@@ -1,6 +1,7 @@
 #!/bin/bash
 
 PROJECTS="adapter-csv adapter-db adapter-hl7v2"
+MANUAL="User-Manual"
 case $1 in
 "clean")
 	for dep in $PROJECTS;
@@ -12,7 +13,14 @@ case $1 in
 	done
 	cd webui
 	lein clean;
+  cd ../doc ; rm *.{html,odt}
 	;;
+"doc")
+  cd doc
+  for i in "odt html"; do
+    pandoc "$MANUAL.md" -f markdown -t $i -s -o "$MANUAL.$i"
+  done
+  ;;
 "help")
   echo "$0 [clean|build|help] withouth commands default is build everything"
   ;;

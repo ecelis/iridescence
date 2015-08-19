@@ -15,15 +15,6 @@ be deleted until we reach the first stable and fully functional version.
   * adapter-hl7v2   - HL7v2 parser module (WIP)
   * adapter-csv     - CSV Adapter (WIP)
 
-
-Docker
-------
-
-    git clone git@github.com:ecelis/iridescence.git
-    cd iridescence
-    docker pull ecaresoft/smartconnector
-    TODO... 
-    
 Build from source
 -----------------
 
@@ -45,6 +36,10 @@ If everything goes well run the standalone application and browse to
 http://127.0.0.1:3000
 
     java -jar ~/iridescence/webui/target/webui.jar
+
+
+`build.sh` by default cleans and build Smart Connector, it also takes
+the `clean` sub-command, to clean only.
 
 
 Features
