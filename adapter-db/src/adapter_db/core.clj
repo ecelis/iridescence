@@ -84,8 +84,8 @@
   (def sele (vec (map keyword (set (string/split query #" ")))))
 (info (sql/format (sql/build :select sele
                          :from fro)))
-  (jdbc/query url (sql/format (sql/build :select sele
-                         :from fro))))
+  [(jdbc/query url (sql/format (sql/build :select sele
+                         :from fro)))])
 
 (defn exec-query [url query-map]
   (jdbc/query (sql/format query-map) :result-set-fn vec))
