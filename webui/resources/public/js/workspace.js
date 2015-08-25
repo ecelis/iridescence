@@ -18,15 +18,8 @@
  *   You should have received a copy of the GNU Affero General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-var util = new Util();      // Utilities such as guid generator and crypto
-var tbX = 4,                // Toolbar X position
-  tbY = 4,                  // Toolbar Y position
-  tbW = 40,                 // Toolbar Width
-  tbH = 80,                // Toolbar Heigth
-  paperW = 768,             // Workspace Width
-  paperH = 100;             // Workspace Height
-var paper = Raphael("work-canvas", paperW, paperH);  // Workspace
 
+var util = new Util();    // Utilities wuch as guid generator and crypto
 /**
 * Workspace Metadata
 * @property
@@ -56,121 +49,16 @@ var adapter_items = [];               // Adapter Items from source
 // Global settings
 var connections = [];                 // Connections between adapters
 var connect = [];                     // Temporary queue for connections
-var adapters = paper.set();           // Create a default adapters
+var adapters = [];
 var work_guid = util.guid();          // Generate adapters GUID
-// We'll create adapters based on generic_adapter
-// TODO avoid cloning in alt-layout branch
-var generic_adapter = paper
-  .rect(-100, -100, 30, 20)
-  .attr({"fill": "#CCC",
-        "fill-opacity": 0,
-        "stroke-width": 3,
-        cursor: "move"});
-
-// Same as generic_adapter its a base connector, derive others from it
-// TODO avoid cloning in alt-yaout branch
-var connector = paper
-  .path("M-10 0L0 0")
-  .attr({"stroke-width": 3,
-        cursor: "move"});
-
-/**
-* start does nothing, only serves as a visual aid for the flow
-*/
-var start = paper.circle(tbX + 80, paperH - 75, 15)
-  .attr({"fill": "#7AC200",
-        "fill-opacity": 100,
-        "stroke-width": 3,
-        "stroke": "#298500",
-        cursor: "move"})
-  .data("props", {"type":"START", "name":"Start", "url":null});
-adapters.push(start);
-
-/**
- * Finish is an adapter which is obviously the last adapter
- * in the work flow. By default it is configured to end in
- * Smart Connector's log with INFO level.
- */
-var finish = paper.circle(paperW - 80, paperH - 75, 15)
-  .attr({"fill": "#D21C00",
-        "fill-opacity": 100,
-        "stroke-width": 3,
-        "stroke": "#990000",
-        cursor: "move"})
-  .data("props", {"type":"FINISH", "name":"Finish", "url":null});
-adapters.push(finish);
+// TODO  .data("props", {"type":"START", "name":"Start", "url":null});
+//adapters.push(start);
+//  .data("props", {"type":"FINISH", "name":"Finish", "url":null});
+//adapters.push(finish);
 
 var connector_tab = $('#properties a[href="#connector"]');
 var adapter_tab = $('#properties a[href="#adapter"]');
 var adapter_tab_fields = $('#adapter :input');
-
-/**
- * Connect queue, Adapters are pushed to the queue in order to add a Connector
- * between them
- * @method
- * @param {Object} artifact connector
- * */
-var connect_queue = function(artifact) {
-  if (connect.length < 2) {       // If the connection queue's length < 2
-    if(connect[0] != artifact) {  // and If adapter isn't already in queue
-      connect.push(artifact);     // add adapter to queue
-    }
-  }
-}
-
-/**
- * Triggered when an adapter starts moving
- */
-var dragger = function() {
-  // TODO Fix for paths
-  switch(this.type) {
-    case "rect":
-      this.ox = this.attr("x");
-      this.oy = this.attr("y");
-      break;
-    case "circle":
-    case "ellipse":
-      this.ox = this.attr("cx");
-      this.oy = this.attr("cy");
-      break;
-  }
-  this.animate({"fill-opacity": .2}, 500);
-};
-
-/**
- * Triggered when a adapter is moving
- */
-var move = function(dx, dy) {
-  var coordinates;
-  if (this.type == "rect") {
-    coordinates = {x: this.ox + dx, y: this.oy + dy};
-  } else {
-    coordinates = { cx: this.ox + dx, cy: this.oy + dy};
-  }
-  this.attr(coordinates);
-  // TODO
-  for(var i = connections.length; i--;) {
-    paper.connection(connections[i]);
-  }
-  paper.safari();
-};
-
-/**
- * Triggered when a adapter stops moving
- */
-var up = function() {
-  this.animate({"fill-opacity": 0}, 500);
-};
-
-/**
- * Triggers when an element from Toolbar is dragged into adapters
- * @method toolUp
- */
-var release = function() {
-  this.attr("x", tbX + 5);
-  this.attr("y", tbY + 5);
-  addToDiagram(this);
-};
 
 /**
  * Triggered when a adapter is clicked, populates the
@@ -194,52 +82,8 @@ var modify = function() {
   }
 };
 
-/**
- * Set default model to new Adapters or Connector
- */
-var setData = function(adapter) {
-  var data = null;
-  if(adapter.type != "path") {
-    // TODO switch-case here to apply apropriate data model
-    data = new DataModel();
-  } else {
-    data = {"id": adapter.id, "name": adapter.attrs.title};
-  }
-  adapter.data("props", data);
-}
 
-/**
- * Add a new element from Toolbar to adapters
- * @method addToDiagram
- * @param {Object} adapter Raphael Element
- * */
-var addToDiagram = function (adapter) {
-  var color = Raphael.getColor(); // Get next color in spectrum
-  if(adapter.type === "path") {
-    if(connect.length == 2) {     // Create a connection between adapters
-      var newConnection = paper.connection(connect[0], connect[1], "#000");
-      newConnection.line.attr({
-          "title": id = connect[0].id + 'to' + connect[1].id,
-          "stroke-width": 3});
-      setData(newConnection.line);
-      // TODO remove newConnection.line.click(modify);
-      connections.push(newConnection);
-      adapters.push(newConnection.line);
-      connect = [];               // Empty queue
-    } else {
-      return;                     // 2 adapters in queue are required
-    }                             // to make a connection
-  } else {
-    var newadapter = adapter.clone();   // Hello Dolly!
-    setData(newadapter);              // Give Dolly a Soul
-    newadapter.attr({fill: color,
-                  stroke: color,
-                  "fill-opacity": 0,
-                  "stroke-width": 3,
-                  "width": 50,
-                  "height": 30,
-                  "x": 390,
-                  "y": 8})
+/*
               .data("props", {"type": "GENERIC",
                     "id":this.id,
                     "name":null,
@@ -249,41 +93,7 @@ var addToDiagram = function (adapter) {
                     "query": null})
               .click(modify);
     adapters.push(newadapter);   // Append new adapter to adapters
-    if(adapters.length == 3) {  // First adapter of new workspace
-      connect.push(start);
-      connect.push(newadapter);
-      var firstConnection = paper.connection(connect[0], connect[1], "#000");
-      firstConnection.line.attr({
-          "title": id = connect[0].id + 'to' + connect[1].id,
-          "stroke-width": 3});
-      setData(firstConnection.line);
-      //firstConnection.line.click(modify);
-      connections.push(firstConnection); // connect to the begining
-      connect = [];     // Empty queue
-    }
-  }
-}
-
-/**
- * Remove adapter from adapters
- * @method remove
- * @param {Integer} id of the Raphael element
- * */
-var remove = function(id) {
-  // TODO Fix this, should be donw within w.remove
-  var adapter = paper.getById(id);
-  adapters.exclude(adapter);
-  adapter.remove();
-}
-
-/**
- * Clone a adapter by id
- * @method clone
- * @param {Integer} id of the Raphael element
- * */
-var clone = function(id) {
-  addToDiagram(paper.getById(id));
-}
+   */
 
 var build_query = function(event, node) {
   var nodes = $('#srcdata').treeview('getSelected', node.nodeId);
@@ -345,31 +155,9 @@ var update_workspace = function() {
   }
 }
 
-/**
- * Update Connector properties
- * @method
- * @param {Integer} connector id
- */
-var update_connector = function(connector) {
-  // TODO adapter_src??
-  var adapter_src = paper.getById(connector.id);
-  if(adapter_src.data("props").items != undefined)
-    adapter_src.data("props").items.forEach(function(item) {
-      $("#connector-items-lst")
-        .append('<option value="' +
-                item.name + '">' + item.name + '</option>');
-    });
-};
-
 // TODO Check if the values aren't overwriten when refreshing webpage
 $('#work-guid').val(work_guid);                   // Workspace GUID field
 $('#work-guid-label').html("Id: " + work_guid);   // Workspace GUID label
-
-connector.click(function() {                      // Connector onClick listener
-  addToDiagram(this)
-});
-
-finish.click(modify); // Finish adapter onDrag
 
 $('#msg-template-lst li a').on('click change',
       function() {
@@ -490,14 +278,6 @@ var fill_connector_types = function() {
     });
 };
 
-// TODO implement a jQuery filter for interesting fields
-/*adapter_tab_fields.on('change', function() {
-  update_adapter($('#adapter-id').val());
-});*/
-$('#adapter-name').on("change", function() {
-  update_adapter(adapters[2].id); // TODO fixed value after alt-layout
-});
-
 $('#adapter-test-btn').on("click change keyup",
       function() {
         update_srcurl();
@@ -513,35 +293,11 @@ $('#connector :input').on("click change keyup",   // Connector properties listen
         update_tgturl();
 });
 
-// TODO Remove from workspace is badly broken
-$('#remove-btn').click(function() {     // Remove item button listener
-  remove($('#adapter-id').val())
-});
-
-// TODO change this to work for workspace
-$('#clone-btn').click(function() {      // Clone item button listener
-  clone($('#adapter-id').val())
-});
-
 $('#save-btn').click(function() {       // Save workspace button listener
   save()
 });
-
-$('#up').click(function() {
-  build_select();
-});
-//$("#files").change(util.handleFileSelect);   // File upload listener
-
-connector_tab.on('show.bs.tab', function(e) {
-  console.log(e);
-});
-
 /// To execute onLoad() TODO temporary since alt-layout
 // Add adapter TODO its temporary since alt-layout
-addToDiagram(generic_adapter);
-connect_queue(adapters[2]);
-connect_queue(finish);
-addToDiagram(connector);
 
 // Keep it in the bottom
 $(document).ready(function() {
