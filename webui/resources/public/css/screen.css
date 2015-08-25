@@ -6,6 +6,11 @@ body {
     padding-top: 40px;
 }
 
+/* Override Bootstrap default */
+#top-column .panel-body {
+  height: 300px;
+}
+
 #properties-panel {
   height: 100%;
 }
@@ -31,4 +36,9 @@ box-sizing: border-box;
 
 #adapter-query, #connector-query {
   height: 100px;
+}
+
+#srcdata {
+  height: 270px;
+  overflow-y: auto;
 }

@@ -46,38 +46,11 @@ var adapter_items = [];               // Adapter Items from source
 var connections = [];                 // Connections between adapters
 var connect = [];                     // Temporary queue for connections
 var work_guid = util.guid();          // Generate adapters GUID
-// TODO  .data("props", {"type":"START", "name":"Start", "url":null});
-//adapters.push(start);
-//  .data("props", {"type":"FINISH", "name":"Finish", "url":null});
-//adapters.push(finish);
-
 var connector_tab = $('#properties a[href="#connector"]');
 var adapter_tab = $('#properties a[href="#adapter"]');
 var adapter_tab_fields = $('#adapter :input');
-
-/**
- * Triggered when a adapter is clicked, populates the
- * properties panel
- * @method modify
- * */
-var modify = function() {
-  property = this.data("props");
-  // TODO clean all those ugly hacks introduced since alt-layout
-  if(this.type != "circle") {
-    $('#adapter-name').val(property.name);
-    $('#adapter-url').val(property.url);
-    $('#adapter-id').val(this.id);
-    adapter_tab.tab('show');
-    connect_queue(this);
-  } else {
-    // TODO initialize properties, Name, etc
-    connector_tab.tab('show');
-    var adapter_id = property.name.split("to")[0];
-    update_connector(this);
-  }
-};
-
-var build_query = function(event, node) {
+var build_query = function(event, node)
+{
   var nodes = $('#srcdata').treeview('getSelected', node.nodeId);
   var col_names = '';
   var table_names = '';
@@ -90,11 +63,16 @@ var build_query = function(event, node) {
   $('#adapter-query').val(col_names);
 };
 
-var srcdata_treview = function() {
-  $('#srcdata').treeview({data: srcdata,
-    multiSelect: true,
+var srcdata_treview = function()
+{
+  $('#srcdata').treeview({
+    data: srcdata,
+    multiSelect: false,
     onNodeSelected: build_query,
-    onNodeUnselected: build_query
+    onNodeUnselected: build_query,
+    state: {
+      expanded: false
+    }
   });
 };
 
