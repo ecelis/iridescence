@@ -235,6 +235,20 @@ var fill_connector_types = function() {
     });
 };
 
+var search_srcdata_treeview = function()
+{
+  var pattern = $('#input-srcdata-search').val();
+  var options = {
+    ignoreCase: true,
+    exactMatch: false,
+    revealResults: true
+  };
+  var results = $('#srcdata').treeview(true).search([pattern, options]);
+  $('#to_map').html(results);
+};
+
+$('#search-srcdata-btn').on('click', search_srcdata_treeview);
+
 $('#adapter-test-btn').on("click change keyup",
       function() {
         update_srcurl();

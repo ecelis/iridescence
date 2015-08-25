@@ -6,7 +6,14 @@
         <!-- Source column -->
         <div class="col-md-4">
           <div class="panel panel-default">
-            <div class="panel-heading">Source</div>
+            <div class="panel-heading">
+              <div class="form-group">
+                <label for="input-srcdata-search" class="sr-only">Search Tree:</label>
+                <input class="form-control" id="input-srcdata-search" placeholder="Type to search..." value="" type="input">
+              </div>
+              <button type="button" class="btn btn-success" id="search-srcdata-btn">Search</button>
+              <button type="button" class="btn btn-default" id="clear-srcdata-search">Clear</button>
+            </div>
             <div class="panel-body">
               <div id="srcdata">...---...</div>
             </div>
@@ -14,6 +21,8 @@
         </div>
         <div class="col-md-4">
           <div id="info-box"></div>
+          <div id="to_map"></div>
+
         </div>
         <!-- Message Column -->
         <div class="col-md-4">
