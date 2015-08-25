@@ -31,25 +31,20 @@ var work_meta = {        // Workspace metadata
   'draft': true
 };
 
-/**
- * Adapter property model
- * @property
- */
-var property = {                      // TODO Get rid of it
-  //this.data("props");               // Artifact's properties
-  'name': null,
-  'type': null,
-  'url': null,
-  'items': null,
-  'from': null,
-  'query': null
+var adapter = {
+  id: null,
+  name: null,
+  type: null,
+  url: null,
+  items: null,
+  from: null,
+  query: null
 };
 
 var adapter_items = [];               // Adapter Items from source
 // Global settings
 var connections = [];                 // Connections between adapters
 var connect = [];                     // Temporary queue for connections
-var adapters = [];
 var work_guid = util.guid();          // Generate adapters GUID
 // TODO  .data("props", {"type":"START", "name":"Start", "url":null});
 //adapters.push(start);
@@ -82,19 +77,6 @@ var modify = function() {
   }
 };
 
-
-/*
-              .data("props", {"type": "GENERIC",
-                    "id":this.id,
-                    "name":null,
-                    "url": null,
-                    "items": null,
-                    "from": null,
-                    "query": null})
-              .click(modify);
-    adapters.push(newadapter);   // Append new adapter to adapters
-   */
-
 var build_query = function(event, node) {
   var nodes = $('#srcdata').treeview('getSelected', node.nodeId);
   var col_names = '';
@@ -122,23 +104,20 @@ var srcdata_treview = function() {
  * @method updateadapter
  * @param {Integer} id of Raphael element
  * */
-var update_adapter = function(id) {
+var update_adapter = function()
+{
   // TODO Fix it, values get borked in the panel
-  var adapter = paper.getById(id);
-  adapter.data("props").id = id;
-  adapter.data("props").type = $('#adapter-type').val();
-  adapter.data("props").name = $('#adapter-name').val();
-  adapter.data("props").url = $('#adapter-url').val();
-  adapter.data("props").from = $('#adapter-from').val();
-  adapter.data("props").query = $('#adapter-query').val();
-  adapter.attr({'title': adapter.data("props").name,
-          'text':adapter.data("props").name});
-  test_connection($('#adapter-url').val());
+  adapter.type = $('#adapter-type').val();
+  adapter.name = $('#adapter-name').val();
+  adapter.url = $('#adapter-url').val();
+  adapter.from = $('#adapter-from').val();
+  adapter.query = $('#adapter-query').val();
+
   if(adapter_items.length > 0) {
-    adapter.data("props").items = adapter_items;
+    adapter.items = adapter_items;
     srcdata_treview();
   }
-}
+};
 
 /**
  * Update work properties
@@ -270,18 +249,21 @@ var fill_connector_types = function() {
   };
   $('#connector-type-lst').append(items.join(''));
   $('#connector-type-lst li a').on('click change',
-    function() {
+    function()
+    {
       var tgt_type = $(this).text();
       $('#btn-connector-type').html(tgt_type+'<span class="caret"></span>');
       fill_connector_driver($(this).text());
-      // TODO update_connector($('#connector-id').val());
     });
 };
 
 $('#adapter-test-btn').on("click change keyup",
       function() {
         update_srcurl();
-        update_adapter(adapters[2].id); // TODO fixed value since alt-layout
+        update_adapter();
+        if (adapter.url != null) {
+          test_connection(adapter.url);
+        }
         if($('#adapter-query').val() != '') {
           build_select();
         }
@@ -293,8 +275,9 @@ $('#connector :input').on("click change keyup",   // Connector properties listen
         update_tgturl();
 });
 
-$('#save-btn').click(function() {       // Save workspace button listener
-  save()
+$('#save-btn').click(function()        // Save workspace button listener
+{
+  save();
 });
 /// To execute onLoad() TODO temporary since alt-layout
 // Add adapter TODO its temporary since alt-layout

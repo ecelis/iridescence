@@ -36,9 +36,9 @@ var save = function() {
            "workspace":payload
          },
         function(res) {
-          $("#msg-template").fadeIn("slow");
-          $("#msg-template").html("Workspace " + $("#work-name").val() + " saved");
-          $("#msg-template").fadeOut("slow");
+          $("#info-box").fadeIn("slow");
+          $("#info-box").html("Workspace " + $("#work-name").val() + " saved");
+          $("#info-box").fadeOut("slow");
         });
 };
 

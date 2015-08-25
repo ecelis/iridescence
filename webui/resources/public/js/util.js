@@ -92,29 +92,28 @@ var db_driver = [
 
 
 Util.prototype.srctype = {
-  'Channel Reader': [],
-  'DICOM Listener': [],
+ // 'Channel Reader': [],
+ // 'DICOM Listener': [],
   'Database Reader': db_driver,
   'File Reader': file_driver,
-  'HTTP Listener': [],
-  'JMS Listener': [],
-  'JavaScript Reader': [],
-  'TCP Listener': [],
-  'Web Service Listener': []
+ // 'HTTP Listener': [],
+ // 'JMS Listener': [],
+ // 'JavaScript Reader': [],
+ // 'TCP Listener': [],
+ // 'Web Service Listener': []
 };
 
 Util.prototype.tgttype = {
-  'SMTP Sender': [],
-  'Channel Writer': [],
-  'DICOM Sender': [],
+ // 'Channel Writer': [],
+ // 'DICOM Sender': [],
   'Database Writer': db_driver,
-  'Document Writer': [],
+ // 'Document Writer': [],
   'File Writer': file_driver,
-  'HTTP Sender': [],
-  'JMS Sender': [],
-  'SMTP Sender': [],
-  'TCP Sender': [],
-  'Web Service Sender': []
+ // 'HTTP Sender': [],
+ // 'JMS Sender': [],
+ // 'SMTP Sender': [],
+ // 'TCP Sender': [],
+ // 'Web Service Sender': []
 };
 
 // From http://raphaeljs.com/graffle.html
