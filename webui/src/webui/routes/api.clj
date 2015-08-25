@@ -151,6 +151,7 @@
           (delete-workspace id))
     (GET "/run/:id" [id]
          (run-workspace id))
+    (POST "/upload" [__anti-forgery-token] (info "upload"))
     )
   (context "/api/adapter" []
     (GET "/test/" [__anti-forgery-token url] (try-url url))

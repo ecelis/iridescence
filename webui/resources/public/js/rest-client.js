@@ -31,9 +31,15 @@ var save = function() {
   adapters.forEach(function(adapter) {
     payload.data.push(JSON.stringify(adapter.data("props")));
   });
-  //payload.data.push(hl7message);
-  $.post("/api/", {"__anti-forgery-token": $('#__anti-forgery-token').val(),
-         "workspace":payload});
+  $.post("/api/",
+         {"__anti-forgery-token": $('#__anti-forgery-token').val(),
+           "workspace":payload
+         },
+        function(res) {
+          $("#msg-template").fadeIn("slow");
+          $("#msg-template").html("Workspace " + $("#work-name").val() + " saved");
+          $("#msg-template").fadeOut("slow");
+        });
 };
 
 /**
