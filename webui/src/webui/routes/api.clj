@@ -28,7 +28,9 @@
             [adapter-hl7v2.core :as hl7]
             [clojure.string :as string]
             [fuzzy-urls.url :refer :all]
-            [fuzzy-urls.lens :as lens :refer [build-url-lens]])
+            [fuzzy-urls.lens :as lens :refer [build-url-lens]]
+            [noir.io :as noi]
+            )
   (:use [taoensso.timbre :only [trace debug info warn error fatal]]))
 
 (def savedir "/tmp") ; TODO Set a definitive path
@@ -127,6 +129,7 @@
 (defn get-objects "Fetch data source objects" [url]
   (info (db/get-tables url)))
 
+
 ;; API Definition
 ;;
 ;; Everything in the /api/ context is a workspace
@@ -151,8 +154,10 @@
           (delete-workspace id))
     (GET "/run/:id" [id]
          (run-workspace id))
-    (POST "/upload" [__anti-forgery-token] (info "upload"))
-    )
+    (POST "/upload" [__anti-forgery-token file]
+          (info "up")
+        ))
+
   (context "/api/adapter" []
     (GET "/test/" [__anti-forgery-token url] (try-url url))
     (GET "/object/" [__anti-forgery-token url] (get-objects url))
