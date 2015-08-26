@@ -46,7 +46,7 @@
                  [adapter-hl7v2 "0.1.2-SNAPSHOT"]]
 
   :min-lein-version "2.0.0"
-  :uberjar-name "iridescence_web_standalone.jar"
+  :uberjar-name "iridescence_standalone.jar"
   :repl-options {:init-ns webui.handler}
   :jvm-opts ["-server"]
 

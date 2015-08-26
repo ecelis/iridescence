@@ -15,6 +15,8 @@ be deleted until we reach the first stable and fully functional version.
   * adapter-hl7v2   - HL7v2 parser module (WIP)
   * adapter-csv     - CSV Adapter (WIP)
 
+Read the [manual](https://github.com/ecelis/iridescence/wiki)
+
 Build from source
 -----------------
 
@@ -22,51 +24,30 @@ In order to build Smart Connector you need to install Leiningen first.
 (Java 8 SDK is a requirement for both lein and Smart Connector, so it is
 assumed to be already installed)
 
-    mkdir ~/bin ; cd ~/bin
-    wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
-    chmod 755 lein
-    ./lein
-    export PATH=~/bin:$PATH
-    cd ~
-    git clone git@github.com:ecelis/iridescence.git
+    git clone --recursive git@github.com:ecelis/iridescence.git
     cd iridescence
     ./build.sh
 
 If everything goes well run the standalone application and browse to
 http://127.0.0.1:3000
 
-    java -jar ~/iridescence/webui/target/webui.jar
+    java -jar ~/iridescence/webui/target/iridescence_standalone.jar
 
 
 `build.sh` by default cleans and build Smart Connector, it also takes
 the `clean` sub-command, to clean only.
 
+Build User Manual
+-----------------
 
-Features
---------
+The user manual is included in the `doc` directory, which is a clone of
+the github wiki for the project. It is writen in markdown and can be
+rendered to ODT and HTML with `pandoc`
 
-  * Adapter connects to a data source
-  * An URL is the format to connect to any data source
-  * While editing the adapter properties it tests the connection and
-    when successful fetches the data structures from it
-  * Connectors define the data flow and transformations between data
-    sources
+    cd doc
+    pandoc Home.md -f markdown -t odt -s -o User-Manual.odt
+    pandoc Home.md -f markdown -t html -s -o User-Manual.html
 
-
-In Progress
------------
-
-  * API RESTful
-  * Connections Rule Engine
-
-
-Bugs
-----
-
-  * Exceptions and logging are not beign handled properly
-  * Remove from workspace is badly broken
-  * Data is not beign validated in any way (yet)
-  * Several not very anoying bugs
 
 ## License
 
