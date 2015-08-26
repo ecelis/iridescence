@@ -129,9 +129,9 @@ var db_handler = function(json_data) {
       table.nodes[table.text].map(function(column){
         cols.push({text: '<div class="draggable">'+column.column_name+'</div>'});
       });
-      adapter_items.push({"text": table.text, "nodes": cols});
+      table_definition.push({"text": table.text, "nodes": cols});
     });
-    return [{text: "tables", nodes: adapter_items}];
+    return [{text: "tables", nodes: table_definition}];
   }
 };
 

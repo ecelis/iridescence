@@ -41,10 +41,7 @@ var adapter = {
   query: null
 };
 
-var adapter_items = [];               // Adapter Items from source
 // Global settings
-var connections = [];                 // Connections between adapters
-var connect = [];                     // Temporary queue for connections
 var work_guid = util.guid();          // Generate adapters GUID
 var connector_tab = $('#properties a[href="#connector"]');
 var adapter_tab = $('#properties a[href="#adapter"]');
@@ -65,19 +62,7 @@ var build_query = function(event, node)
   $('#adapter-query').val(col_names);
 };
 
-var srcdata_treview = function()
-{
-  $('#srcdata').treeview({
-    data: srcdata,
-    multiSelect: false,
-    showCheckbox: true,
-    onNodeSelected: build_query,
-    onNodeUnselected: build_query,
-    state: {
-      expanded: false
-    }
-  });
-};
+
 
 /**
  * Update the adapter properties data 'props' with values from
@@ -93,11 +78,8 @@ var update_adapter = function()
   adapter.url = $('#adapter-url').val();
   adapter.from = $('#adapter-from').val();
   adapter.query = $('#adapter-query').val();
-
-  if(adapter_items.length > 0) {
-    adapter.items = adapter_items;
-    srcdata_treview();
-  }
+  srcdata_treview();
+  console.log($('#srcdata div[class="draggable"]'));
 };
 
 /**
@@ -129,9 +111,10 @@ $('#msg-template-lst li a').on('click change',
 });
 
 $('#workspace :input').on("click change keyup", // Workspace properties listener
-      function() {
+      function()
+      {
         update_workspace();
-});
+      });
 
 var src_driver, src_host, src_src, src_user, src_password, src_url;
 var tgt_driver, tgt_host, tgt_message, tgt_user, tgt_password, tgt_url;
@@ -238,6 +221,19 @@ var fill_connector_types = function() {
     });
 };
 
+var srcdata_treview = function()
+{
+  $('#srcdata').treeview({
+    data: srcdata,
+    multiSelect: false,
+    onNodeSelected: build_query,
+    onNodeUnselected: build_query,
+    state: {
+      expanded: false
+    }
+  });
+};
+
 var search_srcdata_treeview = function()
 {
   var pattern = $('#input-srcdata-search').val();
@@ -288,8 +284,6 @@ $('#save-btn').click(function()        // Save workspace button listener
   save();
 });
 
-/// To execute onLoad() TODO temporary since alt-layout
-// Add adapter TODO its temporary since alt-layout
 
 // Keep it in the bottom
 $(document).ready(function() {
