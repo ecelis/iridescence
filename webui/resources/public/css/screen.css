@@ -42,3 +42,8 @@ box-sizing: border-box;
   height: 270px;
   overflow-y: auto;
 }
+
+.draggable {
+  height: 25px;
+  background-color:silver;
+}

@@ -118,14 +118,16 @@ var db_handler = function(json_data) {
   // Get table names
   if(json_data.tables != null) {
     json_data.tables.forEach(function(item){
-      table_schema.push({"text":Object.getOwnPropertyNames(item)[0],
-        "nodes":item.valueOf()});
+      table_schema.push({
+        "text": Object.getOwnPropertyNames(item)[0],
+        "nodes":item.valueOf()
+      });
     });
     // Get columns and return associative array of tables:columns
     table_schema.map(function(table){
       var cols = [];
       table.nodes[table.text].map(function(column){
-        cols.push({text: column.column_name});
+        cols.push({text: '<div class="draggable">'+column.column_name+'</div>'});
       });
       adapter_items.push({"text": table.text, "nodes": cols});
     });

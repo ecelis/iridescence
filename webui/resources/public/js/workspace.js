@@ -49,6 +49,8 @@ var work_guid = util.guid();          // Generate adapters GUID
 var connector_tab = $('#properties a[href="#connector"]');
 var adapter_tab = $('#properties a[href="#adapter"]');
 var adapter_tab_fields = $('#adapter :input');
+
+
 var build_query = function(event, node)
 {
   var nodes = $('#srcdata').treeview('getSelected', node.nodeId);
@@ -68,6 +70,7 @@ var srcdata_treview = function()
   $('#srcdata').treeview({
     data: srcdata,
     multiSelect: false,
+    showCheckbox: true,
     onNodeSelected: build_query,
     onNodeUnselected: build_query,
     state: {
@@ -243,11 +246,23 @@ var search_srcdata_treeview = function()
     exactMatch: false,
     revealResults: true
   };
-  var results = $('#srcdata').treeview(true).search([pattern, options]);
+  var results = $('#srcdata').treeview('search', [pattern, options]);
+  var htmlOut;
+  results.forEach(function(column)
+                  {
+                    htmlOut += column.text;
+                  });
   $('#to_map').html(results);
 };
 
 $('#search-srcdata-btn').on('click', search_srcdata_treeview);
+
+$('#clear-srcdata-search').on('click', function()
+                      {
+                        $('#srcdata').treeview('clearSearch');
+                        $('#input-srcdata-search').val('');
+                        $('#srcdata').treeview('collapseAll');
+                      });
 
 $('#adapter-test-btn').on("click change keyup",
       function() {
@@ -261,6 +276,7 @@ $('#adapter-test-btn').on("click change keyup",
         }
 });
 
+
 $('#connector :input').on("click change keyup",   // Connector properties listener
       function() {
         // TODO update_adapter($('#adapter-id').val());
@@ -271,6 +287,7 @@ $('#save-btn').click(function()        // Save workspace button listener
 {
   save();
 });
+
 /// To execute onLoad() TODO temporary since alt-layout
 // Add adapter TODO its temporary since alt-layout
 
