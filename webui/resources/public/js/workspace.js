@@ -68,7 +68,6 @@ var build_query = function(event, node)
  * Update the adapter properties data 'props' with values from
  * the properties panel
  * @method updateadapter
- * @param {Integer} id of Raphael element
  * */
 var update_adapter = function()
 {
@@ -79,7 +78,6 @@ var update_adapter = function()
   adapter.from = $('#adapter-from').val();
   adapter.query = $('#adapter-query').val();
   srcdata_treview();
-  console.log($('#srcdata div[class="draggable"]'));
 };
 
 /**
@@ -228,6 +226,12 @@ var srcdata_treview = function()
     multiSelect: false,
     onNodeSelected: build_query,
     onNodeUnselected: build_query,
+    onNodeNodeExpanded: function(event, data)
+                 {
+                   console.log(event);
+                   console.log(data);
+                   $('#srcdata ul li').draggable({containment: 'body'});
+                 },
     state: {
       expanded: false
     }
@@ -283,7 +287,6 @@ $('#save-btn').click(function()        // Save workspace button listener
 {
   save();
 });
-
 
 // Keep it in the bottom
 $(document).ready(function() {
