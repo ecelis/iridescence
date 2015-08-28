@@ -288,11 +288,11 @@ $('#save-btn').click(function()        // Save workspace button listener
   save();
 });
 
+/*
 $('#file-upload-btn').click(function()
                             {
-                              console.log('up');
                               file_upload_handler();
-                            });
+                            }); */
 // Keep it in the bottom
 $(document).ready(function() {
   fill_adapter_types();

@@ -29,14 +29,15 @@
             [clojure.string :as string]
             [fuzzy-urls.url :refer :all]
             [fuzzy-urls.lens :as lens :refer [build-url-lens]]
-            [noir.io :as noi]
+            [noir.io :as nio]
             )
   (:use [taoensso.timbre :only [trace debug info warn error fatal]]))
 
 (def savedir "/tmp") ; TODO Set a definitive path
-(def wsdir "/workspace")
-(def wipdir "/wip")
-(def outdir "/out")
+(def wsdir (str savedir "/workspace/"))
+(def wipdir (str savedir "/wip/"))
+(def outdir (str savedir "/out/"))
+(def tpldir (str savedir "/templates/"))
 
 ;; TODO Read http://www.luminusweb.net/docs/responses.md
 ;; for proper encoding reponses
@@ -64,8 +65,8 @@
              (get workspace :data))})
   (def yaml-workspace (yaml/generate-string workspace-map))
   (if (get (get workspace-map :workspace true) :draft true)
-    (def save-to (str savedir wipdir "/"))
-    (def save-to (str savedir wsdir "/")))
+    (def save-to wipdir)
+    (def save-to wsdir))
   (try (spit (str save-to (get (json/parse-string
                                            (get workspace :meta) true) :guid))
              yaml-workspace) (json-response workspace)
@@ -73,7 +74,7 @@
 
 (defn load-workspace "Loads a workspace from YAML storage and returns its JSON
                      representation" [id]
-  (try (json-response (yaml/parse-string (slurp (str savedir wsdir "/" id))))
+  (try (json-response (yaml/parse-string (slurp (str wsdir id))))
        (catch Exception e (info e))))
 
 (defn update-workspace "Update workspace in YAML storage" [id]
@@ -129,7 +130,6 @@
 (defn get-objects "Fetch data source objects" [url]
   (info (db/get-tables url)))
 
-
 ;; API Definition
 ;;
 ;; Everything in the /api/ context is a workspace
@@ -155,8 +155,8 @@
     (GET "/run/:id" [id]
          (run-workspace id))
     (POST "/upload" [__anti-forgery-token file]
-          (info "up")
-        ))
+          (nio/upload-file tpldir file)
+          ))
 
   (context "/api/adapter" []
     (GET "/test/" [__anti-forgery-token url] (try-url url))
