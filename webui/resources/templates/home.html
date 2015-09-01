@@ -80,16 +80,9 @@
             <div class="panel-heading">Templates</div>
               <div class="panel-body">
                 <form action="/api/upload" method="post" enctype="multipart/form-data">
-                  <!-- span id="file-upload=btn" class="btn btn-success fileinput-button">
-                    <i class="glyphicon glyphicon-plus"></i>
-                    <span>Select files...</span -->
-                      <!-- The file input field used as target for the file upload widget -->
-                      <!-- input id="fileupload" name="files[]" multiple="" type="file">
-                    </span -->
                   <input type="submit" name="file-upload-btn" id="file-upload-btn" 
                   class="btn btn-success"/>
                   <input id="file" name="file" type="file" class="form-control" />
-                  <!-- input type="submit" name="submit" value="submit" /-->
                   {% csrf-field %}
                 </form>
                 <br>
