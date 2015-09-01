@@ -155,10 +155,7 @@
           (delete-workspace id))
     (GET "/run/:id" [id]
          (run-workspace id))
-    (POST "/upload" [__anti-forgery-token file]
-      ;; file with same name will be overwrited, so in production mode , gen a
-      ;; random string as filename
-      (nio/upload-file i/tpldir file)))
+    )
 
   (context "/api/adapter" []
     (GET "/test/" [__anti-forgery-token url] (try-url url))
@@ -168,7 +165,10 @@
 
   (context "/api/template" []
            (GET "/" [__anti-forgery-token]
-                (info (i/ls i/tpldir))
-                )
+                (json-response {:base-name (i/ls i/tpldir)}))
+           (POST "/" [__anti-forgery-token file]
+              ;; file with same name will be overwrited, so in production mode ,
+              ;;gen a random string as filename
+              (nio/upload-file i/tpldir file))
            )
   )

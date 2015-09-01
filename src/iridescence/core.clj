@@ -11,7 +11,7 @@
 (def tpldir (str savedir "templates/"))
 
 (defn ls "List files in a given path" [path]
-  [(map fs/base-name (fs/list-dir path))])
+  (map fs/base-name (fs/list-dir path)))
 
 (defn storage-setup "Set up storage paths" []
   ; TODO this if nil are awful
