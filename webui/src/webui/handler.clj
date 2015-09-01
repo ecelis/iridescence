@@ -33,7 +33,10 @@
     (.mkdir (java.io.File. i/wipdir)))
   (if (.isDirectory (io/file i/outdir))
     nil
-    (.mkdir (java.io.File. i/outdir))))
+    (.mkdir (java.io.File. i/outdir)))
+  (if (.isDirectory (io/file i/tpldir))
+    nil
+    (.mkdir (java.io.File. i/tpldir))))
 
 (defn init
   "init will be called once when

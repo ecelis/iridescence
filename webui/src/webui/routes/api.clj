@@ -26,7 +26,7 @@
             [clojure.string :as string]
             [fuzzy-urls.url :refer :all]
             [fuzzy-urls.lens :as lens :refer [build-url-lens]]
-            [noir.io :as noi]
+            [noir.io :as nio]
             [iridescence.core :as i]
             [adapter-db.core :as db]
             [adapter-csv.core :as csv]
@@ -125,7 +125,6 @@
 (defn get-objects "Fetch data source objects" [url]
   (info (db/get-tables url)))
 
-
 ;; API Definition
 ;;
 ;; Everything in the /api/ context is a workspace
@@ -151,8 +150,8 @@
     (GET "/run/:id" [id]
          (run-workspace id))
     (POST "/upload" [__anti-forgery-token file]
-          (info "up")
-        ))
+          (nio/upload-file i/tpldir file)
+          ))
 
   (context "/api/adapter" []
     (GET "/test/" [__anti-forgery-token url] (try-url url))
