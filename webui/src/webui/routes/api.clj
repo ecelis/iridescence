@@ -164,4 +164,11 @@
     (GET "/test/" [__anti-forgery-token url] (try-url url))
     (GET "/object/" [__anti-forgery-token url] (get-objects url))
     (GET "/build_select/" [__anti-forgery-token url tables query]
-         (execute-adapter url tables query))))
+         (execute-adapter url tables query)))
+
+  (context "/api/template" []
+           (GET "/" [__anti-forgery-token]
+                (info (i/ls i/tpldir))
+                )
+           )
+  )
