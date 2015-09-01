@@ -156,8 +156,9 @@
     (GET "/run/:id" [id]
          (run-workspace id))
     (POST "/upload" [__anti-forgery-token file]
-          (nio/upload-file i/tpldir file)
-          ))
+      ;; file with same name will be overwrited, so in production mode , gen a
+      ;; random string as filename
+      (nio/upload-file i/tpldir file)))
 
   (context "/api/adapter" []
     (GET "/test/" [__anti-forgery-token url] (try-url url))

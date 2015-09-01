@@ -1,26 +1,31 @@
 (ns webui.routes.upload
-  (:require [noir.response :as resp]
-            [noir.session :as session]))
+    (:use compojure.core)
+    (:require [noir.io :as io]
+              [noir.response :as response]
+              [noir.util.middleware :refer [app-handler]]
+              [ring.util.response :refer [file-response]]))
 
-(defmacro in-try-catch [& body]
-  `(try
-     ~@(butlast body)
-     (resp/status 200 ~(last body))
-     (catch Throwable t#
-       (.printStackTrace t#)
-       (resp/status 500 "error"))))
+;; uploaded file dir
+(def resource-path "/tmp/")
 
-;(defn list-files []
-;  (db/list-files))
+(defroutes home-routes
+    (GET "/" []
+      (layout/render "index.html"))
+    (GET "/upload" []
+      (layout/render "upload.html"))
 
-(defn get-file [name]
-  (if-let [{:keys [name type data]} (name)]
-    (resp/content-type type (new java.io.ByteArrayInputStream data))
-    (resp/status 404 (resp/empty))))
+    (POST "/upload" [file]
+;; file with same name will be overwrited, so in production mode , gen a
+;; random string as filename
+(io/upload-file resource-path file)
+(response/redirect
+(str "/files/" (:filename file))))
 
-(defn upload-file! [file]
-  (in-try-catch
-   (file)))
+          (GET "/files/:filename" [filename]
+                      (file-response (str resource-path filename))))  
 
-(defn delete-file! [name]
-  (in-try-catch (name)))
+(def app (app-handler
+                                ;; add your application routes here
+                                          [home-routes]))
+
+
