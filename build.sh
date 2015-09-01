@@ -4,6 +4,7 @@ PROJECTS="adapter-csv adapter-db adapter-hl7v2"
 MANUAL="User-Manual"
 case $1 in
 "clean")
+  lein clean
 	for dep in $PROJECTS;
 	do
 	  cd $dep
@@ -25,6 +26,7 @@ case $1 in
   echo "$0 [clean|build|help] withouth commands default is build everything"
   ;;
 *)
+  lein clean; lein deps; lein uberjar; lein install
 	for dep in $PROJECTS;
 	do
 	  cd $dep
