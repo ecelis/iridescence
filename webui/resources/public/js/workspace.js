@@ -152,6 +152,23 @@ var update_tgturl = function() {
   $('#adapter-url').val(tgt_url);
 };
 
+var fill_templates = function(templates)
+{
+  var items = [];
+  templates.forEach(function(item)
+                    {
+                      items.push('<li><a href="#">' + item + '</a></li>');
+                    });
+  $('#msg-template-lst').find('li').remove().end();
+  $('#msg-template-lst').append(items.join(''));
+  $('#msg-template-lst li a').on('click change',function()
+                             {
+                               $('#msg-template-btn')
+                               .html($(this).text() + '<span class="caret"></span>');
+
+                             });
+};
+
 /**
  * Fill the adpter's driver dropdown
  *
@@ -297,5 +314,6 @@ $('#file-upload-btn').click(function()
 $(document).ready(function() {
   fill_adapter_types();
   fill_connector_types();
+  get_templates();
 });
 

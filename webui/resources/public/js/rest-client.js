@@ -173,25 +173,16 @@ var file_upload_handler = function ()
          {
            console.log(res);
          });
-  /*
-  $('#fileupload').fileupload({
-    url: url,
-    dataType: 'json',
-    done: function (e, data) {
-      $.each(data.result.files, function (index, file) {
-        $('<p/>').text(file.name).appendTo('#files');
-      });
-    },
-    progressall: function (e, data) {
-      var progress = parseInt(data.loaded / data.total * 100, 10);
-      $('#progress .progress-bar').css(
-        'width',
-        progress + '%'
-      );
-    }
-  }).prop('disabled', !$.support.fileInput)
-    .parent().addClass($.support.fileInput ? undefined : 'disabled');
-   */
+};
+
+var get_templates = function()
+{
+  $.get('/api/template/',
+        {'__anti-forgery-token': $('#__anti-forgery-token').val()},
+        function(res)
+        {
+          fill_templates(res['base-name']);
+        });
 };
 
 /**
