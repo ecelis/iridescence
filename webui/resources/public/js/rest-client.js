@@ -19,7 +19,13 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var srcdata;
+var srcdata, tplsrc;
+
+var leaf = function()
+{
+  this.text = '';
+  this.nodes = [];
+};
 
 /**
  * Save adapters to YAML in the server
@@ -59,8 +65,41 @@ var save = function() {
  * @param {Object} json_data response
  */
 var hl7v2_handler = function(json_data) {
-  var fields = [];
-  var msg_tree = [];
+  var tree = [];
+  json_data['template'].forEach(function(item)
+  {
+    var a_leaf = Object.create(leaf.prototype);
+    a_leaf.text = item.id;
+    a_leaf.nodes = [];
+    item.fields.forEach(function(field)
+                        {
+                          var b_leaf = Object.create(leaf.prototype);
+                          b_leaf.nodes = [];
+                          var isArray = field.content instanceof Array;
+                          if(isArray) {
+                            if(field.content.length >= 1) {
+                              var c_leaf = Object.create(leaf.prototype);
+                              c_leaf.text = field.content[0];
+                              c_leaf.nodes = [];
+//                              field.content.shift();
+                              field.content.forEach(function(comp)
+                                           {
+                                             c_leaf.text += '^' +  comp;
+                                             c_leaf.nodes.push(comp);
+                                           });
+                              b_leaf.nodes.push(c_leaf);
+                            } else {
+                              b_leaf.text = typeof field.content[0] !== 'undefined' ? field.content[0] : '';
+                            }
+                          } else {
+                            b_leaf.text = field.content;
+                          }
+ //                             console.log(b_leaf);
+                          a_leaf.nodes.push(b_leaf);
+                        });
+    tree.push(a_leaf);
+  });
+  return {text: 'template', nodes: tree};
   /*
   json_data.segments.forEach(function(segment) {
     fields.push({text: segment.id});
@@ -72,8 +111,8 @@ var hl7v2_handler = function(json_data) {
       }
     });
   });*/
-  console.log([{text: Object.getOwnPropertyNames(json_data)[0],
-              nodes: fields}]);
+  //console.log([{text: Object.getOwnPropertyNames(json_data)[0],
+//              nodes: fields}]);
 };
 
 /**
@@ -183,7 +222,14 @@ var get_template = function(id)
         function(res)
         {
           if(id !== '') {
-            console.log(res);
+            tplsrc = hl7v2_handler(res);
+
+  $('#template').treeview({
+   data: tplsrc,
+    state: {
+      expanded: false
+    }
+  });
           } else {
             fill_templates(res['template']);
           }
