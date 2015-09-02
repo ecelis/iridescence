@@ -1,6 +1,7 @@
 (ns iridescence.core
   (:require [clojure.java.io :as io]
-            [me.raynes.fs :as fs])
+            [me.raynes.fs :as fs]
+            [clj-uuid :as uuid])
   (:use [taoensso.timbre :only [trace debug info warn error fatal]])
   )
 
@@ -11,7 +12,7 @@
 (def tpldir (str savedir "templates/"))
 
 (defn gen-uuid "Generate UUID" []
-  (info (str (java.util.UUID/randomUUID))))
+  (uuid/v1))
 
 (defn ls "List files in a given path" [path]
   (map fs/base-name (fs/list-dir path)))

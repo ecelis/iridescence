@@ -22,8 +22,16 @@
             [com.nervestaple.hl7-parser.message :as hl7message]
             [clojure.string :as string]
             [fuzzy-urls.url :refer :all]
-            [fuzzy-urls.lens :as lens :refer [build-url-lens]])
+            [fuzzy-urls.lens :as lens :refer [build-url-lens]]
+            [cheshire.core :as json]
+            [iridescence.core :as i])
   (:use [taoensso.timbre :only [trace debug info warn error fatal]]))
+
+(defn to-json "Reads an hl7 file and turns into json" [filename]
+  (try
+    (json/generate-string (get (hl7parser/parse (slurp (str i/tpldir filename)))
+                       :segments))
+    (catch Exception e (error e))))
 
 (defn get-columns
   "I don't do a whole lot."

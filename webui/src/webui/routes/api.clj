@@ -168,12 +168,12 @@
            (GET "/" [__anti-forgery-token]
                 (json-response {:base-name (i/ls i/tpldir)}))
            (GET "/:id" [__anti-forgery-token id]
-                ())
+                (json-response {:segments (hl7/to-json id)}))
            (POST "/" [__anti-forgery-token file]
               ;; file with same name will be overwrited, so in production mode ,
               ;;gen a random string as filename
               (nio/upload-file i/tpldir file)
-              (def filename (str i/tpldir (:filename file)))
+              (def filename (str (:filename file)))
               (def uuid-filename (str i/gen-uuid "-" filename)))
               ;(info uuid-filename))
 ;              (fs/rename (io/file (str i/tpldir filename))

@@ -164,8 +164,8 @@ var fill_templates = function(templates)
   $('#msg-template-lst li a').on('click change',function()
                              {
                                $('#msg-template-btn')
-                               .html($(this).text() + '<span class="caret"></span>');
-
+                                .html($(this).text() + '<span class="caret"></span>');
+                               
                              });
 };
 
