@@ -10,6 +10,9 @@
 (def outdir (str savedir "out/"))
 (def tpldir (str savedir "templates/"))
 
+(defn gen-uuid "Generate UUID" []
+  (info (str (java.util.UUID/randomUUID))))
+
 (defn ls "List files in a given path" [path]
   (map fs/base-name (fs/list-dir path)))
 

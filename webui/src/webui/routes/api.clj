@@ -27,6 +27,7 @@
             [fuzzy-urls.url :refer :all]
             [fuzzy-urls.lens :as lens :refer [build-url-lens]]
             [noir.io :as nio]
+            [me.raynes.fs :as fs]
             [iridescence.core :as i]
             [adapter-db.core :as db]
             [adapter-csv.core :as csv]
@@ -166,9 +167,16 @@
   (context "/api/template" []
            (GET "/" [__anti-forgery-token]
                 (json-response {:base-name (i/ls i/tpldir)}))
+           (GET "/:id" [__anti-forgery-token id]
+                ())
            (POST "/" [__anti-forgery-token file]
               ;; file with same name will be overwrited, so in production mode ,
               ;;gen a random string as filename
-              (nio/upload-file i/tpldir file))
+              (nio/upload-file i/tpldir file)
+              (def filename (str i/tpldir (:filename file)))
+              (def uuid-filename (str i/gen-uuid "-" filename)))
+              ;(info uuid-filename))
+;              (fs/rename (io/file (str i/tpldir filename))
+;                         (io/file (str i/tpldir i/gen-uuid "-" filename))))
            )
   )
