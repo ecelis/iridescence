@@ -41,9 +41,12 @@
                  [com.h2database/h2 "1.4.182"]
                  [cheshire "5.4.0"]
                  [clj-yaml "0.4.0"]
+                 [lib-noir "0.9.9"]
+                 [iridescence "0.1.0-SNAPSHOT"]
                  [adapter-db "0.1.16-SNAPSHOT"]
                  [adapter-csv "0.1.0-SNAPSHOT"]
-                 [adapter-hl7v2 "0.1.2-SNAPSHOT"]]
+                 [adapter-hl7v2 "0.1.2-SNAPSHOT"]
+                 ]
 
   :min-lein-version "2.0.0"
   :uberjar-name "iridescence_standalone.jar"

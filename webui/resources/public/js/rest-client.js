@@ -31,9 +31,15 @@ var save = function() {
   adapters.forEach(function(adapter) {
     payload.data.push(JSON.stringify(adapter.data("props")));
   });
-  //payload.data.push(hl7message);
-  $.post("/api/", {"__anti-forgery-token": $('#__anti-forgery-token').val(),
-         "workspace":payload});
+  $.post("/api/",
+         {"__anti-forgery-token": $('#__anti-forgery-token').val(),
+           "workspace":payload
+         },
+        function(res) {
+          $("#info-box").fadeIn("slow");
+          $("#info-box").html("Workspace " + $("#work-name").val() + " saved");
+          $("#info-box").fadeOut("slow");
+        });
 };
 
 /**
@@ -112,18 +118,20 @@ var db_handler = function(json_data) {
   // Get table names
   if(json_data.tables != null) {
     json_data.tables.forEach(function(item){
-      table_schema.push({"text":Object.getOwnPropertyNames(item)[0],
-        "nodes":item.valueOf()});
+      table_schema.push({
+        "text": Object.getOwnPropertyNames(item)[0],
+        "nodes":item.valueOf()
+      });
     });
     // Get columns and return associative array of tables:columns
     table_schema.map(function(table){
       var cols = [];
       table.nodes[table.text].map(function(column){
-        cols.push({text: column.column_name});
+        cols.push({text: '<div class="draggable">'+column.column_name+'</div>'});
       });
-      adapter_items.push({"text": table.text, "nodes": cols});
+      table_definition.push({"text": table.text, "nodes": cols});
     });
-    return [{text: "tables", nodes: adapter_items}];
+    return [{text: "tables", nodes: table_definition}];
   }
 };
 
@@ -151,6 +159,30 @@ var adapter_connection_handler = function(url, json_data) {
     default:
       console.log("Empty response");
   }
+};
+
+var file_upload_handler = function ()
+{
+  // Change this to the location of your server-side upload handler:
+  var url = context + '/upload';
+  $.post(context + "/api/upload",
+         {"__anti-forgery-token": $("#__anti-forgery-token").val(),
+           "file": $('#file').val()
+         },
+         function(res)
+         {
+           console.log(res);
+         });
+};
+
+var get_templates = function()
+{
+  $.get('/api/template/',
+        {'__anti-forgery-token': $('#__anti-forgery-token').val()},
+        function(res)
+        {
+          fill_templates(res['base-name']);
+        });
 };
 
 /**

@@ -12,32 +12,12 @@
             [selmer.parser :as parser]
             [environ.core :refer [env]]
             [cronj.core :as cronj]
-            [clojure.java.io :as io]
+            [iridescence.core :as i]
             ))
 
 (defroutes base-routes
   (route/resources "/")
   (route/not-found "Not Found"))
-
-(def savedir "/tmp") ; TODO Set a definitive path
-(def wsdir "/workspace")
-(def wipdir "/wip")
-(def outdir "/out")
-
-(defn storage-setup "Set ups storage paths" []
-  ; TODO this if nil are awful
-  (if (.isDirectory (io/file (str savedir wsdir)))
-    nil
-    (.mkdir (java.io.File. savedir)))
-  (if (.isDirectory (io/file (str savedir wsdir)))
-    nil
-    (.mkdir (java.io.File. (str savedir wsdir))))
-  (if (.isDirectory (io/file (str savedir wipdir)))
-    nil
-    (.mkdir (java.io.File. (str savedir wipdir))))
-  (if (.isDirectory (io/file (str savedir outdir)))
-    nil
-    (.mkdir (java.io.File. (str savedir outdir)))))
 
 (defn init
   "init will be called once when
@@ -62,7 +42,7 @@
   (cronj/start! session/cleanup-job)
   (timbre/info "\n-=[ webui started successfully"
                (when (env :dev) "using the development profile") "]=-")
-  (storage-setup))
+  (i/storage-setup))
 
 (defn destroy
   "destroy will be called when your application

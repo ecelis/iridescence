@@ -23,18 +23,23 @@
             [cheshire.core :as json]
             [clojure.java.io :as io]
             [clj-yaml.core :as yaml]
+            [clojure.string :as string]
+            [fuzzy-urls.url :refer :all]
+            [fuzzy-urls.lens :as lens :refer [build-url-lens]]
+            [noir.io :as nio]
+            [me.raynes.fs :as fs]
+            [iridescence.core :as i]
             [adapter-db.core :as db]
             [adapter-csv.core :as csv]
             [adapter-hl7v2.core :as hl7]
-            [clojure.string :as string]
-            [fuzzy-urls.url :refer :all]
-            [fuzzy-urls.lens :as lens :refer [build-url-lens]])
+            )
   (:use [taoensso.timbre :only [trace debug info warn error fatal]]))
 
-(def savedir "/tmp") ; TODO Set a definitive path
-(def wsdir "/workspace")
-(def wipdir "/wip")
-(def outdir "/out")
+(defn list-templates "Returns a list of template files" []
+  (def directory (clojure.java.io/file i/tpldir))
+  ; TODO paginate and cache
+  (def files (for [file (file-seq directory)] (.getName file)))
+  )
 
 ;; TODO Read http://www.luminusweb.net/docs/responses.md
 ;; for proper encoding reponses
@@ -62,8 +67,8 @@
              (get workspace :data))})
   (def yaml-workspace (yaml/generate-string workspace-map))
   (if (get (get workspace-map :workspace true) :draft true)
-    (def save-to (str savedir wipdir "/"))
-    (def save-to (str savedir wsdir "/")))
+    (def save-to i/wipdir)
+    (def save-to i/wsdir))
   (try (spit (str save-to (get (json/parse-string
                                            (get workspace :meta) true) :guid))
              yaml-workspace) (json-response workspace)
@@ -71,14 +76,14 @@
 
 (defn load-workspace "Loads a workspace from YAML storage and returns its JSON
                      representation" [id]
-  (try (json-response (yaml/parse-string (slurp (str savedir wsdir "/" id))))
+  (try (json-response (yaml/parse-string (slurp (str i/wsdir id))))
        (catch Exception e (info e))))
 
 (defn update-workspace "Update workspace in YAML storage" [id]
     (json-response {:not (str "yet implemented " id)}))
 
 (defn delete-workspace "Delete workspace from YAML storage" [id]
-  (try (io/delete-file (str savedir "/" id))
+  (try (io/delete-file (str i/savedir id))
        (json-response {:action (str "deleted workspace " id)})
        (catch Exception e (info e))))
 
@@ -152,8 +157,26 @@
     (GET "/run/:id" [id]
          (run-workspace id))
     )
+
   (context "/api/adapter" []
     (GET "/test/" [__anti-forgery-token url] (try-url url))
     (GET "/object/" [__anti-forgery-token url] (get-objects url))
     (GET "/build_select/" [__anti-forgery-token url tables query]
-         (execute-adapter url tables query))))
+         (execute-adapter url tables query)))
+
+  (context "/api/template" []
+           (GET "/" [__anti-forgery-token]
+                (json-response {:base-name (i/ls i/tpldir)}))
+           (GET "/:id" [__anti-forgery-token id]
+                (json-response {:segments (hl7/to-json id)}))
+           (POST "/" [__anti-forgery-token file]
+              ;; file with same name will be overwrited, so in production mode ,
+              ;;gen a random string as filename
+              (nio/upload-file i/tpldir file)
+              (def filename (str (:filename file)))
+              (def uuid-filename (str i/gen-uuid "-" filename)))
+              ;(info uuid-filename))
+;              (fs/rename (io/file (str i/tpldir filename))
+;                         (io/file (str i/tpldir i/gen-uuid "-" filename))))
+           )
+  )
