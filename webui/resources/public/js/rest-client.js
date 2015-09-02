@@ -175,13 +175,18 @@ var file_upload_handler = function ()
          });
 };
 
-var get_templates = function()
+var get_template = function(id)
 {
-  $.get('/api/template/',
+  id = typeof id !== 'undefined' ? id : '';
+  $.get('/api/template/' + id,
         {'__anti-forgery-token': $('#__anti-forgery-token').val()},
         function(res)
         {
-          fill_templates(res['base-name']);
+          if(id !== '') {
+            console.log(res);
+          } else {
+            fill_templates(res['template']);
+          }
         });
 };
 

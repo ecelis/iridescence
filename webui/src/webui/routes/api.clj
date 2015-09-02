@@ -166,9 +166,9 @@
 
   (context "/api/template" []
            (GET "/" [__anti-forgery-token]
-                (json-response {:base-name (i/ls i/tpldir)}))
+                (json-response {:template (i/ls i/tpldir)}))
            (GET "/:id" [__anti-forgery-token id]
-                (json-response {:segments (hl7/to-json id)}))
+                (json-response {:template (hl7/to-json id)}))
            (POST "/" [__anti-forgery-token file]
               ;; file with same name will be overwrited, so in production mode ,
               ;;gen a random string as filename

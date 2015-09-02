@@ -29,8 +29,8 @@
 
 (defn to-json "Reads an hl7 file and turns into json" [filename]
   (try
-    (json/generate-string (get (hl7parser/parse (slurp (str i/tpldir filename)))
-                       :segments))
+    (get (hl7parser/parse (slurp (str i/tpldir filename)))
+                       :segments)
     (catch Exception e (error e))))
 
 (defn get-columns

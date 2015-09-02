@@ -165,7 +165,7 @@ var fill_templates = function(templates)
                              {
                                $('#msg-template-btn')
                                 .html($(this).text() + '<span class="caret"></span>');
-                               
+                               get_template($(this).text());
                              });
 };
 
@@ -282,7 +282,8 @@ $('#clear-srcdata-search').on('click', function()
                       });
 
 $('#adapter-test-btn').on("click change keyup",
-      function() {
+      function()
+      {
         update_srcurl();
         update_adapter();
         if (adapter.url != null) {
@@ -291,14 +292,15 @@ $('#adapter-test-btn').on("click change keyup",
         if($('#adapter-query').val() != '') {
           build_select();
         }
-});
+      });
 
 
 $('#connector :input').on("click change keyup",   // Connector properties listener
-      function() {
+      function()
+      {
         // TODO update_adapter($('#adapter-id').val());
         update_tgturl();
-});
+      });
 
 $('#save-btn').click(function()        // Save workspace button listener
 {
@@ -314,6 +316,6 @@ $('#file-upload-btn').click(function()
 $(document).ready(function() {
   fill_adapter_types();
   fill_connector_types();
-  get_templates();
+  get_template();
 });
 
