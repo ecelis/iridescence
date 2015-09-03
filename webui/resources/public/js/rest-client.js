@@ -77,26 +77,27 @@ var hl7v2_handler = function(json_data) {
                           var isArray = field.content instanceof Array;
                           if(isArray) {
                             if(field.content.length > 1) {
+                              b_leaf.text = field.content.join('^');
                               b_leaf.nodes = typeof b_leaf.nodes === 'undefined' ? [] : b_leaf.nodes;
                               var c_leaf = Object.create(leaf.prototype);
-                              c_leaf.text = field.content[0];
+                              //c_leaf.text = field.content[0];
                               c_leaf.nodes = [];
 //                              field.content.shift();
                               field.content.forEach(function(comp)
                                            {
-                                             c_leaf.text += '^' +  comp;
+                                             //c_leaf.text += '^' +  comp;
+                                             //b_leaf.text += '^' +  comp;
                                              if (comp.length > 1) {
-                                              c_leaf.nodes.push(comp);
+                                              b_leaf.nodes.push({text: comp});
                                              }
                                            });
-                              b_leaf.nodes.push(c_leaf);
+                              //b_leaf.nodes.push(c_leaf);
                             } else {
                               b_leaf.text = typeof field.content[0] !== 'undefined' ? field.content[0] : '';
                             }
                           } else {
                             b_leaf.text = field.content;
                           }
- //                             console.log(b_leaf);
                           a_leaf.nodes.push(b_leaf);
                         });
     tree.push(a_leaf);
