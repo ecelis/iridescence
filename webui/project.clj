@@ -36,8 +36,6 @@
                  [noir-exception "0.2.3"]
                  [bouncer "0.3.2"]
                  [prone "0.8.1"]
-                 [ragtime "0.3.8"]
-                 [yesql "0.5.0-rc1"]
                  [com.h2database/h2 "1.4.182"]
                  [cheshire "5.4.0"]
                  [clj-yaml "0.4.0"]
@@ -58,17 +56,12 @@
   :plugins [[lein-ring "0.9.1"]
             [lein-environ "1.0.0"]
             [lein-ancient "0.6.5"]
-            [ragtime/ragtime.lein "0.3.8"]
             [codox "0.8.11"]]
 
   :ring {:handler webui.handler/app
          :init    webui.handler/init
          :destroy webui.handler/destroy
          :uberwar-name "iridescence.war"}
-  
-  :ragtime
-  {:migrations ragtime.sql.files/migrations
-   :database "jdbc:h2:./site.db"}
   
   
   
