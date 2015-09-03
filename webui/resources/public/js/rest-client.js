@@ -74,10 +74,10 @@ var hl7v2_handler = function(json_data) {
     item.fields.forEach(function(field)
                         {
                           var b_leaf = Object.create(leaf.prototype);
-                          b_leaf.nodes = [];
                           var isArray = field.content instanceof Array;
                           if(isArray) {
-                            if(field.content.length >= 1) {
+                            if(field.content.length > 1) {
+                              b_leaf.nodes = typeof b_leaf.nodes === 'undefined' ? [] : b_leaf.nodes;
                               var c_leaf = Object.create(leaf.prototype);
                               c_leaf.text = field.content[0];
                               c_leaf.nodes = [];
@@ -85,7 +85,9 @@ var hl7v2_handler = function(json_data) {
                               field.content.forEach(function(comp)
                                            {
                                              c_leaf.text += '^' +  comp;
-                                             c_leaf.nodes.push(comp);
+                                             if (comp.length > 1) {
+                                              c_leaf.nodes.push(comp);
+                                             }
                                            });
                               b_leaf.nodes.push(c_leaf);
                             } else {
@@ -99,7 +101,7 @@ var hl7v2_handler = function(json_data) {
                         });
     tree.push(a_leaf);
   });
-  return {text: 'template', nodes: tree};
+  return [{text: 'template', nodes: tree}];
 };
 
 /**
@@ -207,12 +209,7 @@ var get_template = function(id)
         {
           if(id !== '') {
             tplsrc = hl7v2_handler(res);
-            $('#template').treeview({
-             data: tplsrc,
-              state: {
-                expanded: false
-              }
-            });
+            tplsrc_treeview();
           } else {
             fill_templates(res['template']);
           }

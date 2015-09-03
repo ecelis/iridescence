@@ -161,7 +161,7 @@ var fill_templates = function(templates)
                     });
   $('#msg-template-lst').find('li').remove().end();
   $('#msg-template-lst').append(items.join(''));
-  $('#msg-template-lst li a').on('click change',function()
+  $('#msg-template-lst li a').on('click change keyup',function()
                              {
                                $('#msg-template-btn')
                                 .html($(this).text() + '<span class="caret"></span>');
@@ -190,6 +190,9 @@ var fill_adapter_driver = function(src_type) {
       });
 };
 
+/**
+ * Fill adapter types dropdown
+ */
 var fill_adapter_types = function() {
   var items = [];
   for(var key in util.srctype) {
@@ -206,6 +209,9 @@ var fill_adapter_types = function() {
       });
 };
 
+/**
+ * Fill Connector driver dropdown
+ */
 var fill_connector_driver = function(tgt_type) {
   $('#connector-driver-lst').find('li').remove().end();
   var items = [];
@@ -221,6 +227,9 @@ var fill_connector_driver = function(tgt_type) {
   });
 };
 
+/**
+ * Fill connector types dropdown
+ */
 var fill_connector_types = function() {
   var items = [];
   for(var key in util.tgttype) {
@@ -236,6 +245,20 @@ var fill_connector_types = function() {
     });
 };
 
+/**
+ * Populate Template Treeview
+ */
+var tplsrc_treeview = function()
+{
+  $('#template').treeview({
+    data: tplsrc,
+    state: { expanded: true}
+  });
+};
+
+/**
+ * Populate source data treeview
+ */
 var srcdata_treview = function()
 {
   $('#srcdata').treeview({
