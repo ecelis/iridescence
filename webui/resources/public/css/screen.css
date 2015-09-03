@@ -38,7 +38,7 @@ box-sizing: border-box;
   height: 100px;
 }
 
-#srcdata {
+#srcdata, #template {
   height: 270px;
   overflow-y: auto;
 }

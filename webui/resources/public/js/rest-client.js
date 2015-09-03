@@ -79,19 +79,10 @@ var hl7v2_handler = function(json_data) {
                             if(field.content.length > 1) {
                               b_leaf.text = field.content.join('^');
                               b_leaf.nodes = typeof b_leaf.nodes === 'undefined' ? [] : b_leaf.nodes;
-                              var c_leaf = Object.create(leaf.prototype);
-                              //c_leaf.text = field.content[0];
-                              c_leaf.nodes = [];
-//                              field.content.shift();
                               field.content.forEach(function(comp)
                                            {
-                                             //c_leaf.text += '^' +  comp;
-                                             //b_leaf.text += '^' +  comp;
-                                             if (comp.length > 1) {
-                                              b_leaf.nodes.push({text: comp});
-                                             }
+                                            b_leaf.nodes.push({text: comp});
                                            });
-                              //b_leaf.nodes.push(c_leaf);
                             } else {
                               b_leaf.text = typeof field.content[0] !== 'undefined' ? field.content[0] : '';
                             }
