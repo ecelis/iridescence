@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-xs-12">
       <!-- Properties Panel -->
       <div class="row">
         <div class="panel panel-default">
@@ -35,18 +35,25 @@
               <div class="panel-footer">
                 <!-- Form Controls -->
                 <div class="form-group">
-                  <div class="input-group input-group-sm">
+                  <div class="input-group input-group-xs">
                     <div class="btn-group" role="group" aria-label="...">
-                      <button type="button" class="btn btn-default btn-sm" name="save-btn"
-                        id="save-btn">Save</button>
+                      <button type="button" class="btn btn-xs btn-primary"
+                        name="save-btn" id="save-btn">Save</button>
+                      <button class="btn btn-xs btn-success" type="button"
+                        name="adapter-test-btn" id="adapter-test-btn">Test</button>
                     </div>
                   </div>
+
                 </div>
               </div>
-              <input type="hidden" name="work-type" id="work-type">
-              <input type="hidden" name="work-guid" id="work-guid">
-              <input type="hidden" name="adapter-id" id="adapter-id">
-              <input type="hidden" name="adapter-type" id="adapter-type">
+              <div id="hidden-payload">
+                <input type="hidden" name="work-type" id="work-type">
+                <input type="hidden" name="work-guid" id="work-guid">
+                <input type="hidden" name="adapter-id" id="adapter-id">
+                <input type="hidden" name="adapter-type" id="adapter-type">
+                <input type="hidden" id="adapter-from">
+                <input type="hidden" id="adapter-query"/>
+              </div>
             </form>
           </div>
         </div>
@@ -54,45 +61,50 @@
 
       <div class="row" id="top-column">
         <!-- Source column -->
-        <div class="col-md-4">
+        <div class="col-xs-4">
           <div class="panel panel-default">
             <div class="panel-heading">
               <div class="form-group">
                 <label for="input-srcdata-search" class="sr-only">Search Tree:</label>
-                <input class="form-control" id="input-srcdata-search" placeholder="Type to search..." value="" type="input">
+                <input class="form-control input-sm" id="input-srcdata-search" placeholder="Type to search..." value="" type="input">
               </div>
-              <button type="button" class="btn btn-success" id="search-srcdata-btn">Search</button>
-              <button type="button" class="btn btn-default" id="clear-srcdata-search">Clear</button>
+              <button type="button" class="btn btn-xs btn-primary" id="search-srcdata-btn">Search</button>
+              <button type="button" class="btn btn-xs btn-warning" id="clear-srcdata-search">Clear</button>
             </div>
             <div class="panel-body">
-              <div id="srcdata">...---...</div>
+              <div id="srcdata"></div>
             </div>
           </div>
         </div>
         <!-- Central Column -->
-        <div class="col-md-4">
+        <div class="col-xs-4">
           <div id="info-box"></div>
           <div id="to_map"></div>
-
         </div>
         <!-- Message Column -->
-        <div class="col-md-4">
+        <div class="col-xs-4">
           <div class="panel panel-default">
             <div class="panel-heading">Templates</div>
               <div class="panel-body">
                 <div class="row">
                   <form action="/api/template/" method="post" enctype="multipart/form-data">
-                    <input type="submit" name="file-upload-btn" id="file-upload-btn" 
-                    class="btn btn-success"/>
-                    <input id="file" name="file" type="file" class="form-control" />
+                   <div class="col-xs-8">
+                    <input id="file" name="file" type="file"
+                    class="form-control input-sm" />
                     {% csrf-field %}
+                   </div>
+                   <div class="col-xs-3">
+                      <input type="submit" class="btn btn-xs btn-primary"
+                      name="file-upload-btn" id="file-upload-btn" />
+                    </div>
                   </form>
                 </div>
                 <div class="row">
                   <div class="form-group">
-                    <div class="input-group input-group-sm">
+                    <div class="input-group input-group-xs">
                       <div class="input-group-btn">
-                        <button type="button" class="btn btn-default btn-sm dropdown-toggle"
+                        <button type="button"
+                          class="btn btn-default btn-xs dropdown-toggle"
                           data-toggle="dropdown" aria-expanded="false"
                           id="msg-template-btn">Templates
                           <span class="caret"></span></button>

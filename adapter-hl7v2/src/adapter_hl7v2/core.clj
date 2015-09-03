@@ -33,14 +33,6 @@
                        :segments)
     (catch Exception e (error e))))
 
-(defn get-columns
-  "I don't do a whole lot."
-  [url]
-  (println url))
-
-(defn get-tables "Doc string" [url]
-  (println url))
-
 (defn test-url "Test HL7v2 URL" [url]
   ;; TODO handle remote urls
   (def u (string->url url))
@@ -50,10 +42,3 @@
        (info segments)
        segments
   (catch Exception e (error e))))
-
-(defn build-select "Build a SELECT FROM HL7v2" [url tables query]
-  (println url))
-
-(defn exec-query "Exec query against HL7v2" [url query-map]
-  (println url))
-
