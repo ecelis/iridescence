@@ -49,7 +49,7 @@ var save = function() {
 };
 
 /**
- * Handles JSON response for HL7v2 adapter
+ * Handles JSON response for HL7v2 adapter, bootstrap-treeview ready
  *
  * { { delimiters }
  *   { segments [
@@ -100,19 +100,6 @@ var hl7v2_handler = function(json_data) {
     tree.push(a_leaf);
   });
   return {text: 'template', nodes: tree};
-  /*
-  json_data.segments.forEach(function(segment) {
-    fields.push({text: segment.id});
-    segment.fields.forEach(function(field) {
-      if(Object.prototype.toString.call(field.content) === '[object Array]') {
-        fields.push({nodes: field.content});
-      } else {
-//        fields.push({text: Object.getOwnPropertyNames(field.content)[0]});
-      }
-    });
-  });*/
-  //console.log([{text: Object.getOwnPropertyNames(json_data)[0],
-//              nodes: fields}]);
 };
 
 /**
@@ -192,9 +179,6 @@ var adapter_connection_handler = function(url, json_data) {
     case "csv":
       srcdata = csv_handler(json_data);
       break;
-    case "hl7v2":
-      srcdata = hl7v2_handler(json_data);
-      break;
     default:
       console.log("Empty response");
   }
@@ -223,13 +207,12 @@ var get_template = function(id)
         {
           if(id !== '') {
             tplsrc = hl7v2_handler(res);
-
-  $('#template').treeview({
-   data: tplsrc,
-    state: {
-      expanded: false
-    }
-  });
+            $('#template').treeview({
+             data: tplsrc,
+              state: {
+                expanded: false
+              }
+            });
           } else {
             fill_templates(res['template']);
           }
