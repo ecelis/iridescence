@@ -31,7 +31,8 @@ var leaf = function()
  * Save adapters to YAML in the server
  * @method save
  * */
-var save = function() {
+var save = function()
+{
   var payload = {'meta': null, 'data': []};
   payload.meta = JSON.stringify(work_meta);
   adapters.forEach(function(adapter) {
@@ -51,20 +52,11 @@ var save = function() {
 /**
  * Handles JSON response for HL7v2 adapter, bootstrap-treeview ready
  *
- * { { delimiters }
- *   { segments [
- *    { id:
- *      fields [
- *        { content: }
- *      ]
- *    }]
- *   }
- * }
- *
  * @method hl7v2_handler
  * @param {Object} json_data response
  */
-var hl7v2_handler = function(json_data) {
+var hl7v2_handler = function(json_data)
+{
   var tree = [];
   json_data['template'].forEach(function(item)
   {
@@ -72,25 +64,25 @@ var hl7v2_handler = function(json_data) {
     a_leaf.text = item.id;
     a_leaf.nodes = [];
     item.fields.forEach(function(field)
-                        {
-                          var b_leaf = Object.create(leaf.prototype);
-                          var isArray = field.content instanceof Array;
-                          if(isArray) {
-                            if(field.content.length > 1) {
-                              b_leaf.text = field.content.join('^');
-                              b_leaf.nodes = typeof b_leaf.nodes === 'undefined' ? [] : b_leaf.nodes;
-                              field.content.forEach(function(comp)
-                                           {
-                                            b_leaf.nodes.push({text: comp});
-                                           });
-                            } else {
-                              b_leaf.text = typeof field.content[0] !== 'undefined' ? field.content[0] : '';
-                            }
-                          } else {
-                            b_leaf.text = field.content;
-                          }
-                          a_leaf.nodes.push(b_leaf);
-                        });
+    {
+      var b_leaf = Object.create(leaf.prototype);
+      var isArray = field.content instanceof Array;
+      if(isArray) {
+        if(field.content.length > 1) {
+          b_leaf.text = field.content.join('^');
+          b_leaf.nodes = typeof b_leaf.nodes === 'undefined' ? [] : b_leaf.nodes;
+          field.content.forEach(function(comp)
+                       {
+                        b_leaf.nodes.push({text: comp});
+                       });
+        } else {
+          b_leaf.text = typeof field.content[0] !== 'undefined' ? field.content[0] : '';
+        }
+      } else {
+        b_leaf.text = field.content;
+      }
+      a_leaf.nodes.push(b_leaf);
+    });
     tree.push(a_leaf);
   });
   return [{text: 'template', nodes: tree}];
@@ -100,13 +92,11 @@ var hl7v2_handler = function(json_data) {
  * Handles JSON response for CSV adapter
  * TODO handle first row column names
  *
- * { matrix [
- *  [ "xxx" ] ] }
- *
  * @method csv_handler
  * @param {Object} json_data response
  */
-var csv_handler = function(json_data) {
+var csv_handler = function(json_data)
+{
   var matrix = [];
   var row_number = 0;
   json_data.matrix.forEach(function(row) {
@@ -122,12 +112,6 @@ var csv_handler = function(json_data) {
 
 /**
  * Handles JSON response for RDMS
- *
- * { tables [
- *  { table_name: [
- *    { column_name: "xxx" }
- *  ] }
- * ] }
  *
  * @method db_handler
  * @param {Object} json_data response
@@ -162,7 +146,8 @@ var db_handler = function(json_data) {
  * @param {String} url Adapters URL
  * @param {Object} json_data response
  */
-var adapter_connection_handler = function(url, json_data) {
+var adapter_connection_handler = function(url, json_data)
+{
   var proto = new URI(url).scheme();
   switch(proto) {
     case "postgres":
@@ -178,73 +163,72 @@ var adapter_connection_handler = function(url, json_data) {
   }
 };
 
+/**
+ * POST file
+ */
 var file_upload_handler = function ()
 {
   // Change this to the location of your server-side upload handler:
   var url = context + '/upload';
   $.post(context + "/api/upload",
-         {"__anti-forgery-token": $("#__anti-forgery-token").val(),
-           "file": $('#file').val()
-         },
-         function(res)
-         {
-           console.log(res);
-         });
+     {"__anti-forgery-token": $("#__anti-forgery-token").val(),
+       "file": $('#file').val()
+     },
+     function(res)
+     {
+       console.log(res);
+     }
+  );
 };
 
+/**
+ * GET HL7 Template
+ */
 var get_template = function(id)
 {
   id = typeof id !== 'undefined' ? id : '';
   $.get('/api/template/' + id,
-        {'__anti-forgery-token': $('#__anti-forgery-token').val()},
-        function(res)
-        {
-          if(id !== '') {
-            tplsrc = hl7v2_handler(res);
-            tplsrc_treeview();
-          } else {
-            fill_templates(res['template']);
-          }
-        });
+    {'__anti-forgery-token': $('#__anti-forgery-token').val()},
+    function(res)
+    {
+      if(id !== '') {
+        tplsrc = hl7v2_handler(res);
+        tplsrc_treeview();
+      } else {
+        fill_templates(res['template']);
+      }
+    });
 };
 
 /**
- * Makes AJAX requests to adapter source and fills workspace's adapter_items
- * global variable
+ * GET Data Source Schema
+ *
  * @method test_connection
  * @param {String} url
  */
-var test_connection = function (url) {
+var test_connection = function (url)
+{
   $.get("/api/adapter/test/",
-        {"__anti-forgery-token": $("#__anti-forgery-token").val(),
-          "url": url
-        },
-        function(res) {
-          adapter_connection_handler(url, res);
-        });
+    {"__anti-forgery-token": $("#__anti-forgery-token").val(),
+      "url": url
+    },
+    function(res) {
+      adapter_connection_handler(url, res);
+    });
 };
 
-var build_select = function() {
+/**
+ * GET Data From Source
+ */
+var build_select = function()
+{
   $.get("/api/adapter/build_select/",
-        {"__anti-forgery-token": $("#__anti-forgery-token").val(),
-          "url": $('#adapter-url').val(),
-          "tables": $('#adapter-from').val(),
-          "query": $('#adapter-query').val()
-        },
-       function(res) {
-        console.log(res);
-       });
+    {"__anti-forgery-token": $("#__anti-forgery-token").val(),
+      "url": $('#adapter-url').val(),
+      "tables": $('#adapter-from').val(),
+      "query": $('#adapter-query').val()
+    },
+   function(res) {
+    console.log(res);
+   });
 };
-
-// TODO Unused it seems
-var get_objects = function(url) {
-  //console.log('Fetching objects...');
-  $.get("/api/adapter/object/",
-        {"__anti-forgery-token": $("#__anti-forgery-token").val(),
-        "url": url},
-        function(e) {
-          console.log(e);
-        });
-};
-
-
