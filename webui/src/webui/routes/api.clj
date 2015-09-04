@@ -35,12 +35,6 @@
             )
   (:use [taoensso.timbre :only [trace debug info warn error fatal]]))
 
-(defn list-templates "Returns a list of template files" []
-  (def directory (clojure.java.io/file i/tpldir))
-  ; TODO paginate and cache
-  (def files (for [file (file-seq directory)] (.getName file)))
-  )
-
 ;; TODO Read http://www.luminusweb.net/docs/responses.md
 ;; for proper encoding reponses
 (defn json-response "Returns a proper application/json response"

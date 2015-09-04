@@ -3,8 +3,15 @@ body {
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 12px;
     height: 100%;
-    padding-top: 40px;
+    padding-top: 20px;
 }
+
+.navbar-nav > li > a, .navbar-brand {
+  padding-top:4px !important; 
+  padding-bottom:0 !important;
+  height: 28px;
+}
+.navbar {min-height:28px !important;}
 
 /* Override Bootstrap default */
 #top-column .panel-body {
