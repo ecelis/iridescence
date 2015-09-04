@@ -19,9 +19,11 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var util = new Util();    // Utilities wuch as guid generator and crypto
+var util = new Util();    // Utilities such as guid generator and crypto
+
 /**
 * Workspace Metadata
+*
 * @property
 */
 var work_meta = {        // Workspace metadata
@@ -48,6 +50,31 @@ var adapter_tab = $('#properties a[href="#adapter"]');
 var adapter_tab_fields = $('#adapter :input');
 
 
+// TODO Check if the values aren't overwriten when refreshing webpage
+$('#work-guid').val(work_guid);                   // Workspace GUID field
+$('#work-guid-label').html("Id: " + work_guid);   // Workspace GUID label
+
+$('#msg-template-lst li a').on('click change',
+  function()
+  {
+    var template = $(this).text().toUpperCase();
+    $('#msg-template-btn').html(template + '<span class="caret"></span>');
+    // TODO Assign the template
+    $('#msg-template').treeview({data: sample,
+    multiSelect: true});
+  }
+);
+
+$('#workspace :input').on("click change keyup", // Workspace properties listener
+  function()
+  {
+    update_workspace();
+  }
+);
+
+var src_driver, src_host, src_src, src_user, src_password, src_url;
+var tgt_driver, tgt_host, tgt_message, tgt_user, tgt_password, tgt_url;
+
 var build_query = function(event, node)
 {
   var nodes = $('#srcdata').treeview('getSelected', node.nodeId);
@@ -62,12 +89,11 @@ var build_query = function(event, node)
   $('#adapter-query').val(col_names);
 };
 
-
-
 /**
  * Update the adapter properties data 'props' with values from
  * the properties panel
- * @method updateadapter
+ *
+ * @method update_adapter
  * */
 var update_adapter = function()
 {
@@ -82,9 +108,11 @@ var update_adapter = function()
 
 /**
  * Update work properties
- * @method
+ *
+ * @method update_workspace
  */
-var update_workspace = function() {
+var update_workspace = function()
+{
   work_meta.guid = $('#work-guid').val();
   work_meta.name = $('#work-name').val();
   work_meta.comments = $('#work-comments').val();
@@ -95,34 +123,13 @@ var update_workspace = function() {
   }
 }
 
-// TODO Check if the values aren't overwriten when refreshing webpage
-$('#work-guid').val(work_guid);                   // Workspace GUID field
-$('#work-guid-label').html("Id: " + work_guid);   // Workspace GUID label
-
-$('#msg-template-lst li a').on('click change',
-      function() {
-        var template = $(this).text().toUpperCase();
-        $('#msg-template-btn').html(template + '<span class="caret"></span>');
-        // TODO Assign the template
-        $('#msg-template').treeview({data: sample,
-        multiSelect: true});
-});
-
-$('#workspace :input').on("click change keyup", // Workspace properties listener
-      function()
-      {
-        update_workspace();
-      });
-
-var src_driver, src_host, src_src, src_user, src_password, src_url;
-var tgt_driver, tgt_host, tgt_message, tgt_user, tgt_password, tgt_url;
-
 /**
- * Fill the URL for adapters
+ * Build Adapter URL
  *
- * @method
+ * @method update_srcurl
  */
-var update_srcurl = function() {
+var update_srcurl = function()
+{
   src_host = $('#adapter-host').val();
   src_src = $('#adapter-source').val();
   src_user = $('#adapter-user').val();
@@ -136,10 +143,12 @@ var update_srcurl = function() {
 };
 
 /**
- * Fill the URL for connectors
- * @method
+ * Build the Connector URL
+ *
+ * @method update_tgturl
  */
-var update_tgturl = function() {
+var update_tgturl = function()
+{
   tgt_host = $('#connector-host').val();
   tgt_target = $('#connector-target').val();
   tgt_user = $('#connector-user').val();
@@ -156,26 +165,28 @@ var fill_templates = function(templates)
 {
   var items = [];
   templates.forEach(function(item)
-                    {
-                      items.push('<li><a href="#">' + item + '</a></li>');
-                    });
+  {
+    items.push('<li><a href="#">' + item + '</a></li>');
+  });
   $('#msg-template-lst').find('li').remove().end();
   $('#msg-template-lst').append(items.join(''));
-  $('#msg-template-lst li a').on('click change keyup',function()
-                             {
-                               $('#msg-template-btn')
-                                .html($(this).text() + '<span class="caret"></span>');
-                               get_template($(this).text());
-                             });
+  $('#msg-template-lst li a')
+    .on('click change keyup',function()
+     {
+       $('#msg-template-btn')
+        .html($(this).text() + '<span class="caret"></span>');
+       get_template($(this).text());
+     });
 };
 
 /**
- * Fill the adpter's driver dropdown
+ * Populate Adapter's JDBC Dropdown
  *
- * @method
+ * @method fill_adapter_driver
  * @param {String} src_type
  */
-var fill_adapter_driver = function(src_type) {
+var fill_adapter_driver = function(src_type)
+{
   $("#adapter-driver-lst").find("li").remove().end();
   var items = [];
   util.srctype[src_type].forEach(function(item) {
@@ -191,9 +202,12 @@ var fill_adapter_driver = function(src_type) {
 };
 
 /**
- * Fill adapter types dropdown
+ * Populate Adapter's Type Dropdown
+ *
+ * @method fill_adapter_types
  */
-var fill_adapter_types = function() {
+var fill_adapter_types = function()
+{
   var items = [];
   for(var key in util.srctype) {
     items.push('<li><a href="#">'+key+'</a></li>');
@@ -210,7 +224,9 @@ var fill_adapter_types = function() {
 };
 
 /**
- * Fill Connector driver dropdown
+ * Populate Connector JDBC Dropdown
+ *
+ * @method fill_connector_driver
  */
 var fill_connector_driver = function(tgt_type) {
   $('#connector-driver-lst').find('li').remove().end();
@@ -220,17 +236,21 @@ var fill_connector_driver = function(tgt_type) {
   });
   $('#connector-driver-lst').append(items.join(''));
   $('#connector-driver-lst li a').on("click change",
-        function() {
-          tgt_driver = $(this).text().toLowerCase().replace(' ','');
-          $('#btn-connector-driver').html(tgt_driver + '<span class="caret"></span>');
-          // TODO update_connector(adapters[2]);
+  function()
+  {
+    tgt_driver = $(this).text().toLowerCase().replace(' ','');
+    $('#btn-connector-driver').html(tgt_driver + '<span class="caret"></span>');
+    // TODO update_connector(adapters[2]);
   });
 };
 
 /**
- * Fill connector types dropdown
+ * Populate Connector Type Dropdown
+ *
+ * @method fill_connector_types
  */
-var fill_connector_types = function() {
+var fill_connector_types = function()
+{
   var items = [];
   for(var key in util.tgttype) {
     items.push('<li><a href="#">'+key+'</a></li>');
@@ -247,6 +267,8 @@ var fill_connector_types = function() {
 
 /**
  * Populate Template Treeview
+ *
+ * @method tplsrc_treeview
  */
 var tplsrc_treeview = function()
 {
@@ -258,6 +280,8 @@ var tplsrc_treeview = function()
 
 /**
  * Populate source data treeview
+ *
+ * @method srcdata_treeview
  */
 var srcdata_treview = function()
 {
@@ -267,17 +291,22 @@ var srcdata_treview = function()
     onNodeSelected: build_query,
     onNodeUnselected: build_query,
     onNodeNodeExpanded: function(event, data)
-                 {
-                   console.log(event);
-                   console.log(data);
-                   $('#srcdata ul li').draggable({containment: 'body'});
-                 },
+     {
+       console.log(event);
+       console.log(data);
+       $('#srcdata ul li').draggable({containment: 'body'});
+     },
     state: {
       expanded: false
     }
   });
 };
 
+/**
+ * Search srcdata_treeview
+ *
+ * @method search_srcdata_treeview
+ */
 var search_srcdata_treeview = function()
 {
   var pattern = $('#input-srcdata-search').val();
@@ -297,45 +326,42 @@ var search_srcdata_treeview = function()
 
 $('#search-srcdata-btn').on('click', search_srcdata_treeview);
 
-$('#clear-srcdata-search').on('click', function()
-                      {
-                        $('#srcdata').treeview('clearSearch');
-                        $('#input-srcdata-search').val('');
-                        $('#srcdata').treeview('collapseAll');
-                      });
+$('#clear-srcdata-search').on('click',
+  function()
+  {
+    $('#srcdata').treeview('clearSearch');
+    $('#input-srcdata-search').val('');
+    $('#srcdata').treeview('collapseAll');
+  }
+);
 
 $('#adapter-test-btn').on("click change keyup",
-      function()
-      {
-        update_srcurl();
-        update_adapter();
-        if (adapter.url != null) {
-          test_connection(adapter.url);
-        }
-        if($('#adapter-query').val() != '') {
-          build_select();
-        }
-      });
-
+  function()
+  {
+    update_srcurl();
+    update_adapter();
+    if (adapter.url != null) {
+      test_connection(adapter.url);
+    }
+    if($('#adapter-query').val() != '') {
+      build_select();
+    }
+  });
 
 $('#connector :input').on("click change keyup",   // Connector properties listener
-      function()
-      {
-        // TODO update_adapter($('#adapter-id').val());
-        update_tgturl();
-      });
+  function()
+  {
+    // TODO update_adapter($('#adapter-id').val());
+    update_tgturl();
+  });
 
 $('#save-btn').click(function()        // Save workspace button listener
 {
   save();
 });
 
-/*
-$('#file-upload-btn').click(function()
-                            {
-                              file_upload_handler();
-                            }); */
-// Keep it in the bottom
+///////////////////////////////////////////////////////////////////////////////
+// KEEP AT BOTTOM OF THE FILE
 $(document).ready(function() {
   fill_adapter_types();
   fill_connector_types();
