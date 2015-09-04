@@ -84,22 +84,23 @@
         <!-- Message Column -->
         <div class="col-xs-4">
           <div class="panel panel-default">
-            <div class="panel-heading">Templates</div>
-              <div class="panel-body">
-                <div class="row">
-                  <form action="/api/template/" method="post" enctype="multipart/form-data">
-                   <div class="col-xs-8">
-                    <input id="file" name="file" type="file"
-                    class="form-control input-sm" />
-                    {% csrf-field %}
-                   </div>
-                   <div class="col-xs-3">
-                      <input type="submit" class="btn btn-xs btn-primary"
-                      name="file-upload-btn" id="file-upload-btn" />
-                    </div>
-                  </form>
-                </div>
-                <div class="row">
+            <div class="panel-heading">
+              <div class="row">
+                <form action="/api/template/" method="post"
+                  enctype="multipart/form-data" target="upload">
+                 <div class="col-xs-8">
+                  <input id="file" name="file" type="file"
+                  class="form-control input-sm" />
+                  {% csrf-field %}
+                 </div>
+                 <div class="col-xs-3">
+                    <input type="submit" class="btn btn-xs btn-primary"
+                    name="file-upload-btn" id="file-upload-btn"
+                    value="Upload" />
+                 </div>
+                </form>
+              </div>
+              <div class="row">
                   <div class="form-group">
                     <div class="input-group input-group-xs">
                       <div class="input-group-btn">
@@ -113,6 +114,11 @@
                       </div>
                     </div>
                   </div>
+              </div>
+            </div>
+              <div class="panel-body">
+                <div class="row">
+
                 </div>
                 <div class="row">
                   <div id="template">Template</div>
