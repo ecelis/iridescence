@@ -48,7 +48,7 @@ var work_guid = util.guid();          // Generate adapters GUID
 var connector_tab = $('#properties a[href="#connector"]');
 var adapter_tab = $('#properties a[href="#adapter"]');
 var adapter_tab_fields = $('#adapter :input');
-
+var treeview_events = 'nodeChecked nodeCollapsed nodeDisabled nodeEnabled nodeExpanded nodeSelected nodeUnchecked nodeUnselected searchComplete searchCleared';
 
 // TODO Check if the values aren't overwriten when refreshing webpage
 $('#work-guid').val(work_guid);                   // Workspace GUID field
@@ -265,6 +265,24 @@ var fill_connector_types = function()
     });
 };
 
+var makeDraggable = function()
+{
+  $('.treeview ul li.node-srcdata span.draggable').parent().draggable({
+    cursor: 'move',
+    containment: 'window',
+    helper: 'clone',
+    appendTo: 'body',
+    revert: true,
+    zIndex: 255
+  });
+  /*
+  $('.treeview').on(treeview_events, function(event, data)
+    {
+      makeDraggable();
+    });
+   */
+};
+
 /**
  * Populate Template Treeview
  *
@@ -274,8 +292,11 @@ var tplsrc_treeview = function()
 {
   $('#template').treeview({
     data: tplsrc,
+    levels: 16,
+    multiSelect: false,
     state: { expanded: true}
   });
+  // makeDropable(); TODO
 };
 
 /**
@@ -289,21 +310,16 @@ var srcdata_treview = function()
     data: srcdata,
     levels: 16,
     multiSelect: false,
-    onNodeSelected: build_query,
-    onNodeUnselected: build_query,
     onNodeNodeExpanded: function(event, data)
      {
        console.log(event);
        console.log(data);
-//       $('#srcdata ul li').draggable({containment: 'body'});
      },
     state: {
       expanded: true
     }
   });
-  $('.treeview ul li.node-srcdata span.draggable').parent().draggable({
-    cursor: 'move'
-  });
+  makeDraggable();
 };
 
 /**

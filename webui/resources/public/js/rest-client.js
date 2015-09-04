@@ -50,6 +50,18 @@ var save_workspace = function()
 };
 
 /**
+ * Wrap element in draggable span
+ *
+ * @method drag_wrapper
+ * @param String string
+ */
+var drag_wrapper = function(string)
+{
+  return '<span class="draggable ui-widget-content ui-draggable">' +
+    string + '</span>';
+};
+
+/**
  * Handles JSON response for HL7v2 adapter, bootstrap-treeview ready
  *
  * @method hl7v2_handler
@@ -132,8 +144,7 @@ var db_handler = function(json_data) {
       var cols = [];
       table.nodes[table.text].map(function(column){
         cols.push({
-          text: '<span class="draggable ui-widget-content ui-draggable">'
-            +column.column_name+'</span>'});
+          text: drag_wrapper(column.column_name)});
       });
       table_definition.push({"text": table.text, "nodes": cols});
     });
