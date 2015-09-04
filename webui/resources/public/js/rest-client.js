@@ -31,7 +31,7 @@ var leaf = function()
  * Save adapters to YAML in the server
  * @method save
  * */
-var save = function()
+var save_workspace = function()
 {
   var payload = {'meta': null, 'data': []};
   payload.meta = JSON.stringify(work_meta);
@@ -39,14 +39,14 @@ var save = function()
     payload.data.push(JSON.stringify(adapter.data("props")));
   });
   $.post("/api/",
-         {"__anti-forgery-token": $('#__anti-forgery-token').val(),
-           "workspace":payload
-         },
-        function(res) {
-          $("#info-box").fadeIn("slow");
-          $("#info-box").html("Workspace " + $("#work-name").val() + " saved");
-          $("#info-box").fadeOut("slow");
-        });
+     {"__anti-forgery-token": $('#__anti-forgery-token').val(),
+       "workspace":payload
+     },
+    function(res) {
+      $("#info-box").fadeIn("slow");
+      $("#info-box").html("Workspace " + $("#work-name").val() + " saved");
+      $("#info-box").fadeOut("slow");
+    });
 };
 
 /**
@@ -131,7 +131,9 @@ var db_handler = function(json_data) {
     table_schema.map(function(table){
       var cols = [];
       table.nodes[table.text].map(function(column){
-        cols.push({text: '<div class="draggable">'+column.column_name+'</div>'});
+        cols.push({
+          text: '<span class="draggable ui-widget-content ui-draggable">'
+            +column.column_name+'</span>'});
       });
       table_definition.push({"text": table.text, "nodes": cols});
     });

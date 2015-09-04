@@ -81,10 +81,6 @@
        (json-response {:action (str "deleted workspace " id)})
        (catch Exception e (info e))))
 
-(defn run-workspace "Run workspace" [id]
-  (db/build-select "ta")
-  (yaml-response {:not (str "run-workspace stub " id)}))
-
 (defn try_dburl "Test DB URL" [url]
   (def res (db/test-url url))
   (if res
@@ -123,38 +119,30 @@
           :else (warn "Unknown URL type")))
   (json-response {:message adapter-response}))
 
-(defn get-objects "Fetch data source objects" [url]
-  (info (db/get-tables url)))
-
-;; API Definition
+;; RESTful API
 ;;
 ;; Everything in the /api/ context is a workspace
 ;; /api/object/ is any DB, Class, File, Network connection, etc which happens
 ;; to be an adapter in the workspace
 ;; http://localhost:3000/api/
 ;;
-;; POST     /               save-workspace to YAML
-;; GET      /:id            load-workspace from YAML
-;; PUT      /:id            update-workspace (existing) in YAML
-;; DELETE   /:id            delete-workspace (existing) in YAML
-;; GET      /run/:id        run-workspace by ID from YAML
-;; GET      /adapter/test   test-url of adapter
+;; POST     /                       save-workspace to YAML
+;; GET      /:id                    load-workspace from YAML
+;; PUT      /:id                    update-workspace (existing) in YAML
+;; DELETE   /:id                    delete-workspace (existing) in YAML
+;; GET      /adapter/test           test-url of adapter
+;; GET      /adapter/template       List available templates
+;; GET      /adapter/template/:id   Fetch one template3 by id
 
 (defroutes api-routes
   (context "/api" []
     (POST "/" [__anti-forgery-token workspace] (save-workspace workspace))
     (GET "/:id" [id] (load-workspace id))
-    (PUT "/:id" [id]
-         (update-workspace id))
-    (DELETE "/:id" [id]
-          (delete-workspace id))
-    (GET "/run/:id" [id]
-         (run-workspace id))
-    )
+    (PUT "/:id" [id] (update-workspace id))
+    (DELETE "/:id" [id] (delete-workspace id)))
 
   (context "/api/adapter" []
     (GET "/test/" [__anti-forgery-token url] (try-url url))
-    (GET "/object/" [__anti-forgery-token url] (get-objects url))
     (GET "/build_select/" [__anti-forgery-token url tables query]
          (execute-adapter url tables query)))
 

@@ -50,6 +50,6 @@ box-sizing: border-box;
   overflow-y: auto;
 }
 
-.draggable {
-  height: 25px;
+.treeview ul li .node-srcdata {
+  z-index: 255;
 }

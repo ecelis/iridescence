@@ -287,6 +287,7 @@ var srcdata_treview = function()
 {
   $('#srcdata').treeview({
     data: srcdata,
+    levels: 16,
     multiSelect: false,
     onNodeSelected: build_query,
     onNodeUnselected: build_query,
@@ -294,11 +295,14 @@ var srcdata_treview = function()
      {
        console.log(event);
        console.log(data);
-       $('#srcdata ul li').draggable({containment: 'body'});
+//       $('#srcdata ul li').draggable({containment: 'body'});
      },
     state: {
-      expanded: false
+      expanded: true
     }
+  });
+  $('.treeview ul li.node-srcdata span.draggable').parent().draggable({
+    cursor: 'move'
   });
 };
 
@@ -357,7 +361,7 @@ $('#connector :input').on("click change keyup",   // Connector properties listen
 
 $('#save-btn').click(function()        // Save workspace button listener
 {
-  save();
+  save_workspace();
 });
 
 ///////////////////////////////////////////////////////////////////////////////

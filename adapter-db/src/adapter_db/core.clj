@@ -27,8 +27,7 @@
   (:use [taoensso.timbre :only [trace debug info warn error fatal]]
         [clojure.walk]))
 
-(defn tables-sqlmap "Depending on the DBMS in the URL build
-                           an appropriate sqlmap" [dbms database]
+(defn tables-sqlmap "Build SQL based on URL" [dbms database]
   (cond (= "postgres" dbms)
           (-> (select :*)
               (from :information_schema.tables)
@@ -45,7 +44,7 @@
               (where [:= :table_schema database]))
         :else (warn "Unknown DBMS type")))
 
-(defn get-columns "Get columns from" [url table]
+(defn get-columns "Get columns from table" [url table]
   (def dbms (:scheme (string->url url)))
   (def sqlmap (cond (= "postgres" dbms) (sql/build :select :column_name
                :from :information_schema.columns
@@ -60,7 +59,7 @@
   (hash-map (keyword table) (jdbc/query url (sql/format sqlmap)
                                         :result-set-fn vec)))
 
-(defn get-tables "Get tables from" [url]
+(defn get-tables "Get tables from URL" [url]
   (def tables)
   (try ; TODO reuse it (def db-handle (jdbc/get-connection url))
       (def sqlmap (tables-sqlmap (:scheme (string->url url))
@@ -71,7 +70,7 @@
   (def table-defs (conj (map #(get-columns url %) tables) nil))
   (rest table-defs))
 
-(defn test-url "Tests URL" [url]
+(defn test-url "Tests URL connection" [url]
   ; TODO ASAP retrieve other schemas along public
   (try
     ; TODO better reuse db-handle with-db-connection
@@ -79,11 +78,11 @@
     (jdbc/get-connection url) (get-tables url)
     (catch Exception e (info e))))
 
-(defn build-select "Build a select from" [url tables query]
+(defn build-select "Build a SELECT query" [url tables query]
   (def fro (map keyword (set (string/split tables #" "))))
   (def sele (vec (map keyword (set (string/split query #" ")))))
   (jdbc/query url (sql/format (sql/build :select sele
                          :from fro)) :result-set-fn vec))
 
-(defn exec-query [url query-map]
+(defn exec-query "Execute a query against the data base" [url query-map]
   (jdbc/query (sql/format query-map) :result-set-fn vec))
