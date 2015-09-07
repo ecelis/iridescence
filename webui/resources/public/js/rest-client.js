@@ -96,7 +96,7 @@ var hl7v2_handler = function(json_data)
           b_leaf.nodes = typeof b_leaf.nodes === 'undefined' ? [] : b_leaf.nodes;
           field.content.forEach(function(comp)
                        {
-                        b_leaf.nodes.push({text: comp});
+                        b_leaf.nodes.push({text: drop_wrapper(comp)});
                        });
         } else {
           b_leaf.text = typeof field.content[0] !== 'undefined' ?
