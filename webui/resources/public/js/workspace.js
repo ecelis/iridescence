@@ -284,6 +284,22 @@ var makeDraggable = function()
 };
 
 /**
+ * Make parent element of class droppable, well... droppable
+ * @method makeDroppable
+ */
+var makeDroppable = function()
+{
+  $('.treeview ul li.node-template span.droppable').parent().droppable(
+    {
+    drop: function(event, ui)
+    {
+      $(this).addClass("ui-state-highlight")
+      .find("span").html("Dropped");
+    }
+  });
+};
+
+/**
  * Populate Template Treeview
  *
  * @method tplsrc_treeview
@@ -296,7 +312,7 @@ var tplsrc_treeview = function()
     multiSelect: false,
     state: { expanded: true}
   });
-  // makeDropable(); TODO
+  makeDroppable();
 };
 
 /**

@@ -55,11 +55,22 @@ var save_workspace = function()
  * @method drag_wrapper
  * @param String string
  */
-var drag_wrapper = function(string)
+var drag_wrapper = function(element)
 {
   return '<span class="draggable ui-widget-content ui-draggable">' +
-    string + '</span>';
+    element + '</span>';
 };
+
+/**
+ * Wrap element in droppable span
+ * @method drop_wrapper
+ * @param String element
+ */
+var drop_wrapper = function(element)
+{
+  return '<span class="droppable ui-widget-content ui-droppable">' +
+    element + '</span>';
+}
 
 /**
  * Handles JSON response for HL7v2 adapter, bootstrap-treeview ready
@@ -88,10 +99,11 @@ var hl7v2_handler = function(json_data)
                         b_leaf.nodes.push({text: comp});
                        });
         } else {
-          b_leaf.text = typeof field.content[0] !== 'undefined' ? field.content[0] : '';
+          b_leaf.text = typeof field.content[0] !== 'undefined' ?
+            drop_wrapper(field.content[0]) : drop_wrapper('');
         }
       } else {
-        b_leaf.text = field.content;
+        b_leaf.text = drop_wrapper(field.content);
       }
       a_leaf.nodes.push(b_leaf);
     });
