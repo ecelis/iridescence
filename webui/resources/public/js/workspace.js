@@ -369,7 +369,7 @@ $('#clear-srcdata-search').on('click',
   }
 );
 
-$('#adapter-test-btn').on("click change keyup",
+$('#adapter-test-btn').on("keyup",
   function()
   {
     update_srcurl();
@@ -377,9 +377,10 @@ $('#adapter-test-btn').on("click change keyup",
     if (adapter.url != null) {
       test_connection(adapter.url);
     }
+    /* TODO
     if($('#adapter-query').val() != '') {
       build_select();
-    }
+    }*/
   });
 
 $('#connector :input').on("click change keyup",   // Connector properties listener
