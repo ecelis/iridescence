@@ -19,7 +19,7 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var srcdata, tplsrc;
+var srcdata, src_clone, tplsrc, tpl_clone;
 
 var leaf = function()
 {

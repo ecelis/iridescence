@@ -275,12 +275,6 @@ var makeDraggable = function()
     revert: true,
     zIndex: 255
   });
-  /*
-  $('.treeview').on(treeview_events, function(event, data)
-    {
-      makeDraggable();
-    });
-   */
 };
 
 /**
@@ -293,8 +287,12 @@ var makeDroppable = function()
     {
     drop: function(event, ui)
     {
-      $(this).addClass("ui-state-highlight")
-      .find("span").html("Dropped");
+      $(this).addClass("ui-state-highlight");
+      console.log($(this));
+      console.log($(this).context.textContent +
+                  ' ' + ui.helper.context.textContent);
+      tpl_clone = $.extend(true, tpl_clone, tplsrc);
+      console.log(tpl_clone);
     }
   });
 };
