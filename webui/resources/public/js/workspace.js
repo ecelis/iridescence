@@ -50,6 +50,7 @@ var adapter_tab = $('#properties a[href="#adapter"]');
 var adapter_tab_fields = $('#adapter :input');
 var treeview_events = 'nodeChecked nodeCollapsed nodeDisabled nodeEnabled nodeExpanded nodeSelected nodeUnchecked nodeUnselected searchComplete searchCleared';
 
+//var tree_events = 'nodeChecked nodeCollapsed nodeDisabled nodeEnabled nodeExpanded nodeSelected nodeUnchecked nodeUnselected searchComplete searchCleared';
 // TODO Check if the values aren't overwriten when refreshing webpage
 $('#work-guid').val(work_guid);                   // Workspace GUID field
 $('#work-guid-label').html("Id: " + work_guid);   // Workspace GUID label
@@ -311,6 +312,10 @@ var tplsrc_treeview = function()
     state: { expanded: true}
   });
   makeDroppable();
+  $('#template').on(treeview_events, function(event, node)
+                   {
+                     makeDroppable();
+                   });
 };
 
 /**
@@ -324,16 +329,15 @@ var srcdata_treview = function()
     data: srcdata,
     levels: 16,
     multiSelect: false,
-    onNodeNodeExpanded: function(event, data)
-     {
-       console.log(event);
-       console.log(data);
-     },
     state: {
       expanded: true
     }
   });
   makeDraggable();
+  $('#srcdata').on(treeview_events, function(event, node)
+   {
+     makeDraggable();
+   });
 };
 
 /**
