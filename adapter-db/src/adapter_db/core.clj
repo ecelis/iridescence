@@ -28,12 +28,7 @@
         [clojure.walk]))
 
 (defn tables-sqlmap "Build SQL based on URL" [dbms database]
-  (cond (= "postgres" dbms)
-          (-> (select :*)
-              (from :information_schema.tables)
-              (where [:not= :table_schema "pg_catalog"]
-                     [:not= :table_schema "information_schema"]))
-        (= "postgresql" dbms)
+  (cond (= "postgresql" dbms)
           (-> (select :*)
               (from :information_schema.tables)
               (where [:not= :table_schema "pg_catalog"]
