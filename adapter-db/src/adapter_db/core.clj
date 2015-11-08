@@ -27,7 +27,12 @@
   (:use [taoensso.timbre :only [trace debug info warn error fatal]]
         [clojure.walk]))
 
-(defn tables-sqlmap "Build SQL based on URL" [dbms database]
+(defn tables-sqlmap
+  "Returns database specific map, takes dbms and database parameters.
+
+  (tables-sql \"postgresql\" \"northwind\")"
+  [dbms database]
+
   (cond (= "postgresql" dbms)
           (-> (select :*)
               (from :information_schema.tables)
@@ -59,8 +64,9 @@
   (try ; TODO reuse it (def db-handle (jdbc/get-connection url))
       (def sqlmap (tables-sqlmap (:scheme (string->url url))
                                  (:path (string->url url))))
-      (def tables (map #(get % :table_name) (jdbc/query url (sql/format sqlmap)
-                                                        :result-set-fn vec)))
+      (def tables (map #(get % :table_name)
+                       (jdbc/query url (sql/format sqlmap)
+                                   :result-set-fn vec)))
   (catch Exception e (fatal e)))
   (def table-defs (conj (map #(get-columns url %) tables) nil))
   (rest table-defs))
