@@ -44,7 +44,13 @@
               (where [:= :table_schema database]))
         :else (warn "Unknown DBMS type")))
 
-(defn get-columns "Get columns from table" [url table]
+(defn get-columns
+  "Get columns from table given a JDBC URL
+
+  (get-columns \"postgresql://127.0.0.1/northwind?user=myuser&password=secret\""
+
+  [url table]
+
   (def dbms (:scheme (string->url url)))
   (def sqlmap (cond (= "postgres" dbms) (sql/build :select :column_name
                :from :information_schema.columns
