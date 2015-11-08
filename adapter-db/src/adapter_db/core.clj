@@ -83,13 +83,19 @@
   (def table-defs (conj (map #(get-columns url %) tables) nil))
   (rest table-defs))
 
-(defn test-url "Test URL connection " [url]
+(defn test-url
+  "Test JDBC URL connection
+
+  (test-url \"postgresql://127.0.0.1/northwind?user=myuser&password=1qaz\""
+
+  [url]
+
   ; TODO ASAP retrieve other schemas along public
   (try
     ; TODO better reuse db-handle with-db-connection
     ; TODO this true/flase flag hack sucks, fix it
-    (jdbc/get-connection url) (get-tables url)
-    (catch Exception e (info e))))
+    (jdbc/get-connection url)
+    (catch Exception e (warn e))))
 
 (defn build-select "Build a SELECT query" [url tables query]
   (def fro (map keyword (set (string/split tables #" "))))

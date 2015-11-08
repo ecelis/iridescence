@@ -1,5 +1,6 @@
 (ns adapter-db.core-test
   (:require [clojure.test :refer :all]
+            [clojure.java.jdbc :as jdbc]
             [adapter-db.core :as adb]
             [honeysql.core :as sql]
             [honeysql.helpers :refer :all]
@@ -17,6 +18,12 @@
              (-> (select :table_name)
               (from :information_schema.tables)
               (where [:= :table_schema "northwind"]))})
+
+(deftest test-url-test
+  (testing "test-url"
+    (is (or (instance? org.postgresql.jdbc4.Jdbc4Connection
+                       (adb/test-url url))
+            nil))))
 
 (deftest tables-sqlmap-test
   (testing "tables-sqlmap"
