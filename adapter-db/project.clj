@@ -1,10 +1,10 @@
-(defproject adapter-db "0.1.17-SNAPSHOT"
+(defproject adapter-db "0.1.18-SNAPSHOT"
   :description "Iridescence Database Adapter"
   :url "http://github.com/ecelis/iridescence"
   :license {:name "Affero General Public License"
             :url "http://github.com/ecelis/iridescence"}
   :dependencies [[org.clojure/clojure "1.6.0"]
-                 [org.clojure/java.jdbc "0.3.6"]
+                 [org.clojure/java.jdbc "0.4.2"]
                  [honeysql "0.6.2"]
                  [com.taoensso/timbre "3.4.0"]
                  [com.taoensso/tower "3.0.2"]

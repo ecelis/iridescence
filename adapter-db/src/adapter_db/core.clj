@@ -83,7 +83,7 @@
   (def table-defs (conj (map #(get-columns url %) tables) nil))
   (rest table-defs))
 
-(defn test-url "Tests URL connection" [url]
+(defn test-url "Test URL connection " [url]
   ; TODO ASAP retrieve other schemas along public
   (try
     ; TODO better reuse db-handle with-db-connection

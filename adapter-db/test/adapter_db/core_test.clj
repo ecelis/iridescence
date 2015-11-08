@@ -28,6 +28,7 @@
 (deftest get-columns-test
   (testing "get-columns"
     (is (associative? (adb/get-columns url "usstates")))))
+
 (deftest get-tables-test
   (testing "get-tables"
     (is (= (chunked-seq? (adb/get-tables url))))))
