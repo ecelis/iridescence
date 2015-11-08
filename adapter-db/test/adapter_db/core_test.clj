@@ -5,7 +5,8 @@
             [honeysql.helpers :refer :all]
             ))
 
-(def dbms (list "postgresql" "mysql" "oracle" "mssql"))
+(def dbms (list "postgresql" "mysql"))
+(def url (str (first dbms) "://127.0.0.1/northwind?user=iusr&password=1qaz"))
 
 (def sqlmap {:postgresql
              (-> (select :*)
@@ -23,3 +24,7 @@
            (adb/tables-sqlmap "postgresql" "northwind"))
         (= (get sqlmap :mysql)
            (adb/tables-sqlmap "mysql" "northwind")))))
+
+(deftest get-tables-test
+  (testing "get-tables"
+    (is (= (chunked-seq? (adb/get-tables url))))))

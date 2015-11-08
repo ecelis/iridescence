@@ -59,7 +59,13 @@
   (hash-map (keyword table) (jdbc/query url (sql/format sqlmap)
                                         :result-set-fn vec)))
 
-(defn get-tables "Get tables from URL" [url]
+(defn get-tables
+  "Get tables from given JDBC URL
+
+  (get-tables \"postgresql://localhost:5432/northwind?user=myuser&password=secret\""
+
+  [url]
+
   (def tables)
   (try ; TODO reuse it (def db-handle (jdbc/get-connection url))
       (def sqlmap (tables-sqlmap (:scheme (string->url url))
