@@ -21,16 +21,18 @@
 
 (deftest test-url-test
   (testing "test-url"
-    (is (or (instance? org.postgresql.jdbc4.Jdbc4Connection
-                       (adb/test-url url))
-            nil))))
+    (is (= (adb/test-url url)
+            nil))
+    (is (= (let [x (clojure.string/reverse url)]
+             (adb/test-url x))
+           {:hell "o"}))))
 
 (deftest tables-sqlmap-test
   (testing "tables-sqlmap"
     (is (= (get sqlmap :postgresql)
-           (adb/tables-sqlmap "postgresql" "northwind"))
+           (adb/tables-sqlmap {:engine :postgresql :db "northwind"}))
         (= (get sqlmap :mysql)
-           (adb/tables-sqlmap "mysql" "northwind")))))
+           (adb/tables-sqlmap {:engine :mysql :db "northwind"})))))
 
 (deftest get-columns-test
   (testing "get-columns"
