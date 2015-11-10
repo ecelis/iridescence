@@ -25,7 +25,7 @@
             nil))
     (is (= (let [x (clojure.string/reverse url)]
              (adb/test-url x))
-           {:hell "o"}))))
+           {:hell "TODO proper error and success returns"}))))
 
 (deftest tables-sqlmap-test
   (testing "tables-sqlmap"

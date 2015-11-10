@@ -27,9 +27,6 @@
   (:use [taoensso.timbre :only [trace debug info warn error fatal]]
         [clojure.walk]))
 
-;; TODO USe keywords and maps to get rid of cond and such
-(def db-list [:postgresql :mysql :oracle :mssql])
-
 (defn tables-sqlmap
 
   "Returns database specific map, takes dbms and database parameters.
@@ -68,18 +65,15 @@
 
   [url table]
 
-  (def dbms (:scheme (string->url url)))
-  (def sqlmap (cond (= "postgres" dbms) (sql/build :select :column_name
-               :from :information_schema.columns
-               :where [:= :table_name table])
-        (= "postgresql" dbms) (sql/build :select :column_name
-               :from :information_schema.columns
-               :where [:= :table_name table])
-        (= "mysql" dbms) (sql/build :select :column_name
-                :from :information_schema.columns
-                :where [:= :table_name table])
-        :else (warn "Unknown DBMS type")))
-  (hash-map (keyword table) (jdbc/query url (sql/format sqlmap)
+  (def sqlmap (case (keyword (:scheme (string->url url)))
+              :postgresql (sql/build :select :column_name
+                                     :from :information_schema.columns
+                                     :where [:= :table_name table])
+              :mysql (sql/build :select :column_name
+                                :from :information_schema.columns
+                                :where [:= :table_name table])
+              :else (warn "Unknown DBMS type")))
+    (hash-map (keyword table) (jdbc/query url (sql/format sqlmap)
                                         :result-set-fn vec)))
 
 (defn get-tables
