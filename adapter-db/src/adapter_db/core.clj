@@ -35,18 +35,30 @@
   "Returns database specific map, takes dbms and database parameters.
 
   (tables-sql {:engine :postgresql :db \"northwind\"})"
+  ;; TODO Test Oracle and MSSQL
+  ;; Oracle reference
+  ;; http://stackoverflow.com/questions/2247310/how-do-i-list-all-tables-in-a-schema-in-oracle-sql#2247758
+  ;; MSSQL reference
+  ;; https://msdn.microsoft.com/en-us/library/ms186778.aspx
+  ;; http://stackoverflow.com/a/8293531/1366519
+
   [{engine :engine db :db}]
 
-  (cond (= :postgresql engine)
-          (-> (select :*)
-              (from :information_schema.tables)
-              (where [:not= :table_schema "pg_catalog"]
-                     [:not= :table_schema "information_schema"]))
-        (= :mysql engine)
-          (-> (select :table_name)
-              (from :information_schema.tables)
-              (where [:= :table_schema db]))
-        :else (warn (str "Unknown DBMS type " engine))))
+  (case engine
+    :postgresql (-> (select :*)
+                    (from :information_schema.tables)
+                    (where [:not= :table_schema "pg_catalog"]
+                           [:not= :table_schema "information_schema"]))
+    :mysql (-> (select :table_name)
+               (from :information_schema.tables)
+               (where [:= :table_schema db]))
+    :oracle (-> (select :table_name "OBJECT_NAME")
+                (from "USER_OBJECTS")
+                (where [:= "OBJECT_TYPE" "TABLE"]))
+    :mssql (-> (select :table_name "Name")
+               (from :sys.tables)
+               (where [:= "is_ms_shipped" 0]))
+    :else (warn (str "Unknown DBMS type " engine))))
 
 (defn get-columns
 
