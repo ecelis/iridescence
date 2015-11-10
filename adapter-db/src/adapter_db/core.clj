@@ -118,9 +118,9 @@
 
   (get-query url tables)"
 
-  [url & tables]
+  [{url :url tables :tables pivot :pivot}]
 
-  (map #(info (str % " " url)) tables))
+  [{_ cols} (first tables)])
 
 (defn execute-query
 
