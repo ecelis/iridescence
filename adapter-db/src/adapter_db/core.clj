@@ -116,7 +116,7 @@
     ; TODO better reuse db-handle with-db-connection
     ; TODO this true/flase flag hack sucks, fix it
     (jdbc/get-connection url) nil
-    (catch Exception e (warn e) {:hell "o"})))
+    (catch Exception e (warn e) {:hell "TODO proper error and success returns"})))
 
 (defn get-query
 
