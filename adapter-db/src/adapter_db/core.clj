@@ -27,7 +27,11 @@
   (:use [taoensso.timbre :only [trace debug info warn error fatal]]
         [clojure.walk]))
 
+;; TODO USe keywords and maps to get rid of cond and such
+(def db-list [:postgresql :mysql :oracle :mssql])
+
 (defn tables-sqlmap
+
   "Returns database specific map, takes dbms and database parameters.
 
   (tables-sql \"postgresql\" \"northwind\")"
@@ -45,6 +49,7 @@
         :else (warn "Unknown DBMS type")))
 
 (defn get-columns
+
   "Get columns from table given a JDBC URL
 
   (get-columns \"postgresql://127.0.0.1/northwind?user=myuser&password=secret\""
@@ -66,6 +71,7 @@
                                         :result-set-fn vec)))
 
 (defn get-tables
+
   "Get tables from given JDBC URL
 
   (get-tables \"postgresql://localhost:5432/northwind?user=myuser&password=secret\""
@@ -84,6 +90,7 @@
   (rest table-defs))
 
 (defn test-url
+
   "Test JDBC URL connection
 
   (test-url \"postgresql://127.0.0.1/northwind?user=myuser&password=1qaz\""
@@ -97,11 +104,22 @@
     (jdbc/get-connection url)
     (catch Exception e (warn e))))
 
-(defn build-select "Build a SELECT query" [url tables query]
-  (def fro (map keyword (set (string/split tables #" "))))
-  (def sele (vec (map keyword (set (string/split query #" ")))))
-  (jdbc/query url (sql/format (sql/build :select sele
-                         :from fro)) :result-set-fn vec))
+(defn get-query
 
-(defn exec-query "Execute a query against the data base" [url query-map]
-  (jdbc/query (sql/format query-map) :result-set-fn vec))
+  "Build SQL query for selected tables
+
+  (get-query url tables)"
+
+  [url & tables]
+
+  (map #(info (str % " " url)) tables))
+
+(defn execute-query
+
+  "Execute a query against the data base
+
+  (exec-query url sqlmap)"
+
+  [{url sqlmap}]
+
+  (jdbc/query (sql/format sqlmap) :result-set-fn vec))
