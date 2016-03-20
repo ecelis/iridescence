@@ -5,11 +5,11 @@
   (:use [taoensso.timbre :only [trace debug info warn error fatal]])
   )
 
-(def savedir "/tmp/smartconnector/") ; TODO Set a definitive path
-(def wsdir (str savedir "workspace/"))
-(def wipdir (str savedir "wip/"))
-(def outdir (str savedir "out/"))
-(def tpldir (str savedir "templates/"))
+(def savedir "/tmp/smartconnector") ; TODO Set a definitive path
+(def wsdir (str savedir "workspace"))
+(def wipdir (str savedir (str "/" "wip")))
+(def outdir (str savedir (str "/" "out")))
+(def tpldir (str savedir (str "/" "templates")))
 
 (defn gen-uuid "Generate UUID" []
   (uuid/v1))

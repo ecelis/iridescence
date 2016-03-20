@@ -3,11 +3,11 @@
             [clojure.java.io :as io]
             [iridescence.core :refer :all]))
 
-(def save_t "/tmp/smartconnector/") ; TODO Set a definitive path
-(def ws_t (str save_t "/workspace/"))
-(def wip_t (str save_t "/wip/"))
-(def out_t (str save_t "/out/"))
-(def tpl_t (str save_t "/templates/"))
+(def save_t "/tmp/smartconnector") ; TODO Set a definitive path
+(def ws_t (str save_t (str "/" "workspace")))
+(def wip_t (str save_t (str "/" "wip")))
+(def out_t (str save_t (str "/" "out")))
+(def tpl_t (str save_t (str "/" "templates")))
 
 (deftest globals-test
   (testing "Global defs"
